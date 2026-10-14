@@ -61,7 +61,7 @@
                 </div>
             </div>
             <div class="flex items-center gap-2.5 w-full sm:w-auto justify-end">
-                <button onclick="openCalculatorModal()" class="bg-emerald-700/90 hover:bg-emerald-600 text-white px-4 py-2.5 rounded-xl text-sm font-semibold transition shadow-md flex items-center gap-2 border border-emerald-500/50 backdrop-blur-sm group">
+                <button type="button" onclick="openCalculatorModal()" class="bg-emerald-700/90 hover:bg-emerald-600 text-white px-4 py-2.5 rounded-xl text-sm font-semibold transition shadow-md flex items-center gap-2 border border-emerald-500/50 backdrop-blur-sm group cursor-pointer">
                     <i class="fa-solid fa-calculator text-emerald-300 group-hover:scale-110 transition-transform"></i> Quick Utilities & Calculators
                 </button>
                 <div id="pwa-status-badge" class="bg-emerald-950/70 text-emerald-200 px-3 py-2 rounded-xl text-xs font-semibold border border-emerald-700/50 flex items-center gap-2 backdrop-blur-sm">
@@ -86,11 +86,11 @@
 
             <!-- Category Filter Tabs with Fast-Looping Hover Preview -->
             <div class="flex items-center gap-2 overflow-x-visible w-full md:w-auto pb-2 md:pb-0">
-                <button onclick="filterByCategory('All')" onmouseenter="startCategoryLoop('All', event)" onmouseleave="stopCategoryLoop()" id="cat-All" class="category-btn px-4 py-2 rounded-xl text-xs font-bold bg-slate-800 text-white transition shadow-sm">All</button>
-                <button onclick="filterByCategory('Farmers')" onmouseenter="startCategoryLoop('Farmers', event)" onmouseleave="stopCategoryLoop()" id="cat-Farmers" class="category-btn px-4 py-2 rounded-xl text-xs font-bold bg-emerald-100 text-emerald-800 border border-emerald-200 hover:bg-emerald-600 hover:text-white transition">🌾 Farmers</button>
-                <button onclick="filterByCategory('Builders')" onmouseenter="startCategoryLoop('Builders', event)" onmouseleave="stopCategoryLoop()" id="cat-Builders" class="category-btn px-4 py-2 rounded-xl text-xs font-bold bg-indigo-100 text-indigo-800 border border-indigo-200 hover:bg-indigo-600 hover:text-white transition">🏗️ Builders</button>
-                <button onclick="filterByCategory('Handyman')" onmouseenter="startCategoryLoop('Handyman', event)" onmouseleave="stopCategoryLoop()" id="cat-Handyman" class="category-btn px-4 py-2 rounded-xl text-xs font-bold bg-sky-100 text-sky-800 border border-sky-200 hover:bg-sky-600 hover:text-white transition">🛠️ Handyman</button>
-                <button onclick="filterByCategory('Housewives')" onmouseenter="startCategoryLoop('Housewives', event)" onmouseleave="stopCategoryLoop()" id="cat-Housewives" class="category-btn px-4 py-2 rounded-xl text-xs font-bold bg-rose-100 text-rose-800 border border-rose-200 hover:bg-rose-600 hover:text-white transition">🏠 Housewives</button>
+                <button type="button" onclick="filterByCategory('All')" onmouseenter="startCategoryLoop('All', event)" onmouseleave="stopCategoryLoop()" id="cat-All" class="category-btn px-4 py-2 rounded-xl text-xs font-bold bg-slate-800 text-white transition shadow-sm cursor-pointer">All</button>
+                <button type="button" onclick="filterByCategory('Farmers')" onmouseenter="startCategoryLoop('Farmers', event)" onmouseleave="stopCategoryLoop()" id="cat-Farmers" class="category-btn px-4 py-2 rounded-xl text-xs font-bold bg-emerald-100 text-emerald-800 border border-emerald-200 hover:bg-emerald-600 hover:text-white transition cursor-pointer">🌾 Farmers</button>
+                <button type="button" onclick="filterByCategory('Builders')" onmouseenter="startCategoryLoop('Builders', event)" onmouseleave="stopCategoryLoop()" id="cat-Builders" class="category-btn px-4 py-2 rounded-xl text-xs font-bold bg-indigo-100 text-indigo-800 border border-indigo-200 hover:bg-indigo-600 hover:text-white transition cursor-pointer">🏗️ Builders</button>
+                <button type="button" onclick="filterByCategory('Handyman')" onmouseenter="startCategoryLoop('Handyman', event)" onmouseleave="stopCategoryLoop()" id="cat-Handyman" class="category-btn px-4 py-2 rounded-xl text-xs font-bold bg-sky-100 text-sky-800 border border-sky-200 hover:bg-sky-600 hover:text-white transition cursor-pointer">🛠️ Handyman</button>
+                <button type="button" onclick="filterByCategory('Housewives')" onmouseenter="startCategoryLoop('Housewives', event)" onmouseleave="stopCategoryLoop()" id="cat-Housewives" class="category-btn px-4 py-2 rounded-xl text-xs font-bold bg-rose-100 text-rose-800 border border-rose-200 hover:bg-rose-600 hover:text-white transition cursor-pointer">🏠 Housewives</button>
             </div>
 
             <!-- Floating Fast-Looping Preview Popup Box -->
@@ -109,21 +109,21 @@
         <!-- Sub-Category Filter Bar (Dynamic for Farmers) -->
         <div id="subCategoryContainer" class="mb-6 hidden flex items-center gap-2 overflow-x-auto pb-2 bg-emerald-50/60 p-3 rounded-2xl border border-emerald-100">
             <span class="text-xs font-bold text-emerald-900 uppercase tracking-wider mr-2">Farmer Sub-Categories:</span>
-            <button onclick="filterBySubCategory('All')" id="subcat-All" class="subcat-btn px-3.5 py-1.5 rounded-lg text-xs font-bold bg-emerald-800 text-white transition shadow-sm">All Farming</button>
-            <button onclick="filterBySubCategory('Crop Farming')" id="subcat-Crop Farming" class="subcat-btn px-3.5 py-1.5 rounded-lg text-xs font-bold bg-white text-emerald-800 border border-emerald-200 hover:bg-emerald-100 transition">Crop Farming</button>
-            <button onclick="filterBySubCategory('Fruit Farming')" id="subcat-Fruit Farming" class="subcat-btn px-3.5 py-1.5 rounded-lg text-xs font-bold bg-white text-emerald-800 border border-emerald-200 hover:bg-emerald-100 transition">Fruit Farming</button>
-            <button onclick="filterBySubCategory('Vegetable Farming')" id="subcat-Vegetable Farming" class="subcat-btn px-3.5 py-1.5 rounded-lg text-xs font-bold bg-white text-emerald-800 border border-emerald-200 hover:bg-emerald-100 transition">Vegetable Farming</button>
-            <button onclick="filterBySubCategory('Animal Farming')" id="subcat-Animal Farming" class="subcat-btn px-3.5 py-1.5 rounded-lg text-xs font-bold bg-white text-emerald-800 border border-emerald-200 hover:bg-emerald-100 transition">Animal Farming</button>
-            <button onclick="filterBySubCategory('Poultry Farming')" id="subcat-Poultry Farming" class="subcat-btn px-3.5 py-1.5 rounded-lg text-xs font-bold bg-white text-emerald-800 border border-emerald-200 hover:bg-emerald-100 transition">Poultry Farming</button>
+            <button type="button" onclick="filterBySubCategory('All')" id="subcat-All" class="subcat-btn px-3.5 py-1.5 rounded-lg text-xs font-bold bg-emerald-800 text-white transition shadow-sm cursor-pointer">All Farming</button>
+            <button type="button" onclick="filterBySubCategory('Crop Farming')" id="subcat-Crop Farming" class="subcat-btn px-3.5 py-1.5 rounded-lg text-xs font-bold bg-white text-emerald-800 border border-emerald-200 hover:bg-emerald-100 transition cursor-pointer">Crop Farming</button>
+            <button type="button" onclick="filterBySubCategory('Fruit Farming')" id="subcat-Fruit Farming" class="subcat-btn px-3.5 py-1.5 rounded-lg text-xs font-bold bg-white text-emerald-800 border border-emerald-200 hover:bg-emerald-100 transition cursor-pointer">Fruit Farming</button>
+            <button type="button" onclick="filterBySubCategory('Vegetable Farming')" id="subcat-Vegetable Farming" class="subcat-btn px-3.5 py-1.5 rounded-lg text-xs font-bold bg-white text-emerald-800 border border-emerald-200 hover:bg-emerald-100 transition cursor-pointer">Vegetable Farming</button>
+            <button type="button" onclick="filterBySubCategory('Animal Farming')" id="subcat-Animal Farming" class="subcat-btn px-3.5 py-1.5 rounded-lg text-xs font-bold bg-white text-emerald-800 border border-emerald-200 hover:bg-emerald-100 transition cursor-pointer">Animal Farming</button>
+            <button type="button" onclick="filterBySubCategory('Poultry Farming')" id="subcat-Poultry Farming" class="subcat-btn px-3.5 py-1.5 rounded-lg text-xs font-bold bg-white text-emerald-800 border border-emerald-200 hover:bg-emerald-100 transition cursor-pointer">Poultry Farming</button>
         </div>
 
         <!-- Sub-Category Filter Bar (Dynamic for Handyman) -->
         <div id="handymanSubCategoryContainer" class="mb-6 hidden flex items-center gap-2 overflow-x-auto pb-2 bg-sky-50/60 p-3 rounded-2xl border border-sky-100">
             <span class="text-xs font-bold text-sky-900 uppercase tracking-wider mr-2">Handyman Sub-Categories:</span>
-            <button onclick="filterBySubCategory('All')" id="hsubcat-All" class="hsubcat-btn px-3.5 py-1.5 rounded-lg text-xs font-bold bg-sky-800 text-white transition shadow-sm">All Handyman</button>
-            <button onclick="filterBySubCategory('Manufacture')" id="hsubcat-Manufacture" class="hsubcat-btn px-3.5 py-1.5 rounded-lg text-xs font-bold bg-white text-sky-800 border border-sky-200 hover:bg-sky-100 transition">Manufacture</button>
-            <button onclick="filterBySubCategory('Metalwork & Fabrication')" id="hsubcat-Metalwork & Fabrication" class="hsubcat-btn px-3.5 py-1.5 rounded-lg text-xs font-bold bg-white text-sky-800 border border-sky-200 hover:bg-sky-100 transition">Metalwork & Fabrication</button>
-            <button onclick="filterBySubCategory('Plumbing')" id="hsubcat-Plumbing" class="hsubcat-btn px-3.5 py-1.5 rounded-lg text-xs font-bold bg-white text-sky-800 border border-sky-200 hover:bg-sky-100 transition">Plumbing</button>
+            <button type="button" onclick="filterBySubCategory('All')" id="hsubcat-All" class="hsubcat-btn px-3.5 py-1.5 rounded-lg text-xs font-bold bg-sky-800 text-white transition shadow-sm cursor-pointer">All Handyman</button>
+            <button type="button" onclick="filterBySubCategory('Manufacture')" id="hsubcat-Manufacture" class="hsubcat-btn px-3.5 py-1.5 rounded-lg text-xs font-bold bg-white text-sky-800 border border-sky-200 hover:bg-sky-100 transition cursor-pointer">Manufacture</button>
+            <button type="button" onclick="filterBySubCategory('Metalwork & Fabrication')" id="hsubcat-Metalwork & Fabrication" class="hsubcat-btn px-3.5 py-1.5 rounded-lg text-xs font-bold bg-white text-sky-800 border border-sky-200 hover:bg-sky-100 transition cursor-pointer">Metalwork & Fabrication</button>
+            <button type="button" onclick="filterBySubCategory('Plumbing')" id="hsubcat-Plumbing" class="hsubcat-btn px-3.5 py-1.5 rounded-lg text-xs font-bold bg-white text-sky-800 border border-sky-200 hover:bg-sky-100 transition cursor-pointer">Plumbing</button>
         </div>
 
         <!-- Dynamic Guide Cards Grid -->
@@ -139,20 +139,31 @@
         </div>
     </main>
 
-    <!-- Guide Modal with Screenshot Protection & Pay-to-Unlock Overlay -->
+    <!-- Guide Modal with Screenshot Protection & Native PayFast Form -->
     <div id="guideModal" class="fixed inset-0 bg-slate-950/80 backdrop-blur-md z-50 hidden flex items-center justify-center p-4 overflow-y-auto">
         <div id="modalCardWrapper" class="bg-white rounded-3xl max-w-2xl w-full overflow-hidden shadow-2xl transform transition-all my-8 border border-slate-100 relative">
             
-            <!-- Secure Watermark Overlay preventing free viewing / screen grabbing -->
+            <!-- Secure Watermark Overlay with Native PayFast Form -->
             <div id="secureOverlay" class="secure-watermark flex-col text-center p-6 text-white">
                 <div class="bg-amber-500/20 text-amber-300 p-4 rounded-2xl border border-amber-500/40 mb-3 backdrop-blur-md shadow-xl">
                     <i class="fa-solid fa-lock text-3xl"></i>
                 </div>
                 <h3 class="text-lg font-extrabold mb-1">Protected Premium Guide</h3>
                 <p class="text-xs text-slate-300 max-w-xs mb-4 font-medium">Full step-by-step procedures and high-res infographics are securely locked against free viewing and screen grabs.</p>
-                <button type="button" onclick="redirectToPayFast()" class="bg-amber-500 hover:bg-amber-600 text-slate-950 px-6 py-3 rounded-xl text-xs font-extrabold transition shadow-lg flex items-center gap-2 transform hover:scale-105 cursor-pointer">
-                    <i class="fa-solid fa-cart-shopping"></i> Unlock & Download Package (R20.00)
-                </button>
+                
+                <!-- Native PayFast Form 1 -->
+                <form action="https://sandbox.payfast.co.za/eng/process" method="POST">
+                    <input type="hidden" name="merchant_id" value="10004002">
+                    <input type="hidden" name="merchant_key" value="q1cd2rdny4a53">
+                    <input type="hidden" name="return_url" class="pfReturnUrl" value="">
+                    <input type="hidden" name="cancel_url" class="pfCancelUrl" value="">
+                    <input type="hidden" name="item_name" class="pfItemName" value="">
+                    <input type="hidden" name="amount" value="20.00">
+                    <input type="hidden" name="item_description" class="pfItemDesc" value="">
+                    <button type="submit" class="bg-amber-500 hover:bg-amber-600 text-slate-950 px-6 py-3 rounded-xl text-xs font-extrabold transition shadow-lg flex items-center gap-2 transform hover:scale-105 cursor-pointer">
+                        <i class="fa-solid fa-cart-shopping"></i> Unlock & Download Package (R20.00)
+                    </button>
+                </form>
             </div>
 
             <!-- Image Header Container -->
@@ -185,9 +196,20 @@
                 </div>
                 
                 <div class="border-t border-slate-100 pt-4 flex justify-between items-center z-30 relative">
-                    <button type="button" id="modalDownloadBtn" onclick="redirectToPayFast()" class="bg-amber-500 hover:bg-amber-600 text-white px-5 py-2.5 rounded-xl text-xs font-bold transition flex items-center gap-2 shadow-md cursor-pointer">
-                        <i class="fa-solid fa-download"></i> Unlock Package (JPG + Text) - R20.00
-                    </button>
+                    <!-- Native PayFast Form 2 -->
+                    <form action="https://sandbox.payfast.co.za/eng/process" method="POST">
+                        <input type="hidden" name="merchant_id" value="10004002">
+                        <input type="hidden" name="merchant_key" value="q1cd2rdny4a53">
+                        <input type="hidden" name="return_url" class="pfReturnUrl" value="">
+                        <input type="hidden" name="cancel_url" class="pfCancelUrl" value="">
+                        <input type="hidden" name="item_name" class="pfItemName" value="">
+                        <input type="hidden" name="amount" value="20.00">
+                        <input type="hidden" name="item_description" class="pfItemDesc" value="">
+                        <button type="submit" class="bg-amber-500 hover:bg-amber-600 text-white px-5 py-2.5 rounded-xl text-xs font-bold transition flex items-center gap-2 shadow-md cursor-pointer">
+                            <i class="fa-solid fa-download"></i> Unlock Package (JPG + Text) - R20.00
+                        </button>
+                    </form>
+                    
                     <button type="button" onclick="closeModal()" class="bg-slate-100 hover:bg-slate-200 text-slate-700 px-5 py-2.5 rounded-xl text-sm font-semibold transition cursor-pointer">
                         Close
                     </button>
@@ -195,17 +217,6 @@
             </div>
         </div>
     </div>
-
-    <!-- Hidden Direct PayFast Form Container -->
-    <form id="payfastForm" action="https://sandbox.payfast.co.za/eng/process" method="POST" style="display: none;">
-        <input type="hidden" name="merchant_id" value="10004002">
-        <input type="hidden" name="merchant_key" value="q1cd2rdny4a53">
-        <input type="hidden" name="return_url" id="pfReturnUrl" value="">
-        <input type="hidden" name="cancel_url" id="pfCancelUrl" value="">
-        <input type="hidden" name="item_name" id="pfItemName" value="">
-        <input type="hidden" name="amount" value="20.00">
-        <input type="hidden" name="item_description" id="pfItemDesc" value="">
-    </form>
 
     <!-- Quick Utilities Modal -->
     <div id="calculatorModal" class="fixed inset-0 bg-slate-950/70 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4 overflow-y-auto">
@@ -629,6 +640,13 @@
                 subBadge.classList.add('hidden');
             }
 
+            // Populate all PayFast form fields dynamically when the modal opens
+            document.querySelectorAll('.pfReturnUrl').forEach(el => el.value = window.location.href);
+            document.querySelectorAll('.pfCancelUrl').value = window.location.href; // handled per element or collection
+            document.querySelectorAll('.pfCancelUrl').forEach(el => el.value = window.location.href);
+            document.querySelectorAll('.pfItemName').forEach(el => el.value = `Guide Package: ${guide.title}`);
+            document.querySelectorAll('.pfItemDesc').forEach(el => el.value = guide.description.substring(0, 100));
+
             document.getElementById('secureOverlay').classList.remove('hidden');
             document.getElementById('blurContentArea').classList.add('secure-blur');
             document.getElementById('modalImage').classList.add('secure-blur');
@@ -687,20 +705,6 @@
             const cap = parseFloat(document.getElementById('tankCap').value) || 0;
             const rate = parseFloat(document.getElementById('tankRate').value) || 0;
             document.getElementById('tankResult').innerText = ((cap / 100) * rate).toFixed(1) + " mL / g total";
-        }
-
-        function redirectToPayFast() {
-            const guide = allGuides.find(g => g.id === activeGuideId);
-            if (!guide) return;
-
-            // Populate hidden form fields with current guide details
-            document.getElementById('pfReturnUrl').value = window.location.href;
-            document.getElementById('pfCancelUrl').value = window.location.href;
-            document.getElementById('pfItemName').value = `Guide Package: ${guide.title}`;
-            document.getElementById('pfItemDesc').value = guide.description.substring(0, 100);
-
-            // Submit the hardcoded form directly
-            document.getElementById('payfastForm').submit();
         }
 
         window.onload = function() {
