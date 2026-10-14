@@ -42,7 +42,7 @@
             align-items: center;
             justify-content: center;
             background: rgba(15, 23, 42, 0.75);
-            z-index: 20;
+            z-index: 30;
             backdrop-filter: blur(3px);
         }
     </style>
@@ -139,7 +139,7 @@
         </div>
     </main>
 
-    <!-- Guide Modal with Screenshot Protection & Native PayFast Form -->
+    <!-- Guide Modal with Screenshot Protection & Payfast Form -->
     <div id="guideModal" class="fixed inset-0 bg-slate-950/80 backdrop-blur-md z-50 hidden flex items-center justify-center p-4 overflow-y-auto">
         <div id="modalCardWrapper" class="bg-white rounded-3xl max-w-2xl w-full overflow-hidden shadow-2xl transform transition-all my-8 border border-slate-100 relative">
             
@@ -151,15 +151,15 @@
                 <h3 class="text-lg font-extrabold mb-1">Protected Premium Guide</h3>
                 <p class="text-xs text-slate-300 max-w-xs mb-4 font-medium">Full step-by-step procedures and high-res infographics are securely locked against free viewing and screen grabs.</p>
                 
-                <!-- Native PayFast Form 1 -->
+                <!-- Direct PayFast Form -->
                 <form action="https://sandbox.payfast.co.za/eng/process" method="POST">
                     <input type="hidden" name="merchant_id" value="10004002">
                     <input type="hidden" name="merchant_key" value="q1cd2rdny4a53">
-                    <input type="hidden" name="return_url" class="pfReturnUrl" value="">
-                    <input type="hidden" name="cancel_url" class="pfCancelUrl" value="">
-                    <input type="hidden" name="item_name" class="pfItemName" value="">
+                    <input type="hidden" name="return_url" id="pfReturnUrl" value="">
+                    <input type="hidden" name="cancel_url" id="pfCancelUrl" value="">
+                    <input type="hidden" name="item_name" id="pfItemName" value="">
                     <input type="hidden" name="amount" value="20.00">
-                    <input type="hidden" name="item_description" class="pfItemDesc" value="">
+                    <input type="hidden" name="item_description" id="pfItemDesc" value="">
                     <button type="submit" class="bg-amber-500 hover:bg-amber-600 text-slate-950 px-6 py-3 rounded-xl text-xs font-extrabold transition shadow-lg flex items-center gap-2 transform hover:scale-105 cursor-pointer">
                         <i class="fa-solid fa-cart-shopping"></i> Unlock & Download Package (R20.00)
                     </button>
@@ -170,10 +170,10 @@
             <div id="modalImageContainer" class="relative h-64 sm:h-72 bg-slate-900">
                 <img id="modalImage" src="" alt="Guide Image" class="w-full h-full object-cover opacity-90 secure-blur" onerror="handleImageError(this)">
                 <div class="absolute inset-0 bg-gradient-to-t from-slate-950/90 via-slate-950/30 to-transparent"></div>
-                <button type="button" onclick="closeModal()" class="absolute top-4 right-4 bg-black/60 hover:bg-black/80 text-white w-9 h-9 rounded-full flex items-center justify-center transition border border-white/20 shadow-md z-30 cursor-pointer">
+                <button type="button" onclick="closeModal()" class="absolute top-4 right-4 bg-black/60 hover:bg-black/80 text-white w-9 h-9 rounded-full flex items-center justify-center transition border border-white/20 shadow-md z-20 cursor-pointer">
                     <i class="fa-solid fa-xmark text-sm"></i>
                 </button>
-                <div class="absolute bottom-4 left-6 right-6 flex items-center gap-2 flex-wrap z-30">
+                <div class="absolute bottom-4 left-6 right-6 flex items-center gap-2 flex-wrap z-20">
                     <span id="modalCategoryBadge" class="bg-emerald-600 text-white text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider shadow-sm">Category</span>
                     <span id="modalSubCategoryBadge" class="bg-teal-700 text-white text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider shadow-sm hidden">Sub-category</span>
                     <h2 id="modalTitle" class="text-xl sm:text-2xl font-extrabold text-white mt-2 w-full drop-shadow">Guide Title</h2>
@@ -181,7 +181,7 @@
             </div>
 
             <!-- Standard Text Body Container with Blur Protection -->
-            <div id="modalTextBody" class="p-6 sm:p-8 space-y-6 max-h-[60vh] overflow-y-auto relative">
+            <div id="modalTextBody" class="p-6 sm:p-8 space-y-6 max-h-[60vh] overflow-y-auto relative z-10">
                 <div class="secure-blur" id="blurContentArea">
                     <div>
                         <h3 class="text-xs font-bold uppercase text-slate-400 tracking-wider mb-2">Overview</h3>
@@ -195,20 +195,10 @@
                     </div>
                 </div>
                 
-                <div class="border-t border-slate-100 pt-4 flex justify-between items-center z-30 relative">
-                    <!-- Native PayFast Form 2 -->
-                    <form action="https://sandbox.payfast.co.za/eng/process" method="POST">
-                        <input type="hidden" name="merchant_id" value="10004002">
-                        <input type="hidden" name="merchant_key" value="q1cd2rdny4a53">
-                        <input type="hidden" name="return_url" class="pfReturnUrl" value="">
-                        <input type="hidden" name="cancel_url" class="pfCancelUrl" value="">
-                        <input type="hidden" name="item_name" class="pfItemName" value="">
-                        <input type="hidden" name="amount" value="20.00">
-                        <input type="hidden" name="item_description" class="pfItemDesc" value="">
-                        <button type="submit" class="bg-amber-500 hover:bg-amber-600 text-white px-5 py-2.5 rounded-xl text-xs font-bold transition flex items-center gap-2 shadow-md cursor-pointer">
-                            <i class="fa-solid fa-download"></i> Unlock Package (JPG + Text) - R20.00
-                        </button>
-                    </form>
+                <div class="border-t border-slate-100 pt-4 flex justify-between items-center relative z-20">
+                    <button type="button" onclick="document.querySelector('#secureOverlay form').requestSubmit()" class="bg-amber-500 hover:bg-amber-600 text-white px-5 py-2.5 rounded-xl text-xs font-bold transition flex items-center gap-2 shadow-md cursor-pointer">
+                        <i class="fa-solid fa-download"></i> Unlock Package (JPG + Text) - R20.00
+                    </button>
                     
                     <button type="button" onclick="closeModal()" class="bg-slate-100 hover:bg-slate-200 text-slate-700 px-5 py-2.5 rounded-xl text-sm font-semibold transition cursor-pointer">
                         Close
@@ -640,12 +630,11 @@
                 subBadge.classList.add('hidden');
             }
 
-            // Populate all PayFast form fields dynamically when the modal opens
-            document.querySelectorAll('.pfReturnUrl').forEach(el => el.value = window.location.href);
-            document.querySelectorAll('.pfCancelUrl').value = window.location.href; // handled per element or collection
-            document.querySelectorAll('.pfCancelUrl').forEach(el => el.value = window.location.href);
-            document.querySelectorAll('.pfItemName').forEach(el => el.value = `Guide Package: ${guide.title}`);
-            document.querySelectorAll('.pfItemDesc').forEach(el => el.value = guide.description.substring(0, 100));
+            // Populate PayFast Form Fields via IDs
+            document.getElementById('pfReturnUrl').value = window.location.href;
+            document.getElementById('pfCancelUrl').value = window.location.href;
+            document.getElementById('pfItemName').value = `Guide Package: ${guide.title}`;
+            document.getElementById('pfItemDesc').value = guide.description.substring(0, 100);
 
             document.getElementById('secureOverlay').classList.remove('hidden');
             document.getElementById('blurContentArea').classList.add('secure-blur');
