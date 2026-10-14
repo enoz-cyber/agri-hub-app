@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en" class="h-full">
 <head>
@@ -16,15 +15,38 @@
     <link rel="manifest" href='data:application/manifest+json,{"name":"Professional & Lifestyle Hub","short_name":"HubApp","start_url":".","display":"standalone","background_color":"#065f46","theme_color":"#065f46"}'>
 
     <style>
-        body { font-family: 'Inter', sans-serif; }
+        body { 
+            font-family: 'Inter', sans-serif; 
+            -webkit-user-select: none; 
+            -moz-user-select: none; 
+            -ms-user-select: none; 
+            user-select: none; 
+        }
         ::-webkit-scrollbar { width: 8px; }
         ::-webkit-scrollbar-track { background: #f1f5f9; }
         ::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 4px; }
         ::-webkit-scrollbar-thumb:hover { background: #94a3b8; }
         .glass-header { background: linear-gradient(135deg, #065f46 0%, #047857 100%); }
+        
+        /* Screenshot Protection Watermark & Blur Effect */
+        .secure-blur {
+            filter: blur(6px);
+            transition: filter 0.3s ease;
+            pointer-events: none;
+        }
+        .secure-watermark {
+            position: absolute;
+            inset: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(15, 23, 42, 0.4);
+            z-index: 20;
+            backdrop-filter: blur(2px);
+        }
     </style>
 </head>
-<body class="bg-slate-100 text-slate-800 h-full flex flex-col justify-between selection:bg-emerald-200">
+<body class="bg-slate-100 text-slate-800 h-full flex flex-col justify-between selection:bg-transparent" oncontextmenu="return false;">
 
     <header class="glass-header text-white shadow-lg sticky top-0 z-40 border-b border-emerald-700/50">
         <div class="max-w-7xl mx-auto px-4 py-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row justify-between items-center gap-4">
@@ -52,7 +74,7 @@
     <main class="flex-grow max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-8">
         
         <!-- Colorful Search and Category Filter Bar -->
-        <div class="mb-8 flex flex-col md:flex-row justify-between items-center gap-4 bg-gradient-to-r from-emerald-50 via-teal-50 to-indigo-50 p-4 sm:p-5 rounded-2xl shadow-sm border border-emerald-100">
+        <div class="mb-8 flex flex-col md:flex-row justify-between items-center gap-4 bg-gradient-to-r from-emerald-50 via-teal-50 to-indigo-50 p-4 sm:p-5 rounded-2xl shadow-sm border border-emerald-100 relative">
             <div class="relative w-full md:w-80">
                 <span class="absolute inset-y-0 left-0 flex items-center pl-3.5 pointer-events-none text-slate-400">
                     <i class="fa-solid fa-magnifying-glass"></i>
@@ -61,13 +83,21 @@
                     class="w-full pl-10 pr-4 py-2.5 bg-white border border-slate-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500 transition shadow-sm">
             </div>
 
-            <!-- Category Filter Tabs with Vibrant Specific Color Themes -->
-            <div class="flex items-center gap-2 overflow-x-auto w-full md:w-auto pb-2 md:pb-0">
-                <button onclick="filterByCategory('All')" id="cat-All" class="category-btn px-4 py-2 rounded-xl text-xs font-bold bg-slate-800 text-white transition shadow-sm">All</button>
-                <button onclick="filterByCategory('Farmers')" id="cat-Farmers" class="category-btn px-4 py-2 rounded-xl text-xs font-bold bg-emerald-100 text-emerald-800 border border-emerald-200 hover:bg-emerald-600 hover:text-white transition">🌾 Farmers</button>
-                <button onclick="filterByCategory('Builders')" id="cat-Builders" class="category-btn px-4 py-2 rounded-xl text-xs font-bold bg-indigo-100 text-indigo-800 border border-indigo-200 hover:bg-indigo-600 hover:text-white transition">🏗️ Builders</button>
-                <button onclick="filterByCategory('Handyman')" id="cat-Handyman" class="category-btn px-4 py-2 rounded-xl text-xs font-bold bg-sky-100 text-sky-800 border border-sky-200 hover:bg-sky-600 hover:text-white transition">🛠️ Handyman</button>
-                <button onclick="filterByCategory('Housewives')" id="cat-Housewives" class="category-btn px-4 py-2 rounded-xl text-xs font-bold bg-rose-100 text-rose-800 border border-rose-200 hover:bg-rose-600 hover:text-white transition">🏠 Housewives</button>
+            <!-- Category Filter Tabs with Fast-Looping Hover Preview -->
+            <div class="flex items-center gap-2 overflow-x-visible w-full md:w-auto pb-2 md:pb-0">
+                <button onclick="filterByCategory('All')" onmouseenter="startCategoryLoop('All', event)" onmouseleave="stopCategoryLoop()" id="cat-All" class="category-btn px-4 py-2 rounded-xl text-xs font-bold bg-slate-800 text-white transition shadow-sm">All</button>
+                <button onclick="filterByCategory('Farmers')" onmouseenter="startCategoryLoop('Farmers', event)" onmouseleave="stopCategoryLoop()" id="cat-Farmers" class="category-btn px-4 py-2 rounded-xl text-xs font-bold bg-emerald-100 text-emerald-800 border border-emerald-200 hover:bg-emerald-600 hover:text-white transition">🌾 Farmers</button>
+                <button onclick="filterByCategory('Builders')" onmouseenter="startCategoryLoop('Builders', event)" onmouseleave="stopCategoryLoop()" id="cat-Builders" class="category-btn px-4 py-2 rounded-xl text-xs font-bold bg-indigo-100 text-indigo-800 border border-indigo-200 hover:bg-indigo-600 hover:text-white transition">🏗️ Builders</button>
+                <button onclick="filterByCategory('Handyman')" onmouseenter="startCategoryLoop('Handyman', event)" onmouseleave="stopCategoryLoop()" id="cat-Handyman" class="category-btn px-4 py-2 rounded-xl text-xs font-bold bg-sky-100 text-sky-800 border border-sky-200 hover:bg-sky-600 hover:text-white transition">🛠️ Handyman</button>
+                <button onclick="filterByCategory('Housewives')" onmouseenter="startCategoryLoop('Housewives', event)" onmouseleave="stopCategoryLoop()" id="cat-Housewives" class="category-btn px-4 py-2 rounded-xl text-xs font-bold bg-rose-100 text-rose-800 border border-rose-200 hover:bg-rose-600 hover:text-white transition">🏠 Housewives</button>
+            </div>
+
+            <!-- Floating Fast-Looping Preview Popup Box -->
+            <div id="categoryPreviewPopup" class="hidden absolute top-20 left-6 z-50 w-80 bg-slate-900/95 backdrop-blur-md text-white p-4 rounded-2xl shadow-2xl border border-slate-700 pointer-events-none transition-all duration-150">
+                <h4 id="previewTitle" class="text-xs font-extrabold uppercase tracking-wider text-emerald-400 mb-2 border-b border-slate-700 pb-1.5">Category Live Loop</h4>
+                <div id="previewContent" class="text-xs text-slate-200 font-medium min-h-[40px] flex items-center">
+                    <!-- Looping item display -->
+                </div>
             </div>
 
             <div class="flex items-center gap-3 w-full md:w-auto justify-end">
@@ -79,9 +109,9 @@
         <div id="subCategoryContainer" class="mb-6 hidden flex items-center gap-2 overflow-x-auto pb-2 bg-emerald-50/60 p-3 rounded-2xl border border-emerald-100">
             <span class="text-xs font-bold text-emerald-900 uppercase tracking-wider mr-2">Farmer Sub-Categories:</span>
             <button onclick="filterBySubCategory('All')" id="subcat-All" class="subcat-btn px-3.5 py-1.5 rounded-lg text-xs font-bold bg-emerald-800 text-white transition shadow-sm">All Farming</button>
-            <button onclick="filterBySubCategory('Crop Farming')" id="subcat-Crop Farming" class="subcat-btn px-3.5 py-1.5 rounded-lg text-xs font-bold bg-white text-emerald-800 border border-emerald-200 hover:bg-emerald-100 transition">Crop Farming (Images Visible)</button>
-            <button onclick="filterBySubCategory('Fruit Farming')" id="subcat-Fruit Farming" class="subcat-btn px-3.5 py-1.5 rounded-lg text-xs font-bold bg-white text-emerald-800 border border-emerald-200 hover:bg-emerald-100 transition">Fruit Farming (Images Visible)</button>
-            <button onclick="filterBySubCategory('Vegetable Farming')" id="subcat-Vegetable Farming" class="subcat-btn px-3.5 py-1.5 rounded-lg text-xs font-bold bg-white text-emerald-800 border border-emerald-200 hover:bg-emerald-100 transition">Vegetable Farming (Images Visible)</button>
+            <button onclick="filterBySubCategory('Crop Farming')" id="subcat-Crop Farming" class="subcat-btn px-3.5 py-1.5 rounded-lg text-xs font-bold bg-white text-emerald-800 border border-emerald-200 hover:bg-emerald-100 transition">Crop Farming</button>
+            <button onclick="filterBySubCategory('Fruit Farming')" id="subcat-Fruit Farming" class="subcat-btn px-3.5 py-1.5 rounded-lg text-xs font-bold bg-white text-emerald-800 border border-emerald-200 hover:bg-emerald-100 transition">Fruit Farming</button>
+            <button onclick="filterBySubCategory('Vegetable Farming')" id="subcat-Vegetable Farming" class="subcat-btn px-3.5 py-1.5 rounded-lg text-xs font-bold bg-white text-emerald-800 border border-emerald-200 hover:bg-emerald-100 transition">Vegetable Farming</button>
             <button onclick="filterBySubCategory('Animal Farming')" id="subcat-Animal Farming" class="subcat-btn px-3.5 py-1.5 rounded-lg text-xs font-bold bg-white text-emerald-800 border border-emerald-200 hover:bg-emerald-100 transition">Animal Farming</button>
             <button onclick="filterBySubCategory('Poultry Farming')" id="subcat-Poultry Farming" class="subcat-btn px-3.5 py-1.5 rounded-lg text-xs font-bold bg-white text-emerald-800 border border-emerald-200 hover:bg-emerald-100 transition">Poultry Farming</button>
         </div>
@@ -90,7 +120,7 @@
         <div id="handymanSubCategoryContainer" class="mb-6 hidden flex items-center gap-2 overflow-x-auto pb-2 bg-sky-50/60 p-3 rounded-2xl border border-sky-100">
             <span class="text-xs font-bold text-sky-900 uppercase tracking-wider mr-2">Handyman Sub-Categories:</span>
             <button onclick="filterBySubCategory('All')" id="hsubcat-All" class="hsubcat-btn px-3.5 py-1.5 rounded-lg text-xs font-bold bg-sky-800 text-white transition shadow-sm">All Handyman</button>
-            <button onclick="filterBySubCategory('Manufacture')" id="hsubcat-Manufacture" class="hsubcat-btn px-3.5 py-1.5 rounded-lg text-xs font-bold bg-white text-sky-800 border border-sky-200 hover:bg-sky-100 transition">Manufacture (Images Visible)</button>
+            <button onclick="filterBySubCategory('Manufacture')" id="hsubcat-Manufacture" class="hsubcat-btn px-3.5 py-1.5 rounded-lg text-xs font-bold bg-white text-sky-800 border border-sky-200 hover:bg-sky-100 transition">Manufacture</button>
             <button onclick="filterBySubCategory('Metalwork & Fabrication')" id="hsubcat-Metalwork & Fabrication" class="hsubcat-btn px-3.5 py-1.5 rounded-lg text-xs font-bold bg-white text-sky-800 border border-sky-200 hover:bg-sky-100 transition">Metalwork & Fabrication</button>
             <button onclick="filterBySubCategory('Plumbing')" id="hsubcat-Plumbing" class="hsubcat-btn px-3.5 py-1.5 rounded-lg text-xs font-bold bg-white text-sky-800 border border-sky-200 hover:bg-sky-100 transition">Plumbing</button>
         </div>
@@ -108,381 +138,56 @@
         </div>
     </main>
 
-    <!-- Guide Modal -->
-    <div id="guideModal" class="fixed inset-0 bg-slate-950/70 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4 overflow-y-auto">
-        <div id="modalCardWrapper" class="bg-white rounded-3xl max-w-4xl w-full overflow-hidden shadow-2xl transform transition-all my-8 border border-slate-100">
+    <!-- Guide Modal with Screenshot Protection & Pay-to-Unlock Overlay -->
+    <div id="guideModal" class="fixed inset-0 bg-slate-950/80 backdrop-blur-md z-50 hidden flex items-center justify-center p-4 overflow-y-auto">
+        <div id="modalCardWrapper" class="bg-white rounded-3xl max-w-2xl w-full overflow-hidden shadow-2xl transform transition-all my-8 border border-slate-100 relative">
+            
+            <!-- Secure Watermark Overlay preventing free viewing / screen grabbing -->
+            <div id="secureOverlay" class="secure-watermark flex-col text-center p-6 text-white">
+                <div class="bg-amber-500/20 text-amber-300 p-4 rounded-2xl border border-amber-500/40 mb-3 backdrop-blur-md shadow-xl">
+                    <i class="fa-solid fa-lock text-3xl"></i>
+                </div>
+                <h3 class="text-lg font-extrabold mb-1">Protected Premium Guide</h3>
+                <p class="text-xs text-slate-300 max-w-xs mb-4 font-medium">Full step-by-step procedures and high-res infographics are locked to prevent free usage and screen grabbing.</p>
+                <button onclick="downloadCurrentGuide()" class="bg-amber-500 hover:bg-amber-600 text-slate-950 px-6 py-3 rounded-xl text-xs font-extrabold transition shadow-lg flex items-center gap-2 transform hover:scale-105">
+                    <i class="fa-solid fa-cart-shopping"></i> Unlock & Download Package (R20.00)
+                </button>
+            </div>
+
             <!-- Image Header Container -->
             <div id="modalImageContainer" class="relative h-64 sm:h-72 bg-slate-900">
-                <img id="modalImage" src="" alt="Guide Image" class="w-full h-full object-cover opacity-90" onerror="handleImageError(this)">
+                <img id="modalImage" src="" alt="Guide Image" class="w-full h-full object-cover opacity-90 secure-blur" onerror="handleImageError(this)">
                 <div class="absolute inset-0 bg-gradient-to-t from-slate-950/90 via-slate-950/30 to-transparent"></div>
-                <button onclick="closeModal()" class="absolute top-4 right-4 bg-black/60 hover:bg-black/80 text-white w-9 h-9 rounded-full flex items-center justify-center transition border border-white/20 shadow-md z-10">
+                <button onclick="closeModal()" class="absolute top-4 right-4 bg-black/60 hover:bg-black/80 text-white w-9 h-9 rounded-full flex items-center justify-center transition border border-white/20 shadow-md z-30">
                     <i class="fa-solid fa-xmark text-sm"></i>
                 </button>
-                <div class="absolute bottom-4 left-6 right-6 flex items-center gap-2 flex-wrap">
+                <div class="absolute bottom-4 left-6 right-6 flex items-center gap-2 flex-wrap z-30">
                     <span id="modalCategoryBadge" class="bg-emerald-600 text-white text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider shadow-sm">Category</span>
                     <span id="modalSubCategoryBadge" class="bg-teal-700 text-white text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider shadow-sm hidden">Sub-category</span>
                     <h2 id="modalTitle" class="text-xl sm:text-2xl font-extrabold text-white mt-2 w-full drop-shadow">Guide Title</h2>
                 </div>
             </div>
 
-            <!-- Interactive Iframe Container -->
-            <div id="modalIframeContainer" class="hidden relative w-full h-[75vh] bg-slate-900">
-                <button onclick="closeModal()" class="absolute top-4 right-4 bg-black/80 hover:bg-black text-white w-10 h-10 rounded-full flex items-center justify-center transition border border-white/30 shadow-lg z-50">
-                    <i class="fa-solid fa-xmark text-base"></i>
-                </button>
-                <iframe id="modalIframe" src="" class="w-full h-full border-0"></iframe>
-            </div>
-
-            <!-- Embedded Fully Expanded Sheet Metal Calculator Suite -->
-            <div id="modalInteractiveContainer" class="hidden relative w-full bg-slate-900 text-slate-100 p-6 sm:p-8 max-h-[80vh] overflow-y-auto">
-                <button onclick="closeModal()" class="absolute top-4 right-4 bg-slate-800 hover:bg-slate-700 text-white w-10 h-10 rounded-full flex items-center justify-center transition border border-slate-600 shadow-lg z-50">
-                    <i class="fa-solid fa-xmark text-base"></i>
-                </button>
+            <!-- Standard Text Body Container with Blur Protection -->
+            <div id="modalTextBody" class="p-6 sm:p-8 space-y-6 max-h-[60vh] overflow-y-auto relative">
+                <div class="secure-blur" id="blurContentArea">
+                    <div>
+                        <h3 class="text-xs font-bold uppercase text-slate-400 tracking-wider mb-2">Overview</h3>
+                        <p id="modalDescription" class="text-slate-600 text-sm leading-relaxed font-medium"></p>
+                    </div>
+                    <div class="border-t border-slate-100 pt-4 mt-4">
+                        <h3 class="text-xs font-bold uppercase text-slate-400 tracking-wider mb-3">Step-by-Step Procedure</h3>
+                        <ul id="modalSteps" class="space-y-3">
+                            <!-- Dynamic Step List -->
+                        </ul>
+                    </div>
+                </div>
                 
-                <div class="space-y-6">
-                    <div class="border-b border-slate-700 pb-4 flex items-center gap-3">
-                        <div class="bg-sky-500/20 text-sky-400 p-3 rounded-2xl border border-sky-500/30">
-                            <i class="fa-solid fa-compass-drafting text-2xl"></i>
-                        </div>
-                        <div>
-                            <h3 class="text-lg font-bold text-white">Universal Sheet Metal Workers Development Calculators</h3>
-                            <p class="text-xs text-slate-400">Complete layout patterns, transitions, press brake bending, advanced fabrication, weights & cutting forces</p>
-                        </div>
-                    </div>
-
-                    <!-- Main Navigation Tabs -->
-                    <div class="grid grid-cols-2 sm:grid-cols-6 gap-2">
-                        <button onclick="showSheetTab('patterns')" id="sheet-tab-patterns" class="sheet-tab px-3 py-2.5 rounded-xl text-xs font-bold bg-sky-600 text-white shadow-md">1. Layouts</button>
-                        <button onclick="showSheetTab('transitions')" id="sheet-tab-transitions" class="sheet-tab px-3 py-2.5 rounded-xl text-xs font-bold bg-slate-800 text-slate-400 hover:bg-slate-700">2. Transitions</button>
-                        <button onclick="showSheetTab('bending')" id="sheet-tab-bending" class="sheet-tab px-3 py-2.5 rounded-xl text-xs font-bold bg-slate-800 text-slate-400 hover:bg-slate-700">3. Bending</button>
-                        <button onclick="showSheetTab('advanced')" id="sheet-tab-advanced" class="sheet-tab px-3 py-2.5 rounded-xl text-xs font-bold bg-slate-800 text-slate-400 hover:bg-slate-700">4. Advanced Fab</button>
-                        <button onclick="showSheetTab('weight')" id="sheet-tab-weight" class="sheet-tab px-3 py-2.5 rounded-xl text-xs font-bold bg-slate-800 text-slate-400 hover:bg-slate-700">5. Weight</button>
-                        <button onclick="showSheetTab('force')" id="sheet-tab-force" class="sheet-tab px-3 py-2.5 rounded-xl text-xs font-bold bg-slate-800 text-slate-400 hover:bg-slate-700">6. Force</button>
-                    </div>
-
-                    <!-- TAB 1: LAYOUT PATTERNS -->
-                    <div id="sheet-content-patterns" class="sheet-content bg-slate-800/80 p-5 rounded-2xl border border-slate-700 space-y-4">
-                        <h4 class="text-xs font-bold text-sky-400 uppercase tracking-wider flex items-center gap-2">
-                            <i class="fa-solid fa-circle-notch"></i> Cylinders, Cones & Frustums (Parallel/Radial Line)
-                        </h4>
-                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 text-sm">
-                            <div>
-                                <label class="block text-xs font-semibold text-slate-400 mb-1">Base Diameter (D) - mm</label>
-                                <input type="number" id="cylDia" value="200" oninput="calcPattern()" class="w-full p-2.5 bg-slate-900 border border-slate-700 rounded-xl text-white outline-none focus:border-sky-500">
-                            </div>
-                            <div>
-                                <label class="block text-xs font-semibold text-slate-400 mb-1">Height / Length (H) - mm</label>
-                                <input type="number" id="cylHeight" value="300" oninput="calcPattern()" class="w-full p-2.5 bg-slate-900 border border-slate-700 rounded-xl text-white outline-none focus:border-sky-500">
-                            </div>
-                            <div>
-                                <label class="block text-xs font-semibold text-slate-400 mb-1">Top Diameter (d) - mm (Cone)</label>
-                                <input type="number" id="cylTopDia" value="100" oninput="calcPattern()" class="w-full p-2.5 bg-slate-900 border border-slate-700 rounded-xl text-white outline-none focus:border-sky-500">
-                            </div>
-                            <div>
-                                <label class="block text-xs font-semibold text-slate-400 mb-1">Layout Divisions (Points)</label>
-                                <input type="number" id="cylDivs" value="12" oninput="calcPattern()" class="w-full p-2.5 bg-slate-900 border border-slate-700 rounded-xl text-white outline-none focus:border-sky-500">
-                            </div>
-                        </div>
-                        <div class="p-4 bg-slate-900 rounded-xl border border-sky-500/30 grid grid-cols-1 sm:grid-cols-3 gap-3 text-center">
-                            <div>
-                                <span class="block text-xs text-slate-400">Mean Stretch Circumference</span>
-                                <span id="resCirc" class="text-lg font-bold text-sky-400">628.3 mm</span>
-                            </div>
-                            <div>
-                                <span class="block text-xs text-slate-400">Division Step Arc Length</span>
-                                <span id="resStep" class="text-lg font-bold text-sky-400">52.4 mm</span>
-                            </div>
-                            <div>
-                                <span class="block text-xs text-slate-400">Cone Development Radius</span>
-                                <span id="resConeRad" class="text-lg font-bold text-sky-400">316.2 mm</span>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- TAB 2: TRANSITIONS -->
-                    <div id="sheet-content-transitions" class="sheet-content hidden bg-slate-800/80 p-5 rounded-2xl border border-slate-700 space-y-6">
-                        <div class="space-y-3">
-                            <h4 class="text-xs font-bold text-sky-400 uppercase tracking-wider flex items-center gap-2">
-                                <i class="fa-solid fa-diagram-project"></i> 2A. Square-to-Round / Rectangle-to-Round Transition
-                            </h4>
-                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 text-sm">
-                                <div>
-                                    <label class="block text-xs font-semibold text-slate-400 mb-1">Base Width × Length (W × L) - mm</label>
-                                    <div class="grid grid-cols-2 gap-2">
-                                        <input type="number" id="transW" value="300" oninput="calcTransitions()" class="p-2.5 bg-slate-900 border border-slate-700 rounded-xl text-white outline-none focus:border-sky-500" placeholder="Width">
-                                        <input type="number" id="transL" value="300" oninput="calcTransitions()" class="p-2.5 bg-slate-900 border border-slate-700 rounded-xl text-white outline-none focus:border-sky-500" placeholder="Length">
-                                    </div>
-                                </div>
-                                <div>
-                                    <label class="block text-xs font-semibold text-slate-400 mb-1">Top Collar Diameter (d) & Height (H) - mm</label>
-                                    <div class="grid grid-cols-2 gap-2">
-                                        <input type="number" id="transD" value="150" oninput="calcTransitions()" class="p-2.5 bg-slate-900 border border-slate-700 rounded-xl text-white outline-none focus:border-sky-500" placeholder="Dia">
-                                        <input type="number" id="transH" value="250" oninput="calcTransitions()" class="p-2.5 bg-slate-900 border border-slate-700 rounded-xl text-white outline-none focus:border-sky-500" placeholder="Height">
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="p-3 bg-slate-900 rounded-xl border border-sky-500/30 grid grid-cols-1 sm:grid-cols-2 gap-3 text-center">
-                                <div>
-                                    <span class="block text-xs text-slate-400">Corner True Length Diagonal</span>
-                                    <span id="resCornerTL" class="text-base font-bold text-sky-400">308.2 mm</span>
-                                </div>
-                                <div>
-                                    <span class="block text-xs text-slate-400">Development Sector Radius</span>
-                                    <span id="resDevRad" class="text-base font-bold text-sky-400">287.2 mm</span>
-                                </div>
-                            </div>
-                        </div>
-
-                        <hr class="border-slate-700">
-
-                        <div class="space-y-3">
-                            <h4 class="text-xs font-bold text-sky-400 uppercase tracking-wider flex items-center gap-2">
-                                <i class="fa-solid fa-wind"></i> 2B. HVAC Rectangular-to-Round Equivalent Duct Size
-                            </h4>
-                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 text-sm">
-                                <div>
-                                    <label class="block text-xs font-semibold text-slate-400 mb-1">Duct Width (a) - mm</label>
-                                    <input type="number" id="ductA" value="400" oninput="calcTransitions()" class="w-full p-2.5 bg-slate-900 border border-slate-700 rounded-xl text-white outline-none focus:border-sky-500">
-                                </div>
-                                <div>
-                                    <label class="block text-xs font-semibold text-slate-400 mb-1">Duct Height (b) - mm</label>
-                                    <input type="number" id="ductB" value="250" oninput="calcTransitions()" class="w-full p-2.5 bg-slate-900 border border-slate-700 rounded-xl text-white outline-none focus:border-sky-500">
-                                </div>
-                            </div>
-                            <div class="p-3 bg-slate-900 rounded-xl border border-sky-500/30 text-center">
-                                <span class="block text-xs text-slate-400">Equivalent Friction Diameter (De)</span>
-                                <span id="resEquivDuct" class="text-lg font-bold text-sky-400">338.5 mm</span>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- TAB 3: BENDING -->
-                    <div id="sheet-content-bending" class="sheet-content hidden bg-slate-800/80 p-5 rounded-2xl border border-slate-700 space-y-6">
-                        <div class="space-y-3">
-                            <h4 class="text-xs font-bold text-sky-400 uppercase tracking-wider flex items-center gap-2">
-                                <i class="fa-solid fa-ruler-combined"></i> 3A. Bend Allowance (BA), Setback & Bend Deduction (BD)
-                            </h4>
-                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 text-sm">
-                                <div>
-                                    <label class="block text-xs font-semibold text-slate-400 mb-1">Material Thickness (T) - mm</label>
-                                    <input type="number" id="bendThick" value="2.0" step="0.1" oninput="calcBending()" class="w-full p-2.5 bg-slate-900 border border-slate-700 rounded-xl text-white outline-none focus:border-sky-500">
-                                </div>
-                                <div>
-                                    <label class="block text-xs font-semibold text-slate-400 mb-1">Inside Radius (R) - mm</label>
-                                    <input type="number" id="bendRad" value="2.0" step="0.1" oninput="calcBending()" class="w-full p-2.5 bg-slate-900 border border-slate-700 rounded-xl text-white outline-none focus:border-sky-500">
-                                </div>
-                                <div>
-                                    <label class="block text-xs font-semibold text-slate-400 mb-1">Bend Angle (Degrees)</label>
-                                    <input type="number" id="bendAngle" value="90" oninput="calcBending()" class="w-full p-2.5 bg-slate-900 border border-slate-700 rounded-xl text-white outline-none focus:border-sky-500">
-                                </div>
-                                <div>
-                                    <label class="block text-xs font-semibold text-slate-400 mb-1">K-Factor</label>
-                                    <input type="number" id="kFactor" value="0.33" step="0.01" oninput="calcBending()" class="w-full p-2.5 bg-slate-900 border border-slate-700 rounded-xl text-white outline-none focus:border-sky-500">
-                                </div>
-                            </div>
-                            <div class="p-3 bg-slate-900 rounded-xl border border-sky-500/30 grid grid-cols-1 sm:grid-cols-3 gap-3 text-center text-xs">
-                                <div>
-                                    <span class="block text-slate-400">Bend Allowance (BA)</span>
-                                    <span id="resBA" class="text-base font-bold text-sky-400">4.18 mm</span>
-                                </div>
-                                <div>
-                                    <span class="block text-slate-400">Outside Setback (OSSB)</span>
-                                    <span id="resOSSB" class="text-base font-bold text-sky-400">4.00 mm</span>
-                                </div>
-                                <div>
-                                    <span class="block text-slate-400">Bend Deduction (BD)</span>
-                                    <span id="resBD" class="text-base font-bold text-sky-400">3.82 mm</span>
-                                </div>
-                            </div>
-                        </div>
-
-                        <hr class="border-slate-700">
-
-                        <div class="space-y-3">
-                            <h4 class="text-xs font-bold text-sky-400 uppercase tracking-wider flex items-center gap-2">
-                                <i class="fa-solid fa-compress"></i> 3B. Minimum Flange Length & Springback Overbend
-                            </h4>
-                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 text-sm">
-                                <div>
-                                    <label class="block text-xs font-semibold text-slate-400 mb-1">V-Die Opening Width (V) - mm</label>
-                                    <input type="number" id="vWidth" value="16" oninput="calcBending()" class="w-full p-2.5 bg-slate-900 border border-slate-700 rounded-xl text-white outline-none focus:border-sky-500">
-                                </div>
-                                <div>
-                                    <label class="block text-xs font-semibold text-slate-400 mb-1">Material Yield Strength - MPa</label>
-                                    <input type="number" id="yieldStr" value="250" oninput="calcBending()" class="w-full p-2.5 bg-slate-900 border border-slate-700 rounded-xl text-white outline-none focus:border-sky-500">
-                                </div>
-                            </div>
-                            <div class="p-3 bg-slate-900 rounded-xl border border-sky-500/30 grid grid-cols-1 sm:grid-cols-2 gap-3 text-center text-xs">
-                                <div>
-                                    <span class="block text-slate-400">Minimum Safe Flange Leg</span>
-                                    <span id="resMinFlange" class="text-base font-bold text-sky-400">11.2 mm</span>
-                                </div>
-                                <div>
-                                    <span class="block text-slate-400">Est. Overbend Springback</span>
-                                    <span id="resSpringback" class="text-base font-bold text-sky-400">91.8°</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- TAB 4: ADVANCED FAB -->
-                    <div id="sheet-content-advanced" class="sheet-content hidden bg-slate-800/80 p-5 rounded-2xl border border-slate-700 space-y-6">
-                        <div class="space-y-3">
-                            <h4 class="text-xs font-bold text-sky-400 uppercase tracking-wider flex items-center gap-2">
-                                <i class="fa-solid fa-shapes"></i> 4A. Triangulation Offsets & Miter / Elbow Cuts
-                            </h4>
-                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 text-sm">
-                                <div>
-                                    <label class="block text-xs font-semibold text-slate-400 mb-1">Triangulation Offset X / Y - mm</label>
-                                    <div class="grid grid-cols-2 gap-2">
-                                        <input type="number" id="triX" value="150" oninput="calcAdvanced()" class="p-2.5 bg-slate-900 border border-slate-700 rounded-xl text-white outline-none focus:border-sky-500" placeholder="X offset">
-                                        <input type="number" id="triY" value="150" oninput="calcAdvanced()" class="p-2.5 bg-slate-900 border border-slate-700 rounded-xl text-white outline-none focus:border-sky-500" placeholder="Y offset">
-                                    </div>
-                                </div>
-                                <div>
-                                    <label class="block text-xs font-semibold text-slate-400 mb-1">Miter Elbow (Pieces & Angle)</label>
-                                    <div class="grid grid-cols-2 gap-2">
-                                        <input type="number" id="miterPieces" value="4" oninput="calcAdvanced()" class="p-2.5 bg-slate-900 border border-slate-700 rounded-xl text-white outline-none focus:border-sky-500" placeholder="Pieces">
-                                        <input type="number" id="miterAngle" value="90" oninput="calcAdvanced()" class="p-2.5 bg-slate-900 border border-slate-700 rounded-xl text-white outline-none focus:border-sky-500" placeholder="Angle">
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="p-3 bg-slate-900 rounded-xl border border-sky-500/30 grid grid-cols-1 sm:grid-cols-2 gap-3 text-center text-xs">
-                                <div>
-                                    <span class="block text-slate-400">Diagonal True Length</span>
-                                    <span id="resTri" class="text-base font-bold text-sky-400">212.1 mm</span>
-                                </div>
-                                <div>
-                                    <span class="block text-slate-400">Miter Cut Angle / Piece</span>
-                                    <span id="resMiter" class="text-base font-bold text-sky-400">11.25°</span>
-                                </div>
-                            </div>
-                        </div>
-
-                        <hr class="border-slate-700">
-
-                        <div class="space-y-3">
-                            <h4 class="text-xs font-bold text-sky-400 uppercase tracking-wider flex items-center gap-2">
-                                <i class="fa-solid fa-shield-halved"></i> 4B. Large-Radius Step Bending & Dish Tank Heads
-                            </h4>
-                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 text-sm">
-                                <div>
-                                    <label class="block text-xs font-semibold text-slate-400 mb-1">Step Bending Arc Angle & Hits</label>
-                                    <div class="grid grid-cols-2 gap-2">
-                                        <input type="number" id="bumpAngle" value="90" oninput="calcAdvanced()" class="p-2.5 bg-slate-900 border border-slate-700 rounded-xl text-white outline-none focus:border-sky-500" placeholder="Arc Angle">
-                                        <input type="number" id="bumpHits" value="10" oninput="calcAdvanced()" class="p-2.5 bg-slate-900 border border-slate-700 rounded-xl text-white outline-none focus:border-sky-500" placeholder="Hits">
-                                    </div>
-                                </div>
-                                <div>
-                                    <label class="block text-xs font-semibold text-slate-400 mb-1">Torispherical Dish Head Outer Dia - mm</label>
-                                    <input type="number" id="tankDia" value="1000" oninput="calcAdvanced()" class="w-full p-2.5 bg-slate-900 border border-slate-700 rounded-xl text-white outline-none focus:border-sky-500">
-                                </div>
-                            </div>
-                            <div class="p-3 bg-slate-900 rounded-xl border border-sky-500/30 grid grid-cols-1 sm:grid-cols-2 gap-3 text-center text-xs">
-                                <div>
-                                    <span class="block text-slate-400">Angle per Hit Step</span>
-                                    <span id="resBumpStep" class="text-base font-bold text-sky-400">9.0° / hit</span>
-                                </div>
-                                <div>
-                                    <span class="block text-slate-400">Approx. Flat Blank Diameter</span>
-                                    <span id="resTankBlank" class="text-base font-bold text-sky-400">1,250 mm</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- TAB 5: WEIGHT -->
-                    <div id="sheet-content-weight" class="sheet-content hidden bg-slate-800/80 p-5 rounded-2xl border border-slate-700 space-y-4">
-                        <h4 class="text-xs font-bold text-sky-400 uppercase tracking-wider flex items-center gap-2">
-                            <i class="fa-solid fa-weight-hanging"></i> Material Weight Calculator
-                        </h4>
-                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 text-sm">
-                            <div>
-                                <label class="block text-xs font-semibold text-slate-400 mb-1">Material Type</label>
-                                <select id="matType" onchange="calcWeight()" class="w-full p-2.5 bg-slate-900 border border-slate-700 rounded-xl text-white outline-none focus:border-sky-500">
-                                    <option value="7850">Steel (Mild) - 7850 kg/m³</option>
-                                    <option value="8000">Stainless Steel 304 - 8000 kg/m³</option>
-                                    <option value="2700">Aluminum 5052 - 2700 kg/m³</option>
-                                    <option value="8960">Copper - 8960 kg/m³</option>
-                                    <option value="8500">Brass - 8500 kg/m³</option>
-                                </select>
-                            </div>
-                            <div>
-                                <label class="block text-xs font-semibold text-slate-400 mb-1">Thickness - mm</label>
-                                <input type="number" id="sheetThick" value="1.6" step="0.1" oninput="calcWeight()" class="w-full p-2.5 bg-slate-900 border border-slate-700 rounded-xl text-white outline-none focus:border-sky-500">
-                            </div>
-                            <div>
-                                <label class="block text-xs font-semibold text-slate-400 mb-1">Width - mm</label>
-                                <input type="number" id="sheetWidth" value="1220" oninput="calcWeight()" class="w-full p-2.5 bg-slate-900 border border-slate-700 rounded-xl text-white outline-none focus:border-sky-500">
-                            </div>
-                            <div>
-                                <label class="block text-xs font-semibold text-slate-400 mb-1">Length - mm</label>
-                                <input type="number" id="sheetLen" value="2440" oninput="calcWeight()" class="w-full p-2.5 bg-slate-900 border border-slate-700 rounded-xl text-white outline-none focus:border-sky-500">
-                            </div>
-                        </div>
-                        <div class="p-4 bg-slate-900 rounded-xl border border-sky-500/30 grid grid-cols-1 sm:grid-cols-2 gap-3 text-center">
-                            <div>
-                                <span class="block text-xs text-slate-400">Single Sheet Mass</span>
-                                <span id="resSingleWeight" class="text-xl font-bold text-sky-400">37.38 kg</span>
-                            </div>
-                            <div>
-                                <span class="block text-xs text-slate-400">Weight per Square Meter</span>
-                                <span id="resSqmWeight" class="text-xl font-bold text-sky-400">12.56 kg/m²</span>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- TAB 6: FORCE -->
-                    <div id="sheet-content-force" class="sheet-content hidden bg-slate-800/80 p-5 rounded-2xl border border-slate-700 space-y-4">
-                        <h4 class="text-xs font-bold text-sky-400 uppercase tracking-wider flex items-center gap-2">
-                            <i class="fa-solid fa-scissors"></i> Cutting & Shearing Force Tonnage Calculator
-                        </h4>
-                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 text-sm">
-                            <div>
-                                <label class="block text-xs font-semibold text-slate-400 mb-1">Shear Strength - N/mm² (MPa)</label>
-                                <input type="number" id="shearStr" value="350" oninput="calcForce()" class="w-full p-2.5 bg-slate-900 border border-slate-700 rounded-xl text-white outline-none focus:border-sky-500">
-                            </div>
-                            <div>
-                                <label class="block text-xs font-semibold text-slate-400 mb-1">Cut Perimeter Length - mm</label>
-                                <input type="number" id="cutLen" value="1000" oninput="calcForce()" class="w-full p-2.5 bg-slate-900 border border-slate-700 rounded-xl text-white outline-none focus:border-sky-500">
-                            </div>
-                            <div>
-                                <label class="block text-xs font-semibold text-slate-400 mb-1">Sheet Thickness - mm</label>
-                                <input type="number" id="cutThick" value="3.0" step="0.1" oninput="calcForce()" class="w-full p-2.5 bg-slate-900 border border-slate-700 rounded-xl text-white outline-none focus:border-sky-500">
-                            </div>
-                        </div>
-                        <div class="p-4 bg-slate-900 rounded-xl border border-sky-500/30 grid grid-cols-1 sm:grid-cols-2 gap-3 text-center">
-                            <div>
-                                <span class="block text-xs text-slate-400">Required Shearing Force</span>
-                                <span id="resForceKN" class="text-xl font-bold text-sky-400">1,050 kN</span>
-                            </div>
-                            <div>
-                                <span class="block text-xs text-slate-400">Press Tonnage Required</span>
-                                <span id="resForceTons" class="text-xl font-bold text-sky-400">107.0 Metric Tons</span>
-                            </div>
-                        </div>
-                    </div>
-
-                </div>
-            </div>
-
-            <!-- Standard Text Body Container -->
-            <div id="modalTextBody" class="p-6 sm:p-8 space-y-6 max-h-[60vh] overflow-y-auto">
-                <div>
-                    <h3 class="text-xs font-bold uppercase text-slate-400 tracking-wider mb-2">Overview</h3>
-                    <p id="modalDescription" class="text-slate-600 text-sm leading-relaxed font-medium"></p>
-                </div>
-                <div class="border-t border-slate-100 pt-4">
-                    <h3 class="text-xs font-bold uppercase text-slate-400 tracking-wider mb-3">Step-by-Step Procedure</h3>
-                    <ul id="modalSteps" class="space-y-3">
-                        <!-- Dynamic Step List -->
-                    </ul>
-                </div>
-                <div class="border-t border-slate-100 pt-4 flex justify-between items-center">
-                    <button id="modalDownloadBtn" onclick="downloadCurrentGuide()" class="bg-amber-500 hover:bg-amber-600 text-white px-5 py-2.5 rounded-xl text-sm font-semibold transition flex items-center gap-2 shadow-md">
-                        <i class="fa-solid fa-download"></i> Download Infographic JPG
+                <div class="border-t border-slate-100 pt-4 flex justify-between items-center z-30 relative">
+                    <button id="modalDownloadBtn" onclick="downloadCurrentGuide()" class="bg-amber-500 hover:bg-amber-600 text-white px-5 py-2.5 rounded-xl text-xs font-bold transition flex items-center gap-2 shadow-md">
+                        <i class="fa-solid fa-download"></i> Unlock Package (JPG + Text) - R20.00
                     </button>
-                    <button onclick="closeModal()" class="bg-slate-100 hover:bg-slate-200 text-slate-700 px-5 py-2.5 rounded-xl text-sm font-semibold transition">
+                    <button onclick="closeModal()" class="bg-slate-100 hover:bg-slate-200 text-slate-700 px-5 py-2.5 rounded-xl text-xs font-semibold transition">
                         Close
                     </button>
                 </div>
@@ -558,9 +263,18 @@
     </footer>
 
     <script>
+        // Disable keyboard shortcuts for screen-grabbing, inspection, and copying
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'F12' || (e.ctrlKey && (e.key === 'u' || e.key === 's' || e.key === 'c' || e.key === 'p' || e.key === 'i'))) {
+                e.preventDefault();
+                alert('Content protection enabled: Copying and inspecting source code is restricted.');
+                return false;
+            }
+        });
+
         function handleImageError(imgElement) {
             imgElement.onerror = null;
-            imgElement.src = "https://placehold.co/600x400/0369a1/ffffff?text=Manufacture+Infographic";
+            imgElement.src = "https://placehold.co/600x400/0369a1/ffffff?text=Protected+Infographic";
         }
 
         const categoryTheme = {
@@ -571,89 +285,157 @@
         };
 
         const allGuides = [
-            // FARMERS -> Crop Farming
-            { id: "plough", title: "Plough Alignment & Attachment Guide", category: "Farmers", subCategory: "Crop Farming", image: "images/plough-alignment.jpg.jpg", description: "Step-by-step manual for rear-mounted plough alignment, 3-point hitch setup, and depth tuning for optimal soil inversion.", steps: ["Level tractor and plough.", "Set front furrow width.", "Adjust draft links.", "Verify vertical alignment."] },
-            { id: "disc-harrow", title: "Disc Harrow Alignment Guide", category: "Farmers", subCategory: "Crop Farming", image: "images/disc-harrow.jpg.jpg", description: "Side alignment, gang angles, tractor tire matching, and hitch point leveling for uniform residue incorporation.", steps: ["Adjust gang angles.", "Set hitch height.", "Inspect scraper blades.", "Grease bearings."] },
-            { id: "fertilizer-spreader", title: "Fertilizer Spreader Calibration", category: "Farmers", subCategory: "Crop Farming", image: "images/fertilizer-spreader.jpg.jpg", description: "Gate opening adjustments, catch-pan tests, spread width checking, and speed tuning for precise nutrient placement.", steps: ["Perform stationary catch-test.", "Weigh collected fertilizer.", "Calculate CV.", "Adjust vane angles."] },
-            { id: "boom-sprayer", title: "Boom Sprayer Calibration", category: "Farmers", subCategory: "Crop Farming", image: "images/boom-sprayer.jpg.jpg", description: "Nozzle selection, pressure tuning, and output checks for accurate systemic chemical application.", steps: ["Check nozzle tips.", "Measure pressure.", "Collect output.", "Ensure flow variation is within +/- 5%."] },
-            { id: "field-sprayer", title: "Field Sprayer Calibration", category: "Farmers", subCategory: "Crop Farming", image: "images/field-sprayer.jpg.jpg", description: "Comprehensive calibration procedures for large field sprayers, tank agitation, and drift reduction.", steps: ["Fill 100m test track.", "Measure traverse time.", "Calculate tank mix volume.", "Calibrate gauges."] },
-            { id: "maize-planting", title: "Maize Planting Guide", category: "Farmers", subCategory: "Crop Farming", image: "images/maize-planting.jpg.jpg", description: "Seed spacing, population calculations, fertilizer disc placement, and depth settings for high yield emergence.", steps: ["Select seed plate.", "Calibrate seed drop.", "Set depth (4-6 cm).", "Ensure good contact."] },
-            { id: "manure-spreader", title: "Manure Spreader Calibration", category: "Farmers", subCategory: "Crop Farming", image: "images/manure-spreader.jpg.jpg", description: "Application rates, beater speed adjustment, and spread uniformity for solid and semi-solid livestock manure.", steps: ["Weigh empty spreader.", "Distribute tarps.", "Run spreader.", "Weigh samples."] },
-            { id: "slasher-guide", title: "Slasher Guide", category: "Farmers", subCategory: "Crop Farming", image: "images/slasher-guide.jpg.jpg", description: "Cutting height adjustments, skid shoe leveling, and safety chain inspections for pasture topping and weed control.", steps: ["Adjust tail wheel.", "Inspect swing-away blades.", "Verify PTO clutch.", "Check safety guards."] },
-            
-            // FARMERS -> Fruit Farming
-            { id: "mist-sprayer", title: "Mist Sprayer Calibration", category: "Farmers", subCategory: "Fruit Farming", image: "images/mist-sprayer.jpg.jpg", description: "Air assistance and droplet distribution tuning for orchard canopies and dense foliage crops.", steps: ["Check fan gearbox.", "Align air cowlings.", "Use water-sensitive cards.", "Adjust pump pressure."] },
-            { id: "fruit-pruning", title: "Orchard Fruit Tree Pruning Manual", category: "Farmers", subCategory: "Fruit Farming", image: "images/fruit-pruning.jpg.jpg", description: "Comprehensive 9-step multi-panel visual guide for winter pruning, canopy health, and maximum sunlight penetration.", steps: ["Sanitize tools.", "Assess canopy goals.", "Remove 3-Ds.", "Clear center canopy."] },
-            { id: "tree-density", title: "Orchard Tree Density Calculation Guide", category: "Farmers", subCategory: "Fruit Farming", isInteractive: true, interactiveUrl: "tree-density.html", image: "images/tree-density.jpg.jpg", description: "Interactive visual simulator and calculation tool for determining tree population per hectare.", steps: ["Adjust row and tree spacing sliders.", "Observe live calculation.", "Analyze hectare population output."] },
-
-            // FARMERS -> Vegetable Farming
-            { id: "cabbage-planting", title: "Cabbage Field Planting & Cultivation Guide", category: "Farmers", subCategory: "Vegetable Farming", image: "images/cabbage-planting.jpg.jpg", description: "Comprehensive 9-step multi-panel visual guide for commercial cabbage field setup, soil preparation, basal fertilization, precision spacing, crop water management, mechanical weeding, pest scouting, and mature harvest.", steps: [
-                "Deep plough, incorporate organic matter, and create raised beds for cabbage drainage.",
-                "Maintain soil pH (6.0–6.8). Perform a soil test for customized fertilizer needs.",
-                "Incorporate pre-plant fertilizer, high in phosphorus and calcium for a strong start.",
-                "Choose suitable commercial varieties. Utilize seedlings from a nursery for optimal field stand.",
-                "Pre-mark holes: 45–60 cm between plants, 60–75 cm between rows for cabbage growth.",
-                "Use drip or efficient sprinkler irrigation. Maintain moisture during cabbage head formation.",
-                "Perform shallow mechanical cultivation to manage weeds and aerate the root zone.",
-                "Regular scouting for common pests (caterpillars, aphids) and diseases. Implement Integrated Pest Management (IPM).",
-                "Harvest cabbage heads when firm and full-sized. Observe head density for optimal commercial yield."
-            ]},
-            { id: "carrot-planting", title: "Carrot Field Planting & Cultivation Guide", category: "Farmers", subCategory: "Vegetable Farming", image: "images/carrot-planting.jpg.jpg", description: "Comprehensive 9-step multi-panel visual guide for commercial carrot field setup, soil preparation, basal fertilization, precision spacing, crop water management, mechanical weeding, pest scouting, and mature harvest.", steps: [
-                "Deep plough, incorporate organic matter, and create raised beds for carrot drainage.",
-                "Maintain soil pH (6.0–6.8). Perform a soil test for customized fertilizer needs.",
-                "Incorporate pre-plant fertilizer, high in phosphorus and calcium for a strong start.",
-                "Choose suitable commercial varieties. Utilize seedlings from a nursery for optimal field stand.",
-                "Pre-mark holes: 45–60 cm between plants, 60–75 cm between rows for carrot growth.",
-                "Use drip or efficient sprinkler irrigation. Maintain moisture during carrot head formation.",
-                "Perform shallow mechanical cultivation to manage weeds and aerate the root zone.",
-                "Regular scouting for common pests (caterpillars, aphids) and diseases. Implement Integrated Pest Management (IPM).",
-                "Harvest carrot roots when firm and full-sized. Observe root density for optimal commercial yield."
-            ]},
-            { id: "onion-planting-1", title: "Commercial Onion Field Planting Guide", category: "Farmers", subCategory: "Vegetable Farming", image: "images/onion-planting-1.jpg.jpg", description: "Comprehensive 9-step multi-panel visual guide for commercial onion field setup, soil prep, and precision planting.", steps: ["Test soil pH.", "Incorporate basal fertilizers.", "Choose healthy seedlings.", "Set proper spacing."] },
-            { id: "onion-planting-2", title: "Onion Field Planting & Cultivation Guide", category: "Farmers", subCategory: "Vegetable Farming", image: "images/onion-planting-2.jpg.jpg", description: "Step-by-step visual manual covering soil preparation, planting materials, weed control, and curing.", steps: ["Test soil pH.", "Choose seeds/transplants.", "Provide consistent water.", "Control weeds."] },
-            { id: "potato-planting", title: "Commercial Potato Field Planting Guide", category: "Farmers", subCategory: "Vegetable Farming", image: "images/potato-planting.jpg.jpg", description: "Comprehensive 9-step multi-panel visual guide for commercial potato large-scale production, chitting, and hilling.", steps: ["Test soil pH.", "Choose certified seed tubers.", "Set rows.", "Hill up soil ridges."] },
-            { id: "pumpkin-planting", title: "Commercial Pumpkin Field Planting Guide", category: "Farmers", subCategory: "Vegetable Farming", image: "images/pumpkin-planting.jpg.jpg", description: "Comprehensive 9-step multi-panel visual guide for commercial pumpkin field setup, precision spacing, vine care, and harvest.", steps: ["Test soil pH (6.0-6.8) and form wide raised beds.", "Select certified disease-resistant seeds.", "Apply pre-plant basal fertilizer rich in P and K.", "Set wide row spacing (1.5-2.5 m) and plant spacing (60-90 cm).", "Plant seeds 2.5-4.0 cm deep into warm soil (>18°C).", "Maintain consistent root-zone irrigation.", "Control weeds early before vines run.", "Monitor for beetles, aphids, and powdery mildew.", "Taper water and harvest with 5-10 cm stems attached."] },
-            { id: "watermelon-planting", title: "Commercial Watermelon Field Planting Guide", category: "Farmers", subCategory: "Vegetable Farming", image: "images/watermelon-planting.jpg.jpg", description: "Comprehensive 9-step multi-panel visual guide for commercial watermelon field setup, spacing, pest monitoring, and harvest.", steps: ["Test soil pH (6.0-6.8) and plough deeply for optimal drainage.", "Choose certified disease-resistant seeds; pre-sprout for even germination.", "Incorporate pre-plant fertilizer (Focus N, P, K) into rows.", "Set rows 1.5-2.5 m apart; space hills 60-90 cm apart in-row.", "Plant seeds flatwise (2.5-4 cm depth) and thin to single plants.", "Provide deep, consistent irrigation; critical during fruit set.", "Control weeds early with shallow cultivation or selective herbicides.", "Monitor for cucumber beetles, squash bugs, and powdery mildew.", "Taper irrigation 1-2 weeks before harvest; cut fruit with sturdy stems attached."] },
-            { id: "tomato-planting", title: "Commercial Tomato Field Planting Guide", category: "Farmers", subCategory: "Vegetable Farming", image: "images/tomato-planting.jpg.jpg", description: "Comprehensive 9-step multi-panel visual guide for commercial tomato production, transplanting, staking, and supported harvest.", steps: ["Test soil pH (6.2-6.8) and maintain rich, loamy, well-drained soil.", "Use vigorous, hardened-off transplants for even field establishment.", "Incorporate pre-plant fertilizer (Focus P, K, & Ca) near root zone.", "Set rows 0.9-1.2 m apart; space plants 45-60 cm apart in-row.", "Plant transplants deeply (10-15 cm) to encourage extensive adventitious root growth.", "Provide consistent moisture via drip irrigation; avoid overhead watering.", "Implement mulches and selective herbicides; perform early shallow cultivation.", "Scout for hornworms, blights, and viruses; implement pest management.", "Harvest fruit when fully ripe and firm, or at 'breaker stage' for ripening."] },
-            { id: "bell-pepper-planting", title: "Commercial Bell Pepper Field Planting Guide", category: "Farmers", subCategory: "Vegetable Farming", image: "images/bell-pepper-planting.jpg.jpg", description: "Comprehensive 9-step multi-panel visual guide for commercial bell pepper field setup, soil prep, precision spacing, pest management, and harvest.", steps: ["Target pH 6.0–6.8. Provide rich, sandy loam, well-drained soil; incorporate compost.", "Use healthy, disease-free seedlings with robust root systems.", "Incorporate pre-plant fertilizer (Focus N, P, K & Micronutrients) near root zone.", "Set rows 0.75–1.0 m apart; space plants 30–45 cm apart in-row.", "Plant transplants deeply (10-15 cm) to cover root ball; avoid covering the crown.", "Provide consistent, uniform moisture via drip; critical for initial establishment.", "Control weeds early with shallow cultivation or selective pre-emergence herbicides.", "Scout for hornworms, thrips, blights, and viruses. Implement pest management.", "Harvest when bell peppers are full size and firm, or at full color for ripeness."] },
-            { id: "green-bean-planting", title: "Commercial Green Bean Field Planting Guide", category: "Farmers", subCategory: "Vegetable Farming", image: "images/green-bean-planting.jpg.jpg", description: "Comprehensive 9-step multi-panel visual guide for commercial green bean field setup, direct seeding, precision spacing, trellising, and harvest.", steps: ["Target pH 5.8–6.8. Provide loose, well-drained fertile loam soil; ensure soil temp is above 18°C.", "Treat seeds with a registered fungicide and rhizobium inoculant to boost biological nitrogen fixation.", "Incorporate balanced pre-plant basal fertilizer (focus on P and K; avoid excess N to prevent vine overgrowth).", "Set rows 45–60 cm apart for bush varieties (or install trellises/poles for pole beans); space seeds 5–10 cm apart in-row.", "Direct seed green beans at a precise depth of 3–4 cm in loose soil and cover lightly.", "Provide consistent moisture via drip irrigation; avoid overhead watering during flowering to prevent disease.", "Control weeds early through shallow cultivation or mulching, taking care not to disrupt shallow roots.", "Scout regularly for bean flies, aphids, rust, and fungal leaf diseases; implement integrated pest management.", "Harvest pods every 2–3 days by hand using shears to ensure optimal tenderness and continuous pod production."] },
-
-            // FARMERS -> Animal & Poultry Farming
-            { id: "cattle-health", title: "Cattle Herd Health & Vaccination Schedule", category: "Farmers", subCategory: "Animal Farming", image: "https://placehold.co/600x400/065f46/ffffff?text=Animal+Farming", description: "Routine vaccinations, parasite control, and daily monitoring guidelines for beef and dairy cattle.", steps: ["Maintain records.", "Administer annual boosters.", "Perform hoof trimming.", "Ensure clean water."] },
-            { id: "poultry-brooding", title: "Poultry Brooder Setup & Management", category: "Farmers", subCategory: "Poultry Farming", image: "https://placehold.co/600x400/065f46/ffffff?text=Poultry+Farming", description: "Temperature regulation, lighting programs, and biosecurity protocols for day-old chicks.", steps: ["Pre-heat brooding house.", "Set up chick guards.", "Provide fresh water.", "Monitor temperatures."] },
-
-            // BUILDERS
-            { id: "foundation-pouring", title: "Concrete Foundation Pouring & Curing", category: "Builders", subCategory: "General", image: "https://placehold.co/600x400/334155/ffffff?text=Builders+Guide", description: "Excavation depth checks, formwork stability, reinforcement placement, and proper moisture curing.", steps: ["Verify trench depth.", "Secure rebar mesh.", "Pour concrete evenly.", "Keep surface moist for 7 days."] },
-
-            // HANDYMAN -> Manufacture
-            { id: "hiller-build", title: "Raised Bed Hiller (Double Disc) Build Guide", category: "Handyman", subCategory: "Manufacture", image: "images/hiller-build.jpg.jpg", description: "Step-by-step practical fabrication and field tuning manual for building a heavy-duty double-disc raised bed hiller.", steps: [
-                "Cut a 1.5–1.8 m length of heavy 75×75 mm square steel tubing (5mm wall thickness) and weld end caps to block dirt and moisture.",
-                "Weld Category 1/2 hitch upright brackets and lower pin mounts to the center of the bar, adding triangular gusset plates for heavy load support.",
-                "Cut two 400–500 mm vertical square shanks and drill height adjustment holes along their length for depth control.",
-                "Mount double-disc hubs and spindles to the shanks at a 15–25° inward angle to scoop soil upward into a central raised bed.",
-                "Attach shanks to the main toolbar using heavy-duty U-bolt collar clamps, allowing left/right row spacing (75–90 cm) and depth adjustments.",
-                "Mount to tractor 3-point linkage, set low gear speed, and test in dry, workable soil to form clean, high beds for root crops."
-            ]},
-            { id: "bakkie-fertilizer-spreader", title: "Bakkie Differential Fertilizer Spreader Build Guide", category: "Handyman", subCategory: "Manufacture", image: "images/Fertilizer-spreader.jpg", description: "Step-by-step ground-driven fabrication manual for a bakkie differential fertilizer spreader, covering material specifications, chassis building, hopper mounting, drive transfer, metering gate, and calibration.", steps: [
-                "Axle Preparation: Select a standard light commercial vehicle (bakkie) rear axle assembly (e.g., Toyota Hilux or Nissan NP300) with a gear ratio of 3.7:1 to 4.1:1. Clean the housing, completely weld the spider gears together inside the pumpkin casing to lock the differential, and orient the input pinion flange vertically upward.",
-                "Chassis Frame: Cut two main longitudinal rails out of 75mm x 50mm x 3mm RHS mild steel to 1500mm and three crossmembers to 900mm to form a ladder frame. Attach a 1200mm drawbar made of 75mm x 75mm x 4mm SHS, reinforce with gussets, attach a ball coupler, and mount the subframe securely onto the bakkie axle housing.",
-                "Conical Hopper: Acquire a 250L to 400L UV-stabilized polyethylene or sheet metal conical hopper. Build a circular/square support cage using 40mm x 40mm x 3mm angle iron and four vertical legs so the bottom exit sits 400mm-500mm above the spinner disc, ensuring exact center alignment with the vertical pinion axis.",
-                "Drive Transfer & Spinner: Align a 25mm solid bright round bar steel vertical shaft directly over the upward-facing pinion flange using a flexible mechanical coupling or yoke adapter. Fabricate a 450mm diameter spinner disc from 4mm stainless/galvanized plate with 4-6 directional fins (40mm high) and mount it via a locking collar beneath the hopper release point.",
-                "Metering Gate: Fit a flat, horizontal sliding plate made of 3mm stainless steel at the bottom mouth as a guillotine-style gate over a teardrop/crescent aperture. Connect a mechanical linkage rod to a long control lever on the front drawbar with a notched selector bar.",
-                "Field Testing & Calibration: Fill with dry fertilizer or coarse sand, pull at a working speed of 8 to 12 km/h to achieve a 6 to 10 meter spread pattern, and adjust drop points and gate lever settings as required."
-            ]},
-
-            // HANDYMAN -> Metalwork & Fabrication & Plumbing
-            { id: "sheet-metal-calculators", title: "Universal Sheet Metal Workers Development Calculators", category: "Handyman", subCategory: "Metalwork & Fabrication", isInteractive: true, interactiveType: "sheetMetal", image: "https://placehold.co/600x400/0369a1/ffffff?text=Sheet+Metal+Calculators", description: "Complete universal calculator suite featuring parallel/radial layout patterns, square-to-round transitions, duct sizing, press brake bending, advanced fab, weights, and shearing force.", steps: ["Select tab.", "Enter dimensions.", "Review developments."] },
-            { id: "leak-repair", title: "Emergency Pipe Leak Repair & Sealing", category: "Handyman", subCategory: "Plumbing", image: "https://placehold.co/600x400/0369a1/ffffff?text=Handyman+Guide", description: "Quick steps to isolate main water lines, apply temporary rubber clamps, and replace damaged PVC/copper fittings.", steps: ["Shut off water.", "Dry pipe section.", "Apply repair tape.", "Test pressure."] },
-
-            // HOUSEWIVES
-            { id: "meal-prep", title: "Weekly Family Meal Prep & Pantry Rotation", category: "Housewives", subCategory: "Meal Prep", image: "https://placehold.co/600x400/db2777/ffffff?text=Home+Guide", description: "Efficient batch cooking strategies, airtight storage organization, and FIFO pantry management.", steps: ["Plan 7-day menu.", "Inventory pantry.", "Batch chop vegetables.", "Label containers."] }
+            {
+                id: "plough", title: "Plough Alignment & Attachment Guide", category: "Farmers", subCategory: "Crop Farming", image: "images/plough-alignment.jpg.jpg",
+                desc: "Step-by-step manual for rear-mounted plough alignment, 3-point hitch setup, and depth tuning for optimal soil inversion.",
+                steps: ["Level tractor and plough.", "Set front furrow width.", "Adjust draft links.", "Verify vertical alignment."]
+            },
+            {
+                id: "disc-harrow", title: "Disc Harrow Alignment Guide", category: "Farmers", subCategory: "Crop Farming", image: "images/disc-harrow.jpg.jpg",
+                desc: "Side alignment, gang angles, tractor tire matching, and hitch point leveling for uniform residue incorporation.",
+                steps: ["Adjust gang angles.", "Set hitch height.", "Inspect scraper blades.", "Grease bearings."]
+            },
+            {
+                id: "fertilizer-spreader", title: "Fertilizer Spreader Calibration", category: "Farmers", subCategory: "Crop Farming", image: "images/fertilizer-spreader.jpg.jpg",
+                desc: "Gate opening adjustments, catch-pan tests, spread width checking, and speed tuning for precise nutrient placement.",
+                steps: ["Perform stationary catch-test.", "Weigh collected fertilizer.", "Calculate CU.", "Adjust vane angles."]
+            },
+            {
+                id: "boom-sprayer", title: "Boom Sprayer Calibration", category: "Farmers", subCategory: "Crop Farming", image: "images/boom-sprayer.jpg.jpg",
+                desc: "Nozzle selection, pressure tuning, and output checks for accurate systemic chemical application.",
+                steps: ["Check nozzle tips.", "Measure pressure.", "Collect output.", "Ensure flow variation is within +/- 5%."]
+            },
+            {
+                id: "field-sprayer", title: "Field Sprayer Calibration", category: "Farmers", subCategory: "Crop Farming", image: "images/field-sprayer.jpg.jpg",
+                desc: "Comprehensive calibration procedures for large field sprayers, tank agitation, and drift reduction.",
+                steps: ["Fill 100m test track.", "Measure traverse time.", "Calculate tank mix volume.", "Calibrate gauges."]
+            },
+            {
+                id: "maize-planting", title: "Maize Planting Guide", category: "Farmers", subCategory: "Crop Farming", image: "images/maize-planting.jpg.jpg",
+                desc: "Seed spacing, population calculations, fertilizer disc placement, and depth settings for high yield emergence.",
+                steps: ["Select seed plate.", "Calibrate seed drop.", "Set depth (4-6 cm).", "Ensure good contact."]
+            },
+            {
+                id: "manure-spreader", title: "Manure Spreader Calibration", category: "Farmers", subCategory: "Crop Farming", image: "images/manure-spreader.jpg.jpg",
+                desc: "Application rates, beater speed adjustment, and spread uniformity for solid and semi-solid livestock manure.",
+                steps: ["Weigh empty spreader.", "Distribute tarps.", "Run spreader.", "Weigh samples."]
+            },
+            {
+                id: "slasher-guide", title: "Slasher Guide", category: "Farmers", subCategory: "Crop Farming", image: "images/slasher-guide.jpg.jpg",
+                desc: "Cutting height adjustments, skid shoe leveling, and safety chain inspections for pasture topping and weed control.",
+                steps: ["Adjust tail wheel.", "Inspect swing-away blades.", "Verify PTO Clutch.", "Check safety guards."]
+            },
+            {
+                id: "mist-sprayer", title: "Mist Sprayer Calibration", category: "Farmers", subCategory: "Fruit Farming", image: "images/mist-sprayer.jpg.jpg",
+                desc: "Air assistance and droplet distribution tuning for orchard canopies and dense foliage crops.",
+                steps: ["Check fan gearbox.", "Align air coulings.", "Use water-sensitive cards.", "Adjust pump pressure."]
+            },
+            {
+                id: "fruit-pruning", title: "Orchard Fruit Tree Pruning Manual", category: "Farmers", subCategory: "Fruit Farming", image: "images/fruit-pruning.jpg.jpg",
+                desc: "Comprehensive 9-step multi-panel visual guide for winter pruning, canopy health, and maximum sunlight penetration.",
+                steps: ["Sanitize tools.", "Assess canopy goals.", "Remove 3-Ds.", "Clear center canopy."]
+            },
+            {
+                id: "tree-density", title: "Orchard Tree Density Calculation Guide", category: "Farmers", subCategory: "Fruit Farming", isInteractive: true, interactiveUrl: "tree-density.html", image: "images/tree-density.jpg.jpg",
+                desc: "Interactive visual simulator and calculation tool for determining tree population per hectare.",
+                steps: ["Adjust row and tree spacing sliders.", "Observe live calculation.", "Analyze hectare population output."]
+            },
+            {
+                id: "cabbage-planting", title: "Cabbage Field Planting & Cultivation Guide", category: "Farmers", subCategory: "Vegetable Farming", image: "images/cabbage-planting.jpg.jpg",
+                desc: "Comprehensive 9-step multi-panel visual guide for commercial cabbage field setup, soil prep, basal fertilization, and pest management.",
+                steps: ["Deep plough and create raised beds.", "Maintain soil pH (6.0-6.8).", "Incorporate pre-plant fertilizer.", "Choose commercial varieties.", "Pre-mark holes.", "Use drip irrigation.", "Perform shallow cultivation.", "Scout for pests.", "Harvest."]
+            },
+            {
+                id: "carrot-planting", title: "Carrot Field Planting & Cultivation Guide", category: "Farmers", subCategory: "Vegetable Farming", image: "images/carrot-planting.jpg.jpg",
+                desc: "Comprehensive 9-step multi-panel visual guide for commercial carrot field setup, soil prep, and harvesting.",
+                steps: ["Deep plough and create raised beds.", "Maintain soil pH (6.0-6.8).", "Incorporate pre-plant fertilizer.", "Choose commercial varieties.", "Pre-mark rows.", "Use drip irrigation.", "Perform shallow cultivation.", "Scout for pests.", "Harvest."]
+            },
+            {
+                id: "onion-planting-1", title: "Commercial Onion Field Planting Guide", category: "Farmers", subCategory: "Vegetable Farming", image: "images/onion-planting-1.jpg.jpg",
+                desc: "Comprehensive guide for commercial onion field setup, soil prep, and precision planting.",
+                steps: ["Test soil pH.", "Incorporate basal fertilizers.", "Choose healthy seedlings.", "Set proper spacing."]
+            },
+            {
+                id: "onion-planting-2", title: "Onion Field Planting & Cultivation Guide", category: "Farmers", subCategory: "Vegetable Farming", image: "images/onion-planting-2.jpg.jpg",
+                desc: "Step-by-step visual manual covering soil preparation, planting materials, weed control, and curing.",
+                steps: ["Test soil pH.", "Choose seeds/transplants.", "Provide consistent water.", "Control weeds."]
+            },
+            {
+                id: "potato-planting", title: "Commercial Potato Field Planting Guide", category: "Farmers", subCategory: "Vegetable Farming", image: "images/potato-planting.jpg.jpg",
+                desc: "Comprehensive guide for commercial potato large-scale production, chitting, and hilling.",
+                steps: ["Test soil pH.", "Choose certified seed tubers.", "Set rows.", "Hill up soil ridges."]
+            },
+            {
+                id: "pumpkin-planting", title: "Commercial Pumpkin Field Planting Guide", category: "Farmers", subCategory: "Vegetable Farming", image: "images/pumpkin-planting.jpg.jpg",
+                desc: "Comprehensive guide for commercial pumpkin field setup, precision spacing, vine care, and harvest.",
+                steps: ["Test soil pH.", "Select certified seeds.", "Apply basal fertilizer.", "Set wide spacing.", "Plant seeds.", "Maintain water.", "Control weeds.", "Monitor pests.", "Harvest."]
+            },
+            {
+                id: "watermelon-planting", title: "Commercial Watermelon Field Planting Guide", category: "Farmers", subCategory: "Vegetable Farming", image: "images/watermelon-planting.jpg.jpg",
+                desc: "Comprehensive guide for commercial watermelon field setup, spacing, pest monitoring, and harvest.",
+                steps: ["Test soil pH.", "Choose seeds.", "Incorporate fertilizer.", "Set rows.", "Plant seeds.", "Provide irrigation.", "Control weeds.", "Monitor pests.", "Harvest."]
+            },
+            {
+                id: "tomato-planting", title: "Commercial Tomato Field Planting Guide", category: "Farmers", subCategory: "Vegetable Farming", image: "images/tomato-planting.jpg.jpg",
+                desc: "Comprehensive guide for commercial tomato production, transplanting, staking, and supported harvest.",
+                steps: ["Test soil pH.", "Use transplants.", "Incorporate fertilizer.", "Set rows.", "Plant deeply.", "Provide moisture.", "Manage mulch.", "Scout for pests.", "Harvest."]
+            },
+            {
+                id: "bell-pepper-planting", title: "Commercial Bell Pepper Field Planting Guide", category: "Farmers", subCategory: "Vegetable Farming", image: "images/bell-pepper-planting.jpg.jpg",
+                desc: "Comprehensive guide for commercial bell pepper field setup, soil prep, precision spacing, and harvest.",
+                steps: ["Test soil pH.", "Use seedlings.", "Incorporate fertilizer.", "Set rows.", "Plant deeply.", "Provide moisture.", "Control weeds.", "Scout for pests.", "Harvest."]
+            },
+            {
+                id: "green-bean-planting", title: "Commercial Green Bean Field Planting Guide", category: "Farmers", subCategory: "Vegetable Farming", image: "images/green-bean-planting.jpg.jpg",
+                desc: "Comprehensive guide for commercial green bean field setup, direct seeding, precision spacing, and harvest.",
+                steps: ["Test soil pH.", "Treat seeds.", "Incorporate fertilizer.", "Set rows.", "Direct seed.", "Provide moisture.", "Control weeds.", "Scout for pests.", "Harvest."]
+            },
+            {
+                id: "cattle-health", title: "Cattle Herd Health & Vaccination Schedule", category: "Farmers", subCategory: "Animal Farming", image: "https://placehold.co/600x400/065f46/ffffff?text=Animal+Farming",
+                desc: "Routine vaccinations, parasite control, and daily monitoring guidelines for beef and dairy cattle.",
+                steps: ["Maintain records.", "Administer annual boosters.", "Perform hoof trimming.", "Ensure clean water."]
+            },
+            {
+                id: "poultry-brooding", title: "Poultry Brooder Setup & Management", category: "Farmers", subCategory: "Poultry Farming", image: "https://placehold.co/600x400/065f46/ffffff?text=Poultry+Farming",
+                desc: "Temperature regulation, lighting programs, and biosecurity protocols for day-old chicks.",
+                steps: ["Pre-heat brooding house.", "Set up chick guards.", "Provide fresh water.", "Monitor temperatures."]
+            },
+            {
+                id: "foundation-pouring", title: "Concrete Foundation Pouring & Curing", category: "Builders", subCategory: "General", image: "https://placehold.co/600x400/334155/ffffff?text=Builders+Guide",
+                desc: "Excavation depth checks, formwork stability, reinforcement placement, and proper moisture curing.",
+                steps: ["Verify trench depth.", "Secure rebar mesh.", "Pour concrete evenly.", "Keep surface moist for 7 days."]
+            },
+            {
+                id: "hiller-build", title: "Raised Bed Hiller (Double Disc) Build Guide", category: "Handyman", subCategory: "Manufacture", image: "images/hiller-build.jpg.jpg",
+                desc: "Step-by-step practical fabrication and field tuning manual for building a heavy-duty double-disc raised bed hiller.",
+                steps: ["Cut square steel tubing.", "Weld hitch upright bracket.", "Cut vertical square shanks.", "Mount double-disc hubs.", "Attach shanks to toolbar.", "Test in workable soil."]
+            },
+            {
+                id: "bakkie-fertilizer-spreader", title: "Bakkie Differential Fertilizer Spreader Build Guide", category: "Handyman", subCategory: "Manufacture", image: "images/Fertilizer-spreader.jpg",
+                desc: "Step-by-step ground-driven fabrication manual for a bakkie differential fertilizer spreader.",
+                steps: ["Axle Prep & differential locking.", "Build chassis frame.", "Mount conical hopper.", "Align drive transfer & spinner.", "Fit metering gate.", "Field test & calibrate."]
+            },
+            {
+                id: "sheet-metal-calculators", title: "Universal Sheet Metal Workers Development Calculators", category: "Handyman", subCategory: "Metalwork & Fabrication", isInteractive: true, interactiveType: "sheetMetal", image: "https://placehold.co/600x400/0369a1/ffffff?text=Sheet+Metal+Calculators",
+                desc: "Complete universal calculator suite featuring parallel/radial layout patterns, square-to-round transitions, and bending.",
+                steps: ["Select tab.", "Enter dimensions.", "Review developments."]
+            },
+            {
+                id: "leak-repair", title: "Emergency Pipe Leak Repair & Sealing", category: "Handyman", subCategory: "Plumbing", image: "https://placehold.co/600x400/0369a1/ffffff?text=Handyman+Guide",
+                desc: "Quick steps to isolate main water lines, apply temporary rubber clamps, and replace damaged PVC/copper fittings.",
+                steps: ["Shut off water.", "Dry pipe section.", "Apply repair tape.", "Test pressure."]
+            },
+            {
+                id: "meal-prep", title: "Weekly Family Meal Prep & Pantry Rotation", category: "Housewives", subCategory: "Meal Prep", image: "https://placehold.co/600x400/db2777/ffffff?text=Home+Guide",
+                desc: "Efficient batch cooking strategies, airtight storage organization, and FIFO pantry management.",
+                steps: ["Plan 7-day menu.", "Inventory pantry.", "Batch chop vegetables.", "Label containers."]
+            }
         ];
 
         let activeCategory = 'All';
         let activeSubCategory = 'All';
         let activeGuideId = null;
+        let loopInterval = null;
 
         function renderGuides() {
             const grid = document.getElementById('guidesGrid');
@@ -704,17 +486,14 @@
                 card.className = `${theme.bg} rounded-2xl shadow-sm hover:shadow-xl ${theme.border} border overflow-hidden transition-all duration-300 flex flex-col justify-between group`;
                 
                 let imageHtml = '';
-                if (showImages && guide.image && !guide.image.startsWith('http')) {
+                if (showImages && guide.image) {
                     imageHtml = `
                         <div class="relative h-48 bg-slate-100 overflow-hidden">
                             <img src="${guide.image}" alt="${guide.title}" 
-                                 class="w-full h-full object-cover group-hover:scale-105 transition duration-500"
+                                 class="w-full h-full object-cover group-hover:scale-105 transition duration-500 secure-blur"
                                  onerror="handleImageError(this)">
-                            <div class="absolute top-3 left-3 flex gap-2">
-                                <span class="${theme.badgeBg} backdrop-blur-md text-white text-xs font-bold px-3 py-1 rounded-full shadow-md">
-                                    ${guide.category}
-                                </span>
-                                <span class="${theme.subBadgeBg} backdrop-blur-md text-white text-xs font-bold px-3 py-1 rounded-full shadow-md">${guide.subCategory}</span>
+                            <div class="absolute inset-0 bg-slate-900/30 flex items-center justify-center">
+                                <span class="bg-slate-900/80 text-white text-[10px] font-bold px-2.5 py-1 rounded-full uppercase tracking-wider">🔒 Preview Protected</span>
                             </div>
                         </div>
                     `;
@@ -724,13 +503,12 @@
                     ${imageHtml}
                     <div class="p-5 sm:p-6 flex-grow flex flex-col justify-between">
                         <div>
-                            ${!showImages ? `<div class="flex gap-2 mb-3"><span class="${theme.badgeBg} text-white text-xs font-bold px-3 py-1 rounded-full">${guide.category}</span>${guide.subCategory && guide.subCategory !== 'General' ? `<span class="${theme.subBadgeBg} text-white text-xs font-bold px-3 py-1 rounded-full">${guide.subCategory}</span>` : ''}</div>` : ''}
                             <h3 class="text-lg font-bold text-slate-800 mb-2 group-hover:text-emerald-700 transition">${guide.title}</h3>
                             <p class="text-slate-600 text-xs sm:text-sm line-clamp-3 mb-4 leading-relaxed">${guide.description}</p>
                         </div>
                         <div class="flex items-center gap-2.5 pt-4 border-t border-slate-200/60">
                             <button onclick="openModal('${guide.id}')" class="flex-1 ${theme.buttonBg} text-white py-2.5 px-3 rounded-xl text-xs font-bold transition flex items-center justify-center gap-2 shadow-sm">
-                                <i class="fa-solid fa-book-open"></i> ${guide.isInteractive ? 'Launch Calculator' : 'View Guide'}
+                                <i class="fa-solid fa-lock"></i> ${guide.isInteractive ? 'Launch Calculator' : 'View Guide (Locked)'}
                             </button>
                         </div>
                     </div>
@@ -784,6 +562,44 @@
             renderGuides();
         }
 
+        function startCategoryLoop(category, event) {
+            const popup = document.getElementById('categoryPreviewPopup');
+            const titleEl = document.getElementById('previewTitle');
+            const contentEl = document.getElementById('previewContent');
+
+            const guidesInCat = category === 'All' ? allGuides : allGuides.filter(g => g.category === category);
+            if (guidesInCat.length === 0) return;
+
+            titleEl.innerText = `${category} (${guidesInCat.length} guides)`;
+            
+            let currentIndex = 0;
+            updateLoopItem(guidesInCat, currentIndex, contentEl);
+
+            clearInterval(loopInterval);
+            loopInterval = setInterval(() => {
+                currentIndex = (currentIndex + 1) % guidesInCat.length;
+                updateLoopItem(guidesInCat, currentIndex, contentEl);
+            }, 900);
+
+            popup.classList.remove('hidden');
+        }
+
+        function updateLoopItem(guides, index, container) {
+            const guide = guides[index];
+            container.innerHTML = `
+                <div class="flex items-center gap-2.5 w-full">
+                    <span class="bg-emerald-500/20 text-emerald-400 font-bold px-2 py-0.5 rounded text-[10px] shrink-0">${index + 1}/${guides.length}</span>
+                    <span class="truncate font-semibold text-slate-100">${guide.title}</span>
+                </div>
+            `;
+        }
+
+        function stopCategoryLoop() {
+            clearInterval(loopInterval);
+            const popup = document.getElementById('categoryPreviewPopup');
+            popup.classList.add('hidden');
+        }
+
         function openModal(id) {
             const guide = allGuides.find(g => g.id === id);
             if (!guide) return;
@@ -801,57 +617,32 @@
                 subBadge.classList.add('hidden');
             }
 
+            // Keep blur overlay active until purchase/download
+            document.getElementById('secureOverlay').classList.remove('hidden');
+            document.getElementById('blurContentArea').classList.add('secure-blur');
+            document.getElementById('modalImage').classList.add('secure-blur');
+
             const modalImageContainer = document.getElementById('modalImageContainer');
-            const modalIframeContainer = document.getElementById('modalIframeContainer');
-            const modalInteractiveContainer = document.getElementById('modalInteractiveContainer');
             const modalTextBody = document.getElementById('modalTextBody');
             const modalCardWrapper = document.getElementById('modalCardWrapper');
-            const downloadBtn = document.getElementById('modalDownloadBtn');
             
-            modalImageContainer.classList.add('hidden');
-            modalTextBody.classList.add('hidden');
-            modalIframeContainer.classList.add('hidden');
-            modalInteractiveContainer.classList.add('hidden');
+            modalCardWrapper.classList.remove('max-w-5xl');
+            modalCardWrapper.classList.add('max-w-2xl');
+            modalTextBody.classList.remove('hidden');
 
-            if (guide.isInteractive) {
-                modalCardWrapper.classList.remove('max-w-2xl');
-                modalCardWrapper.classList.add('max-w-5xl');
-
-                if (guide.interactiveUrl) {
-                    modalIframeContainer.classList.remove('hidden');
-                    document.getElementById('modalIframe').src = guide.interactiveUrl;
-                } else if (guide.interactiveType === 'sheetMetal') {
-                    modalInteractiveContainer.classList.remove('hidden');
-                    showSheetTab('patterns');
-                    calcPattern();
-                    calcTransitions();
-                    calcBending();
-                    calcAdvanced();
-                    calcWeight();
-                    calcForce();
-                }
-            } else {
-                modalCardWrapper.classList.remove('max-w-5xl');
-                modalCardWrapper.classList.add('max-w-2xl');
-                modalTextBody.classList.remove('hidden');
-
-                if ((guide.category === 'Farmers' && ['Crop Farming', 'Fruit Farming', 'Vegetable Farming'].includes(guide.subCategory)) || (guide.category === 'Handyman' && guide.subCategory === 'Manufacture')) {
-                    modalImageContainer.classList.remove('hidden');
-                    document.getElementById('modalImage').src = guide.image;
-                    if (downloadBtn) downloadBtn.classList.remove('hidden');
-                } else {
-                    if (downloadBtn) downloadBtn.classList.add('hidden');
-                }
-                
-                const stepsList = document.getElementById('modalSteps');
-                stepsList.innerHTML = '';
-                guide.steps.forEach((step, idx) => {
-                    const li = document.createElement('li');
-                    li.className = "flex items-start gap-3 text-sm text-slate-700 bg-slate-50 p-3.5 rounded-2xl border border-slate-200/80 shadow-sm";
-                    li.innerHTML = `<span class="bg-sky-700 text-white text-xs font-extrabold w-6 h-6 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5 shadow-sm">${idx + 1}</span> <span class="font-medium">${step}</span>`;
-                    stepsList.appendChild(li);
-                });
+            if (guide.image) {
+                modalImageContainer.classList.remove('hidden');
+                document.getElementById('modalImage').src = guide.image;
             }
+            
+            const stepsList = document.getElementById('modalSteps');
+            stepsList.innerHTML = '';
+            guide.steps.forEach((step, idx) => {
+                const li = document.createElement('li');
+                li.className = "flex items-start gap-3 text-sm text-slate-700 bg-slate-50 p-3.5 rounded-2xl border border-slate-200/80 shadow-sm";
+                li.innerHTML = `<span class="bg-sky-700 text-white text-xs font-extrabold w-6 h-6 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5 shadow-sm">${idx + 1}</span> <span class="font-medium">${step}</span>`;
+                stepsList.appendChild(li);
+            });
 
             document.getElementById('guideModal').classList.remove('hidden');
             document.body.style.overflow = 'hidden';
@@ -860,7 +651,6 @@
         function closeModal() {
             document.getElementById('guideModal').classList.add('hidden');
             document.body.style.overflow = 'auto';
-            document.getElementById('modalIframe').src = "";
             activeGuideId = null;
         }
 
@@ -890,128 +680,72 @@
 
         function downloadCurrentGuide() {
             const guide = allGuides.find(g => g.id === activeGuideId);
-            if (guide && guide.image) {
-                const link = document.createElement('a');
-                link.href = guide.image;
-                link.download = guide.title.replace(/[^a-zA-Z0-9]/g, '_') + ".jpg";
-                document.body.appendChild(link);
-                link.click();
-                document.body.removeChild(link);
+            if (!guide) return;
+
+            if (confirm(`Download Package: ${guide.title}\nIncludes: Full Infographic JPG + Procedure Text File\nPrice: R20.00\n\nProceed to secure PayFast checkout?`)) {
+                
+                // Clear Blur and Watermark upon initiating checkout
+                document.getElementById('secureOverlay').classList.add('hidden');
+                document.getElementById('blurContentArea').classList.remove('secure-blur');
+                document.getElementById('modalImage').classList.remove('secure-blur');
+
+                const payfastUrl = 'https://sandbox.payfast.co.za/eng/process'; 
+                const merchantId = '10004002'; 
+                const merchantKey = 'q1cd2rdny4a53'; 
+                
+                const form = document.createElement('form');
+                form.method = 'POST';
+                form.action = payfastUrl;
+
+                const paymentData = {
+                    merchant_id: merchantId,
+                    merchant_key: merchantKey,
+                    return_url: window.location.href, 
+                    cancel_url: window.location.href, 
+                    item_name: `Guide Package: ${guide.title}`,
+                    amount: '20.00', 
+                    item_description: guide.description.substring(0, 100)
+                };
+
+                for (const key in paymentData) {
+                    if (paymentData.hasOwnProperty(key)) {
+                        const input = document.createElement('input');
+                        input.type = 'hidden';
+                        input.name = key;
+                        input.value = paymentData[key];
+                        form.appendChild(input);
+                    }
+                }
+
+                document.body.appendChild(form);
+                form.submit();
+                document.body.removeChild(form);
+
+                let textContent = `GUIDE TITLE: ${guide.title}\n`;
+                textContent += `CATEGORY: ${guide.category} > ${guide.subCategory}\n\n`;
+                textContent += `OVERVIEW:\n${guide.description}\n\n`;
+                textContent += `STEP-BY-STEP PROCEDURE:\n`;
+                guide.steps.forEach((step, i) => {
+                    textContent += `${i + 1}. ${step}\n`;
+                });
+
+                const blob = new Blob([textContent], { type: 'text/plain;charset=utf-8' });
+                const textLink = document.createElement('a');
+                textLink.href = URL.createObjectURL(blob);
+                textLink.download = guide.title.replace(/[^a-zA-Z0-9]/g, '_') + "_Guide.txt";
+                document.body.appendChild(textLink);
+                textLink.click();
+                document.body.removeChild(textLink);
+
+                if (guide.image) {
+                    const imgLink = document.createElement('a');
+                    imgLink.href = guide.image;
+                    imgLink.download = guide.title.replace(/[^a-zA-Z0-9]/g, '_') + "_Infographic.jpg";
+                    document.body.appendChild(imgLink);
+                    imgLink.click();
+                    document.body.removeChild(imgLink);
+                }
             }
-        }
-
-        function showSheetTab(tabName) {
-            document.querySelectorAll('.sheet-tab').forEach(b => {
-                b.className = "sheet-tab px-3 py-2.5 rounded-xl text-xs font-bold bg-slate-800 text-slate-400 hover:bg-slate-700";
-            });
-            document.querySelectorAll('.sheet-content').forEach(c => c.classList.add('hidden'));
-
-            document.getElementById('sheet-tab-' + tabName).className = "sheet-tab px-3 py-2.5 rounded-xl text-xs font-bold bg-sky-600 text-white shadow-md";
-            document.getElementById('sheet-content-' + tabName).classList.remove('hidden');
-        }
-
-        function calcPattern() {
-            const D = parseFloat(document.getElementById('cylDia').value) || 0;
-            const H = parseFloat(document.getElementById('cylHeight').value) || 0;
-            const divs = parseFloat(document.getElementById('cylDivs').value) || 12;
-
-            const circ = Math.PI * D;
-            const step = circ / divs;
-            const R_cone = Math.sqrt(Math.pow(D / 2, 2) + Math.pow(H, 2));
-
-            document.getElementById('resCirc').innerText = circ.toFixed(1) + " mm";
-            document.getElementById('resStep').innerText = step.toFixed(1) + " mm";
-            document.getElementById('resConeRad').innerText = R_cone.toFixed(1) + " mm";
-        }
-
-        function calcTransitions() {
-            const w = parseFloat(document.getElementById('transW').value) || 0;
-            const l = parseFloat(document.getElementById('transL').value) || 0;
-            const d = parseFloat(document.getElementById('transD').value) || 0;
-            const h = parseFloat(document.getElementById('transH').value) || 0;
-
-            const cornerTL = Math.sqrt(Math.pow(w / 2 - d / 2, 2) + Math.pow(l / 2 - d / 2, 2) + Math.pow(h, 2));
-            const devRad = Math.sqrt(Math.pow(w / 2, 2) + Math.pow(h, 2));
-
-            const ductA = parseFloat(document.getElementById('ductA').value) || 0;
-            const ductB = parseFloat(document.getElementById('ductB').value) || 0;
-            const equivDuct = 1.30 * Math.pow(ductA * ductB, 0.625) / Math.pow(ductA + ductB, 0.25);
-
-            document.getElementById('resCornerTL').innerText = cornerTL.toFixed(1) + " mm";
-            document.getElementById('resDevRad').innerText = devRad.toFixed(1) + " mm";
-            document.getElementById('resEquivDuct').innerText = equivDuct.toFixed(1) + " mm";
-        }
-
-        function calcBending() {
-            const T = parseFloat(document.getElementById('bendThick').value) || 0;
-            const R = parseFloat(document.getElementById('bendRad').value) || 0;
-            const angle = parseFloat(document.getElementById('bendAngle').value) || 0;
-            const K = parseFloat(document.getElementById('kFactor').value) || 0.33;
-
-            const rad = (angle * Math.PI) / 180;
-            const BA = rad * (R + (K * T));
-            const OSSB = Math.tan(rad / 2) * (R + T);
-            const BD = (2 * OSSB) - BA;
-
-            const vWidth = parseFloat(document.getElementById('vWidth').value) || 16;
-            const minFlange = (vWidth / 2) + 2;
-
-            const yieldStr = parseFloat(document.getElementById('yieldStr').value) || 250;
-            const overbend = angle + (yieldStr / 100);
-
-            document.getElementById('resBA').innerText = BA.toFixed(2) + " mm";
-            document.getElementById('resOSSB').innerText = OSSB.toFixed(2) + " mm";
-            document.getElementById('resBD').innerText = BD.toFixed(2) + " mm";
-            document.getElementById('resMinFlange').innerText = minFlange.toFixed(1) + " mm";
-            document.getElementById('resSpringback').innerText = overbend.toFixed(1) + "°";
-        }
-
-        function calcAdvanced() {
-            const x = parseFloat(document.getElementById('triX').value) || 0;
-            const y = parseFloat(document.getElementById('triY').value) || 0;
-            const tri = Math.sqrt(Math.pow(x, 2) + Math.pow(y, 2));
-
-            const pieces = parseFloat(document.getElementById('miterPieces').value) || 4;
-            const totalAngle = parseFloat(document.getElementById('miterAngle').value) || 90;
-            const miterVal = totalAngle / (2 * (pieces - 1));
-
-            const bumpAngle = parseFloat(document.getElementById('bumpAngle').value) || 90;
-            const bumpHits = parseFloat(document.getElementById('bumpHits').value) || 10;
-            const bumpStep = bumpAngle / bumpHits;
-
-            const tankD = parseFloat(document.getElementById('tankDia').value) || 1000;
-            const tankBlank = tankD * 1.25;
-
-            document.getElementById('resTri').innerText = tri.toFixed(1) + " mm";
-            document.getElementById('resMiter').innerText = miterVal.toFixed(2) + "°";
-            document.getElementById('resBumpStep').innerText = bumpStep.toFixed(1) + "° / hit";
-            document.getElementById('resTankBlank').innerText = tankBlank.toFixed(0) + " mm";
-        }
-
-        function calcWeight() {
-            const density = parseFloat(document.getElementById('matType').value) || 7850;
-            const T = (parseFloat(document.getElementById('sheetThick').value) || 0) / 1000;
-            const W = (parseFloat(document.getElementById('sheetWidth').value) || 0) / 1000;
-            const L = (parseFloat(document.getElementById('sheetLen').value) || 0) / 1000;
-
-            const weightSingle = W * L * T * density;
-            const weightSqm = 1 * 1 * T * density;
-
-            document.getElementById('resSingleWeight').innerText = weightSingle.toFixed(2) + " kg";
-            document.getElementById('resSqmWeight').innerText = weightSqm.toFixed(2) + " kg/m²";
-        }
-
-        function calcForce() {
-            const shear = parseFloat(document.getElementById('shearStr').value) || 0;
-            const len = parseFloat(document.getElementById('cutLen').value) || 0;
-            const T = parseFloat(document.getElementById('cutThick').value) || 0;
-
-            const forceN = len * T * shear;
-            const forceKN = forceN / 1000;
-            const tons = forceKN / 9.81;
-
-            document.getElementById('resForceKN').innerText = forceKN.toFixed(1) + " kN";
-            document.getElementById('resForceTons').innerText = tons.toFixed(1) + " Metric Tons";
         }
 
         window.onload = function() {
