@@ -1,0 +1,653 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Orchard Tree Density Calculation Guide - Infographic Visual</title>
+    <!-- Tailwind CSS for Responsive Layout -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts: Permanent Marker, Bangers, and Inter for Comic Manual Typography -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bangers&family=Permanent+Marker&family=Inter:wght@400;600;800;900&display=swap" rel="stylesheet">
+    <!-- FontAwesome for UI Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f7f1e3;
+            color: #1e272e;
+        }
+
+        .comic-font {
+            font-family: 'Bangers', cursive;
+            letter-spacing: 1px;
+        }
+
+        .chalk-font {
+            font-family: 'Permanent Marker', cursive;
+        }
+
+        /* Comic panel border styling */
+        .comic-panel {
+            background-color: #fdfbf7;
+            border: 4px solid #1e272e;
+            box-shadow: 6px 6px 0px #1e272e;
+            border-radius: 12px;
+            position: relative;
+            overflow: hidden;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .comic-panel:hover {
+            transform: translateY(-2px);
+            box-shadow: 8px 8px 0px #1e272e;
+        }
+
+        /* Tag header styled like reference */
+        .panel-tag {
+            background-color: #ff793f;
+            color: #ffffff;
+            border-bottom: 3px solid #1e272e;
+            border-right: 3px solid #1e272e;
+            font-weight: 900;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            box-shadow: 2px 2px 0px #1e272e;
+        }
+
+        /* Verification badge */
+        .badge-verified {
+            background-color: #2ed573;
+            color: #ffffff;
+            border: 2px solid #1e272e;
+            box-shadow: 3px 3px 0px #1e272e;
+            font-family: 'Bangers', cursive;
+        }
+
+        /* SVG Vector Comic Styling */
+        svg .stroke-main {
+            stroke: #1e272e;
+            stroke-width: 3.5;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+        }
+
+        svg .stroke-thin {
+            stroke: #1e272e;
+            stroke-width: 2;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 10px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #f7f1e3;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #ff793f;
+            border: 2px solid #1e272e;
+            border-radius: 5px;
+        }
+
+        /* Print optimization */
+        @media print {
+            .no-print {
+                display: none !important;
+            }
+            body {
+                background-color: #ffffff;
+            }
+            .comic-panel {
+                box-shadow: none;
+                break-inside: avoid;
+            }
+        }
+    </style>
+</head>
+<body class="min-h-screen p-3 md:p-6 lg:p-8">
+
+    <div class="max-w-7xl mx-auto mb-6 no-print">
+        <div class="comic-panel p-4 bg-amber-100 flex flex-col md:flex-row items-center justify-between gap-4">
+            <div class="flex items-center gap-3">
+                <div class="w-12 h-12 bg-orange-500 rounded-full border-2 border-black flex items-center justify-center text-white text-2xl shadow">
+                    <i class="fa-solid fa-sliders"></i>
+                </div>
+                <div>
+                    <h2 class="comic-font text-2xl text-slate-900 tracking-wide">Interactive Density Simulator</h2>
+                    <p class="text-xs text-slate-700 font-semibold">Adjust spacing parameters to see dynamic updates across all visual panels!</p>
+                </div>
+            </div>
+            
+            <!-- Controls -->
+            <div class="flex flex-wrap items-center gap-4 sm:gap-6">
+                <div>
+                    <label class="block text-xs font-bold text-slate-800 uppercase mb-1">Row Spacing (m): <span id="rowVal" class="text-orange-600 font-black">4.0</span></label>
+                    <input type="range" id="rowInput" min="2.0" max="8.0" step="0.5" value="4.0" class="w-28 sm:w-36 accent-orange-500 cursor-pointer">
+                </div>
+                <div>
+                    <label class="block text-xs font-bold text-slate-800 uppercase mb-1">Tree Spacing (m): <span id="treeVal" class="text-orange-600 font-black">2.0</span></label>
+                    <input type="range" id="treeInput" min="1.0" max="5.0" step="0.5" value="2.0" class="w-28 sm:w-36 accent-orange-500 cursor-pointer">
+                </div>
+                <button onclick="window.print()" class="px-4 py-2 bg-emerald-500 hover:bg-emerald-600 text-white font-extrabold rounded-lg border-2 border-black shadow-[3px_3px_0px_#000] active:translate-y-0.5 active:shadow-none text-sm transition">
+                    <i class="fa-solid fa-print mr-1"></i> Print Poster
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <div class="max-w-7xl mx-auto">
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+
+            <!-- ================= MAIN TITLE HEADER PANEL (Spans 2 cols on lg) ================= -->
+            <div class="comic-panel lg:col-span-2 p-5 sm:p-6 bg-amber-50 flex flex-col justify-between relative min-h-[320px]">
+                <div class="absolute top-3 right-3 bg-red-500 text-white font-black text-xs px-3 py-1 rounded-full border-2 border-black shadow-[2px_2px_0px_#000] rotate-2">
+                    FIELD MANUAL v2.4
+                </div>
+
+                <div>
+                    <h1 class="comic-font text-3xl sm:text-5xl lg:text-6xl text-slate-900 leading-tight mb-2 uppercase drop-shadow">
+                        ORCHARD TREE DENSITY <br><span class="text-orange-600">CALCULATION GUIDE:</span>
+                    </h1>
+                    <p class="text-sm sm:text-base font-extrabold text-slate-700 tracking-wide border-b-4 border-orange-500 pb-2 mb-4 inline-block">
+                        A Step-by-Step Visual Manual for Orchard Trees per Hectare
+                    </p>
+                </div>
+
+                <!-- Graphic Banner Section -->
+                <div class="grid grid-cols-1 sm:grid-cols-12 items-center gap-4 mt-2">
+                    <!-- Male Farmer Character Illustration -->
+                    <div class="sm:col-span-7 flex items-center gap-3 bg-orange-100 p-3 rounded-xl border-2 border-black">
+                        <svg class="w-28 h-28 flex-shrink-0" viewBox="0 0 120 120">
+                            <!-- Background Circle -->
+                            <circle cx="60" cy="60" r="54" fill="#38ada9" class="stroke-main" />
+                            <!-- Farmer Body -->
+                            <path d="M 30,110 L 90,110 L 85,75 L 35,75 Z" fill="#e67e22" class="stroke-main"/> <!-- Orange Shirt -->
+                            <path d="M 40,78 L 80,78 L 75,120 L 45,120 Z" fill="#2980b9" class="stroke-main"/> <!-- Denim Overalls -->
+                            <rect x="52" y="80" width="16" height="20" rx="2" fill="#1b4f72" class="stroke-thin"/>
+                            <!-- Straps -->
+                            <line x1="45" y1="78" x2="52" y2="95" class="stroke-main"/>
+                            <line x1="75" y1="78" x2="68" y2="95" class="stroke-main"/>
+                            <!-- Head & Neck -->
+                            <rect x="53" y="62" width="14" height="15" fill="#ffcd94" class="stroke-thin"/>
+                            <ellipse cx="60" cy="50" rx="20" ry="22" fill="#ffcd94" class="stroke-main"/>
+                            <!-- Cap -->
+                            <path d="M 38,45 C 38,30 82,30 82,45 Z" fill="#e67e22" class="stroke-main"/>
+                            <path d="M 35,45 C 50,45 85,40 95,43 L 82,48 Z" fill="#d35400" class="stroke-main"/>
+                            <!-- Face features -->
+                            <circle cx="53" cy="48" r="2.5" fill="#1e272e"/>
+                            <circle cx="67" cy="48" r="2.5" fill="#1e272e"/>
+                            <path d="M 53,58 Q 60,65 67,58" fill="none" stroke="#1e272e" stroke-width="2.5" stroke-linecap="round"/>
+                            <!-- Ears -->
+                            <circle cx="39" cy="50" r="4" fill="#ffcd94" class="stroke-thin"/>
+                            <circle cx="81" cy="50" r="4" fill="#ffcd94" class="stroke-thin"/>
+                        </svg>
+                        <div>
+                            <div class="comic-font text-xl text-orange-600">Chief Agronomist Says:</div>
+                            <p class="text-xs font-bold text-slate-800 leading-snug">
+                                "Precision tree density ensures maximum yield, optimal canopy airflow, and easy tractor mobility!"
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Gauge Graphic: 1 Hectare Constant -->
+                    <div class="sm:col-span-5 bg-yellow-200 p-3 rounded-xl border-2 border-black text-center flex flex-col items-center justify-center">
+                        <div class="text-xs font-black uppercase text-slate-800 mb-1">Standard Land Unit</div>
+                        <div class="comic-font text-3xl text-slate-900 leading-none">1 HECTARE</div>
+                        <div class="bg-white px-3 py-1 rounded border-2 border-black font-extrabold text-sm text-red-600 mt-1 shadow-sm">
+                            = 10,000 m²
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ================= PANEL 1 ================= -->
+            <div class="comic-panel p-4 flex flex-col justify-between">
+                <div>
+                    <div class="panel-tag text-xs px-2.5 py-1 rounded inline-block mb-3">
+                        STEP 1: MEASURE ROW SPACING
+                    </div>
+                    <h3 class="font-extrabold text-lg text-slate-900 mb-2">Measure Alley Width</h3>
+                    <p class="text-xs text-slate-600 font-semibold mb-3">
+                        Measure the clear distance between adjacent orchard tree rows (alleyway width for tractor passage).
+                    </p>
+                </div>
+
+                <!-- SVG Visual: Measuring tape between 2 rows -->
+                <div class="bg-amber-100 rounded-lg border-2 border-black p-3 relative h-48 flex items-center justify-center">
+                    <svg class="w-full h-full" viewBox="0 0 200 140">
+                        <!-- Sky & Ground -->
+                        <rect x="0" y="0" width="200" height="100" fill="#c7ecee"/>
+                        <rect x="0" y="100" width="200" height="40" fill="#badc58"/>
+                        <line x1="0" y1="100" x2="200" y2="100" class="stroke-main"/>
+
+                        <!-- Left Tree Trunk -->
+                        <path d="M 20,100 L 25,60 L 35,60 L 40,100 Z" fill="#784e2d" class="stroke-main"/>
+                        <ellipse cx="30" cy="45" rx="25" ry="30" fill="#6ab04c" class="stroke-main"/>
+
+                        <!-- Right Tree Trunk -->
+                        <path d="M 160,100 L 165,60 L 175,60 L 180,100 Z" fill="#784e2d" class="stroke-main"/>
+                        <ellipse cx="170" cy="45" rx="25" ry="30" fill="#6ab04c" class="stroke-main"/>
+
+                        <!-- Measuring Tape Line -->
+                        <line x1="30" y1="110" x2="170" y2="110" stroke="#f1c40f" stroke-width="6" class="stroke-main"/>
+                        <!-- Arrowheads -->
+                        <polygon points="30,110 40,105 40,115" fill="#1e272e"/>
+                        <polygon points="170,110 160,105 160,115" fill="#1e272e"/>
+
+                        <!-- Dimension Callout Box -->
+                        <rect x="70" y="95" width="60" height="28" rx="6" fill="#ff793f" class="stroke-thin"/>
+                        <text x="100" y="114" font-family="'Bangers', cursive" font-size="16" fill="#ffffff" text-anchor="middle" id="panel1Val">4.0 m</text>
+                    </svg>
+                </div>
+
+                <div class="mt-3 bg-slate-100 p-2 rounded border border-slate-300 text-xs text-center font-bold text-slate-800">
+                    Row Distance = <span class="dynamic-row text-orange-600 font-black">4.0</span> meters
+                </div>
+            </div>
+
+            <!-- ================= PANEL 2 ================= -->
+            <div class="comic-panel p-4 flex flex-col justify-between">
+                <div>
+                    <div class="panel-tag text-xs px-2.5 py-1 rounded inline-block mb-3">
+                        STEP 2: MEASURE IN-ROW SPACING
+                    </div>
+                    <h3 class="font-extrabold text-lg text-slate-900 mb-2">Measure Tree-to-Tree</h3>
+                    <p class="text-xs text-slate-600 font-semibold mb-3">
+                        Determine the distance between trunks of individual trees planted along the same row.
+                    </p>
+                </div>
+
+                <!-- SVG Visual: In-row spacing between trunk centers -->
+                <div class="bg-amber-100 rounded-lg border-2 border-black p-3 relative h-48 flex items-center justify-center">
+                    <svg class="w-full h-full" viewBox="0 0 200 140">
+                        <rect x="0" y="0" width="200" height="100" fill="#c7ecee"/>
+                        <rect x="0" y="100" width="200" height="40" fill="#badc58"/>
+                        <line x1="0" y1="100" x2="200" y2="100" class="stroke-main"/>
+
+                        <!-- Tree 1 -->
+                        <path d="M 45,100 L 48,65 L 58,65 L 61,100 Z" fill="#784e2d" class="stroke-main"/>
+                        <ellipse cx="53" cy="50" rx="22" ry="25" fill="#44bd32" class="stroke-main"/>
+
+                        <!-- Tree 2 -->
+                        <path d="M 135,100 L 138,65 L 148,65 L 151,100 Z" fill="#784e2d" class="stroke-main"/>
+                        <ellipse cx="144" cy="50" rx="22" ry="25" fill="#44bd32" class="stroke-main"/>
+
+                        <!-- Measure Tape -->
+                        <line x1="53" y1="110" x2="144" y2="110" stroke="#f1c40f" stroke-width="6" class="stroke-main"/>
+                        <polygon points="53,110 63,105 63,115" fill="#1e272e"/>
+                        <polygon points="144,110 134,105 134,115" fill="#1e272e"/>
+
+                        <!-- Callout -->
+                        <rect x="75" y="95" width="50" height="28" rx="6" fill="#ff793f" class="stroke-thin"/>
+                        <text x="100" y="114" font-family="'Bangers', cursive" font-size="16" fill="#ffffff" text-anchor="middle" id="panel2Val">2.0 m</text>
+                    </svg>
+                </div>
+
+                <div class="mt-3 bg-slate-100 p-2 rounded border border-slate-300 text-xs text-center font-bold text-slate-800">
+                    Tree Distance = <span class="dynamic-tree text-orange-600 font-black">2.0</span> meters
+                </div>
+            </div>
+
+            <!-- ================= PANEL 3 ================= -->
+            <div class="comic-panel p-4 flex flex-col justify-between">
+                <div>
+                    <div class="panel-tag text-xs px-2.5 py-1 rounded inline-block mb-3">
+                        STEP 3: CALCULATE AREA PER TREE
+                    </div>
+                    <h3 class="font-extrabold text-lg text-slate-900 mb-2">Multiply Both Distances</h3>
+                    <p class="text-xs text-slate-600 font-semibold mb-3">
+                        Calculate the total land area footprint (in m²) required for each individual tree.
+                    </p>
+                </div>
+
+                <!-- Chalkboard Diagram -->
+                <div class="bg-slate-800 rounded-lg border-4 border-amber-800 p-4 relative h-48 flex flex-col items-center justify-center text-white text-center shadow-inner">
+                    <div class="text-amber-300 text-xs font-bold uppercase mb-1 tracking-widest">Chalkboard Calculation</div>
+                    <div class="chalk-font text-lg text-emerald-300 mb-2">
+                        Area = Row × Tree Spacing
+                    </div>
+                    <div class="chalk-font text-xl sm:text-2xl text-yellow-300 bg-slate-900/80 px-3 py-2 rounded border border-slate-600 w-full">
+                        <span class="dynamic-row">4.0</span>m × <span class="dynamic-tree">2.0</span>m = <span class="dynamic-area text-orange-400">8.0</span> m²
+                    </div>
+                    <div class="text-[11px] text-slate-300 mt-2 font-mono">
+                        (Footprint area per tree)
+                    </div>
+                </div>
+
+                <div class="mt-3 bg-slate-100 p-2 rounded border border-slate-300 text-xs text-center font-bold text-slate-800">
+                    Tree Footprint = <span class="dynamic-area text-orange-600 font-black">8.0</span> m²
+                </div>
+            </div>
+
+            <!-- ================= PANEL 4 ================= -->
+            <div class="comic-panel p-4 flex flex-col justify-between">
+                <div>
+                    <div class="panel-tag text-xs px-2.5 py-1 rounded inline-block mb-3">
+                        STEP 4: UNDERSTAND HECTARE AREA
+                    </div>
+                    <h3 class="font-extrabold text-lg text-slate-900 mb-2">Standard Hectare Constant</h3>
+                    <p class="text-xs text-slate-600 font-semibold mb-3">
+                        One metric hectare is a standard plot measuring 100 meters wide by 100 meters long.
+                    </p>
+                </div>
+
+                <!-- Top-down Grid Map -->
+                <div class="bg-amber-100 rounded-lg border-2 border-black p-3 relative h-48 flex items-center justify-center">
+                    <svg class="w-full h-full" viewBox="0 0 200 140">
+                        <rect x="20" y="15" width="160" height="110" fill="#2ed573" rx="4" class="stroke-main"/>
+                        <!-- Grid pattern -->
+                        <path d="M 20,42.5 L 180,42.5 M 20,70 L 180,70 M 20,97.5 L 180,97.5" stroke="#26de81" stroke-width="2"/>
+                        <path d="M 60,15 L 60,125 M 100,15 L 100,125 M 140,15 L 140,125" stroke="#26de81" stroke-width="2"/>
+                        
+                        <!-- Dimension Labels -->
+                        <text x="100" y="10" font-family="'Bangers', cursive" font-size="12" fill="#1e272e" text-anchor="middle">100 METERS</text>
+                        <text x="10" y="70" font-family="'Bangers', cursive" font-size="12" fill="#1e272e" text-anchor="middle" transform="rotate(-90 10 70)">100 METERS</text>
+                        
+                        <!-- Center Stamp -->
+                        <rect x="45" y="45" width="110" height="50" rx="8" fill="#1e272e" opacity="0.9"/>
+                        <text x="105" y="67" font-family="'Bangers', cursive" font-size="16" fill="#f1c40f" text-anchor="middle">1 HECTARE</text>
+                        <text x="105" y="85" font-family="'Inter', sans-serif" font-weight="900" font-size="12" fill="#ffffff" text-anchor="middle">10,000 m²</text>
+                    </svg>
+                </div>
+
+                <div class="mt-3 bg-slate-100 p-2 rounded border border-slate-300 text-xs text-center font-bold text-slate-800">
+                    Always use <span class="text-orange-600 font-black">10,000 m²</span> as base unit
+                </div>
+            </div>
+
+            <!-- ================= PANEL 5 ================= -->
+            <div class="comic-panel p-4 flex flex-col justify-between">
+                <div>
+                    <div class="panel-tag text-xs px-2.5 py-1 rounded inline-block mb-3">
+                        STEP 5: APPLY DENSITY FORMULA
+                    </div>
+                    <h3 class="font-extrabold text-lg text-slate-900 mb-2">The Golden Orchard Formula</h3>
+                    <p class="text-xs text-slate-600 font-semibold mb-3">
+                        Divide the total square meters in a hectare by the individual tree footprint area.
+                    </p>
+                </div>
+
+                <!-- Chalkboard Formula -->
+                <div class="bg-slate-800 rounded-lg border-4 border-amber-800 p-3 relative h-48 flex flex-col items-center justify-center text-white text-center shadow-inner">
+                    <div class="chalk-font text-amber-300 text-base mb-2">Standard Formula:</div>
+                    <div class="flex items-center gap-3">
+                        <div class="chalk-font text-sm text-slate-200">Trees / Ha =</div>
+                        <div class="flex flex-col items-center">
+                            <div class="chalk-font text-yellow-300 text-lg border-b-2 border-white px-2">10,000 m²</div>
+                            <div class="chalk-font text-emerald-300 text-sm mt-1">Area per Tree (m²)</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mt-3 bg-slate-100 p-2 rounded border border-slate-300 text-xs text-center font-bold text-slate-800">
+                    Formula: <span class="text-orange-600 font-black">10,000 ÷ (Row × Tree Spacing)</span>
+                </div>
+            </div>
+
+            <!-- ================= PANEL 6 ================= -->
+            <div class="comic-panel p-4 flex flex-col justify-between">
+                <div>
+                    <div class="panel-tag text-xs px-2.5 py-1 rounded inline-block mb-3">
+                        STEP 6: CALCULATE TOTAL TREES
+                    </div>
+                    <h3 class="font-extrabold text-lg text-slate-900 mb-2">Compute Density Output</h3>
+                    <p class="text-xs text-slate-600 font-semibold mb-3">
+                        Execute the mathematical division to determine theoretical maximum tree capacity.
+                    </p>
+                </div>
+
+                <!-- Interactive Calculator Display Box -->
+                <div class="bg-amber-100 rounded-lg border-2 border-black p-4 relative h-48 flex flex-col items-center justify-center">
+                    <div class="bg-slate-900 text-green-400 font-mono p-4 rounded-xl border-4 border-slate-700 w-full shadow-lg text-center">
+                        <div class="text-xs text-slate-400 mb-1">DIGITAL CALCULATOR DISPLAY</div>
+                        <div class="text-lg text-slate-300 border-b border-slate-700 pb-1 mb-2">
+                            10,000 ÷ <span class="dynamic-area">8.0</span>
+                        </div>
+                        <div class="text-3xl font-black text-yellow-300 tracking-wider">
+                            = <span id="panel6Result">1,250</span>
+                        </div>
+                        <div class="text-[10px] text-slate-400 mt-1 uppercase">Trees Per Hectare</div>
+                    </div>
+                </div>
+
+                <div class="mt-3 bg-emerald-100 p-2 rounded border border-emerald-400 text-xs text-center font-bold text-emerald-900">
+                    Theoretical Density = <span id="dynamicCountText" class="text-emerald-700 font-black text-sm">1,250</span> Trees/Ha
+                </div>
+            </div>
+
+            <!-- ================= PANEL 7 ================= -->
+            <div class="comic-panel p-4 flex flex-col justify-between">
+                <div>
+                    <div class="panel-tag text-xs px-2.5 py-1 rounded inline-block mb-3">
+                        STEP 7: ADJUST FOR HEADLANDS
+                    </div>
+                    <h3 class="font-extrabold text-lg text-slate-900 mb-2">Subtract Tractor Paths</h3>
+                    <p class="text-xs text-slate-600 font-semibold mb-3">
+                        Deduct 5% to 10% from total count for perimeter turning roads and utility space.
+                    </p>
+                </div>
+
+                <!-- SVG Visual: Field Perimeter with Road -->
+                <div class="bg-amber-100 rounded-lg border-2 border-black p-3 relative h-48 flex items-center justify-center">
+                    <svg class="w-full h-full" viewBox="0 0 200 140">
+                        <!-- Outer Field Boundary -->
+                        <rect x="10" y="10" width="180" height="120" fill="#f5cd79" rx="6" class="stroke-main"/>
+                        <!-- Inner Tree Zone -->
+                        <rect x="30" y="30" width="140" height="80" fill="#2ed573" rx="4" class="stroke-main"/>
+                        
+                        <!-- Tractor Icon in Road -->
+                        <rect x="135" y="14" width="20" height="12" fill="#e74c3c" class="stroke-thin"/>
+                        <circle cx="140" cy="26" r="4" fill="#1e272e"/>
+                        <circle cx="150" cy="26" r="4" fill="#1e272e"/>
+
+                        <!-- Text Overlay -->
+                        <text x="100" y="24" font-family="'Inter', sans-serif" font-weight="900" font-size="9" fill="#1e272e" text-anchor="middle">HEADLAND TURN ROAD (-7%)</text>
+                        <text x="100" y="75" font-family="'Bangers', cursive" font-size="16" fill="#ffffff" text-anchor="middle">NET PLANTING AREA</text>
+                    </svg>
+                </div>
+
+                <div class="mt-3 bg-slate-100 p-2 rounded border border-slate-300 text-xs text-center font-bold text-slate-800">
+                    Practical Net Density ≈ <span id="netTreesVal" class="text-orange-600 font-black">1,162</span> Trees/Ha
+                </div>
+            </div>
+
+            <!-- ================= PANEL 8 ================= -->
+            <div class="comic-panel lg:col-span-2 p-5 bg-emerald-50 flex flex-col justify-between">
+                <div>
+                    <div class="flex items-center justify-between mb-3">
+                        <div class="panel-tag text-xs px-2.5 py-1 rounded">
+                            STEP 8: VERIFY ORCHARD GRID & SPACING
+                        </div>
+                        <div class="badge-verified px-3 py-1 rounded-full text-xs font-black tracking-widest flex items-center gap-1">
+                            <i class="fa-solid fa-circle-check"></i> VERIFIED
+                        </div>
+                    </div>
+                    <h3 class="font-extrabold text-xl text-slate-900 mb-1">Optimized Orchard Canopy & Sunlight</h3>
+                    <p class="text-xs text-slate-700 font-semibold mb-3">
+                        Review the complete layout matrix to ensure balanced light penetration, sprayer access, and root system expansion.
+                    </p>
+                </div>
+
+                <!-- Orchard Grid Visualization -->
+                <div class="bg-amber-100 rounded-lg border-2 border-black p-4 relative h-48 flex items-center justify-center overflow-hidden">
+                    <svg class="w-full h-full" viewBox="0 0 400 140">
+                        <rect x="0" y="0" width="400" height="140" fill="#a8e6cf"/>
+                        <!-- Sun graphic with rays -->
+                        <circle cx="360" cy="25" r="18" fill="#f1c40f" class="stroke-thin"/>
+                        <line x1="330" y1="25" x2="310" y2="25" stroke="#f39c12" stroke-width="3" stroke-dasharray="4"/>
+                        <line x1="360" y1="55" x2="360" y2="75" stroke="#f39c12" stroke-width="3" stroke-dasharray="4"/>
+                        <line x1="335" y1="45" x2="315" y2="65" stroke="#f39c12" stroke-width="3" stroke-dasharray="4"/>
+
+                        <!-- Grid of Trees (4 rows) -->
+                        <g id="treeGridGroup">
+                            <!-- JS dynamically injects tree grid visual based on spacing -->
+                        </g>
+
+                        <rect x="15" y="100" width="170" height="30" rx="6" fill="#1e272e" opacity="0.95"/>
+                        <text x="100" y="120" font-family="'Bangers', cursive" font-size="14" fill="#2ed573" text-anchor="middle">
+                            OPTIMIZED CANOPY AIRFLOW
+                        </text>
+                    </svg>
+                </div>
+
+                <div class="mt-3 flex flex-wrap items-center justify-between gap-2 text-xs font-bold text-slate-800">
+                    <div>
+                        Current Grid: <span class="dynamic-row text-orange-600 font-black">4.0</span>m x <span class="dynamic-tree text-orange-600 font-black">2.0</span>m
+                    </div>
+                    <div class="text-emerald-700">
+                        <i class="fa-solid fa-leaf mr-1"></i> Canopy Density Level: <span id="densityBadge" class="font-black underline">Medium-High Density</span>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- Footer / Quick Reference Table -->
+        <div class="mt-6 comic-panel p-5 bg-white">
+            <h3 class="comic-font text-2xl text-slate-900 mb-3 flex items-center gap-2">
+                <i class="fa-solid fa-table-cells text-orange-500"></i> Standard Orchard Spacing Reference Table
+            </h3>
+            <div class="overflow-x-auto">
+                <table class="w-full text-left border-collapse text-xs sm:text-sm">
+                    <thead>
+                        <tr class="bg-amber-200 border-b-2 border-black text-slate-900 comic-font text-base">
+                            <th class="p-2 sm:p-3 border-r-2 border-black">Row Spacing</th>
+                            <th class="p-2 sm:p-3 border-r-2 border-black">Tree Spacing</th>
+                            <th class="p-2 sm:p-3 border-r-2 border-black">Area / Tree</th>
+                            <th class="p-2 sm:p-3 border-r-2 border-black">Trees / Hectare</th>
+                            <th class="p-2 sm:p-3">Common Crop Application</th>
+                        </tr>
+                    </thead>
+                    <tbody class="divide-y divide-slate-300 font-bold text-slate-800">
+                        <tr class="hover:bg-amber-50">
+                            <td class="p-2 sm:p-3 border-r-2 border-black">3.0 m</td>
+                            <td class="p-2 sm:p-3 border-r-2 border-black">1.2 m</td>
+                            <td class="p-2 sm:p-3 border-r-2 border-black">3.6 m²</td>
+                            <td class="p-2 sm:p-3 border-r-2 border-black text-orange-600 font-black">2,777</td>
+                            <td class="p-2 sm:p-3">High-Density Super-Spindle Apples</td>
+                        </tr>
+                        <tr class="hover:bg-amber-50 bg-orange-50/50">
+                            <td class="p-2 sm:p-3 border-r-2 border-black">4.0 m</td>
+                            <td class="p-2 sm:p-3 border-r-2 border-black">2.0 m</td>
+                            <td class="p-2 sm:p-3 border-r-2 border-black">8.0 m²</td>
+                            <td class="p-2 sm:p-3 border-r-2 border-black text-orange-600 font-black">1,250</td>
+                            <td class="p-2 sm:p-3">Intensive Dwarf Apples, Pears & Cherries</td>
+                        </tr>
+                        <tr class="hover:bg-amber-50">
+                            <td class="p-2 sm:p-3 border-r-2 border-black">5.0 m</td>
+                            <td class="p-2 sm:p-3 border-r-2 border-black">2.5 m</td>
+                            <td class="p-2 sm:p-3 border-r-2 border-black">12.5 m²</td>
+                            <td class="p-2 sm:p-3 border-r-2 border-black text-orange-600 font-black">800</td>
+                            <td class="p-2 sm:p-3">Semi-Dwarf Peaches, Plums & Citrus</td>
+                        </tr>
+                        <tr class="hover:bg-amber-50">
+                            <td class="p-2 sm:p-3 border-r-2 border-black">6.0 m</td>
+                            <td class="p-2 sm:p-3 border-r-2 border-black">3.0 m</td>
+                            <td class="p-2 sm:p-3 border-r-2 border-black">18.0 m²</td>
+                            <td class="p-2 sm:p-3 border-r-2 border-black text-orange-600 font-black">555</td>
+                            <td class="p-2 sm:p-3">Standard Avocados, Mangoes & Walnuts</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="mt-4 pt-3 border-t border-slate-300 flex flex-col sm:flex-row items-center justify-between text-xs text-slate-600 font-semibold gap-2">
+                <div>Published by Agronomy Field Extension Guide Services</div>
+                <div class="badge-verified px-2 py-0.5 rounded text-[10px]">Verified Agricultural Calculation</div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // DOM Elements
+        const rowInput = document.getElementById('rowInput');
+        const treeInput = document.getElementById('treeInput');
+        const rowVal = document.getElementById('rowVal');
+        const treeVal = document.getElementById('treeVal');
+
+        // Dynamic Text Elements
+        const dynamicRows = document.querySelectorAll('.dynamic-row');
+        const dynamicTrees = document.querySelectorAll('.dynamic-tree');
+        const dynamicAreas = document.querySelectorAll('.dynamic-area');
+        const panel1Val = document.getElementById('panel1Val');
+        const panel2Val = document.getElementById('panel2Val');
+        const panel6Result = document.getElementById('panel6Result');
+        const dynamicCountText = document.getElementById('dynamicCountText');
+        const netTreesVal = document.getElementById('netTreesVal');
+        const densityBadge = document.getElementById('densityBadge');
+        const treeGridGroup = document.getElementById('treeGridGroup');
+
+        // Recalculate and update interface
+        function updateCalculation() {
+            const row = parseFloat(rowInput.value);
+            const tree = parseFloat(treeInput.value);
+            
+            // Calculate Area and Trees
+            const area = row * tree;
+            const treesPerHa = Math.round(10000 / area);
+            const netTrees = Math.round(treesPerHa * 0.93); // Deducting 7% headlands
+
+            // Update Header Values
+            rowVal.textContent = row.toFixed(1);
+            treeVal.textContent = tree.toFixed(1);
+
+            // Sync dynamic class placeholders across all panels
+            dynamicRows.forEach(el => el.textContent = row.toFixed(1));
+            dynamicTrees.forEach(el => el.textContent = tree.toFixed(1));
+            dynamicAreas.forEach(el => el.textContent = area.toFixed(1));
+
+            // Panel specific visual updates
+            panel1Val.textContent = `${row.toFixed(1)} m`;
+            panel2Val.textContent = `${tree.toFixed(1)} m`;
+            panel6Result.textContent = treesPerHa.toLocaleString();
+            dynamicCountText.textContent = treesPerHa.toLocaleString();
+            netTreesVal.textContent = netTrees.toLocaleString();
+
+            // Dynamic Density Badge Text
+            if (treesPerHa >= 2000) {
+                densityBadge.textContent = "Ultra High Density (Super Spindle)";
+            } else if (treesPerHa >= 1000) {
+                densityBadge.textContent = "High Density (Intensive)";
+            } else if (treesPerHa >= 600) {
+                densityBadge.textContent = "Medium Density (Semi-Dwarf)";
+            } else {
+                densityBadge.textContent = "Traditional Standard Density";
+            }
+
+            // Redraw Step 8 Dynamic Visual Grid
+            renderTreeGrid(row, tree);
+        }
+
+        // Render Tree Grid for Panel 8
+        function renderTreeGrid(row, tree) {
+            let svgContent = '';
+            // Scale rendering density inversely to spacing
+            const colSpacing = Math.max(25, Math.min(60, row * 10));
+            const rowSpacing = Math.max(20, Math.min(45, tree * 12));
+
+            for (let x = 30; x < 380; x += colSpacing) {
+                for (let y = 25; y < 130; y += rowSpacing) {
+                    svgContent += `
+                        <circle cx="${x}" cy="${y}" r="8" fill="#2ed573" stroke="#1e272e" stroke-width="1.5" />
+                        <circle cx="${x}" cy="${y}" r="3" fill="#26de81" />
+                    `;
+                }
+            }
+            treeGridGroup.innerHTML = svgContent;
+        }
+
+        // Event Listeners for Sliders
+        rowInput.addEventListener('input', updateCalculation);
+        treeInput.addEventListener('input', updateCalculation);
+
+        // Initial Calculation Run on Page Load
+        window.onload = function() {
+            updateCalculation();
+        };
+    </script>
+</body>
+</html>
