@@ -683,6 +683,7 @@
             const guide = allGuides.find(g => g.id === activeGuideId);
             if (!guide) return;
 
+            // Updated to secure HTTPS endpoint to prevent mixed-content blocking on GitHub Pages
             const payfastUrl = 'https://sandbox.payfast.co.za/eng/process'; 
             const merchantId = '10004002'; 
             const merchantKey = 'q1cd2rdny4a53'; 
