@@ -1,222 +1,488 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="h-full">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Agri Hub - Guide View</title>
+    <title>Professional & Lifestyle Hub - Agri & Home Guides</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- FontAwesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Inter Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Inline Web Manifest for PWA Capabilities -->
+    <link rel="manifest" href='data:application/manifest+json,{"name":"Professional & Lifestyle Hub","short_name":"HubApp","start_url":".","display":"standalone","background_color":"#065f46","theme_color":"#065f46"}'>
+
     <style>
-        /* Base Page Styles */
-        body {
-            margin: 0;
-            font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-            background-color: #0f172a;
-            color: #f8fafc;
+        body { 
+            font-family: 'Inter', sans-serif; 
+            -webkit-user-select: none; 
+            -moz-user-select: none; 
+            -ms-user-select: none; 
+            user-select: none; 
         }
-
-        .container {
-            padding: 20px;
-            max-width: 800px;
-            margin: 0 auto;
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #f1f5f9; }
+        ::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: #94a3b8; }
+        .glass-header { background: linear-gradient(135deg, #065f46 0%, #047857 100%); }
+        
+        /* Screenshot Protection Watermark & Blur Effect */
+        .secure-blur {
+            filter: blur(6px);
+            transition: filter 0.3s ease;
+            pointer-events: none;
         }
-
-        .category-header {
-            font-size: 24px;
-            font-weight: bold;
-            margin-bottom: 20px;
-        }
-
-        .guide-card {
-            background: #1e293b;
-            padding: 16px;
-            border-radius: 8px;
-            margin-bottom: 12px;
-            cursor: pointer;
-            border: 1px solid #334155;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .guide-card:hover {
-            border-color: #f59e0b;
-        }
-
-        /* --- FIXED MODAL STYLES --- */
-        .modal-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100vw;
-            height: 100vh;
-            background-color: rgba(0, 0, 0, 0.75);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            z-index: 9999;
-            /* Hidden by default */
-            display: none; 
-        }
-
-        .modal-overlay.active {
-            display: flex;
-        }
-
-        .modal-content {
-            background: #1a2230;
-            color: #ffffff;
-            padding: 28px 24px;
-            border-radius: 12px;
-            width: 90%;
-            max-width: 420px;
-            position: relative;
-            text-align: center;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
-            box-sizing: border-box;
-            border: 1px solid #334155;
-        }
-
-        .modal-close-x {
+        .secure-watermark {
             position: absolute;
-            top: 12px;
-            right: 16px;
-            background: transparent;
-            border: none;
-            color: #94a3b8;
-            font-size: 28px;
-            cursor: pointer;
-            line-height: 1;
-            padding: 4px;
-        }
-        .modal-close-x:hover {
-            color: #ffffff;
-        }
-
-        .modal-icon {
-            font-size: 36px;
-            margin-bottom: 12px;
-        }
-
-        .modal-content h2 {
-            margin-top: 0;
-            font-size: 20px;
-            color: #f8fafc;
-        }
-
-        .modal-content p {
-            color: #94a3b8;
-            font-size: 14px;
-            line-height: 1.5;
-            margin-bottom: 20px;
-        }
-
-        .modal-unlock-btn {
-            background: #f59e0b;
-            color: #111827;
-            font-weight: bold;
-            border: none;
-            padding: 12px 16px;
-            border-radius: 6px;
-            width: 100%;
-            cursor: pointer;
-            font-size: 15px;
-            transition: background 0.2s;
-        }
-        .modal-unlock-btn:hover {
-            background: #d97706;
-        }
-
-        .modal-close-text {
-            background: transparent;
-            border: none;
-            color: #94a3b8;
-            margin-top: 16px;
-            cursor: pointer;
-            font-size: 14px;
-        }
-        .modal-close-text:hover {
-            color: #ffffff;
-            text-decoration: underline;
+            inset: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(15, 23, 42, 0.4);
+            z-index: 20;
+            backdrop-filter: blur(2px);
         }
     </style>
 </head>
-<body>
+<body class="bg-slate-100 text-slate-800 h-full flex flex-col justify-between selection:bg-transparent" oncontextmenu="return false;">
 
-    <div class="container">
-        <div class="category-header">Precision Agriculture Categories</div>
+    <header class="glass-header text-white shadow-lg sticky top-0 z-40 border-b border-emerald-700/50">
+        <div class="max-w-7xl mx-auto px-4 py-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row justify-between items-center gap-4">
+            <div class="flex items-center space-x-3.5">
+                <div class="bg-emerald-900/50 p-2.5 rounded-2xl shadow-inner border border-emerald-600/40 backdrop-blur-md">
+                    <i class="fa-solid fa-layer-group text-2xl text-emerald-200"></i>
+                </div>
+                <div>
+                    <h1 class="text-xl sm:text-2xl font-extrabold tracking-tight">Professional & Lifestyle Hub</h1>
+                    <p class="text-xs sm:text-sm text-emerald-200 font-medium">Farmers, Builders, Handyman & Housewives Guides</p>
+                </div>
+            </div>
+            <div class="flex items-center gap-2.5 w-full sm:w-auto justify-end">
+                <button onclick="openCalculatorModal()" class="bg-emerald-700/90 hover:bg-emerald-600 text-white px-4 py-2.5 rounded-xl text-sm font-semibold transition shadow-md flex items-center gap-2 border border-emerald-500/50 backdrop-blur-sm group">
+                    <i class="fa-solid fa-calculator text-emerald-300 group-hover:scale-110 transition-transform"></i> Quick Utilities & Calculators
+                </button>
+                <div id="pwa-status-badge" class="bg-emerald-950/70 text-emerald-200 px-3 py-2 rounded-xl text-xs font-semibold border border-emerald-700/50 flex items-center gap-2 backdrop-blur-sm">
+                    <span id="pwa-status-dot" class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+                    <span id="pwa-status-text">Online</span>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main class="flex-grow max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-8">
         
-        <!-- Example clickable guide that triggers the modal -->
-        <div class="guide-card" onclick="openModal()">
-            <span>Disc Harrow Alignment Guide (Locked)</span>
-            <span>🔒</span>
+        <!-- Colorful Search and Category Filter Bar -->
+        <div class="mb-8 flex flex-col md:flex-row justify-between items-center gap-4 bg-gradient-to-r from-emerald-50 via-teal-50 to-indigo-50 p-4 sm:p-5 rounded-2xl shadow-sm border border-emerald-100 relative">
+            <div class="relative w-full md:w-80">
+                <span class="absolute inset-y-0 left-0 flex items-center pl-3.5 pointer-events-none text-slate-400">
+                    <i class="fa-solid fa-magnifying-glass"></i>
+                </span>
+                <input type="text" id="searchInput" oninput="filterGuides()" placeholder="Search guides or procedures..." 
+                    class="w-full pl-10 pr-4 py-2.5 bg-white border border-slate-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500 transition shadow-sm">
+            </div>
+
+            <!-- Category Filter Tabs -->
+            <div class="flex items-center gap-2 overflow-x-visible w-full md:w-auto pb-2 md:pb-0">
+                <button onclick="filterByCategory('All')" id="cat-All" class="category-btn px-4 py-2 rounded-xl text-xs font-bold bg-slate-800 text-white transition shadow-sm">All</button>
+                <button onclick="filterByCategory('Farmers')" id="cat-Farmers" class="category-btn px-4 py-2 rounded-xl text-xs font-bold bg-emerald-100 text-emerald-800 border border-emerald-200 hover:bg-emerald-600 hover:text-white transition">🌾 Farmers</button>
+                <button onclick="filterByCategory('Builders')" id="cat-Builders" class="category-btn px-4 py-2 rounded-xl text-xs font-bold bg-indigo-100 text-indigo-800 border border-indigo-200 hover:bg-indigo-600 hover:text-white transition">🏗️ Builders</button>
+                <button onclick="filterByCategory('Handyman')" id="cat-Handyman" class="category-btn px-4 py-2 rounded-xl text-xs font-bold bg-sky-100 text-sky-800 border border-sky-200 hover:bg-sky-600 hover:text-white transition">🛠️ Handyman</button>
+                <button onclick="filterByCategory('Housewives')" id="cat-Housewives" class="category-btn px-4 py-2 rounded-xl text-xs font-bold bg-rose-100 text-rose-800 border border-rose-200 hover:bg-rose-600 hover:text-white transition">🏠 Housewives</button>
+            </div>
+
+            <div class="flex items-center gap-3 w-full md:w-auto justify-end">
+                <span class="text-xs text-slate-600 font-bold uppercase tracking-wider bg-white px-3.5 py-2 rounded-xl border border-slate-200 shadow-sm">Total Guides: <strong id="guide-count" class="text-emerald-700 font-bold">0</strong></span>
+            </div>
+        </div>
+
+        <!-- Dynamic Guide Cards Grid -->
+        <div id="guidesGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <!-- Dynamic Injection via JavaScript -->
+        </div>
+
+        <!-- Empty State Filter Notice -->
+        <div id="emptyState" class="hidden text-center py-16 bg-white rounded-2xl border border-dashed border-slate-300 my-4 shadow-sm">
+            <i class="fa-solid fa-folder-open text-4xl text-slate-300 mb-3"></i>
+            <h3 class="text-lg font-semibold text-slate-600">No guides found</h3>
+            <p class="text-sm text-slate-400 mt-1">Try adjusting your search terms or category filters.</p>
+        </div>
+    </main>
+
+    <!-- Guide Modal with Screenshot Protection & Pay-to-Unlock Overlay -->
+    <div id="guideModal" class="fixed inset-0 bg-slate-950/80 backdrop-blur-md z-50 hidden flex items-center justify-center p-4 overflow-y-auto">
+        <div id="modalCardWrapper" class="bg-white rounded-3xl max-w-2xl w-full overflow-hidden shadow-2xl transform transition-all my-8 border border-slate-100 relative">
+            
+            <!-- Secure Watermark Overlay preventing free viewing / screen grabbing -->
+            <div id="secureOverlay" class="secure-watermark flex-col text-center p-6 text-white">
+                <div class="bg-amber-500/20 text-amber-300 p-4 rounded-2xl border border-amber-500/40 mb-3 backdrop-blur-md shadow-xl">
+                    <i class="fa-solid fa-lock text-3xl"></i>
+                </div>
+                <h3 class="text-lg font-extrabold mb-1">Protected Premium Guide</h3>
+                <p class="text-xs text-slate-300 max-w-xs mb-4 font-medium">Full step-by-step procedures and high-res infographics are locked to prevent free usage and screen grabbing.</p>
+                <button onclick="downloadCurrentGuide()" class="bg-amber-500 hover:bg-amber-600 text-slate-950 px-6 py-3 rounded-xl text-xs font-extrabold transition shadow-lg flex items-center gap-2 transform hover:scale-105">
+                    <i class="fa-solid fa-cart-shopping"></i> Unlock & Download Package (R20.00)
+                </button>
+            </div>
+
+            <!-- Image Header Container -->
+            <div id="modalImageContainer" class="relative h-64 sm:h-72 bg-slate-900">
+                <img id="modalImage" src="" alt="Guide Image" class="w-full h-full object-cover opacity-90 secure-blur" onerror="handleImageError(this)">
+                <div class="absolute inset-0 bg-gradient-to-t from-slate-950/90 via-slate-950/30 to-transparent"></div>
+                <button onclick="closeModal()" class="absolute top-4 right-4 bg-black/60 hover:bg-black/80 text-white w-9 h-9 rounded-full flex items-center justify-center transition border border-white/20 shadow-md z-30 cursor-pointer">
+                    <i class="fa-solid fa-xmark text-sm"></i>
+                </button>
+                <div class="absolute bottom-4 left-6 right-6 flex items-center gap-2 flex-wrap z-30">
+                    <span id="modalCategoryBadge" class="bg-emerald-600 text-white text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider shadow-sm">Category</span>
+                    <span id="modalSubCategoryBadge" class="bg-teal-700 text-white text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider shadow-sm hidden">Sub-category</span>
+                    <h2 id="modalTitle" class="text-xl sm:text-2xl font-extrabold text-white mt-2 w-full drop-shadow">Guide Title</h2>
+                </div>
+            </div>
+
+            <!-- Standard Text Body Container with Blur Protection -->
+            <div id="modalTextBody" class="p-6 sm:p-8 space-y-6 max-h-[60vh] overflow-y-auto relative">
+                <div class="secure-blur" id="blurContentArea">
+                    <div>
+                        <h3 class="text-xs font-bold uppercase text-slate-400 tracking-wider mb-2">Overview</h3>
+                        <p id="modalDescription" class="text-slate-600 text-sm leading-relaxed font-medium"></p>
+                    </div>
+                    <div class="border-t border-slate-100 pt-4 mt-4">
+                        <h3 class="text-xs font-bold uppercase text-slate-400 tracking-wider mb-3">Step-by-Step Procedure</h3>
+                        <ul id="modalSteps" class="space-y-3">
+                            <!-- Dynamic Step List -->
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="border-t border-slate-100 pt-4 flex justify-between items-center z-30 relative">
+                    <button id="modalDownloadBtn" onclick="downloadCurrentGuide()" class="bg-amber-500 hover:bg-amber-600 text-white px-5 py-2.5 rounded-xl text-xs font-bold transition flex items-center gap-2 shadow-md">
+                        <i class="fa-solid fa-download"></i> Unlock Package (JPG + Text) - R20.00
+                    </button>
+                    <button onclick="closeModal()" class="bg-slate-100 hover:bg-slate-200 text-slate-700 px-5 py-2.5 rounded-xl text-xs font-semibold transition cursor-pointer">
+                        Close
+                    </button>
+                </div>
+            </div>
         </div>
     </div>
 
-    <!-- Paywall Modal Overlay -->
-    <div id="paywall-modal" class="modal-overlay">
-        <div class="modal-content" id="modal-card">
-            <!-- Top-Right X Close Button -->
-            <button class="modal-close-x" id="modal-close-x-btn" aria-label="Close modal">&times;</button>
+    <!-- Quick Utilities Modal -->
+    <div id="calculatorModal" class="fixed inset-0 bg-slate-950/70 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4 overflow-y-auto">
+        <div class="bg-white rounded-3xl max-w-3xl w-full overflow-hidden shadow-2xl p-6 sm:p-8 border border-slate-100 max-h-[90vh] overflow-y-auto">
+            <div class="flex justify-between items-center mb-6 border-b border-slate-100 pb-4">
+                <h3 class="text-lg sm:text-xl font-extrabold text-slate-800 flex items-center gap-2.5">
+                    <div class="bg-emerald-100 p-2 rounded-xl text-emerald-700"><i class="fa-solid fa-calculator"></i></div> Universal Calculators & Conversion Tables
+                </h3>
+                <button onclick="closeCalculatorModal()" class="text-slate-400 hover:text-slate-600 p-2 rounded-full hover:bg-slate-100 transition">
+                    <i class="fa-solid fa-xmark text-lg"></i>
+                </button>
+            </div>
             
-            <!-- Modal Body Content -->
-            <div class="modal-icon">🔒</div>
-            <h2>Protected Premium Guide</h2>
-            <p>Full step-by-step procedures and high-res infographics are securely locked against free viewing and screen grabs.</p>
-            
-            <button class="modal-unlock-btn" onclick="handleTransaction()">Unlock & Download Package (R20.00)</button>
-            
-            <!-- Bottom Close Text Button -->
-            <button class="modal-close-text" id="modal-close-text-btn">Close</button>
+            <div class="space-y-6">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div class="bg-emerald-50/50 p-4 rounded-2xl border border-emerald-100 shadow-sm">
+                        <h4 class="font-bold text-xs uppercase tracking-wider text-emerald-800 mb-3 flex items-center gap-2">
+                            <i class="fa-solid fa-ruler text-emerald-600"></i> Bulk Material Estimator
+                        </h4>
+                        <div class="space-y-3 text-sm">
+                            <div>
+                                <label class="block text-xs font-semibold text-slate-500 mb-1">Quantity / Count</label>
+                                <input type="number" id="calcQty" value="100" class="w-full p-2.5 bg-white border border-slate-200 rounded-xl text-sm focus:ring-2 focus:ring-emerald-500 outline-none shadow-inner" oninput="calculateUtility()">
+                            </div>
+                            <div>
+                                <label class="block text-xs font-semibold text-slate-500 mb-1">Rate per Unit (kg/L)</label>
+                                <input type="number" id="calcRate" value="1.5" step="0.1" class="w-full p-2.5 bg-white border border-slate-200 rounded-xl text-sm focus:ring-2 focus:ring-emerald-500 outline-none shadow-inner" oninput="calculateUtility()">
+                            </div>
+                            <div>
+                                <label class="block text-xs font-semibold text-emerald-700 mb-1">Total Requirement</label>
+                                <div id="calcResult" class="p-2.5 bg-emerald-100 border border-emerald-200 rounded-xl font-bold text-emerald-800 text-center shadow-inner">150.0 kg/total</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="bg-teal-50/50 p-4 rounded-2xl border border-teal-100 shadow-sm">
+                        <h4 class="font-bold text-xs uppercase tracking-wider text-teal-800 mb-3 flex items-center gap-2">
+                            <i class="fa-solid fa-droplet text-teal-600"></i> Spray Tank Mix Calculator
+                        </h4>
+                        <div class="space-y-3 text-sm">
+                            <div>
+                                <label class="block text-xs font-semibold text-slate-500 mb-1">Tank Capacity (Liters)</label>
+                                <input type="number" id="tankCap" value="500" class="w-full p-2.5 bg-white border border-slate-200 rounded-xl text-sm focus:ring-2 focus:ring-teal-500 outline-none shadow-inner" oninput="calculateTankMix()">
+                            </div>
+                            <div>
+                                <label class="block text-xs font-semibold text-slate-500 mb-1">Mix Rate per 100L (mL/g)</label>
+                                <input type="number" id="tankRate" value="250" step="10" class="w-full p-2.5 bg-white border border-slate-200 rounded-xl text-sm focus:ring-2 focus:ring-teal-500 outline-none shadow-inner" oninput="calculateTankMix()">
+                            </div>
+                            <div>
+                                <label class="block text-xs font-semibold text-teal-700 mb-1">Chemical Needed for Full Tank</label>
+                                <div id="tankResult" class="p-2.5 bg-teal-100 border border-teal-200 rounded-xl font-bold text-teal-800 text-center shadow-inner">1,250.0 mL</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="mt-6 text-right">
+                <button onclick="closeCalculatorModal()" class="bg-emerald-700 hover:bg-emerald-800 text-white px-6 py-2.5 rounded-xl text-sm font-semibold transition shadow-md">Done</button>
+            </div>
         </div>
     </div>
+
+    <footer class="bg-white border-t border-slate-200 mt-12 py-6 shadow-sm">
+        <div class="max-w-7xl mx-auto px-4 text-center text-xs text-slate-500 font-medium">
+            &copy; 2026 Professional & Lifestyle Hub &bull; Farmers, Builders, Handyman & Housewives Guide &bull; Offline Ready
+        </div>
+    </footer>
 
     <script>
-        const modalOverlay = document.getElementById('paywall-modal');
-        const modalCard = document.getElementById('modal-card');
-        const closeXBtn = document.getElementById('modal-close-x-btn');
-        const closeTextBtn = document.getElementById('modal-close-text-btn');
-
-        // Open modal function
-        function openModal() {
-            modalOverlay.classList.add('active');
-        }
-
-        // Close modal function (Purely toggles visibility, never touches browser history)
-        function closeModal() {
-            modalOverlay.classList.remove('active');
-        }
-
-        // 1. Close via top 'X' button
-        closeXBtn.addEventListener('click', (e) => {
-            e.stopPropagation();
-            closeModal();
-        });
-
-        // 2. Close via bottom 'Close' text button
-        closeTextBtn.addEventListener('click', (e) => {
-            e.stopPropagation();
-            closeModal();
-        });
-
-        // 3. Close when clicking the dark backdrop outside the card
-        modalOverlay.addEventListener('click', () => {
-            closeModal();
-        });
-
-        // Prevent clicks inside the content card from accidentally bubbling up to close it
-        modalCard.addEventListener('click', (e) => {
-            e.stopPropagation();
-        });
-
-        // 4. Close when pressing the 'Escape' key
-        document.addEventListener('keydown', (e) => {
+        // Disable keyboard shortcuts for screen-grabbing, inspection, and copying
+        document.addEventListener('keydown', function(e) {
             if (e.key === 'Escape') {
                 closeModal();
+                closeCalculatorModal();
+            }
+            if (e.key === 'F12' || (e.ctrlKey && (e.key === 'u' || e.key === 's' || e.key === 'c' || e.key === 'p' || e.key === 'i'))) {
+                e.preventDefault();
+                alert('Content protection enabled: Copying and inspecting source code is restricted.');
+                return false;
             }
         });
 
-        // Placeholder for transaction action
-        function handleTransaction() {
-            alert('Redirecting to secure payment checkout...');
+        function handleImageError(imgElement) {
+            imgElement.onerror = null;
+            imgElement.src = "https://placehold.co/600x400/0369a1/ffffff?text=Protected+Infographic";
+        }
+
+        const allGuides = [
+            {
+                id: "plough", title: "Plough Alignment & Attachment Guide", category: "Farmers", subCategory: "Crop Farming", image: "images/plough-alignment.jpg.jpg",
+                desc: "Step-by-step manual for rear-mounted plough alignment, 3-point hitch setup, and depth tuning for optimal soil inversion.",
+                steps: ["Level tractor and plough.", "Set front furrow width.", "Adjust draft links.", "Verify vertical alignment."]
+            },
+            {
+                id: "disc-harrow", title: "Disc Harrow Alignment Guide", category: "Farmers", subCategory: "Crop Farming", image: "images/disc-harrow.jpg.jpg",
+                desc: "Side alignment, gang angles, tractor tire matching, and hitch point leveling for uniform residue incorporation.",
+                steps: ["Adjust gang angles.", "Set hitch height.", "Inspect scraper blades.", "Grease bearings."]
+            },
+            {
+                id: "fertilizer-spreader", title: "Fertilizer Spreader Calibration", category: "Farmers", subCategory: "Crop Farming", image: "images/fertilizer-spreader.jpg.jpg",
+                desc: "Gate opening adjustments, catch-pan tests, spread width checking, and speed tuning for precise nutrient placement.",
+                steps: ["Perform stationary catch-test.", "Weigh collected fertilizer.", "Calculate CU.", "Adjust vane angles."]
+            },
+            {
+                id: "boom-sprayer", title: "Boom Sprayer Calibration", category: "Farmers", subCategory: "Crop Farming", image: "images/boom-sprayer.jpg.jpg",
+                desc: "Nozzle selection, pressure tuning, and output checks for accurate systemic chemical application.",
+                steps: ["Check nozzle tips.", "Measure pressure.", "Collect output.", "Ensure flow variation is within +/- 5%."]
+            },
+            {
+                id: "field-sprayer", title: "Field Sprayer Calibration", category: "Farmers", subCategory: "Crop Farming", image: "images/field-sprayer.jpg.jpg",
+                desc: "Comprehensive calibration procedures for large field sprayers, tank agitation, and drift reduction.",
+                steps: ["Fill 100m test track.", "Measure traverse time.", "Calculate tank mix volume.", "Calibrate gauges."]
+            },
+            {
+                id: "maize-planting", title: "Maize Planting Guide", category: "Farmers", subCategory: "Crop Farming", image: "images/maize-planting.jpg.jpg",
+                desc: "Seed spacing, population calculations, fertilizer disc placement, and depth settings for high yield emergence.",
+                steps: ["Select seed plate.", "Calibrate seed drop.", "Set depth (4-6 cm).", "Ensure good contact."]
+            },
+            {
+                id: "manure-spreader", title: "Manure Spreader Calibration", category: "Farmers", subCategory: "Crop Farming", image: "images/manure-spreader.jpg.jpg",
+                desc: "Application rates, beater speed adjustment, and spread uniformity for solid and semi-solid livestock manure.",
+                steps: ["Weigh empty spreader.", "Distribute tarps.", "Run spreader.", "Weigh samples."]
+            },
+            {
+                id: "slasher-guide", title: "Slasher Guide", category: "Farmers", subCategory: "Crop Farming", image: "images/slasher-guide.jpg.jpg",
+                desc: "Cutting height adjustments, skid shoe leveling, and safety chain inspections for pasture topping and weed control.",
+                steps: ["Adjust tail wheel.", "Inspect swing-away blades.", "Verify PTO Clutch.", "Check safety guards."]
+            },
+            {
+                id: "mist-sprayer", title: "Mist Sprayer Calibration", category: "Farmers", subCategory: "Fruit Farming", image: "images/mist-sprayer.jpg.jpg",
+                desc: "Air assistance and droplet distribution tuning for orchard canopies and dense foliage crops.",
+                steps: ["Check fan gearbox.", "Align air coulings.", "Use water-sensitive cards.", "Adjust pump pressure."]
+            },
+            {
+                id: "fruit-pruning", title: "Orchard Fruit Tree Pruning Manual", category: "Farmers", subCategory: "Fruit Farming", image: "images/fruit-pruning.jpg.jpg",
+                desc: "Comprehensive 9-step multi-panel visual guide for winter pruning, canopy health, and maximum sunlight penetration.",
+                steps: ["Sanitize tools.", "Assess canopy goals.", "Remove 3-Ds.", "Clear center canopy."]
+            },
+            {
+                id: "cabbage-planting", title: "Cabbage Field Planting & Cultivation Guide", category: "Farmers", subCategory: "Vegetable Farming", image: "images/cabbage-planting.jpg.jpg",
+                desc: "Comprehensive 9-step multi-panel visual guide for commercial cabbage field setup, soil prep, basal fertilization, and pest management.",
+                steps: ["Deep plough and create raised beds.", "Maintain soil pH (6.0-6.8).", "Incorporate pre-plant fertilizer.", "Choose commercial varieties.", "Pre-mark holes.", "Use drip irrigation.", "Perform shallow cultivation.", "Scout for pests.", "Harvest."]
+            },
+            {
+                id: "carrot-planting", title: "Carrot Field Planting & Cultivation Guide", category: "Farmers", subCategory: "Vegetable Farming", image: "images/carrot-planting.jpg.jpg",
+                desc: "Comprehensive 9-step multi-panel visual guide for commercial carrot field setup, soil prep, and harvesting.",
+                steps: ["Deep plough and create raised beds.", "Maintain soil pH (6.0-6.8).", "Incorporate pre-plant fertilizer.", "Choose commercial varieties.", "Pre-mark rows.", "Use drip irrigation.", "Perform shallow cultivation.", "Scout for pests.", "Harvest."]
+            },
+            {
+                id: "onion-planting-1", title: "Commercial Onion Field Planting Guide", category: "Farmers", subCategory: "Vegetable Farming", image: "images/onion-planting-1.jpg.jpg",
+                desc: "Comprehensive guide for commercial onion field setup, soil prep, and precision planting.",
+                steps: ["Test soil pH.", "Incorporate basal fertilizers.", "Choose healthy seedlings.", "Set proper spacing."]
+            },
+            {
+                id: "onion-planting-2", title: "Onion Field Planting & Cultivation Guide", category: "Farmers", subCategory: "Vegetable Farming", image: "images/onion-planting-2.jpg.jpg",
+                desc: "Step-by-step visual manual covering soil preparation, planting materials, weed control, and curing.",
+                steps: ["Test soil pH.", "Choose seeds/transplants.", "Provide consistent water.", "Control weeds."]
+            },
+            {
+                id: "potato-planting", title: "Commercial Potato Field Planting Guide", category: "Farmers", subCategory: "Vegetable Farming", image: "images/potato-planting.jpg.jpg",
+                desc: "Comprehensive guide for commercial potato large-scale production, chitting, and hilling.",
+                steps: ["Test soil pH.", "Choose certified seed tubers.", "Set rows.", "Hill up soil ridges."]
+            },
+            {
+                id: "pumpkin-planting", title: "Commercial Pumpkin Field Planting Guide", category: "Farmers", subCategory: "Vegetable Farming", image: "images/pumpkin-planting.jpg.jpg",
+                desc: "Comprehensive guide for commercial pumpkin field setup, precision spacing, vine care, and harvest.",
+                steps: ["Test soil pH.", "Select certified seeds.", "Apply basal fertilizer.", "Set wide spacing.", "Plant seeds.", "Maintain water.", "Control weeds.", "Monitor pests.", "Harvest."]
+            },
+            {
+                id: "watermelon-planting", title: "Commercial Watermelon Field Planting Guide", category: "Farmers", subCategory: "Vegetable Farming", image: "images/watermelon-planting.jpg.jpg",
+                desc: "Comprehensive guide for commercial watermelon field setup, spacing, pest monitoring, and harvest.",
+                steps: ["Test soil pH.", "Choose seeds.", "Incorporate fertilizer.", "Set rows.", "Plant seeds.", "Provide irrigation.", "Control weeds.", "Monitor pests.", "Harvest."]
+            },
+            {
+                id: "tomato-planting", title: "Commercial Tomato Field Planting Guide", category: "Farmers", subCategory: "Vegetable Farming", image: "images/tomato-planting.jpg.jpg",
+                desc: "Comprehensive guide for commercial tomato production, transplanting, staking, and supported harvest.",
+                steps: ["Test soil pH.", "Use transplants.", "Incorporate fertilizer.", "Set rows.", "Plant deeply.", "Provide moisture.", "Manage mulch.", "Scout for pests.", "Harvest."]
+            }
+        ];
+
+        let currentActiveGuide = null;
+
+        function openModal(guideId) {
+            const guide = allGuides.find(g => g.id === guideId);
+            if (!guide) return;
+            currentActiveGuide = guide;
+
+            document.getElementById('modalImage').src = guide.image;
+            document.getElementById('modalTitle').textContent = guide.title;
+            document.getElementById('modalDescription').textContent = guide.desc;
+            document.getElementById('modalCategoryBadge').textContent = guide.category;
+
+            const subBadge = document.getElementById('modalSubCategoryBadge');
+            if (guide.subCategory) {
+                subBadge.textContent = guide.subCategory;
+                subBadge.classList.remove('hidden');
+            } else {
+                subBadge.classList.add('hidden');
+            }
+
+            const stepsList = document.getElementById('modalSteps');
+            stepsList.innerHTML = '';
+            guide.steps.forEach((step, idx) => {
+                const li = document.createElement('li');
+                li.className = "flex items-start gap-2.5 text-xs text-slate-600 font-medium";
+                li.innerHTML = `<span class="bg-slate-200 text-slate-700 w-5 h-5 rounded-full flex items-center justify-center font-bold flex-shrink-0 text-[10px]">${idx + 1}</span> <span>${step}</span>`;
+                stepsList.appendChild(li);
+            });
+
+            document.getElementById('guideModal').classList.remove('hidden');
+        }
+
+        // Clean UI toggle to close modal without navigating away or breaking app state
+        function closeModal() {
+            document.getElementById('guideModal').classList.add('hidden');
+            currentActiveGuide = null;
+        }
+
+        function openCalculatorModal() {
+            document.getElementById('calculatorModal').classList.remove('hidden');
+        }
+
+        function closeCalculatorModal() {
+            document.getElementById('calculatorModal').classList.add('hidden');
+        }
+
+        function downloadCurrentGuide() {
+            alert('Redirecting to secure R20.00 checkout package...');
+        }
+
+        function calculateUtility() {
+            const qty = parseFloat(document.getElementById('calcQty').value) || 0;
+            const rate = parseFloat(document.getElementById('calcRate').value) || 0;
+            const total = qty * rate;
+            document.getElementById('calcResult').textContent = total.toFixed(1) + " kg/total";
+        }
+
+        function calculateTankMix() {
+            const cap = parseFloat(document.getElementById('tankCap').value) || 0;
+            const rate = parseFloat(document.getElementById('tankRate').value) || 0;
+            const total = (cap / 100) * rate;
+            document.getElementById('tankResult').textContent = total.toLocaleString() + " mL";
+        }
+
+        // Render guides into the grid on load
+        function renderGuides(guidesToRender) {
+            const grid = document.getElementById('guidesGrid');
+            const countEl = document.getElementById('guide-count');
+            grid.innerHTML = '';
+            countEl.textContent = guidesToRender.length;
+
+            const emptyState = document.getElementById('emptyState');
+            if (guidesToRender.length === 0) {
+                emptyState.classList.remove('hidden');
+                return;
+            } else {
+                emptyState.classList.add('hidden');
+            }
+
+            guidesToRender.forEach(guide => {
+                const card = document.createElement('div');
+                card.className = "bg-white rounded-2xl p-5 shadow-sm border border-slate-200 hover:shadow-md transition cursor-pointer flex flex-col justify-between group";
+                card.onclick = () => openModal(guide.id);
+
+                card.innerHTML = `
+                    <div>
+                        <div class="h-40 rounded-xl overflow-hidden mb-4 bg-slate-100 relative">
+                            <img src="${guide.image}" alt="${guide.title}" class="w-full h-full object-cover group-hover:scale-105 transition duration-300" onerror="handleImageError(this)">
+                            <div class="absolute top-3 right-3 bg-slate-900/70 backdrop-blur-md text-amber-300 w-8 h-8 rounded-full flex items-center justify-center text-xs shadow-sm">
+                                <i class="fa-solid fa-lock"></i>
+                            </div>
+                        </div>
+                        <div class="flex items-center gap-2 mb-2">
+                            <span class="bg-emerald-100 text-emerald-800 text-[10px] font-bold px-2.5 py-0.5 rounded-full uppercase">${guide.category}</span>
+                            ${guide.subCategory ? `<span class="bg-teal-50 text-teal-700 text-[10px] font-bold px-2.5 py-0.5 rounded-full uppercase">${guide.subCategory}</span>` : ''}
+                        </div>
+                        <h3 class="font-bold text-slate-800 text-base mb-1 group-hover:text-emerald-700 transition">${guide.title}</h3>
+                        <p class="text-xs text-slate-500 line-clamp-2">${guide.desc}</p>
+                    </div>
+                    <div class="mt-4 pt-3 border-t border-slate-100 flex justify-between items-center text-xs font-semibold text-emerald-700">
+                        <span>View Protected Guide</span>
+                        <i class="fa-solid fa-arrow-right group-hover:translate-x-1 transition-transform"></i>
+                    </div>
+                `;
+                grid.appendChild(card);
+            });
+        }
+
+        // Initialize display
+        renderGuides(allGuides);
+
+        function filterGuides() {
+            const query = document.getElementById('searchInput').value.toLowerCase();
+            const filtered = allGuides.filter(g => g.title.toLowerCase().includes(query) || g.desc.toLowerCase().includes(query));
+            renderGuides(filtered);
+        }
+
+        function filterByCategory(category) {
+            // Highlight active tab styling
+            document.querySelectorAll('.category-btn').forEach(btn => {
+                btn.classList.remove('bg-slate-800', 'text-white');
+                btn.classList.add('bg-slate-100', 'text-slate-700');
+            });
+            
+            if (category === 'All') {
+                document.getElementById('cat-All').classList.add('bg-slate-800', 'text-white');
+                document.getElementById('cat-All').classList.remove('bg-slate-100', 'text-slate-700');
+                renderGuides(allGuides);
+            } else {
+                const activeBtn = document.getElementById(`cat-${category}`);
+                if (activeBtn) {
+                    activeBtn.classList.add('bg-slate-800', 'text-white');
+                    activeBtn.classList.remove('bg-slate-100', 'text-slate-700');
+                }
+                const filtered = allGuides.filter(g => g.category === category);
+                renderGuides(filtered);
+            }
         }
     </script>
 </body>
