@@ -139,7 +139,7 @@
         </div>
     </main>
 
-    <!-- Guide Modal with Screenshot Protection & Payfast Form -->
+    <!-- Guide Modal with Screenshot Protection & PayFast Form -->
     <div id="guideModal" class="fixed inset-0 bg-slate-950/80 backdrop-blur-md z-50 hidden flex items-center justify-center p-4 overflow-y-auto">
         <div id="modalCardWrapper" class="bg-white rounded-3xl max-w-2xl w-full overflow-hidden shadow-2xl transform transition-all my-8 border border-slate-100 relative">
             
@@ -152,7 +152,7 @@
                 <p class="text-xs text-slate-300 max-w-xs mb-4 font-medium">Full step-by-step procedures and high-res infographics are securely locked against free viewing and screen grabs.</p>
                 
                 <!-- Direct PayFast Form -->
-                <form action="https://sandbox.payfast.co.za/eng/process" method="POST">
+                <form id="payfastModalForm" action="https://sandbox.payfast.co.za/eng/process" method="POST">
                     <input type="hidden" name="merchant_id" value="10004002">
                     <input type="hidden" name="merchant_key" value="q1cd2rdny4a53">
                     <input type="hidden" name="return_url" id="pfReturnUrl" value="">
@@ -196,7 +196,7 @@
                 </div>
                 
                 <div class="border-t border-slate-100 pt-4 flex justify-between items-center relative z-20">
-                    <button type="button" onclick="document.querySelector('#secureOverlay form').requestSubmit()" class="bg-amber-500 hover:bg-amber-600 text-white px-5 py-2.5 rounded-xl text-xs font-bold transition flex items-center gap-2 shadow-md cursor-pointer">
+                    <button type="button" onclick="document.getElementById('payfastModalForm').requestSubmit()" class="bg-amber-500 hover:bg-amber-600 text-white px-5 py-2.5 rounded-xl text-xs font-bold transition flex items-center gap-2 shadow-md cursor-pointer">
                         <i class="fa-solid fa-download"></i> Unlock Package (JPG + Text) - R20.00
                     </button>
                     
@@ -473,7 +473,7 @@
                 const matchesCategory = activeCategory === 'All' || g.category === activeCategory;
                 const matchesSubCategory = activeSubCategory === 'All' || g.subCategory === activeSubCategory;
                 const matchesSearch = g.title.toLowerCase().includes(searchQuery) || 
-                                      g.description.toLowerCase().includes(searchQuery) ||
+                                      (g.desc && g.desc.toLowerCase().includes(searchQuery)) ||
                                       g.category.toLowerCase().includes(searchQuery);
                 return matchesCategory && matchesSubCategory && matchesSearch;
             });
@@ -517,11 +517,11 @@
                     <div class="p-5 sm:p-6 flex-grow flex flex-col justify-between">
                         <div>
                             <h3 class="text-lg font-bold text-slate-800 mb-2 group-hover:text-emerald-700 transition">${guide.title}</h3>
-                            <p class="text-slate-600 text-xs sm:text-sm line-clamp-3 mb-4 leading-relaxed">${guide.description}</p>
+                            <p class="text-slate-600 text-xs sm:text-sm line-clamp-3 mb-4 leading-relaxed">${guide.desc || ''}</p>
                         </div>
                         <div class="flex items-center gap-2.5 pt-4 border-t border-slate-200/60">
                             <button type="button" onclick="openModal('${guide.id}')" class="flex-1 ${theme.buttonBg} text-white py-2.5 px-3 rounded-xl text-xs font-bold transition flex items-center justify-center gap-2 shadow-sm cursor-pointer">
-                                <i class="fa-solid fa-lock"></i> ${guide.isInteractive ? 'Launch Calculator' : 'View Guide (Locked)'}
+                                <i class="fa-solid fa-eye"></i> View Guide
                             </button>
                         </div>
                     </div>
@@ -619,7 +619,7 @@
             activeGuideId = id;
 
             document.getElementById('modalTitle').innerText = guide.title;
-            document.getElementById('modalDescription').innerText = guide.description;
+            document.getElementById('modalDescription').innerText = guide.desc || '';
             document.getElementById('modalCategoryBadge').innerText = guide.category;
             
             const subBadge = document.getElementById('modalSubCategoryBadge');
@@ -634,7 +634,7 @@
             document.getElementById('pfReturnUrl').value = window.location.href;
             document.getElementById('pfCancelUrl').value = window.location.href;
             document.getElementById('pfItemName').value = `Guide Package: ${guide.title}`;
-            document.getElementById('pfItemDesc').value = guide.description.substring(0, 100);
+            document.getElementById('pfItemDesc').value = (guide.desc || '').substring(0, 100);
 
             document.getElementById('secureOverlay').classList.remove('hidden');
             document.getElementById('blurContentArea').classList.add('secure-blur');
@@ -655,12 +655,14 @@
             
             const stepsList = document.getElementById('modalSteps');
             stepsList.innerHTML = '';
-            guide.steps.forEach((step, idx) => {
-                const li = document.createElement('li');
-                li.className = "flex items-start gap-3 text-sm text-slate-700 bg-slate-50 p-3.5 rounded-2xl border border-slate-200/80 shadow-sm";
-                li.innerHTML = `<span class="bg-sky-700 text-white text-xs font-extrabold w-6 h-6 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5 shadow-sm">${idx + 1}</span> <span class="font-medium">${step}</span>`;
-                stepsList.appendChild(li);
-            });
+            if (guide.steps) {
+                guide.steps.forEach((step, idx) => {
+                    const li = document.createElement('li');
+                    li.className = "flex items-start gap-3 text-sm text-slate-700 bg-slate-50 p-3.5 rounded-2xl border border-slate-200/80 shadow-sm";
+                    li.innerHTML = `<span class="bg-sky-700 text-white text-xs font-extrabold w-6 h-6 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5 shadow-sm">${idx + 1}</span> <span class="font-medium">${step}</span>`;
+                    stepsList.appendChild(li);
+                });
+            }
 
             document.getElementById('guideModal').classList.remove('hidden');
             document.body.style.overflow = 'hidden';
