@@ -30,9 +30,10 @@
         
         /* Screenshot Protection Watermark & Blur Effect */
         .secure-blur {
-            filter: blur(6px);
-            transition: filter 0.3s ease;
+            filter: blur(8px);
+            -webkit-filter: blur(8px);
             pointer-events: none;
+            user-select: none;
         }
         .secure-watermark {
             position: absolute;
@@ -40,9 +41,9 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            background: rgba(15, 23, 42, 0.4);
+            background: rgba(15, 23, 42, 0.75);
             z-index: 20;
-            backdrop-filter: blur(2px);
+            backdrop-filter: blur(3px);
         }
     </style>
 </head>
@@ -148,8 +149,8 @@
                     <i class="fa-solid fa-lock text-3xl"></i>
                 </div>
                 <h3 class="text-lg font-extrabold mb-1">Protected Premium Guide</h3>
-                <p class="text-xs text-slate-300 max-w-xs mb-4 font-medium">Full step-by-step procedures and high-res infographics are locked to prevent free usage and screen grabbing.</p>
-                <button onclick="downloadCurrentGuide()" class="bg-amber-500 hover:bg-amber-600 text-slate-950 px-6 py-3 rounded-xl text-xs font-extrabold transition shadow-lg flex items-center gap-2 transform hover:scale-105">
+                <p class="text-xs text-slate-300 max-w-xs mb-4 font-medium">Full step-by-step procedures and high-res infographics are securely locked against free viewing and screen grabs.</p>
+                <button onclick="redirectToPayFast()" class="bg-amber-500 hover:bg-amber-600 text-slate-950 px-6 py-3 rounded-xl text-xs font-extrabold transition shadow-lg flex items-center gap-2 transform hover:scale-105">
                     <i class="fa-solid fa-cart-shopping"></i> Unlock & Download Package (R20.00)
                 </button>
             </div>
@@ -184,10 +185,10 @@
                 </div>
                 
                 <div class="border-t border-slate-100 pt-4 flex justify-between items-center z-30 relative">
-                    <button id="modalDownloadBtn" onclick="downloadCurrentGuide()" class="bg-amber-500 hover:bg-amber-600 text-white px-5 py-2.5 rounded-xl text-xs font-bold transition flex items-center gap-2 shadow-md">
+                    <button id="modalDownloadBtn" onclick="redirectToPayFast()" class="bg-amber-500 hover:bg-amber-600 text-white px-5 py-2.5 rounded-xl text-xs font-bold transition flex items-center gap-2 shadow-md">
                         <i class="fa-solid fa-download"></i> Unlock Package (JPG + Text) - R20.00
                     </button>
-                    <button onclick="closeModal()" class="bg-slate-100 hover:bg-slate-200 text-slate-700 px-5 py-2.5 rounded-xl text-xs font-semibold transition">
+                    <button onclick="closeModal()" class="bg-slate-100 hover:bg-slate-200 text-slate-700 px-5 py-2.5 rounded-xl text-sm font-semibold transition">
                         Close
                     </button>
                 </div>
@@ -617,7 +618,7 @@
                 subBadge.classList.add('hidden');
             }
 
-            // Keep blur overlay active until purchase/download
+            // Keep blur overlay active
             document.getElementById('secureOverlay').classList.remove('hidden');
             document.getElementById('blurContentArea').classList.add('secure-blur');
             document.getElementById('modalImage').classList.add('secure-blur');
@@ -678,74 +679,40 @@
             document.getElementById('tankResult').innerText = ((cap / 100) * rate).toFixed(1) + " mL / g total";
         }
 
-        function downloadCurrentGuide() {
+        function redirectToPayFast() {
             const guide = allGuides.find(g => g.id === activeGuideId);
             if (!guide) return;
 
-            if (confirm(`Download Package: ${guide.title}\nIncludes: Full Infographic JPG + Procedure Text File\nPrice: R20.00\n\nProceed to secure PayFast checkout?`)) {
-                
-                // Clear Blur and Watermark upon initiating checkout
-                document.getElementById('secureOverlay').classList.add('hidden');
-                document.getElementById('blurContentArea').classList.remove('secure-blur');
-                document.getElementById('modalImage').classList.remove('secure-blur');
+            const payfastUrl = 'https://sandbox.payfast.co.za/eng/process'; 
+            const merchantId = '10004002'; 
+            const merchantKey = 'q1cd2rdny4a53'; 
+            
+            const form = document.createElement('form');
+            form.method = 'POST';
+            form.action = payfastUrl;
 
-                const payfastUrl = 'https://sandbox.payfast.co.za/eng/process'; 
-                const merchantId = '10004002'; 
-                const merchantKey = 'q1cd2rdny4a53'; 
-                
-                const form = document.createElement('form');
-                form.method = 'POST';
-                form.action = payfastUrl;
+            const paymentData = {
+                merchant_id: merchantId,
+                merchant_key: merchantKey,
+                return_url: window.location.href, 
+                cancel_url: window.location.href, 
+                item_name: `Guide Package: ${guide.title}`,
+                amount: '20.00', 
+                item_description: guide.description.substring(0, 100)
+            };
 
-                const paymentData = {
-                    merchant_id: merchantId,
-                    merchant_key: merchantKey,
-                    return_url: window.location.href, 
-                    cancel_url: window.location.href, 
-                    item_name: `Guide Package: ${guide.title}`,
-                    amount: '20.00', 
-                    item_description: guide.description.substring(0, 100)
-                };
-
-                for (const key in paymentData) {
-                    if (paymentData.hasOwnProperty(key)) {
-                        const input = document.createElement('input');
-                        input.type = 'hidden';
-                        input.name = key;
-                        input.value = paymentData[key];
-                        form.appendChild(input);
-                    }
-                }
-
-                document.body.appendChild(form);
-                form.submit();
-                document.body.removeChild(form);
-
-                let textContent = `GUIDE TITLE: ${guide.title}\n`;
-                textContent += `CATEGORY: ${guide.category} > ${guide.subCategory}\n\n`;
-                textContent += `OVERVIEW:\n${guide.description}\n\n`;
-                textContent += `STEP-BY-STEP PROCEDURE:\n`;
-                guide.steps.forEach((step, i) => {
-                    textContent += `${i + 1}. ${step}\n`;
-                });
-
-                const blob = new Blob([textContent], { type: 'text/plain;charset=utf-8' });
-                const textLink = document.createElement('a');
-                textLink.href = URL.createObjectURL(blob);
-                textLink.download = guide.title.replace(/[^a-zA-Z0-9]/g, '_') + "_Guide.txt";
-                document.body.appendChild(textLink);
-                textLink.click();
-                document.body.removeChild(textLink);
-
-                if (guide.image) {
-                    const imgLink = document.createElement('a');
-                    imgLink.href = guide.image;
-                    imgLink.download = guide.title.replace(/[^a-zA-Z0-9]/g, '_') + "_Infographic.jpg";
-                    document.body.appendChild(imgLink);
-                    imgLink.click();
-                    document.body.removeChild(imgLink);
+            for (const key in paymentData) {
+                if (paymentData.hasOwnProperty(key)) {
+                    const input = document.createElement('input');
+                    input.type = 'hidden';
+                    input.name = key;
+                    input.value = paymentData[key];
+                    form.appendChild(input);
                 }
             }
+
+            document.body.appendChild(form);
+            form.submit();
         }
 
         window.onload = function() {
