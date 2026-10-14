@@ -150,7 +150,7 @@
                 </div>
                 <h3 class="text-lg font-extrabold mb-1">Protected Premium Guide</h3>
                 <p class="text-xs text-slate-300 max-w-xs mb-4 font-medium">Full step-by-step procedures and high-res infographics are securely locked against free viewing and screen grabs.</p>
-                <button onclick="redirectToPayFast()" class="bg-amber-500 hover:bg-amber-600 text-slate-950 px-6 py-3 rounded-xl text-xs font-extrabold transition shadow-lg flex items-center gap-2 transform hover:scale-105">
+                <button type="button" onclick="redirectToPayFast()" class="bg-amber-500 hover:bg-amber-600 text-slate-950 px-6 py-3 rounded-xl text-xs font-extrabold transition shadow-lg flex items-center gap-2 transform hover:scale-105 cursor-pointer">
                     <i class="fa-solid fa-cart-shopping"></i> Unlock & Download Package (R20.00)
                 </button>
             </div>
@@ -159,7 +159,7 @@
             <div id="modalImageContainer" class="relative h-64 sm:h-72 bg-slate-900">
                 <img id="modalImage" src="" alt="Guide Image" class="w-full h-full object-cover opacity-90 secure-blur" onerror="handleImageError(this)">
                 <div class="absolute inset-0 bg-gradient-to-t from-slate-950/90 via-slate-950/30 to-transparent"></div>
-                <button onclick="closeModal()" class="absolute top-4 right-4 bg-black/60 hover:bg-black/80 text-white w-9 h-9 rounded-full flex items-center justify-center transition border border-white/20 shadow-md z-30">
+                <button type="button" onclick="closeModal()" class="absolute top-4 right-4 bg-black/60 hover:bg-black/80 text-white w-9 h-9 rounded-full flex items-center justify-center transition border border-white/20 shadow-md z-30 cursor-pointer">
                     <i class="fa-solid fa-xmark text-sm"></i>
                 </button>
                 <div class="absolute bottom-4 left-6 right-6 flex items-center gap-2 flex-wrap z-30">
@@ -185,16 +185,27 @@
                 </div>
                 
                 <div class="border-t border-slate-100 pt-4 flex justify-between items-center z-30 relative">
-                    <button id="modalDownloadBtn" onclick="redirectToPayFast()" class="bg-amber-500 hover:bg-amber-600 text-white px-5 py-2.5 rounded-xl text-xs font-bold transition flex items-center gap-2 shadow-md">
+                    <button type="button" id="modalDownloadBtn" onclick="redirectToPayFast()" class="bg-amber-500 hover:bg-amber-600 text-white px-5 py-2.5 rounded-xl text-xs font-bold transition flex items-center gap-2 shadow-md cursor-pointer">
                         <i class="fa-solid fa-download"></i> Unlock Package (JPG + Text) - R20.00
                     </button>
-                    <button onclick="closeModal()" class="bg-slate-100 hover:bg-slate-200 text-slate-700 px-5 py-2.5 rounded-xl text-sm font-semibold transition">
+                    <button type="button" onclick="closeModal()" class="bg-slate-100 hover:bg-slate-200 text-slate-700 px-5 py-2.5 rounded-xl text-sm font-semibold transition cursor-pointer">
                         Close
                     </button>
                 </div>
             </div>
         </div>
     </div>
+
+    <!-- Hidden Direct PayFast Form Container -->
+    <form id="payfastForm" action="https://sandbox.payfast.co.za/eng/process" method="POST" style="display: none;">
+        <input type="hidden" name="merchant_id" value="10004002">
+        <input type="hidden" name="merchant_key" value="q1cd2rdny4a53">
+        <input type="hidden" name="return_url" id="pfReturnUrl" value="">
+        <input type="hidden" name="cancel_url" id="pfCancelUrl" value="">
+        <input type="hidden" name="item_name" id="pfItemName" value="">
+        <input type="hidden" name="amount" value="20.00">
+        <input type="hidden" name="item_description" id="pfItemDesc" value="">
+    </form>
 
     <!-- Quick Utilities Modal -->
     <div id="calculatorModal" class="fixed inset-0 bg-slate-950/70 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4 overflow-y-auto">
@@ -203,7 +214,7 @@
                 <h3 class="text-lg sm:text-xl font-extrabold text-slate-800 flex items-center gap-2.5">
                     <div class="bg-emerald-100 p-2 rounded-xl text-emerald-700"><i class="fa-solid fa-calculator"></i></div> Universal Calculators & Conversion Tables
                 </h3>
-                <button onclick="closeCalculatorModal()" class="text-slate-400 hover:text-slate-600 p-2 rounded-full hover:bg-slate-100 transition">
+                <button type="button" onclick="closeCalculatorModal()" class="text-slate-400 hover:text-slate-600 p-2 rounded-full hover:bg-slate-100 transition cursor-pointer">
                     <i class="fa-solid fa-xmark text-lg"></i>
                 </button>
             </div>
@@ -252,7 +263,7 @@
                 </div>
             </div>
             <div class="mt-6 text-right">
-                <button onclick="closeCalculatorModal()" class="bg-emerald-700 hover:bg-emerald-800 text-white px-6 py-2.5 rounded-xl text-sm font-semibold transition shadow-md">Done</button>
+                <button type="button" onclick="closeCalculatorModal()" class="bg-emerald-700 hover:bg-emerald-800 text-white px-6 py-2.5 rounded-xl text-sm font-semibold transition shadow-md cursor-pointer">Done</button>
             </div>
         </div>
     </div>
@@ -508,7 +519,7 @@
                             <p class="text-slate-600 text-xs sm:text-sm line-clamp-3 mb-4 leading-relaxed">${guide.description}</p>
                         </div>
                         <div class="flex items-center gap-2.5 pt-4 border-t border-slate-200/60">
-                            <button onclick="openModal('${guide.id}')" class="flex-1 ${theme.buttonBg} text-white py-2.5 px-3 rounded-xl text-xs font-bold transition flex items-center justify-center gap-2 shadow-sm">
+                            <button type="button" onclick="openModal('${guide.id}')" class="flex-1 ${theme.buttonBg} text-white py-2.5 px-3 rounded-xl text-xs font-bold transition flex items-center justify-center gap-2 shadow-sm cursor-pointer">
                                 <i class="fa-solid fa-lock"></i> ${guide.isInteractive ? 'Launch Calculator' : 'View Guide (Locked)'}
                             </button>
                         </div>
@@ -618,7 +629,6 @@
                 subBadge.classList.add('hidden');
             }
 
-            // Keep blur overlay active
             document.getElementById('secureOverlay').classList.remove('hidden');
             document.getElementById('blurContentArea').classList.add('secure-blur');
             document.getElementById('modalImage').classList.add('secure-blur');
@@ -683,37 +693,14 @@
             const guide = allGuides.find(g => g.id === activeGuideId);
             if (!guide) return;
 
-            // Updated to secure HTTPS endpoint to prevent mixed-content blocking on GitHub Pages
-            const payfastUrl = 'https://sandbox.payfast.co.za/eng/process'; 
-            const merchantId = '10004002'; 
-            const merchantKey = 'q1cd2rdny4a53'; 
-            
-            const form = document.createElement('form');
-            form.method = 'POST';
-            form.action = payfastUrl;
+            // Populate hidden form fields with current guide details
+            document.getElementById('pfReturnUrl').value = window.location.href;
+            document.getElementById('pfCancelUrl').value = window.location.href;
+            document.getElementById('pfItemName').value = `Guide Package: ${guide.title}`;
+            document.getElementById('pfItemDesc').value = guide.description.substring(0, 100);
 
-            const paymentData = {
-                merchant_id: merchantId,
-                merchant_key: merchantKey,
-                return_url: window.location.href, 
-                cancel_url: window.location.href, 
-                item_name: `Guide Package: ${guide.title}`,
-                amount: '20.00', 
-                item_description: guide.description.substring(0, 100)
-            };
-
-            for (const key in paymentData) {
-                if (paymentData.hasOwnProperty(key)) {
-                    const input = document.createElement('input');
-                    input.type = 'hidden';
-                    input.name = key;
-                    input.value = paymentData[key];
-                    form.appendChild(input);
-                }
-            }
-
-            document.body.appendChild(form);
-            form.submit();
+            // Submit the hardcoded form directly
+            document.getElementById('payfastForm').submit();
         }
 
         window.onload = function() {
