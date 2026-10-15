@@ -32,7 +32,7 @@
         
         /* Optimized Blur Effect (Clearer View, Unreadable Text) */
         .secure-blur {
-            filter: blur(1.5px);
+            filter: blur(4px);
             transition: filter 0.3s ease;
             pointer-events: none;
         }
@@ -42,9 +42,9 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            background: rgba(15, 23, 42, 0.65);
+            background: rgba(15, 23, 42, 0.75);
             z-index: 20;
-            backdrop-filter: blur(3px);
+            backdrop-filter: blur(4px);
             cursor: pointer;
         }
     </style>
@@ -428,7 +428,7 @@
                 steps: ["Select tab.", "Enter dimensions.", "Review developments."]
             },
             {
-                id: "leak-repair", title: "Emergency Pipe Leak Repair & Sealing", category: "Handyman", subCategory: "Plumbing", image: "images/plumbing-repair.jpg.jpg",
+                id: "leak-repair", title: "Emergency Pipe Leak Repair & Sealing", category: "Handyman", subCategory: "Plumbing", image: "https://placehold.co/600x400/0369a1/ffffff?text=Handyman+Guide",
                 desc: "Quick steps to isolate main water lines, apply temporary rubber clamps, and replace damaged PVC/copper fittings.",
                 steps: ["Shut off water.", "Dry pipe section.", "Apply repair tape.", "Test pressure."]
             },
