@@ -684,51 +684,75 @@
             document.getElementById('tankResult').innerText = ((cap / 100) * rate).toFixed(1) + " mL / g total";
         }
 
-        function triggerImageDownload(imageUrl, fileName) {
-            fetch(imageUrl)
-                .then(response => response.blob())
-                .then(blob => {
-                    const blobUrl = URL.createObjectURL(blob);
-                    const link = document.createElement('a');
-                    link.href = blobUrl;
-                    link.download = fileName;
-                    document.body.appendChild(link);
-                    link.click();
-                    document.body.removeChild(link);
-                    URL.revokeObjectURL(blobUrl);
-                })
-                .catch(() => {
-                    // Fallback using Canvas if direct fetch is blocked by CORS/Local security
-                    const img = new Image();
-                    img.crossOrigin = "anonymous";
-                    img.onload = function () {
-                        const canvas = document.createElement("canvas");
-                        canvas.width = img.width;
-                        canvas.height = img.height;
-                        const ctx = canvas.getContext("2d");
-                        ctx.drawImage(img, 0, 0);
-                        canvas.toBlob(function (blob) {
-                            const blobUrl = URL.createObjectURL(blob);
-                            const link = document.createElement('a');
-                            link.href = blobUrl;
-                            link.download = fileName;
-                            document.body.appendChild(link);
-                            link.click();
-                            document.body.removeChild(link);
+        function triggerFileDownloads(guide) {
+            const guideDesc = guide.desc || guide.description || '';
+            let textContent = `GUIDE TITLE: ${guide.title}\n`;
+            textContent += `CATEGORY: ${guide.category} > ${guide.subCategory}\n\n`;
+            textContent += `OVERVIEW:\n${guideDesc}\n\n`;
+            textContent += `STEP-BY-STEP PROCEDURE:\n`;
+            guide.steps.forEach((step, i) => {
+                textContent += `${i + 1}. ${step}\n`;
+            });
+
+            // 1. Download Text File
+            const blob = new Blob([textContent], { type: 'text/plain;charset=utf-8' });
+            const textLink = document.createElement('a');
+            textLink.href = URL.createObjectURL(blob);
+            textLink.download = guide.title.replace(/[^a-zA-Z0-9]/g, '_') + "_Guide.txt";
+            document.body.appendChild(textLink);
+            textLink.click();
+            document.body.removeChild(textLink);
+
+            // 2. Download Image File via Fetch/Blob to bypass browser download blocking
+            if (guide.image) {
+                setTimeout(() => {
+                    const imgFileName = guide.title.replace(/[^a-zA-Z0-9]/g, '_') + "_Infographic.jpg";
+                    fetch(guide.image)
+                        .then(response => response.blob())
+                        .then(imgBlob => {
+                            const blobUrl = URL.createObjectURL(imgBlob);
+                            const imgLink = document.createElement('a');
+                            imgLink.href = blobUrl;
+                            imgLink.download = imgFileName;
+                            document.body.appendChild(imgLink);
+                            imgLink.click();
+                            document.body.removeChild(imgLink);
                             URL.revokeObjectURL(blobUrl);
-                        }, 'image/jpeg');
-                    };
-                    img.src = imageUrl;
-                });
+                        })
+                        .catch(() => {
+                            // Canvas Fallback if fetch fails
+                            const img = new Image();
+                            img.crossOrigin = "anonymous";
+                            img.onload = function () {
+                                const canvas = document.createElement("canvas");
+                                canvas.width = img.width;
+                                canvas.height = img.height;
+                                const ctx = canvas.getContext("2d");
+                                ctx.drawImage(img, 0, 0);
+                                canvas.toBlob(function (b) {
+                                    const blobUrl = URL.createObjectURL(b);
+                                    const imgLink = document.createElement('a');
+                                    imgLink.href = blobUrl;
+                                    imgLink.download = imgFileName;
+                                    document.body.appendChild(imgLink);
+                                    imgLink.click();
+                                    document.body.removeChild(imgLink);
+                                    URL.revokeObjectURL(blobUrl);
+                                }, 'image/jpeg');
+                            };
+                            img.src = guide.image;
+                        });
+                }, 800); // 800ms staggered delay ensures browser triggers both files simultaneously
+            }
         }
 
         function downloadCurrentGuide() {
             const guide = allGuides.find(g => g.id === activeGuideId);
             if (!guide) return;
 
-            if (confirm(`Download Package: ${guide.title}\nIncludes: Full Infographic JPG + Procedure Text File\nPrice: R20.00\n\nProceed to secure PayFast checkout?`)) {
+            if (confirm(`Secure Checkout: ${guide.title}\nPackage Includes: Infographic JPG + Procedure Text File\nPrice: R20.00\n\nClick OK to proceed to PayFast payment & download files.`)) {
                 
-                // Do NOT unblur or clear watermark on preview card during purchase redirect
+                // 1. Redirect to PayFast Gateway
                 const payfastUrl = 'https://sandbox.payfast.co.za/eng/process'; 
                 const merchantId = '10004002'; 
                 const merchantKey = 'q1cd2rdny4a53'; 
@@ -762,31 +786,8 @@
                 form.submit();
                 document.body.removeChild(form);
 
-                // Prepare text procedure file content
-                let textContent = `GUIDE TITLE: ${guide.title}\n`;
-                textContent += `CATEGORY: ${guide.category} > ${guide.subCategory}\n\n`;
-                textContent += `OVERVIEW:\n${guideDesc}\n\n`;
-                textContent += `STEP-BY-STEP PROCEDURE:\n`;
-                guide.steps.forEach((step, i) => {
-                    textContent += `${i + 1}. ${step}\n`;
-                });
-
-                // Download text procedure file
-                const blob = new Blob([textContent], { type: 'text/plain;charset=utf-8' });
-                const textLink = document.createElement('a');
-                textLink.href = URL.createObjectURL(blob);
-                textLink.download = guide.title.replace(/[^a-zA-Z0-9]/g, '_') + "_Guide.txt";
-                document.body.appendChild(textLink);
-                textLink.click();
-                document.body.removeChild(textLink);
-
-                // Trigger reliable Infographic JPG image download
-                if (guide.image) {
-                    setTimeout(() => {
-                        const imgFileName = guide.title.replace(/[^a-zA-Z0-9]/g, '_') + "_Infographic.jpg";
-                        triggerImageDownload(guide.image, imgFileName);
-                    }, 300);
-                }
+                // 2. Trigger simultaneous file downloads
+                triggerFileDownloads(guide);
             }
         }
 
