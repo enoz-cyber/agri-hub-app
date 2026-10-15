@@ -10,6 +10,8 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <!-- Inter Font -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- JSZip CDN for bundling text and image into a single package -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
     
     <!-- Inline Web Manifest for PWA Capabilities -->
     <link rel="manifest" href='data:application/manifest+json,{"name":"Professional & Lifestyle Hub","short_name":"HubApp","start_url":".","display":"standalone","background_color":"#065f46","theme_color":"#065f46"}'>
@@ -190,7 +192,7 @@
                 
                 <div class="border-t border-slate-800 pt-4 flex justify-between items-center z-30 relative">
                     <button onclick="downloadCurrentGuide()" class="bg-amber-500 hover:bg-amber-600 text-slate-950 px-5 py-2.5 rounded-xl text-xs font-bold transition flex items-center gap-2 shadow-md">
-                        <i class="fa-solid fa-download"></i> Unlock Package (JPG + Text) - R20.00
+                        <i class="fa-solid fa-download"></i> Unlock Package (ZIP Bundle) - R20.00
                     </button>
                     <button onclick="closeModal()" class="bg-slate-800 hover:bg-slate-700 text-slate-200 px-5 py-2.5 rounded-xl text-xs font-semibold transition">
                         Close
@@ -684,11 +686,11 @@
             document.getElementById('tankResult').innerText = ((cap / 100) * rate).toFixed(1) + " mL / g total";
         }
 
-        function downloadCurrentGuide() {
+        async function downloadCurrentGuide() {
             const guide = allGuides.find(g => g.id === activeGuideId);
             if (!guide) return;
 
-            if (confirm(`Download Package: ${guide.title}\nIncludes: Full Infographic JPG + Procedure Text File\nPrice: R20.00\n\nProceed to secure PayFast checkout?`)) {
+            if (confirm(`Download Package: ${guide.title}\nIncludes: Full Infographic + Procedure Text File (ZIP Bundle)\nPrice: R20.00\n\nProceed to secure PayFast checkout?`)) {
                 
                 // Clear Blur and Watermark upon initiating checkout
                 document.getElementById('secureOverlay').classList.add('hidden');
@@ -737,25 +739,30 @@
                     textContent += `${i + 1}. ${step}\n`;
                 });
 
-                // Trigger simultaneous bundle downloads for both Text File and Infographic JPG
-                const blob = new Blob([textContent], { type: 'text/plain;charset=utf-8' });
-                const textLink = document.createElement('a');
-                textLink.href = URL.createObjectURL(blob);
-                textLink.download = guide.title.replace(/[^a-zA-Z0-9]/g, '_') + "_Guide.txt";
-                document.body.appendChild(textLink);
-                textLink.click();
-                document.body.removeChild(textLink);
+                // Package both Text and Image into a single ZIP file using JSZip
+                const zip = new JSZip();
+                const baseFilename = guide.title.replace(/[^a-zA-Z0-9]/g, '_');
+                
+                zip.file(`${baseFilename}_Guide.txt`, textContent);
 
                 if (guide.image) {
-                    setTimeout(() => {
-                        const imgLink = document.createElement('a');
-                        imgLink.href = guide.image;
-                        imgLink.download = guide.title.replace(/[^a-zA-Z0-9]/g, '_') + "_Infographic.jpg";
-                        document.body.appendChild(imgLink);
-                        imgLink.click();
-                        document.body.removeChild(imgLink);
-                    }, 400);
+                    try {
+                        const response = await fetch(guide.image);
+                        const blob = await response.blob();
+                        zip.file(`${baseFilename}_Infographic.jpg`, blob);
+                    } catch (e) {
+                        console.error("Could not fetch image for zip bundle", e);
+                    }
                 }
+
+                zip.generateAsync({ type: "blob" }).then(function(content) {
+                    const zipLink = document.createElement('a');
+                    zipLink.href = URL.createObjectURL(content);
+                    zipLink.download = `${baseFilename}_Package.zip`;
+                    document.body.appendChild(zipLink);
+                    zipLink.click();
+                    document.body.removeChild(zipLink);
+                });
             }
         }
 
