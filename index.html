@@ -684,18 +684,52 @@
             document.getElementById('tankResult').innerText = ((cap / 100) * rate).toFixed(1) + " mL / g total";
         }
 
+        function triggerImageDownload(imageUrl, fileName) {
+            fetch(imageUrl)
+                .then(response => response.blob())
+                .then(blob => {
+                    const blobUrl = URL.createObjectURL(blob);
+                    const link = document.createElement('a');
+                    link.href = blobUrl;
+                    link.download = fileName;
+                    document.body.appendChild(link);
+                    link.click();
+                    document.body.removeChild(link);
+                    URL.revokeObjectURL(blobUrl);
+                })
+                .catch(() => {
+                    // Fallback using Canvas if direct fetch is blocked by CORS/Local security
+                    const img = new Image();
+                    img.crossOrigin = "anonymous";
+                    img.onload = function () {
+                        const canvas = document.createElement("canvas");
+                        canvas.width = img.width;
+                        canvas.height = img.height;
+                        const ctx = canvas.getContext("2d");
+                        ctx.drawImage(img, 0, 0);
+                        canvas.toBlob(function (blob) {
+                            const blobUrl = URL.createObjectURL(blob);
+                            const link = document.createElement('a');
+                            link.href = blobUrl;
+                            link.download = fileName;
+                            document.body.appendChild(link);
+                            link.click();
+                            document.body.removeChild(link);
+                            URL.revokeObjectURL(blobUrl);
+                        }, 'image/jpeg');
+                    };
+                    img.src = imageUrl;
+                });
+        }
+
         function downloadCurrentGuide() {
             const guide = allGuides.find(g => g.id === activeGuideId);
             if (!guide) return;
 
             if (confirm(`Download Package: ${guide.title}\nIncludes: Full Infographic JPG + Procedure Text File\nPrice: R20.00\n\nProceed to secure PayFast checkout?`)) {
                 
-                // Clear Blur and Watermark upon initiating checkout
-                document.getElementById('secureOverlay').classList.add('hidden');
-                document.getElementById('blurContentArea').classList.remove('secure-blur');
-                document.getElementById('modalImage').classList.remove('secure-blur');
-
-                const payfastUrl = 'https://sandbox.payfast.co.za/eng/process';
+                // Do NOT unblur or clear watermark on preview card during purchase redirect
+                const payfastUrl = 'https://sandbox.payfast.co.za/eng/process'; 
                 const merchantId = '10004002'; 
                 const merchantKey = 'q1cd2rdny4a53'; 
                 
@@ -737,7 +771,7 @@
                     textContent += `${i + 1}. ${step}\n`;
                 });
 
-                // Trigger simultaneous bundle downloads for both Text File and Infographic JPG
+                // Download text procedure file
                 const blob = new Blob([textContent], { type: 'text/plain;charset=utf-8' });
                 const textLink = document.createElement('a');
                 textLink.href = URL.createObjectURL(blob);
@@ -746,15 +780,12 @@
                 textLink.click();
                 document.body.removeChild(textLink);
 
+                // Trigger reliable Infographic JPG image download
                 if (guide.image) {
                     setTimeout(() => {
-                        const imgLink = document.createElement('a');
-                        imgLink.href = guide.image;
-                        imgLink.download = guide.title.replace(/[^a-zA-Z0-9]/g, '_') + "_Infographic.jpg";
-                        document.body.appendChild(imgLink);
-                        imgLink.click();
-                        document.body.removeChild(imgLink);
-                    }, 400);
+                        const imgFileName = guide.title.replace(/[^a-zA-Z0-9]/g, '_') + "_Infographic.jpg";
+                        triggerImageDownload(guide.image, imgFileName);
+                    }, 300);
                 }
             }
         }
