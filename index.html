@@ -10,7 +10,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <!-- Inter Font -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <!-- JSZip CDN for bundling text and image into a single package -->
+    <!-- JSZip CDN for bundling text and asset into a single package -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
     
     <!-- Inline Web Manifest for PWA Capabilities -->
@@ -690,7 +690,12 @@
             const guide = allGuides.find(g => g.id === activeGuideId);
             if (!guide) return;
 
-            if (confirm(`Download Package: ${guide.title}\nIncludes: Full Infographic + Procedure Text File (ZIP Bundle)\nPrice: R20.00\n\nProceed to secure PayFast checkout?`)) {
+            const isInteractiveGuide = guide.isInteractive || false;
+            const assetUrl = guide.interactiveUrl || guide.image;
+            const assetExtension = isInteractiveGuide || guide.interactiveUrl ? 'html' : 'jpg';
+            const assetName = isInteractiveGuide ? 'Interactive_Tool' : 'Infographic';
+
+            if (confirm(`Download Package: ${guide.title}\nIncludes: Full Procedure Text + ${isInteractiveGuide ? 'Interactive HTML Tool' : 'Infographic JPG'} (ZIP Bundle)\nPrice: R20.00\n\nProceed to secure PayFast checkout?`)) {
                 
                 // Clear Blur and Watermark upon initiating checkout
                 document.getElementById('secureOverlay').classList.add('hidden');
@@ -739,19 +744,19 @@
                     textContent += `${i + 1}. ${step}\n`;
                 });
 
-                // Package both Text and Image into a single ZIP file using JSZip
+                // Package both Text and Companion Asset (.html or .jpg) into a single ZIP file using JSZip
                 const zip = new JSZip();
                 const baseFilename = guide.title.replace(/[^a-zA-Z0-9]/g, '_');
                 
                 zip.file(`${baseFilename}_Guide.txt`, textContent);
 
-                if (guide.image) {
+                if (assetUrl) {
                     try {
-                        const response = await fetch(guide.image);
+                        const response = await fetch(assetUrl);
                         const blob = await response.blob();
-                        zip.file(`${baseFilename}_Infographic.jpg`, blob);
+                        zip.file(`${baseFilename}_${assetName}.${assetExtension}`, blob);
                     } catch (e) {
-                        console.error("Could not fetch image for zip bundle", e);
+                        console.error("Could not fetch companion asset for zip bundle", e);
                     }
                 }
 
