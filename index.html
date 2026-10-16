@@ -711,63 +711,72 @@
                 const closeBtn = document.getElementById('modalCloseBtn');
                 const actionFooter = document.getElementById('modalActionFooter');
                 const textBody = document.getElementById('modalTextBody');
+                const modalCard = document.getElementById('modalCardWrapper');
                 
-                // Temporarily hide overlay and remove blur classes internally without flashing on user's screen yet
+                // Hide overlay and remove blur internally for clean capture
                 overlay.style.opacity = '0';
                 blurArea.classList.remove('secure-blur');
                 modalImg.classList.remove('secure-blur');
                 
-                // Temporarily remove max-height so ALL steps render fully on the canvas snapshot
+                // Temporarily expand the container to full height so NO steps get cut off
                 const originalMaxHeight = textBody.style.maxHeight;
+                const originalOverflow = textBody.style.overflowY;
+                const originalCardMaxHeight = modalCard.style.maxHeight;
+                
                 textBody.style.maxHeight = 'none';
-                textBody.style.overflow = 'visible';
+                textBody.style.overflowY = 'visible';
+                modalCard.style.maxHeight = 'none';
 
-                // Hide close button and buttons from the image capture
+                // Hide close button and footer action buttons from the image capture
                 closeBtn.style.display = 'none';
                 actionFooter.style.display = 'none';
 
-                const modalCard = document.getElementById('modalCardWrapper');
+                // Brief timeout to let the DOM fully reflow the expanded text container before capturing
+                setTimeout(() => {
+                    html2canvas(modalCard, {
+                        scale: 2,
+                        useCORS: true,
+                        backgroundColor: '#0f172a',
+                        windowWidth: modalCard.scrollWidth,
+                        windowHeight: modalCard.scrollHeight
+                    }).then(canvas => {
+                        // Restore UI states back to normal
+                        closeBtn.style.display = 'flex';
+                        actionFooter.style.display = 'flex';
+                        textBody.style.maxHeight = originalMaxHeight;
+                        textBody.style.overflowY = originalOverflow;
+                        modalCard.style.maxHeight = originalCardMaxHeight;
+                        
+                        // Re-enable blur and watermark securely
+                        overlay.style.opacity = '1';
+                        blurArea.classList.add('secure-blur');
+                        modalImg.classList.add('secure-blur');
 
-                // Generate full high-res canvas snapshot cleanly in the background
-                html2canvas(modalCard, {
-                    scale: 2,
-                    useCORS: true,
-                    backgroundColor: '#0f172a'
-                }).then(canvas => {
-                    // Restore UI states
-                    closeBtn.style.display = 'flex';
-                    actionFooter.style.display = 'flex';
-                    textBody.style.maxHeight = originalMaxHeight;
-                    textBody.style.overflowY = 'auto';
-                    
-                    // Re-enable blur and watermark securely
-                    overlay.style.opacity = '1';
-                    blurArea.classList.add('secure-blur');
-                    modalImg.classList.add('secure-blur');
+                        // Trigger full image download
+                        const imageURL = canvas.toDataURL('image/png');
+                        const baseFilename = guide.title.replace(/[^a-zA-Z0-9]/g, '_');
+                        
+                        const dlLink = document.createElement('a');
+                        dlLink.href = imageURL;
+                        dlLink.download = `${baseFilename}_Guide_Card.png`;
+                        document.body.appendChild(dlLink);
+                        dlLink.click();
+                        document.body.removeChild(dlLink);
 
-                    // Trigger image download
-                    const imageURL = canvas.toDataURL('image/png');
-                    const baseFilename = guide.title.replace(/[^a-zA-Z0-9]/g, '_');
-                    
-                    const dlLink = document.createElement('a');
-                    dlLink.href = imageURL;
-                    dlLink.download = `${baseFilename}_Guide_Card.png`;
-                    document.body.appendChild(dlLink);
-                    dlLink.click();
-                    document.body.removeChild(dlLink);
-
-                    closeModal();
-                }).catch(err => {
-                    console.error("Image generation failed:", err);
-                    closeBtn.style.display = 'flex';
-                    actionFooter.style.display = 'flex';
-                    textBody.style.maxHeight = originalMaxHeight;
-                    textBody.style.overflowY = 'auto';
-                    overlay.style.opacity = '1';
-                    blurArea.classList.add('secure-blur');
-                    modalImg.classList.add('secure-blur');
-                    alert("Could not generate image file. Please try again.");
-                });
+                        closeModal();
+                    }).catch(err => {
+                        console.error("Image generation failed:", err);
+                        closeBtn.style.display = 'flex';
+                        actionFooter.style.display = 'flex';
+                        textBody.style.maxHeight = originalMaxHeight;
+                        textBody.style.overflowY = originalOverflow;
+                        modalCard.style.maxHeight = originalCardMaxHeight;
+                        overlay.style.opacity = '1';
+                        blurArea.classList.add('secure-blur');
+                        modalImg.classList.add('secure-blur');
+                        alert("Could not generate image file. Please try again.");
+                    });
+                }, 150);
             }
         }
 
