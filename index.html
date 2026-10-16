@@ -705,35 +705,47 @@
 
             if (confirm(`Unlock & Download Guide Card Image: ${guide.title}\nPrice: R20.00\n\nProceed to download as a single unified image?`)) {
                 
-                // Temporarily remove blur & overlay so the snapshot is clean and readable
-                document.getElementById('secureOverlay').classList.add('hidden');
-                document.getElementById('blurContentArea').classList.remove('secure-blur');
-                document.getElementById('modalImage').classList.remove('secure-blur');
-                
-                // Temporarily hide close button and footer buttons during canvas rendering
+                const overlay = document.getElementById('secureOverlay');
+                const blurArea = document.getElementById('blurContentArea');
+                const modalImg = document.getElementById('modalImage');
                 const closeBtn = document.getElementById('modalCloseBtn');
                 const actionFooter = document.getElementById('modalActionFooter');
+                const textBody = document.getElementById('modalTextBody');
+                
+                // Temporarily hide overlay and remove blur classes internally without flashing on user's screen yet
+                overlay.style.opacity = '0';
+                blurArea.classList.remove('secure-blur');
+                modalImg.classList.remove('secure-blur');
+                
+                // Temporarily remove max-height so ALL steps render fully on the canvas snapshot
+                const originalMaxHeight = textBody.style.maxHeight;
+                textBody.style.maxHeight = 'none';
+                textBody.style.overflow = 'visible';
+
+                // Hide close button and buttons from the image capture
                 closeBtn.style.display = 'none';
                 actionFooter.style.display = 'none';
 
                 const modalCard = document.getElementById('modalCardWrapper');
 
-                // Use html2canvas to render the entire card into a single high-quality image canvas
+                // Generate full high-res canvas snapshot cleanly in the background
                 html2canvas(modalCard, {
-                    scale: 2, // High resolution rendering
+                    scale: 2,
                     useCORS: true,
                     backgroundColor: '#0f172a'
                 }).then(canvas => {
-                    // Restore modal UI elements back
+                    // Restore UI states
                     closeBtn.style.display = 'flex';
                     actionFooter.style.display = 'flex';
+                    textBody.style.maxHeight = originalMaxHeight;
+                    textBody.style.overflowY = 'auto';
                     
-                    // Re-apply secure blur back to the modal in case they view another
-                    document.getElementById('secureOverlay').classList.remove('hidden');
-                    document.getElementById('blurContentArea').classList.add('secure-blur');
-                    document.getElementById('modalImage').classList.add('secure-blur');
+                    // Re-enable blur and watermark securely
+                    overlay.style.opacity = '1';
+                    blurArea.classList.add('secure-blur');
+                    modalImg.classList.add('secure-blur');
 
-                    // Convert canvas to downloadable image blob/link
+                    // Trigger image download
                     const imageURL = canvas.toDataURL('image/png');
                     const baseFilename = guide.title.replace(/[^a-zA-Z0-9]/g, '_');
                     
@@ -747,9 +759,13 @@
                     closeModal();
                 }).catch(err => {
                     console.error("Image generation failed:", err);
-                    // Restore UI if error occurs
                     closeBtn.style.display = 'flex';
                     actionFooter.style.display = 'flex';
+                    textBody.style.maxHeight = originalMaxHeight;
+                    textBody.style.overflowY = 'auto';
+                    overlay.style.opacity = '1';
+                    blurArea.classList.add('secure-blur');
+                    modalImg.classList.add('secure-blur');
                     alert("Could not generate image file. Please try again.");
                 });
             }
