@@ -705,14 +705,14 @@
             const assetExtension = isInteractiveGuide || guide.interactiveUrl ? 'html' : 'jpg';
             const assetName = isInteractiveGuide ? 'Interactive_Tool' : 'Infographic';
 
-            if (confirm(`Download Package: ${guide.title}\nIncludes: Full Procedure Text + ${isInteractiveGuide ? 'Interactive HTML Tool' : 'Infographic JPG'} (ZIP Bundle)\nPrice: R20.00\n\nProceed to secure PayFast checkout?`)) {
+            if (confirm(`Download Package: ${guide.title}\nIncludes: Full Procedure Text + ${isInteractiveGuide ? 'Interactive HTML Tool' : 'Infographic JPG'}\nPrice: R20.00\n\nProceed to secure PayFast sandbox checkout?`)) {
                 
                 // Clear Blur and Watermark upon initiating checkout
                 document.getElementById('secureOverlay').classList.add('hidden');
                 document.getElementById('blurContentArea').classList.remove('secure-blur');
                 document.getElementById('modalImage').classList.remove('secure-blur');
 
-                const payfastUrl = 'https://www.payfast.co.za/eng/process'; // Updated to Live Production URL
+                const payfastUrl = 'https://sandbox.payfast.co.za/eng/process'; // Reverted to Sandbox URL
                 const merchantId = '10004002'; 
                 const merchantKey = 'q1cd2rdny4a53'; 
                 
@@ -744,41 +744,6 @@
                 document.body.appendChild(form);
                 form.submit();
                 document.body.removeChild(form);
-
-                // Prepare text procedure file content
-                let textContent = `GUIDE TITLE: ${guide.title}\n`;
-                textContent += `CATEGORY: ${guide.category} > ${guide.subCategory}\n\n`;
-                textContent += `OVERVIEW:\n${guideDesc}\n\n`;
-                textContent += `STEP-BY-STEP PROCEDURE:\n`;
-                guide.steps.forEach((step, i) => {
-                    textContent += `${i + 1}. ${step}\n`;
-                });
-
-                // Package both Text and Companion Asset (.html or .jpg) into a single ZIP file using JSZip
-                const zip = new JSZip();
-                const baseFilename = guide.title.replace(/[^a-zA-Z0-9]/g, '_');
-                
-                zip.file(`${baseFilename}_Guide.txt`, textContent);
-
-                if (assetUrl) {
-                    try {
-                        const response = await fetch(assetUrl);
-                        if (!response.ok) throw new Error('Network response was not ok');
-                        const blob = await response.blob();
-                        zip.file(`${baseFilename}_${assetName}.${assetExtension}`, blob);
-                    } catch (e) {
-                        console.warn("Could not fetch local asset, packaging text guide only.", e);
-                    }
-                }
-
-                zip.generateAsync({ type: "blob" }).then(function(content) {
-                    const zipLink = document.createElement('a');
-                    zipLink.href = URL.createObjectURL(content);
-                    zipLink.download = `${baseFilename}_Package.zip`;
-                    document.body.appendChild(zipLink);
-                    zipLink.click();
-                    document.body.removeChild(zipLink);
-                });
             }
         }
 
