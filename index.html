@@ -10,8 +10,10 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <!-- Inter Font -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <!-- html2canvas CDN for capturing the modal card into a single unified image -->
+    <!-- html2canvas CDN for capturing static guide cards into an image -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <!-- JSZip CDN for packaging interactive HTML tools -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
     
     <!-- Inline Web Manifest for PWA Capabilities -->
     <link rel="manifest" href='data:application/manifest+json,{"name":"Professional & Lifestyle Hub","short_name":"HubApp","start_url":".","display":"standalone","background_color":"#065f46","theme_color":"#065f46"}'>
@@ -156,9 +158,9 @@
                     <i class="fa-solid fa-lock text-3xl"></i>
                 </div>
                 <h3 class="text-lg font-extrabold mb-1 pointer-events-none">Protected Premium Guide</h3>
-                <p class="text-xs text-slate-300 max-w-xs mb-4 font-medium pointer-events-none">Full step-by-step procedures and high-res infographics are locked to prevent free usage and screen grabbing.</p>
-                <button type="button" onclick="event.stopPropagation(); downloadCurrentGuide();" class="bg-gradient-to-r from-amber-500 to-orange-500 hover:from-amber-400 hover:to-orange-400 text-slate-950 px-6 py-3 rounded-2xl text-xs font-extrabold transition shadow-lg flex items-center gap-2 transform hover:scale-105">
-                    <i class="fa-solid fa-cart-shopping"></i> Unlock & Download Guide Image (R20.00)
+                <p id="modalLockSubtitle" class="text-xs text-slate-300 max-w-xs mb-4 font-medium pointer-events-none">Full step-by-step procedures and high-res infographics are locked to prevent free usage and screen grabbing.</p>
+                <button type="button" onclick="event.stopPropagation(); downloadCurrentGuide();" id="modalOverlayBtn" class="bg-gradient-to-r from-amber-500 to-orange-500 hover:from-amber-400 hover:to-orange-400 text-slate-950 px-6 py-3 rounded-2xl text-xs font-extrabold transition shadow-lg flex items-center gap-2 transform hover:scale-105">
+                    <i class="fa-solid fa-cart-shopping"></i> Unlock & Download Package (R20.00)
                 </button>
             </div>
 
@@ -194,8 +196,8 @@
                 
                 <!-- Action footer hidden during image snapshot capture -->
                 <div id="modalActionFooter" class="border-t border-slate-800 pt-4 flex justify-between items-center z-30 relative">
-                    <button onclick="downloadCurrentGuide()" class="bg-amber-500 hover:bg-amber-600 text-slate-950 px-5 py-2.5 rounded-xl text-xs font-bold transition flex items-center gap-2 shadow-md">
-                        <i class="fa-solid fa-download"></i> Unlock Image File - R20.00
+                    <button id="modalActionBtn" onclick="downloadCurrentGuide()" class="bg-amber-500 hover:bg-amber-600 text-slate-950 px-5 py-2.5 rounded-xl text-xs font-bold transition flex items-center gap-2 shadow-md">
+                        <i class="fa-solid fa-download"></i> Unlock Package (R20.00)
                     </button>
                     <button onclick="closeModal()" class="bg-slate-800 hover:bg-slate-700 text-slate-200 px-5 py-2.5 rounded-xl text-xs font-semibold transition">
                         Close
@@ -638,6 +640,21 @@
                 subBadge.classList.add('hidden');
             }
 
+            // Customize lock overlay text based on whether it is an interactive tool or static guide
+            const overlayBtn = document.getElementById('modalOverlayBtn');
+            const actionBtn = document.getElementById('modalActionBtn');
+            const lockSubtitle = document.getElementById('modalLockSubtitle');
+
+            if (guide.isInteractive) {
+                lockSubtitle.innerText = "Interactive HTML tool & dynamic calculation simulator are locked to prevent unauthorized usage.";
+                overlayBtn.innerHTML = `<i class="fa-solid fa-cart-shopping"></i> Unlock Interactive Tool Package (ZIP) - R20.00`;
+                actionBtn.innerHTML = `<i class="fa-solid fa-download"></i> Unlock Interactive Tool (ZIP) - R20.00`;
+            } else {
+                lockSubtitle.innerText = "Full step-by-step procedures and high-res infographics are locked to prevent free usage and screen grabbing.";
+                overlayBtn.innerHTML = `<i class="fa-solid fa-cart-shopping"></i> Unlock & Download Guide Image (R20.00)`;
+                actionBtn.innerHTML = `<i class="fa-solid fa-download"></i> Unlock Image File - R20.00`;
+            }
+
             // Keep blur overlay active until purchase/download
             document.getElementById('secureOverlay').classList.remove('hidden');
             document.getElementById('blurContentArea').classList.add('secure-blur');
@@ -703,6 +720,49 @@
             const guide = allGuides.find(g => g.id === activeGuideId);
             if (!guide) return;
 
+            const isInteractive = guide.isInteractive || false;
+            const baseFilename = guide.title.replace(/[^a-zA-Z0-9]/g, '_');
+
+            // --- PATH 1: Interactive Tool Downloads (e.g. tree-density.html) as ZIP package ---
+            if (isInteractive) {
+                if (confirm(`Unlock & Download Interactive Package: ${guide.title}\nIncludes: Standalone HTML Tool + Guide Text (ZIP Package)\nPrice: R20.00\n\nProceed to download?`)) {
+                    const zip = new JSZip();
+                    
+                    let textContent = `GUIDE TITLE: ${guide.title}\n`;
+                    textContent += `CATEGORY: ${guide.category} > ${guide.subCategory}\n\n`;
+                    textContent += `OVERVIEW:\n${guide.desc || guide.description || ''}\n\n`;
+                    textContent += `STEP-BY-STEP PROCEDURE:\n`;
+                    guide.steps.forEach((step, i) => {
+                        textContent += `${i + 1}. ${step}\n`;
+                    });
+
+                    zip.file(`${baseFilename}_Procedure.txt`, textContent);
+
+                    const interactiveUrl = guide.interactiveUrl || 'tree-density.html';
+                    try {
+                        const response = await fetch(interactiveUrl);
+                        if (!response.ok) throw new Error('Interactive file not found');
+                        const fileBlob = await response.blob();
+                        zip.file(`${baseFilename}_Calculator.html`, fileBlob);
+                    } catch (e) {
+                        console.warn("Could not fetch interactive html file directly. Packaging procedure text.", e);
+                    }
+
+                    zip.generateAsync({ type: "blob" }).then(function(content) {
+                        const zipLink = document.createElement('a');
+                        zipLink.href = URL.createObjectURL(content);
+                        zipLink.download = `${baseFilename}_Interactive_Package.zip`;
+                        document.body.appendChild(zipLink);
+                        zipLink.click();
+                        document.body.removeChild(zipLink);
+
+                        closeModal();
+                    });
+                }
+                return;
+            }
+
+            // --- PATH 2: Standard Visual Guides Download as a Single Captured Card Image (.png) ---
             if (confirm(`Unlock & Download Guide Card Image: ${guide.title}\nPrice: R20.00\n\nProceed to download as a single unified image?`)) {
                 
                 const overlay = document.getElementById('secureOverlay');
@@ -713,12 +773,12 @@
                 const textBody = document.getElementById('modalTextBody');
                 const modalCard = document.getElementById('modalCardWrapper');
                 
-                // Hide overlay and remove blur internally for clean capture
+                // Hide overlay and remove blur internally for clean image capture
                 overlay.style.opacity = '0';
                 blurArea.classList.remove('secure-blur');
                 modalImg.classList.remove('secure-blur');
                 
-                // Temporarily expand the container to full height so NO steps get cut off
+                // Temporarily expand the container so NO steps get cut off
                 const originalMaxHeight = textBody.style.maxHeight;
                 const originalOverflow = textBody.style.overflowY;
                 const originalCardMaxHeight = modalCard.style.maxHeight;
@@ -727,11 +787,11 @@
                 textBody.style.overflowY = 'visible';
                 modalCard.style.maxHeight = 'none';
 
-                // Hide close button and footer action buttons from the image capture
+                // Hide close button and footer action buttons from snapshot
                 closeBtn.style.display = 'none';
                 actionFooter.style.display = 'none';
 
-                // Brief timeout to let the DOM fully reflow the expanded text container before capturing
+                // Timeout allows DOM reflow before html2canvas takes snapshot
                 setTimeout(() => {
                     html2canvas(modalCard, {
                         scale: 2,
@@ -740,7 +800,7 @@
                         windowWidth: modalCard.scrollWidth,
                         windowHeight: modalCard.scrollHeight
                     }).then(canvas => {
-                        // Restore UI states back to normal
+                        // Restore UI states
                         closeBtn.style.display = 'flex';
                         actionFooter.style.display = 'flex';
                         textBody.style.maxHeight = originalMaxHeight;
@@ -754,7 +814,6 @@
 
                         // Trigger full image download
                         const imageURL = canvas.toDataURL('image/png');
-                        const baseFilename = guide.title.replace(/[^a-zA-Z0-9]/g, '_');
                         
                         const dlLink = document.createElement('a');
                         dlLink.href = imageURL;
