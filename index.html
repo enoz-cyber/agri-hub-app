@@ -706,7 +706,7 @@
             const assetExtension = isInteractiveGuide || guide.interactiveUrl ? 'html' : 'jpg';
             const assetName = isInteractiveGuide ? 'Interactive_Tool' : 'Infographic';
 
-            if (confirm(`Download Package: ${guide.title}\nIncludes: Full Procedure Text + ${isInteractiveGuide ? 'Interactive HTML Tool' : 'Infographic JPG'} (ZIP Bundle)\nPrice: R20.00\n\nProceed to secure PayFast checkout?`)) {
+            if (confirm(`Download Package: ${guide.title}\nIncludes: Full Procedure Text + ${isInteractiveGuide ? 'Interactive HTML Tool' : 'Infographic JPG'} (ZIP Bundle)\nPrice: R20.00\n\nProceed to PayFast Sandbox checkout?`)) {
                 
                 // Clear Blur and Watermark upon initiating checkout
                 document.getElementById('secureOverlay').classList.add('hidden');
@@ -748,9 +748,9 @@
                     zipLink.click();
                     document.body.removeChild(zipLink);
 
-                    // Submit to PayFast in a new tab with your prefilled contact info
+                    // Submit to PayFast Sandbox in a new tab
                     setTimeout(() => {
-                        const payfastUrl = 'https://www.payfast.co.za/eng/process';
+                        const payfastUrl = 'https://sandbox.payfast.co.za/eng/process';
                         const form = document.createElement('form');
                         form.method = 'POST';
                         form.action = payfastUrl;
