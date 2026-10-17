@@ -10,10 +10,8 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <!-- Inter Font -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <!-- html2canvas CDN for capturing static guide cards into an image -->
+    <!-- html2canvas CDN -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
-    <!-- JSZip CDN for packaging interactive HTML tools -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
     
     <!-- Inline Web Manifest for PWA Capabilities -->
     <link rel="manifest" href='data:application/manifest+json,{"name":"Professional & Lifestyle Hub","short_name":"HubApp","start_url":".","display":"standalone","background_color":"#065f46","theme_color":"#065f46"}'>
@@ -32,7 +30,6 @@
         ::-webkit-scrollbar-thumb:hover { background: #475569; }
         .glass-header { background: linear-gradient(135deg, #047857 0%, #065f46 50%, #022c22 100%); }
         
-        /* Optimized Blur Effect (Clearer View, Unreadable Text) */
         .secure-blur {
             filter: blur(4px);
             transition: filter 0.3s ease;
@@ -78,7 +75,7 @@
 
     <main class="flex-grow max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-8">
         
-        <!-- Colorful Search and Category Filter Bar -->
+        <!-- Search and Category Filter Bar -->
         <div class="mb-8 flex flex-col md:flex-row justify-between items-center gap-4 bg-slate-800/90 p-4 sm:p-5 rounded-3xl shadow-lg border border-slate-700/80 relative backdrop-blur-sm">
             <div class="relative w-full md:w-80">
                 <span class="absolute inset-y-0 left-0 flex items-center pl-3.5 pointer-events-none text-emerald-400">
@@ -97,17 +94,15 @@
                 <button onclick="filterByCategory('Housewives')" onmouseenter="startCategoryLoop('Housewives', event)" onmouseleave="stopCategoryLoop()" id="cat-Housewives" class="category-btn px-4 py-2 rounded-xl text-xs font-bold bg-rose-950/80 text-rose-300 border border-rose-700/60 hover:bg-rose-600 hover:text-white transition shadow-sm hover:scale-105">🏠 Housewives</button>
             </div>
 
-            <!-- Floating Fast-Looping Preview Popup Box -->
+            <!-- Floating Preview Popup Box -->
             <div id="categoryPreviewPopup" class="hidden absolute top-20 left-6 z-50 w-80 bg-slate-900/95 backdrop-blur-md text-white p-4 rounded-2xl shadow-2xl border border-slate-700 pointer-events-none transition-all duration-150">
                 <h4 id="previewTitle" class="text-xs font-extrabold uppercase tracking-wider text-emerald-400 mb-2 border-b border-slate-700 pb-1.5">Category Live Loop</h4>
-                <div id="previewContent" class="text-xs text-slate-200 font-medium min-h-[40px] flex items-center">
-                    <!-- Looping item display -->
-                </div>
+                <div id="previewContent" class="text-xs text-slate-200 font-medium min-h-[40px] flex items-center"></div>
             </div>
 
             <div class="flex items-center gap-3 w-full md:w-auto justify-end">
                 <span class="text-xs text-slate-300 font-bold uppercase tracking-wider bg-slate-900/90 px-4 py-2.5 rounded-2xl border border-slate-700 shadow-sm flex items-center gap-2">
-                    Total Guides: <strong id="guide-count" class="text-emerald-400 font-extrabold text-sm">0</strong>
+                    TOTAL GUIDES: <strong id="guide-count" class="text-emerald-400 font-extrabold text-sm">30</strong>
                 </span>
             </div>
         </div>
@@ -132,12 +127,10 @@
             <button onclick="filterBySubCategory('Plumbing')" id="hsubcat-Plumbing" class="hsubcat-btn px-3.5 py-1.5 rounded-xl text-xs font-bold bg-slate-800 text-sky-300 border border-sky-800 hover:bg-sky-800 hover:text-white transition shadow-sm">Plumbing</button>
         </div>
 
-        <!-- Dynamic Guide Cards Grid -->
-        <div id="guidesGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            <!-- Dynamic Injection via JavaScript -->
-        </div>
+        <!-- Guides Grid -->
+        <div id="guidesGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"></div>
 
-        <!-- Empty State Filter Notice -->
+        <!-- Empty State -->
         <div id="emptyState" class="hidden text-center py-16 bg-slate-800/80 rounded-3xl border border-dashed border-slate-700 my-4 shadow-sm">
             <div class="bg-slate-700 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-3 text-slate-400">
                 <i class="fa-solid fa-folder-open text-2xl"></i>
@@ -147,11 +140,10 @@
         </div>
     </main>
 
-    <!-- Guide Modal with Screenshot Protection & Pay-to-Unlock Overlay -->
+    <!-- Guide Modal -->
     <div id="guideModal" class="fixed inset-0 bg-slate-950/80 backdrop-blur-md z-50 hidden flex items-center justify-center p-4 overflow-y-auto">
         <div id="modalCardWrapper" class="bg-slate-900 rounded-3xl max-w-2xl w-full overflow-hidden shadow-2xl transform transition-all my-8 border border-slate-700 relative text-slate-100">
             
-            <!-- Secure Watermark Overlay preventing free viewing / screen grabbing -->
             <div id="secureOverlay" class="secure-watermark flex-col text-center p-6 text-white" onclick="downloadCurrentGuide()">
                 <div class="bg-amber-500/20 text-amber-300 p-4 rounded-2xl border border-amber-500/40 mb-3 backdrop-blur-md shadow-xl pointer-events-none">
                     <i class="fa-solid fa-lock text-3xl"></i>
@@ -163,7 +155,6 @@
                 </button>
             </div>
 
-            <!-- Image Header Container -->
             <div id="modalImageContainer" class="relative h-64 sm:h-72 bg-slate-950">
                 <img id="modalImage" src="" alt="Guide Image" class="w-full h-full object-cover opacity-90 secure-blur" onerror="handleImageError(this)">
                 <div class="absolute inset-0 bg-gradient-to-t from-slate-950/90 via-slate-950/30 to-transparent"></div>
@@ -177,7 +168,6 @@
                 </div>
             </div>
 
-            <!-- Standard Text Body Container with Blur Protection -->
             <div id="modalTextBody" class="p-6 sm:p-8 space-y-6 max-h-[60vh] overflow-y-auto relative bg-slate-900">
                 <div class="secure-blur" id="blurContentArea">
                     <div>
@@ -186,9 +176,7 @@
                     </div>
                     <div class="border-t border-slate-800 pt-4 mt-4">
                         <h3 class="text-xs font-bold uppercase text-slate-400 tracking-wider mb-3">Step-by-Step Procedure</h3>
-                        <ul id="modalSteps" class="space-y-3">
-                            <!-- Dynamic Step List -->
-                        </ul>
+                        <ul id="modalSteps" class="space-y-3"></ul>
                     </div>
                 </div>
                 
@@ -196,15 +184,13 @@
                     <button id="modalActionBtn" onclick="downloadCurrentGuide()" class="bg-amber-500 hover:bg-amber-600 text-slate-950 px-5 py-2.5 rounded-xl text-xs font-bold transition flex items-center gap-2 shadow-md">
                         <i class="fa-solid fa-download"></i> Unlock Package (R20.00)
                     </button>
-                    <button onclick="closeModal()" class="bg-slate-800 hover:bg-slate-700 text-slate-200 px-5 py-2.5 rounded-xl text-xs font-semibold transition">
-                        Close
-                    </button>
+                    <button onclick="closeModal()" class="bg-slate-800 hover:bg-slate-700 text-slate-200 px-5 py-2.5 rounded-xl text-xs font-semibold transition">Close</button>
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- Quick Utilities Modal -->
+    <!-- Calculators Modal -->
     <div id="calculatorModal" class="fixed inset-0 bg-slate-950/70 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4 overflow-y-auto">
         <div class="bg-slate-900 rounded-3xl max-w-3xl w-full overflow-hidden shadow-2xl p-6 sm:p-8 border border-slate-700 max-h-[90vh] overflow-y-auto text-slate-100">
             <div class="flex justify-between items-center mb-6 border-b border-slate-800 pb-4">
@@ -217,7 +203,6 @@
             </div>
             
             <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <!-- Boom Sprayer Calibration Calculator -->
                 <div class="bg-slate-800/80 p-5 rounded-2xl border border-slate-700 shadow-sm flex flex-col justify-between">
                     <div>
                         <h4 class="text-sm font-bold text-emerald-400 mb-3 flex items-center gap-2"><i class="fa-solid fa-spray-can-sparkles"></i> Boom Sprayer Calibration</h4>
@@ -240,7 +225,6 @@
                     <div id="sprayResult" class="mt-3 p-3 bg-slate-900 rounded-xl text-xs text-emerald-300 font-mono hidden"></div>
                 </div>
 
-                <!-- Tree Density Per Hectare Calculator -->
                 <div class="bg-slate-800/80 p-5 rounded-2xl border border-slate-700 shadow-sm flex flex-col justify-between">
                     <div>
                         <h4 class="text-sm font-bold text-teal-400 mb-3 flex items-center gap-2"><i class="fa-solid fa-tree"></i> Orchard Tree Density</h4>
@@ -273,128 +257,38 @@
     </footer>
 
     <script>
-        // Guides Data Repository
+        // Full 30 Guides Repository Restored
         const guides = [
-            {
-                id: 1,
-                title: "Boom Sprayer Calibration & Nozzle Output",
-                category: "Farmers",
-                subCategory: "Crop Farming",
-                description: "Complete calibration guide for agricultural boom sprayers, calculating ground speed, nozzle discharge rate, and active chemical mixing ratios per hectare.",
-                image: "images/boom-sprayer.jpg",
-                steps: [
-                    "Measure a calibration test course of exactly 100 meters in the field.",
-                    "Record the time in seconds taken by the tractor to drive the 100m course at working gear and RPM.",
-                    "Calculate actual tractor ground speed in km/h: Speed = (Distance x 3.6) / Time in seconds.",
-                    "Collect output from each individual spray nozzle into a graduated cylinder for exactly 1 minute.",
-                    "Calculate average nozzle discharge rate and compare with target application volume."
-                ]
-            },
-            {
-                id: 2,
-                title: "Orchard Fruit Tree Pruning & Training",
-                category: "Farmers",
-                subCategory: "Fruit Farming",
-                description: "Step-by-step winter and summer pruning guidelines for deciduous and citrus orchard trees to maximize sunlight penetration and fruit yield.",
-                image: "images/pruning.jpg",
-                steps: [
-                    "Sanitize all pruning shears and saws using a 10% bleach solution or alcohol wipe between trees.",
-                    "Remove the 3 Ds: Dead, Diseased, and Damaged wood back to healthy collar tissue.",
-                    "Eliminate water sprouts growing vertically from main branches and suckers emerging from the rootstock.",
-                    "Open the center canopy of vase-trained trees to ensure maximum solar interception.",
-                    "Apply copper-based wound sealer or fungicide paste on large pruning cuts exceeding 25mm diameter."
-                ]
-            },
-            {
-                id: 3,
-                title: "Onion Cultivation & Bulb Sizing Procedure",
-                category: "Farmers",
-                subCategory: "Vegetable Farming",
-                description: "Comprehensive agronomy guide covering soil preparation, direct seeding vs. transplanting, fertigation schedules, and curing onions.",
-                image: "images/onions.jpg",
-                steps: [
-                    "Prepare fine, well-drained seedbeds with a target soil pH between 6.0 and 6.8, incorporating organic compost.",
-                    "Transplant strong seedlings when pencil-thick (approx 6-8 weeks old) at 10cm spacing within rows.",
-                    "Maintain consistent soil moisture during bulb enlargement; reduce watering 3 weeks before harvest.",
-                    "Stop nitrogen applications 4 weeks prior to harvest to prevent thick necks and storage rot.",
-                    "Harvest when 50% of tops have naturally fallen over, then cure in shaded, well-ventilated dry areas."
-                ]
-            },
-            {
-                id: 4,
-                title: "Boran Cattle Herd Health & Mineral Supplementation",
-                category: "Farmers",
-                subCategory: "Animal Farming",
-                description: "Practical management protocols for Boran cattle herds, covering lick programs, parasite control, and breeding season optimization.",
-                image: "images/boran.jpg",
-                steps: [
-                    "Provide high-phosphate mineral licks during green summer grazing and protein-energy licks during dry winter months.",
-                    "Implement a strict dipping and spraying rotation to control ticks, midges, and biting flies.",
-                    "Perform annual breeding soundness evaluations (bull fertility tests) 60 days before bull introduction.",
-                    "Tag and record all calves within 24 hours of birth alongside maternal pedigree tracking.",
-                    "Schedule routine vaccinations for blackleg, botulism, anthrax, and bovine viral diarrhea."
-                ]
-            },
-            {
-                id: 5,
-                title: "Raised Bed Hiller Fabrication & Tillage Setup",
-                category: "Handyman",
-                subCategory: "Metalwork & Fabrication",
-                description: "Blueprints and fabrication instructions for building a tractor-attached raised bed hiller using heavy-duty box tubing and disc blades.",
-                image: "images/hiller.jpg",
-                steps: [
-                    "Cut main toolbar frame using 100x100x5mm structural rectangular steel tubing.",
-                    "Fabricate adjustable mounting shanks for disc hiller blades with dual clamping bolts.",
-                    "Weld heavy-duty 3-point hitch category 2 mounting pins reinforced with gusset plates.",
-                    "Mount concave disc blades at a 15 to 20-degree angle to optimize soil throw and bed formation.",
-                    "Test-run in cultivated soil to adjust bed width and height tolerances."
-                ]
-            },
-            {
-                id: 6,
-                title: "Flexible Rubber Bellows Hose Plumbing & Sourcing",
-                category: "Handyman",
-                subCategory: "Plumbing",
-                description: "Installation and replacement guide for flexible rubber bellows hoses in high-vibration pump lines and plumbing networks.",
-                image: "images/plumbing.jpg",
-                steps: [
-                    "Isolate and drain the pipeline system completely before removing old rigid or damaged fittings.",
-                    "Measure exact face-to-face installation length and flange diameter specifications.",
-                    "Inspect mating flanges for rust, pitting, or burrs to guarantee a flat sealing surface.",
-                    "Insert approved rubber gasket or O-ring seals and tighten flange bolts in a criss-cross torque pattern.",
-                    "Pressure test the assembly gradually up to operating specs while checking for leaks."
-                ]
-            },
-            {
-                id: 7,
-                title: "Commercial Foundation Pouring & Reinforcement",
-                category: "Builders",
-                subCategory: "All",
-                description: "Structural guidelines for excavating, blinding, steel rebar placement, and concrete pouring for robust building foundations.",
-                image: "images/foundation.jpg",
-                steps: [
-                    "Excavate trenches down to stable bearing soil strata according to structural engineering specs.",
-                    "Pour a 50mm unreinforced concrete blinding layer to provide a clean working platform.",
-                    "Position Y12 or Y16 steel reinforcement bars supported by concrete spacers for correct cover.",
-                    "Pour ready-mix concrete of specified MPa strength, vibrating continuously to remove air pockets.",
-                    "Cure concrete by keeping surfaces damp with continuous water spraying for at least 7 days."
-                ]
-            },
-            {
-                id: 8,
-                title: "Deep-Clean Housekeeping & Stain Removal Masterclass",
-                category: "Housewives",
-                subCategory: "All",
-                description: "Professional household cleaning tips, chemical safety protocols, and effective stain removal methods for fabrics and surfaces.",
-                image: "images/cleaning.jpg",
-                steps: [
-                    "Pre-treat stubborn organic stains using enzymatic cleaners or hydrogen peroxide solutions.",
-                    "Clean high-touch surfaces (door handles, light switches, countertops) with disinfectant wipes.",
-                    "Deep clean kitchen grease filters by soaking in boiling water and heavy-duty degreaser.",
-                    "Vacuum and steam-clean upholstery and carpets using appropriate fabric-safe detergents.",
-                    "Ventilate all rooms thoroughly after cleaning to clear airborne chemical residues."
-                ]
-            }
+            { id: 1, title: "Plough Alignment & Attachment Guide", category: "Farmers", subCategory: "Crop Farming", description: "Step-by-step manual for rear-mounted plough alignment, 3-point hitch setup, and depth tuning for optimal soil inversion.", image: "images/plough.jpg", steps: ["Check top link and lift rod leveling.", "Ensure draft arms are equally adjusted.", "Set furrow width according to plough body size.", "Test-run at shallow depth before final pass."] },
+            { id: 2, title: "Disc Harrow Alignment Guide", category: "Farmers", subCategory: "Crop Farming", description: "Side alignment, gang angles, tractor tire matching, and hitch point leveling for uniform residue incorporation.", image: "images/harrow.jpg", steps: ["Inspect front and rear gang angles.", "Check drawbar swing lock settings.", "Verify tractor tire pressures for equal draft."] },
+            { id: 3, title: "Fertilizer Spreader Calibration", category: "Farmers", subCategory: "Crop Farming", description: "Gate opening adjustments, catch-pan tests, spread width checking, and speed tuning for precise nutrient placement.", image: "images/spreader.jpg", steps: ["Arrange catch pans across test span.", "Run spreader at target PTO speed.", "Measure granules collected to compute application rate."] },
+            { id: 4, title: "Boom Sprayer Calibration & Nozzle Output", category: "Farmers", subCategory: "Crop Farming", description: "Complete calibration guide for agricultural boom sprayers, calculating ground speed and nozzle discharge rate.", image: "images/boom-sprayer.jpg", steps: ["Measure 100m course.", "Record tractor seconds.", "Collect output from nozzles for 1 minute."] },
+            { id: 5, title: "Recommended Maize Planting Speed", category: "Farmers", subCategory: "Crop Farming", description: "Ground speed optimization for pneumatic and mechanical planters to ensure precise seed spacing.", image: "images/maize-planting.jpg", steps: ["Match gear and RPM to seed plate cells.", "Check seed drop uniformity in test furrow."] },
+            { id: 6, title: "Row Planter Calibration & Seed Drop", category: "Farmers", subCategory: "Crop Farming", description: "Plate selection, vacuum pressure tuning, and depth wheel adjustment for row crops.", image: "images/planter.jpg", steps: ["Test vacuum suction levels.", "Verify fertilizer auger delivery rates."] },
+            { id: 7, title: "Tractor Wheel-Slip Calculation", category: "Farmers", subCategory: "Crop Farming", description: "Methods to calculate and correct tractor wheel-slip under heavy draft loads for fuel efficiency.", image: "images/wheel-slip.jpg", steps: ["Mark 10 wheel revolutions under load vs no load.", "Calculate slip percentage.", "Adjust ballast or tire pressure."] },
+            { id: 8, title: "Slasher Height & Gear Setup", category: "Farmers", subCategory: "Crop Farming", description: "Rotary cutter deck leveling, slip-clutch inspection, and gearbox maintenance.", image: "images/slasher.jpg", steps: ["Set tailwheel height.", "Check PTO shaft universal joint alignment."] },
+            { id: 9, title: "Baldan Disc Harrow Gang Angle Adjustment", category: "Farmers", subCategory: "Crop Farming", description: "Adjusting front and rear gang angles on Baldan harrows for aggressive soil cutting.", image: "images/baldan.jpg", steps: ["Loosen adjustment bolts safely.", "Pin gangs to desired aggressive angle."] },
+            { id: 10, title: "Ground-Driven Manure Spreader Fabrication", category: "Handyman", subCategory: "Manufacture", description: "DIY fabrication guidelines for building ground-driven spreaders using differential axles.", image: "images/manure-spreader.jpg", steps: ["Mount bakkie differential axle upside down.", "Fabricate chain conveyor floor drive."] },
+            { id: 11, title: "Bakkie Differential Spreader Drive Setup", category: "Handyman", subCategory: "Metalwork & Fabrication", description: "Sprocket and wheel drive mechanisms utilizing vehicle differentials for spreaders.", image: "images/differential.jpg", steps: ["Weld drive sprocket to axle shaft.", "Align ground wheel pneumatic tire."] },
+            { id: 12, title: "Raised Bed Hiller Fabrication & Tillage Setup", category: "Handyman", subCategory: "Metalwork & Fabrication", description: "Blueprints for building tractor-attached raised bed hillers using box tubing and disc blades.", image: "images/hiller.jpg", steps: ["Cut main toolbar frame.", "Mount concave disc blades at 20-degree angle."] },
+            { id: 13, title: "Flexible Rubber Bellows Hose Plumbing & Sourcing", category: "Handyman", subCategory: "Plumbing", description: "Installation and replacement guide for flexible rubber bellows hoses in high-vibration pump lines.", image: "images/plumbing.jpg", steps: ["Measure exact face-to-face length.", "Tighten flange bolts in criss-cross pattern."] },
+            { id: 14, title: "Orchard Fruit Tree Pruning & Training", category: "Farmers", subCategory: "Fruit Farming", description: "Winter and summer pruning guidelines for deciduous and citrus orchard trees.", image: "images/pruning.jpg", steps: ["Remove 3 Ds (Dead, Diseased, Damaged).", "Open center canopy."] },
+            { id: 15, title: "Orchard Tree Density Per Hectare Calculation", category: "Farmers", subCategory: "Fruit Farming", description: "Mathematical formula and spacing layouts for optimal orchard tree populations.", image: "images/tree-density.jpg", steps: ["Measure row and tree spacing.", "Apply 10,000 / (row x tree) formula."] },
+            { id: 16, title: "Onion Cultivation & Bulb Sizing Procedure", category: "Farmers", subCategory: "Vegetable Farming", description: "Soil preparation, direct seeding vs transplanting, and fertigation schedules.", image: "images/onions.jpg", steps: ["Transplant seedlings at 10cm spacing.", "Reduce watering 3 weeks before harvest."] },
+            { id: 17, title: "Potato Planting & Earthing-Up Guide", category: "Farmers", subCategory: "Vegetable Farming", description: "Seed potato sprouting, trench depth, and progressive ridge earthing.", image: "images/potatoes.jpg", steps: ["Plant certified seed tubers 10cm deep.", "Earth up soil when plants reach 20cm height."] },
+            { id: 18, title: "Watermelon Field Layout & Irrigation", category: "Farmers", subCategory: "Vegetable Farming", description: "Drip irrigation setup, mulching, and pollination management for cucurbits.", image: "images/watermelons.jpg", steps: ["Lay black plastic mulch.", "Space hills 2 meters apart."] },
+            { id: 19, title: "Tomato Trellising & Pruning Guide", category: "Farmers", subCategory: "Vegetable Farming", description: "Indeterminate tomato stake training, stringing, and sucker removal.", image: "images/tomatoes.jpg", steps: ["Install strong end posts and wire.", "Prune side shoots weekly."] },
+            { id: 20, title: "Bell Pepper Spacing & Pest Management", category: "Farmers", subCategory: "Vegetable Farming", description: "Capsicum production, calcium sprays against blossom end rot, and scouting.", image: "images/peppers.jpg", steps: ["Maintain balanced calcium fertigation.", "Monitor for aphids and thrips."] },
+            { id: 21, title: "Green Bean Direct Sowing & Pole Setup", category: "Farmers", subCategory: "Vegetable Farming", description: "Bush vs pole bean planting depths, trellis framing, and picking intervals.", image: "images/beans.jpg", steps: ["Sow seeds 3cm deep in warm soil.", "Erect teepee pole frames."] },
+            { id: 22, title: "Cabbage Seedling Transp. & Pest Control", category: "Farmers", subCategory: "Vegetable Farming", description: "Brassica management, cutworm collars, and head formation monitoring.", image: "images/cabbage.jpg", steps: ["Harden off seedlings.", "Apply organic Bacillus thuringiensis for moth control."] },
+            { id: 23, title: "Carrot Soil Preparation & Thinning", category: "Farmers", subCategory: "Vegetable Farming", description: "Fine seedbed preparation, prevent forking, and root expansion thinning.", image: "images/carrots.jpg", steps: ["Ensure stone-free topsoil.", "Thin seedlings to 5cm spacing."] },
+            { id: 24, title: "Boran Cattle Herd Health & Mineral Licks", category: "Farmers", subCategory: "Animal Farming", description: "Practical management protocols for Boran cattle herds, lick programs, and parasite control.", image: "images/boran.jpg", steps: ["Provide phosphate licks in summer.", "Schedule annual bull breeding soundness tests."] },
+            { id: 25, title: "Poultry Brooder House Temperature & Feed", category: "Farmers", subCategory: "Poultry Farming", description: "Day-old chick brooding management, heater setup, and starter feed conversion.", image: "images/poultry.jpg", steps: ["Pre-heat brooder to 32°C.", "Ensure constant fresh water access."] },
+            { id: 26, title: "Commercial Foundation Pouring & Reinforcement", category: "Builders", subCategory: "All", description: "Structural guidelines for excavating, blinding, rebar placement, and concrete pouring.", image: "images/foundation.jpg", steps: ["Excavate to stable subsoil.", "Position Y12/Y16 rebar reinforcement."] },
+            { id: 27, title: "Brickwork Damp-Proof Course Installation", category: "Builders", subCategory: "All", description: "DPC membrane laying, flashing, and rising damp prevention in masonry walls.", image: "images/dpc.jpg", steps: ["Lay mortar bed level.", "Roll out DPC membrane with 150mm overlaps."] },
+            { id: 28, title: "Roof Truss Pitch & Span Calculation", category: "Builders", subCategory: "All", description: "Timber roof truss engineering, spacing, bracing, and hurricane clip anchoring.", image: "images/roof.jpg", steps: ["Erect main gable trusses plumb.", "Install permanent diagonal rafter bracing."] },
+            { id: 29, title: "Deep-Clean Housekeeping & Stain Removal", category: "Housewives", subCategory: "All", description: "Professional household cleaning tips, chemical safety, and fabric stain removal.", image: "images/cleaning.jpg", steps: ["Pre-treat organic stains.", "Disinfect high-touch surfaces."] },
+            { id: 30, title: "Household Pantry Pest Control & Organization", category: "Housewives", subCategory: "All", description: "Airtight storage protocols, natural deterrents, and pantry moth eradication.", image: "images/pantry.jpg", steps: ["Inspect dry goods regularly.", "Store grains in sealed glass or plastic containers."] }
         ];
 
         let currentFilter = 'All';
@@ -427,7 +321,10 @@
                     <div class="relative h-48 bg-slate-950 overflow-hidden">
                         <img src="${g.image}" alt="${g.title}" class="w-full h-full object-cover group-hover:scale-105 transition duration-300 opacity-90" onerror="handleImageError(this)">
                         <div class="absolute inset-0 bg-gradient-to-t from-slate-900 via-transparent to-transparent"></div>
-                        <span class="absolute top-3 left-3 bg-slate-900/80 backdrop-blur-md text-emerald-400 text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider border border-slate-700">
+                        <span class="absolute top-3 left-3 bg-slate-950/80 backdrop-blur-md text-amber-400 text-xs font-extrabold px-3 py-1 rounded-full uppercase tracking-wider border border-amber-500/40 shadow-md flex items-center gap-1.5">
+                            <i class="fa-solid fa-lock text-[10px]"></i> PREVIEW PROTECTED
+                        </span>
+                        <span class="absolute bottom-3 left-3 bg-slate-900/90 text-emerald-400 text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider border border-slate-700">
                             ${g.category}
                         </span>
                     </div>
@@ -436,9 +333,10 @@
                             <h3 class="text-base font-extrabold text-white mb-2 group-hover:text-emerald-300 transition">${g.title}</h3>
                             <p class="text-xs text-slate-300 line-clamp-2 font-medium">${g.description}</p>
                         </div>
-                        <div class="mt-4 pt-3 border-t border-slate-700/60 flex items-center justify-between text-xs font-bold text-emerald-400">
-                            <span class="flex items-center gap-1.5"><i class="fa-solid fa-lock"></i> Locked Guide</span>
-                            <span class="bg-emerald-950/80 text-emerald-300 px-3 py-1.5 rounded-xl border border-emerald-800 group-hover:bg-emerald-600 group-hover:text-white transition">Unlock R20</span>
+                        <div class="mt-4 pt-3 border-t border-slate-700/60 flex items-center justify-between text-xs font-bold text-amber-400">
+                            <span class="bg-emerald-950/90 text-emerald-300 px-3 py-1.5 rounded-xl border border-emerald-800/80 w-full text-center group-hover:bg-emerald-600 group-hover:text-white transition flex items-center justify-center gap-2">
+                                <i class="fa-solid fa-lock"></i> View Guide (Locked)
+                            </span>
                         </div>
                     </div>
                 </div>
@@ -490,7 +388,6 @@
             img.src = 'https://images.unsplash.com/photo-1500937386664-56d1dfef3854?auto=format&fit=crop&w=600&q=80';
         }
 
-        // Fast-Looping Category Preview
         let previewInterval = null;
         function startCategoryLoop(category, event) {
             const popup = document.getElementById('categoryPreviewPopup');
@@ -517,7 +414,6 @@
             document.getElementById('categoryPreviewPopup').classList.add('hidden');
         }
 
-        // Modal Controls
         function openModal(id) {
             const guide = guides.find(g => g.id === id);
             if(!guide) return;
@@ -544,11 +440,9 @@
                 </li>
             `).join('');
 
-            // Apply Secure Blur Protection
             document.getElementById('secureOverlay').style.display = 'flex';
             document.getElementById('blurContentArea').classList.add('secure-blur');
             document.getElementById('modalImage').classList.add('secure-blur');
-
             document.getElementById('guideModal').classList.remove('hidden');
         }
 
@@ -559,8 +453,6 @@
 
         function downloadCurrentGuide() {
             if(!activeGuideForModal) return;
-
-            // Remove blur and simulate PayFast / download package sequence
             document.getElementById('secureOverlay').style.display = 'none';
             document.getElementById('blurContentArea').classList.remove('secure-blur');
             document.getElementById('modalImage').classList.remove('secure-blur');
@@ -574,7 +466,6 @@
                 link.href = canvas.toDataURL('image/png');
                 link.click();
 
-                // Restore blur overlay
                 document.getElementById('secureOverlay').style.display = 'flex';
                 document.getElementById('blurContentArea').classList.add('secure-blur');
                 document.getElementById('modalImage').classList.add('secure-blur');
@@ -582,7 +473,6 @@
             });
         }
 
-        // Quick Utilities Calculators
         function openCalculatorModal() {
             document.getElementById('calculatorModal').classList.remove('hidden');
         }
@@ -594,60 +484,24 @@
             const rate = parseFloat(document.getElementById('sprayRate').value);
             const width = parseFloat(document.getElementById('boomWidth').value);
             const speed = parseFloat(document.getElementById('tractorSpeed').value);
-
-            if(isNaN(rate) || isNaN(width) || isNaN(speed) || speed === 0) {
-                alert('Please enter valid numbers for calibration.');
-                return;
-            }
-
-            // Formula: Flow per nozzle (L/min) = (Rate x Speed x Nozzle Spacing in meters) / 600
-            // Assuming standard nozzle spacing of 0.5m
-            const nozzleSpacing = 0.5;
-            const flowPerNozzle = (rate * speed * nozzleSpacing) / 600;
-
+            if(isNaN(rate) || isNaN(width) || isNaN(speed) || speed === 0) return alert('Enter valid numbers.');
+            const flowPerNozzle = (rate * speed * 0.5) / 600;
             const resDiv = document.getElementById('sprayResult');
             resDiv.classList.remove('hidden');
-            resDiv.innerHTML = `<strong>Result:</strong> Required output per nozzle = <strong>${flowPerNozzle.toFixed(2)} L/min</strong> at ${speed} km/h with ${width}m boom width.`;
+            resDiv.innerHTML = `<strong>Result:</strong> Required output = <strong>${flowPerNozzle.toFixed(2)} L/min</strong> at ${speed} km/h (${width}m boom).`;
         }
 
         function calculateTreeDensity() {
             const row = parseFloat(document.getElementById('rowSpacing').value);
             const tree = parseFloat(document.getElementById('treeSpacing').value);
-
-            if(isNaN(row) || isNaN(tree) || row === 0 || tree === 0) {
-                alert('Please enter valid spacing dimensions.');
-                return;
-            }
-
-            // 1 hectare = 10,000 square meters
+            if(isNaN(row) || isNaN(tree) || row === 0 || tree === 0) return alert('Enter valid dimensions.');
             const density = 10000 / (row * tree);
-
             const resDiv = document.getElementById('treeResult');
             resDiv.classList.remove('hidden');
-            resDiv.innerHTML = `<strong>Result:</strong> Tree density = <strong>${Math.round(density)} trees per hectare</strong> (${row}m x ${tree}m spacing).`;
+            resDiv.innerHTML = `<strong>Result:</strong> Density = <strong>${Math.round(density)} trees/ha</strong> (${row}m x ${tree}m).`;
         }
 
-        // PWA Status Monitor
-        window.addEventListener('online', updateOnlineStatus);
-        window.addEventListener('offline', updateOnlineStatus);
-
-        function updateOnlineStatus() {
-            const dot = document.getElementById('pwa-status-dot');
-            const text = document.getElementById('pwa-status-text');
-            if (navigator.onLine) {
-                dot.className = 'w-2.5 h-2.5 rounded-full bg-emerald-400 animate-pulse shadow-sm shadow-emerald-400';
-                text.innerText = 'Online';
-            } else {
-                dot.className = 'w-2.5 h-2.5 rounded-full bg-amber-400 animate-pulse shadow-sm shadow-amber-400';
-                text.innerText = 'Offline Mode Active';
-            }
-        }
-
-        // Initial render on load
-        window.onload = () => {
-            renderGuides();
-            updateOnlineStatus();
-        };
+        window.onload = () => { renderGuides(); };
     </script>
 </body>
 </html>
