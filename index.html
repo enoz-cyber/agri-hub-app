@@ -141,7 +141,6 @@
 
     <!-- Guide Modal -->
     <div id="guideModal" class="fixed inset-0 bg-slate-950/80 backdrop-blur-md z-50 hidden flex items-center justify-center p-4 overflow-y-auto">
-        <!-- MODAL CARD WRAPPER: Structured cleanly as one cohesive graphic card -->
         <div id="modalCardWrapper" class="bg-slate-900 rounded-3xl max-w-2xl w-full overflow-hidden shadow-2xl transform transition-all my-8 border border-slate-700 relative text-slate-100">
             
             <div id="secureOverlay" class="secure-watermark flex-col text-center p-6 text-white" onclick="downloadCurrentGuide()">
@@ -156,21 +155,21 @@
             </div>
 
             <!-- Image Header Container -->
-            <div id="modalImageContainer" class="relative h-64 sm:h-80 bg-slate-950">
-                <img id="modalImage" src="" alt="Guide Image" class="w-full h-full object-cover secure-blur" onerror="handleImageError(this)">
-                <div class="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/20 to-transparent"></div>
+            <div id="modalImageContainer" class="relative bg-slate-950">
+                <img id="modalImage" src="" alt="Guide Image" class="w-full h-auto object-contain secure-blur" onerror="handleImageError(this)">
                 <button id="modalCloseBtn" onclick="closeModal()" class="absolute top-4 right-4 bg-black/60 hover:bg-black/80 text-white w-9 h-9 rounded-full flex items-center justify-center transition border border-white/20 shadow-md z-30">
                     <i class="fa-solid fa-xmark text-sm"></i>
                 </button>
-                <div class="absolute bottom-4 left-6 right-6 flex items-center gap-2 flex-wrap z-30 pointer-events-none">
-                    <span id="modalCategoryBadge" class="bg-emerald-600 text-white text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider shadow-sm">Category</span>
-                    <span id="modalSubCategoryBadge" class="bg-teal-700 text-white text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider shadow-sm hidden">Sub-category</span>
-                    <h2 id="modalTitle" class="text-xl sm:text-2xl font-extrabold text-white mt-2 w-full drop-shadow">Guide Title</h2>
-                </div>
             </div>
 
             <!-- Text Body Container -->
             <div id="modalTextBody" class="p-6 sm:p-8 space-y-6 relative bg-slate-900">
+                <div class="flex items-center gap-2 flex-wrap mb-2">
+                    <span id="modalCategoryBadge" class="bg-emerald-600 text-white text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider shadow-sm">Category</span>
+                    <span id="modalSubCategoryBadge" class="bg-teal-700 text-white text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider shadow-sm hidden">Sub-category</span>
+                </div>
+                <h2 id="modalTitle" class="text-xl sm:text-2xl font-extrabold text-white">Guide Title</h2>
+
                 <div class="secure-blur" id="blurContentArea">
                     <div>
                         <h3 class="text-xs font-bold uppercase text-slate-400 tracking-wider mb-2">Overview</h3>
@@ -182,13 +181,6 @@
                     </div>
                 </div>
                 
-                <!-- Footer branding included in the card graphic -->
-                <div id="cardBrandingFooter" class="pt-4 border-t border-slate-800 flex justify-between items-center text-[10px] text-slate-400 font-semibold uppercase tracking-wider">
-                    <span>Professional & Lifestyle Hub</span>
-                    <span>Verified Official Guide</span>
-                </div>
-
-                <!-- Interactive UI Action Footer (Hidden during screenshot capture) -->
                 <div id="modalActionFooter" class="border-t border-slate-800 pt-4 flex justify-between items-center z-30 relative">
                     <button onclick="downloadCurrentGuide()" class="bg-amber-500 hover:bg-amber-600 text-slate-950 px-5 py-2.5 rounded-xl text-xs font-bold transition flex items-center gap-2 shadow-md">
                         <i class="fa-solid fa-download"></i> Unlock & Download Pro Card - R20.00
@@ -690,45 +682,70 @@
             document.getElementById('tankResult').innerText = ((cap / 100) * rate).toFixed(1) + " mL / g total";
         }
 
-        // Professional Single Card Graphic Image Export (Clean, Crisp, and Complete)
+        // Dedicated Clean Card Image Offscreen Generator
         function downloadCurrentGuide() {
             const guide = allGuides.find(g => g.id === activeGuideId);
             if (!guide) return;
 
             if (confirm(`Unlock & Download Pro Guide Card: ${guide.title}\nPrice: R20.00\n\nProceed to PayFast Sandbox checkout?`)) {
-                
-                const secureOverlay = document.getElementById('secureOverlay');
-                const modalCloseBtn = document.getElementById('modalCloseBtn');
-                const modalActionFooter = document.getElementById('modalActionFooter');
-                const cardBrandingFooter = document.getElementById('cardBrandingFooter');
-                const blurContentArea = document.getElementById('blurContentArea');
-                const modalImage = document.getElementById('modalImage');
-                const wrapper = document.getElementById('modalCardWrapper');
 
-                // Hide lock overlay, close icon, and action button footer
-                secureOverlay.classList.add('hidden');
-                modalCloseBtn.style.display = 'none';
-                modalActionFooter.style.display = 'none';
-                
-                // Unblur image and text completely
-                blurContentArea.classList.remove('secure-blur');
-                modalImage.classList.remove('secure-blur');
-                modalImage.style.filter = "none";
+                // Build a temporary, perfectly-styled offscreen card element
+                const offscreenCard = document.createElement('div');
+                offscreenCard.style.position = 'fixed';
+                offscreenCard.style.top = '-9999px';
+                offscreenCard.style.left = '-9999px';
+                offscreenCard.style.width = '800px';
+                offscreenCard.style.backgroundColor = '#0f172a';
+                offscreenCard.style.color = '#f8fafc';
+                offscreenCard.style.fontFamily = "'Inter', sans-serif";
+                offscreenCard.style.borderRadius = '24px';
+                offscreenCard.style.overflow = 'hidden';
+                offscreenCard.style.padding = '0px';
+
+                let stepsHtml = '';
+                guide.steps.forEach((step, idx) => {
+                    stepsHtml += `
+                        <div style="display:flex; align-items:flex-start; gap:12px; background-color:#1e293b; padding:14px; border-radius:14px; margin-bottom:10px; border:1px solid #334155;">
+                            <span style="background-color:#0369a1; color:#ffffff; font-size:12px; font-weight:800; width:24px; height:24px; border-radius:50%; display:flex; align-items:center; justify-center; flex-shrink:0;">${idx + 1}</span>
+                            <span style="font-size:14px; font-weight:500; color:#cbd5e1; line-height:1.4;">${step}</span>
+                        </div>
+                    `;
+                });
+
+                offscreenCard.innerHTML = `
+                    <div style="width:100%; background-color:#020617; border-bottom:1px solid #334155;">
+                        <img src="${guide.image}" style="width:100%; height:auto; display:block;" crossorigin="anonymous">
+                    </div>
+                    <div style="padding:32px;">
+                        <div style="margin-bottom:12px;">
+                            <span style="background-color:#059669; color:#ffffff; font-size:11px; font-weight:800; padding:4px 12px; border-radius:9999px; text-transform:uppercase; letter-spacing:0.05em;">${guide.category}</span>
+                            ${guide.subCategory ? `<span style="background-color:#0f766e; color:#ffffff; font-size:11px; font-weight:800; padding:4px 12px; border-radius:9999px; text-transform:uppercase; letter-spacing:0.05em; margin-left:6px;">${guide.subCategory}</span>` : ''}
+                        </div>
+                        <h1 style="font-size:24px; font-weight:800; color:#ffffff; margin-bottom:16px;">${guide.title}</h1>
+                        <p style="font-size:14px; color:#94a3b8; line-height:1.6; margin-bottom:24px; font-weight:500;">${guide.desc || guide.description || ''}</p>
+                        
+                        <div style="border-top:1px solid #1e293b; padding-top:20px; margin-bottom:24px;">
+                            <h3 style="font-size:11px; font-weight:800; text-transform:uppercase; color:#64748b; letter-spacing:0.05em; margin-bottom:12px;">Step-by-Step Procedure</h3>
+                            ${stepsHtml}
+                        </div>
+
+                        <div style="border-top:1px solid #1e293b; padding-top:16px; display:flex; justify-content:space-between; align-items:center; font-size:11px; color:#64748b; font-weight:700; text-transform:uppercase; letter-spacing:0.05em;">
+                            <span>Professional & Lifestyle Hub</span>
+                            <span>Verified Official Guide</span>
+                        </div>
+                    </div>
+                `;
+
+                document.body.appendChild(offscreenCard);
 
                 // Render high-res single professional card image (Scale 3x for crisp output)
-                html2canvas(wrapper, { scale: 3, backgroundColor: '#0f172a', useCORS: true, logging: false }).then(canvas => {
+                html2canvas(offscreenCard, { scale: 3, backgroundColor: '#0f172a', useCORS: true, logging: false }).then(canvas => {
                     const link = document.createElement('a');
                     link.download = `${guide.title.replace(/[^a-z0-9]/gi, '_').toLowerCase()}_pro_card.png`;
                     link.href = canvas.toDataURL('image/png', 1.0);
                     link.click();
 
-                    // Restore modal UI state
-                    modalCloseBtn.style.display = 'flex';
-                    modalActionFooter.style.display = 'flex';
-                    secureOverlay.classList.remove('hidden');
-                    blurContentArea.classList.add('secure-blur');
-                    modalImage.classList.add('secure-blur');
-                    modalImage.style.filter = "";
+                    document.body.removeChild(offscreenCard);
 
                     // Trigger PayFast Sandbox checkout in a new tab
                     setTimeout(() => {
