@@ -10,8 +10,8 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <!-- Inter Font -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <!-- html2canvas CDN -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <!-- JSZip CDN for bundling text and asset into a single package -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
     
     <!-- Inline Web Manifest for PWA Capabilities -->
     <link rel="manifest" href='data:application/manifest+json,{"name":"Professional & Lifestyle Hub","short_name":"HubApp","start_url":".","display":"standalone","background_color":"#065f46","theme_color":"#065f46"}'>
@@ -30,6 +30,7 @@
         ::-webkit-scrollbar-thumb:hover { background: #475569; }
         .glass-header { background: linear-gradient(135deg, #047857 0%, #065f46 50%, #022c22 100%); }
         
+        /* Optimized Blur Effect (Clearer View, Unreadable Text) */
         .secure-blur {
             filter: blur(4px);
             transition: filter 0.3s ease;
@@ -75,7 +76,7 @@
 
     <main class="flex-grow max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-8">
         
-        <!-- Search and Category Filter Bar -->
+        <!-- Colorful Search and Category Filter Bar -->
         <div class="mb-8 flex flex-col md:flex-row justify-between items-center gap-4 bg-slate-800/90 p-4 sm:p-5 rounded-3xl shadow-lg border border-slate-700/80 relative backdrop-blur-sm">
             <div class="relative w-full md:w-80">
                 <span class="absolute inset-y-0 left-0 flex items-center pl-3.5 pointer-events-none text-emerald-400">
@@ -94,15 +95,17 @@
                 <button onclick="filterByCategory('Housewives')" onmouseenter="startCategoryLoop('Housewives', event)" onmouseleave="stopCategoryLoop()" id="cat-Housewives" class="category-btn px-4 py-2 rounded-xl text-xs font-bold bg-rose-950/80 text-rose-300 border border-rose-700/60 hover:bg-rose-600 hover:text-white transition shadow-sm hover:scale-105">🏠 Housewives</button>
             </div>
 
-            <!-- Floating Preview Popup Box -->
+            <!-- Floating Fast-Looping Preview Popup Box -->
             <div id="categoryPreviewPopup" class="hidden absolute top-20 left-6 z-50 w-80 bg-slate-900/95 backdrop-blur-md text-white p-4 rounded-2xl shadow-2xl border border-slate-700 pointer-events-none transition-all duration-150">
                 <h4 id="previewTitle" class="text-xs font-extrabold uppercase tracking-wider text-emerald-400 mb-2 border-b border-slate-700 pb-1.5">Category Live Loop</h4>
-                <div id="previewContent" class="text-xs text-slate-200 font-medium min-h-[40px] flex items-center"></div>
+                <div id="previewContent" class="text-xs text-slate-200 font-medium min-h-[40px] flex items-center">
+                    <!-- Looping item display -->
+                </div>
             </div>
 
             <div class="flex items-center gap-3 w-full md:w-auto justify-end">
                 <span class="text-xs text-slate-300 font-bold uppercase tracking-wider bg-slate-900/90 px-4 py-2.5 rounded-2xl border border-slate-700 shadow-sm flex items-center gap-2">
-                    TOTAL GUIDES: <strong id="guide-count" class="text-emerald-400 font-extrabold text-sm">30</strong>
+                    Total Guides: <strong id="guide-count" class="text-emerald-400 font-extrabold text-sm">0</strong>
                 </span>
             </div>
         </div>
@@ -127,10 +130,12 @@
             <button onclick="filterBySubCategory('Plumbing')" id="hsubcat-Plumbing" class="hsubcat-btn px-3.5 py-1.5 rounded-xl text-xs font-bold bg-slate-800 text-sky-300 border border-sky-800 hover:bg-sky-800 hover:text-white transition shadow-sm">Plumbing</button>
         </div>
 
-        <!-- Guides Grid -->
-        <div id="guidesGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"></div>
+        <!-- Dynamic Guide Cards Grid -->
+        <div id="guidesGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <!-- Dynamic Injection via JavaScript -->
+        </div>
 
-        <!-- Empty State -->
+        <!-- Empty State Filter Notice -->
         <div id="emptyState" class="hidden text-center py-16 bg-slate-800/80 rounded-3xl border border-dashed border-slate-700 my-4 shadow-sm">
             <div class="bg-slate-700 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-3 text-slate-400">
                 <i class="fa-solid fa-folder-open text-2xl"></i>
@@ -140,25 +145,28 @@
         </div>
     </main>
 
-    <!-- Guide Modal -->
+    <!-- Guide Modal with Screenshot Protection & Pay-to-Unlock Overlay -->
     <div id="guideModal" class="fixed inset-0 bg-slate-950/80 backdrop-blur-md z-50 hidden flex items-center justify-center p-4 overflow-y-auto">
         <div id="modalCardWrapper" class="bg-slate-900 rounded-3xl max-w-2xl w-full overflow-hidden shadow-2xl transform transition-all my-8 border border-slate-700 relative text-slate-100">
             
+            <!-- Secure Watermark Overlay preventing free viewing / screen grabbing -->
             <div id="secureOverlay" class="secure-watermark flex-col text-center p-6 text-white" onclick="downloadCurrentGuide()">
                 <div class="bg-amber-500/20 text-amber-300 p-4 rounded-2xl border border-amber-500/40 mb-3 backdrop-blur-md shadow-xl pointer-events-none">
                     <i class="fa-solid fa-lock text-3xl"></i>
                 </div>
                 <h3 class="text-lg font-extrabold mb-1 pointer-events-none">Protected Premium Guide</h3>
-                <p id="modalLockSubtitle" class="text-xs text-slate-300 max-w-xs mb-4 font-medium pointer-events-none">Full step-by-step procedures and high-res infographics are locked to prevent free usage and screen grabbing.</p>
-                <button type="button" onclick="event.stopPropagation(); downloadCurrentGuide();" id="modalOverlayBtn" class="bg-gradient-to-r from-amber-500 to-orange-500 hover:from-amber-400 hover:to-orange-400 text-slate-950 px-6 py-3 rounded-2xl text-xs font-extrabold transition shadow-lg flex items-center gap-2 transform hover:scale-105">
+                <p class="text-xs text-slate-300 max-w-xs mb-4 font-medium pointer-events-none">Full step-by-step procedures and high-res infographics are locked to prevent free usage and screen grabbing.</p>
+                <button type="button" onclick="event.stopPropagation(); downloadCurrentGuide();" class="bg-gradient-to-r from-amber-500 to-orange-500 hover:from-amber-400 hover:to-orange-400 text-slate-950 px-6 py-3 rounded-2xl text-xs font-extrabold transition shadow-lg flex items-center gap-2 transform hover:scale-105">
                     <i class="fa-solid fa-cart-shopping"></i> Unlock & Download Package (R20.00)
                 </button>
             </div>
 
+            <!-- Image Header Container -->
             <div id="modalImageContainer" class="relative h-64 sm:h-72 bg-slate-950">
                 <img id="modalImage" src="" alt="Guide Image" class="w-full h-full object-cover opacity-90 secure-blur" onerror="handleImageError(this)">
                 <div class="absolute inset-0 bg-gradient-to-t from-slate-950/90 via-slate-950/30 to-transparent"></div>
-                <button id="modalCloseBtn" onclick="closeModal()" class="absolute top-4 right-4 bg-black/60 hover:bg-black/80 text-white w-9 h-9 rounded-full flex items-center justify-center transition border border-white/20 shadow-md z-30">
+                <!-- RESTORED CLOSE BUTTON -->
+                <button onclick="closeModal()" class="absolute top-4 right-4 bg-black/60 hover:bg-black/80 text-white w-9 h-9 rounded-full flex items-center justify-center transition border border-white/20 shadow-md z-30">
                     <i class="fa-solid fa-xmark text-sm"></i>
                 </button>
                 <div class="absolute bottom-4 left-6 right-6 flex items-center gap-2 flex-wrap z-30 pointer-events-none">
@@ -168,6 +176,7 @@
                 </div>
             </div>
 
+            <!-- Standard Text Body Container with Blur Protection -->
             <div id="modalTextBody" class="p-6 sm:p-8 space-y-6 max-h-[60vh] overflow-y-auto relative bg-slate-900">
                 <div class="secure-blur" id="blurContentArea">
                     <div>
@@ -176,21 +185,25 @@
                     </div>
                     <div class="border-t border-slate-800 pt-4 mt-4">
                         <h3 class="text-xs font-bold uppercase text-slate-400 tracking-wider mb-3">Step-by-Step Procedure</h3>
-                        <ul id="modalSteps" class="space-y-3"></ul>
+                        <ul id="modalSteps" class="space-y-3">
+                            <!-- Dynamic Step List -->
+                        </ul>
                     </div>
                 </div>
                 
-                <div id="modalActionFooter" class="border-t border-slate-800 pt-4 flex justify-between items-center z-30 relative">
-                    <button id="modalActionBtn" onclick="downloadCurrentGuide()" class="bg-amber-500 hover:bg-amber-600 text-slate-950 px-5 py-2.5 rounded-xl text-xs font-bold transition flex items-center gap-2 shadow-md">
-                        <i class="fa-solid fa-download"></i> Unlock Package (R20.00)
+                <div class="border-t border-slate-800 pt-4 flex justify-between items-center z-30 relative">
+                    <button onclick="downloadCurrentGuide()" class="bg-amber-500 hover:bg-amber-600 text-slate-950 px-5 py-2.5 rounded-xl text-xs font-bold transition flex items-center gap-2 shadow-md">
+                        <i class="fa-solid fa-download"></i> Unlock Package (ZIP Bundle) - R20.00
                     </button>
-                    <button onclick="closeModal()" class="bg-slate-800 hover:bg-slate-700 text-slate-200 px-5 py-2.5 rounded-xl text-xs font-semibold transition">Close</button>
+                    <button onclick="closeModal()" class="bg-slate-800 hover:bg-slate-700 text-slate-200 px-5 py-2.5 rounded-xl text-xs font-semibold transition">
+                        Close
+                    </button>
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- Calculators Modal -->
+    <!-- Quick Utilities Modal -->
     <div id="calculatorModal" class="fixed inset-0 bg-slate-950/70 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4 overflow-y-auto">
         <div class="bg-slate-900 rounded-3xl max-w-3xl w-full overflow-hidden shadow-2xl p-6 sm:p-8 border border-slate-700 max-h-[90vh] overflow-y-auto text-slate-100">
             <div class="flex justify-between items-center mb-6 border-b border-slate-800 pb-4">
@@ -202,181 +215,365 @@
                 </button>
             </div>
             
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <div class="bg-slate-800/80 p-5 rounded-2xl border border-slate-700 shadow-sm flex flex-col justify-between">
-                    <div>
-                        <h4 class="text-sm font-bold text-emerald-400 mb-3 flex items-center gap-2"><i class="fa-solid fa-spray-can-sparkles"></i> Boom Sprayer Calibration</h4>
-                        <div class="space-y-3">
+            <div class="space-y-6">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div class="bg-slate-800/70 p-5 rounded-2xl border border-emerald-900/50 shadow-sm">
+                        <h4 class="font-bold text-xs uppercase tracking-wider text-emerald-400 mb-3 flex items-center gap-2">
+                            <i class="fa-solid fa-ruler text-emerald-500"></i> Bulk Material Estimator
+                        </h4>
+                        <div class="space-y-3 text-sm">
                             <div>
-                                <label class="block text-xs font-semibold text-slate-300 mb-1">Target Application Rate (L/ha)</label>
-                                <input type="number" id="sprayRate" value="200" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-3 py-2 text-sm text-white focus:outline-none focus:ring-2 focus:ring-emerald-500">
+                                <label class="block text-xs font-semibold text-slate-300 mb-1">Quantity / Count</label>
+                                <input type="number" id="calcQty" value="100" class="w-full p-2.5 bg-slate-900 border border-slate-700 rounded-xl text-sm text-slate-100 focus:ring-2 focus:ring-emerald-500 outline-none shadow-inner" oninput="calculateUtility()">
                             </div>
                             <div>
-                                <label class="block text-xs font-semibold text-slate-300 mb-1">Boom Width (meters)</label>
-                                <input type="number" id="boomWidth" value="12" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-3 py-2 text-sm text-white focus:outline-none focus:ring-2 focus:ring-emerald-500">
+                                <label class="block text-xs font-semibold text-slate-300 mb-1">Rate per Unit (kg/L)</label>
+                                <input type="number" id="calcRate" value="1.5" step="0.1" class="w-full p-2.5 bg-slate-900 border border-slate-700 rounded-xl text-sm text-slate-100 focus:ring-2 focus:ring-emerald-500 outline-none shadow-inner" oninput="calculateUtility()">
                             </div>
                             <div>
-                                <label class="block text-xs font-semibold text-slate-300 mb-1">Tractor Speed (km/h)</label>
-                                <input type="number" id="tractorSpeed" value="8" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-3 py-2 text-sm text-white focus:outline-none focus:ring-2 focus:ring-emerald-500">
+                                <label class="block text-xs font-semibold text-emerald-400 mb-1">Total Requirement</label>
+                                <div id="calcResult" class="p-2.5 bg-emerald-950/80 border border-emerald-800/60 rounded-xl font-bold text-emerald-300 text-center shadow-inner">150.0 kg/total</div>
                             </div>
                         </div>
                     </div>
-                    <button onclick="calculateSprayer()" class="mt-4 w-full bg-emerald-600 hover:bg-emerald-500 text-white py-2.5 rounded-xl text-xs font-bold transition shadow">Calculate Flow / Nozzle</button>
-                    <div id="sprayResult" class="mt-3 p-3 bg-slate-900 rounded-xl text-xs text-emerald-300 font-mono hidden"></div>
-                </div>
 
-                <div class="bg-slate-800/80 p-5 rounded-2xl border border-slate-700 shadow-sm flex flex-col justify-between">
-                    <div>
-                        <h4 class="text-sm font-bold text-teal-400 mb-3 flex items-center gap-2"><i class="fa-solid fa-tree"></i> Orchard Tree Density</h4>
-                        <div class="space-y-3">
+                    <div class="bg-slate-800/70 p-5 rounded-2xl border border-teal-900/50 shadow-sm">
+                        <h4 class="font-bold text-xs uppercase tracking-wider text-teal-400 mb-3 flex items-center gap-2">
+                            <i class="fa-solid fa-droplet text-teal-500"></i> Spray Tank Mix Calculator
+                        </h4>
+                        <div class="space-y-3 text-sm">
                             <div>
-                                <label class="block text-xs font-semibold text-slate-300 mb-1">Row Spacing (meters)</label>
-                                <input type="number" id="rowSpacing" value="4.5" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-3 py-2 text-sm text-white focus:outline-none focus:ring-2 focus:ring-teal-500">
+                                <label class="block text-xs font-semibold text-slate-300 mb-1">Tank Capacity (Liters)</label>
+                                <input type="number" id="tankCap" value="500" class="w-full p-2.5 bg-slate-900 border border-slate-700 rounded-xl text-sm text-slate-100 focus:ring-2 focus:ring-teal-500 outline-none shadow-inner" oninput="calculateTankMix()">
                             </div>
                             <div>
-                                <label class="block text-xs font-semibold text-slate-300 mb-1">Tree Spacing in Row (meters)</label>
-                                <input type="number" id="treeSpacing" value="2.0" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-3 py-2 text-sm text-white focus:outline-none focus:ring-2 focus:ring-teal-500">
+                                <label class="block text-xs font-semibold text-slate-300 mb-1">Mix Rate per 100L (mL/g)</label>
+                                <input type="number" id="tankRate" value="250" step="10" class="w-full p-2.5 bg-slate-900 border border-slate-700 rounded-xl text-sm text-slate-100 focus:ring-2 focus:ring-teal-500 outline-none shadow-inner" oninput="calculateTankMix()">
+                            </div>
+                            <div>
+                                <label class="block text-xs font-semibold text-teal-400 mb-1">Chemical Needed for Full Tank</label>
+                                <div id="tankResult" class="p-2.5 bg-teal-950/80 border border-teal-800/60 rounded-xl font-bold text-teal-300 text-center shadow-inner">1,250.0 mL</div>
                             </div>
                         </div>
                     </div>
-                    <button onclick="calculateTreeDensity()" class="mt-4 w-full bg-teal-600 hover:bg-teal-500 text-white py-2.5 rounded-xl text-xs font-bold transition shadow">Calculate Density per Hectare</button>
-                    <div id="treeResult" class="mt-3 p-3 bg-slate-900 rounded-xl text-xs text-teal-300 font-mono hidden"></div>
                 </div>
+            </div>
+            <div class="mt-6 text-right">
+                <button onclick="closeCalculatorModal()" class="bg-emerald-600 hover:bg-emerald-500 text-white px-6 py-2.5 rounded-xl text-sm font-semibold transition shadow-md">Done</button>
             </div>
         </div>
     </div>
 
-    <footer class="bg-slate-950 text-slate-400 py-6 border-t border-slate-800 text-xs text-center">
-        <div class="max-w-7xl mx-auto px-4 flex flex-col sm:flex-row justify-between items-center gap-3">
-            <p>&copy; 2026 Professional & Lifestyle Hub. All rights reserved.</p>
-            <div class="flex items-center gap-4 text-emerald-400">
-                <span><i class="fa-solid fa-shield-halved"></i> PWA Secured Hub</span>
-                <span><i class="fa-solid fa-bolt"></i> GitHub Pages Deployment</span>
-            </div>
+    <footer class="bg-slate-950 border-t border-slate-800 mt-12 py-6 shadow-sm">
+        <div class="max-w-7xl mx-auto px-4 text-center text-xs text-slate-400 font-medium">
+            &copy; 2026 Professional & Lifestyle Hub &bull; Farmers, Builders, Handyman & Housewives Guide &bull; Offline Ready
         </div>
     </footer>
 
     <script>
-        // Full 30 Guides Repository Restored
-        const guides = [
-            { id: 1, title: "Plough Alignment & Attachment Guide", category: "Farmers", subCategory: "Crop Farming", description: "Step-by-step manual for rear-mounted plough alignment, 3-point hitch setup, and depth tuning for optimal soil inversion.", image: "images/plough.jpg", steps: ["Check top link and lift rod leveling.", "Ensure draft arms are equally adjusted.", "Set furrow width according to plough body size.", "Test-run at shallow depth before final pass."] },
-            { id: 2, title: "Disc Harrow Alignment Guide", category: "Farmers", subCategory: "Crop Farming", description: "Side alignment, gang angles, tractor tire matching, and hitch point leveling for uniform residue incorporation.", image: "images/harrow.jpg", steps: ["Inspect front and rear gang angles.", "Check drawbar swing lock settings.", "Verify tractor tire pressures for equal draft."] },
-            { id: 3, title: "Fertilizer Spreader Calibration", category: "Farmers", subCategory: "Crop Farming", description: "Gate opening adjustments, catch-pan tests, spread width checking, and speed tuning for precise nutrient placement.", image: "images/spreader.jpg", steps: ["Arrange catch pans across test span.", "Run spreader at target PTO speed.", "Measure granules collected to compute application rate."] },
-            { id: 4, title: "Boom Sprayer Calibration & Nozzle Output", category: "Farmers", subCategory: "Crop Farming", description: "Complete calibration guide for agricultural boom sprayers, calculating ground speed and nozzle discharge rate.", image: "images/boom-sprayer.jpg", steps: ["Measure 100m course.", "Record tractor seconds.", "Collect output from nozzles for 1 minute."] },
-            { id: 5, title: "Recommended Maize Planting Speed", category: "Farmers", subCategory: "Crop Farming", description: "Ground speed optimization for pneumatic and mechanical planters to ensure precise seed spacing.", image: "images/maize-planting.jpg", steps: ["Match gear and RPM to seed plate cells.", "Check seed drop uniformity in test furrow."] },
-            { id: 6, title: "Row Planter Calibration & Seed Drop", category: "Farmers", subCategory: "Crop Farming", description: "Plate selection, vacuum pressure tuning, and depth wheel adjustment for row crops.", image: "images/planter.jpg", steps: ["Test vacuum suction levels.", "Verify fertilizer auger delivery rates."] },
-            { id: 7, title: "Tractor Wheel-Slip Calculation", category: "Farmers", subCategory: "Crop Farming", description: "Methods to calculate and correct tractor wheel-slip under heavy draft loads for fuel efficiency.", image: "images/wheel-slip.jpg", steps: ["Mark 10 wheel revolutions under load vs no load.", "Calculate slip percentage.", "Adjust ballast or tire pressure."] },
-            { id: 8, title: "Slasher Height & Gear Setup", category: "Farmers", subCategory: "Crop Farming", description: "Rotary cutter deck leveling, slip-clutch inspection, and gearbox maintenance.", image: "images/slasher.jpg", steps: ["Set tailwheel height.", "Check PTO shaft universal joint alignment."] },
-            { id: 9, title: "Baldan Disc Harrow Gang Angle Adjustment", category: "Farmers", subCategory: "Crop Farming", description: "Adjusting front and rear gang angles on Baldan harrows for aggressive soil cutting.", image: "images/baldan.jpg", steps: ["Loosen adjustment bolts safely.", "Pin gangs to desired aggressive angle."] },
-            { id: 10, title: "Ground-Driven Manure Spreader Fabrication", category: "Handyman", subCategory: "Manufacture", description: "DIY fabrication guidelines for building ground-driven spreaders using differential axles.", image: "images/manure-spreader.jpg", steps: ["Mount bakkie differential axle upside down.", "Fabricate chain conveyor floor drive."] },
-            { id: 11, title: "Bakkie Differential Spreader Drive Setup", category: "Handyman", subCategory: "Metalwork & Fabrication", description: "Sprocket and wheel drive mechanisms utilizing vehicle differentials for spreaders.", image: "images/differential.jpg", steps: ["Weld drive sprocket to axle shaft.", "Align ground wheel pneumatic tire."] },
-            { id: 12, title: "Raised Bed Hiller Fabrication & Tillage Setup", category: "Handyman", subCategory: "Metalwork & Fabrication", description: "Blueprints for building tractor-attached raised bed hillers using box tubing and disc blades.", image: "images/hiller.jpg", steps: ["Cut main toolbar frame.", "Mount concave disc blades at 20-degree angle."] },
-            { id: 13, title: "Flexible Rubber Bellows Hose Plumbing & Sourcing", category: "Handyman", subCategory: "Plumbing", description: "Installation and replacement guide for flexible rubber bellows hoses in high-vibration pump lines.", image: "images/plumbing.jpg", steps: ["Measure exact face-to-face length.", "Tighten flange bolts in criss-cross pattern."] },
-            { id: 14, title: "Orchard Fruit Tree Pruning & Training", category: "Farmers", subCategory: "Fruit Farming", description: "Winter and summer pruning guidelines for deciduous and citrus orchard trees.", image: "images/pruning.jpg", steps: ["Remove 3 Ds (Dead, Diseased, Damaged).", "Open center canopy."] },
-            { id: 15, title: "Orchard Tree Density Per Hectare Calculation", category: "Farmers", subCategory: "Fruit Farming", description: "Mathematical formula and spacing layouts for optimal orchard tree populations.", image: "images/tree-density.jpg", steps: ["Measure row and tree spacing.", "Apply 10,000 / (row x tree) formula."] },
-            { id: 16, title: "Onion Cultivation & Bulb Sizing Procedure", category: "Farmers", subCategory: "Vegetable Farming", description: "Soil preparation, direct seeding vs transplanting, and fertigation schedules.", image: "images/onions.jpg", steps: ["Transplant seedlings at 10cm spacing.", "Reduce watering 3 weeks before harvest."] },
-            { id: 17, title: "Potato Planting & Earthing-Up Guide", category: "Farmers", subCategory: "Vegetable Farming", description: "Seed potato sprouting, trench depth, and progressive ridge earthing.", image: "images/potatoes.jpg", steps: ["Plant certified seed tubers 10cm deep.", "Earth up soil when plants reach 20cm height."] },
-            { id: 18, title: "Watermelon Field Layout & Irrigation", category: "Farmers", subCategory: "Vegetable Farming", description: "Drip irrigation setup, mulching, and pollination management for cucurbits.", image: "images/watermelons.jpg", steps: ["Lay black plastic mulch.", "Space hills 2 meters apart."] },
-            { id: 19, title: "Tomato Trellising & Pruning Guide", category: "Farmers", subCategory: "Vegetable Farming", description: "Indeterminate tomato stake training, stringing, and sucker removal.", image: "images/tomatoes.jpg", steps: ["Install strong end posts and wire.", "Prune side shoots weekly."] },
-            { id: 20, title: "Bell Pepper Spacing & Pest Management", category: "Farmers", subCategory: "Vegetable Farming", description: "Capsicum production, calcium sprays against blossom end rot, and scouting.", image: "images/peppers.jpg", steps: ["Maintain balanced calcium fertigation.", "Monitor for aphids and thrips."] },
-            { id: 21, title: "Green Bean Direct Sowing & Pole Setup", category: "Farmers", subCategory: "Vegetable Farming", description: "Bush vs pole bean planting depths, trellis framing, and picking intervals.", image: "images/beans.jpg", steps: ["Sow seeds 3cm deep in warm soil.", "Erect teepee pole frames."] },
-            { id: 22, title: "Cabbage Seedling Transp. & Pest Control", category: "Farmers", subCategory: "Vegetable Farming", description: "Brassica management, cutworm collars, and head formation monitoring.", image: "images/cabbage.jpg", steps: ["Harden off seedlings.", "Apply organic Bacillus thuringiensis for moth control."] },
-            { id: 23, title: "Carrot Soil Preparation & Thinning", category: "Farmers", subCategory: "Vegetable Farming", description: "Fine seedbed preparation, prevent forking, and root expansion thinning.", image: "images/carrots.jpg", steps: ["Ensure stone-free topsoil.", "Thin seedlings to 5cm spacing."] },
-            { id: 24, title: "Boran Cattle Herd Health & Mineral Licks", category: "Farmers", subCategory: "Animal Farming", description: "Practical management protocols for Boran cattle herds, lick programs, and parasite control.", image: "images/boran.jpg", steps: ["Provide phosphate licks in summer.", "Schedule annual bull breeding soundness tests."] },
-            { id: 25, title: "Poultry Brooder House Temperature & Feed", category: "Farmers", subCategory: "Poultry Farming", description: "Day-old chick brooding management, heater setup, and starter feed conversion.", image: "images/poultry.jpg", steps: ["Pre-heat brooder to 32°C.", "Ensure constant fresh water access."] },
-            { id: 26, title: "Commercial Foundation Pouring & Reinforcement", category: "Builders", subCategory: "All", description: "Structural guidelines for excavating, blinding, rebar placement, and concrete pouring.", image: "images/foundation.jpg", steps: ["Excavate to stable subsoil.", "Position Y12/Y16 rebar reinforcement."] },
-            { id: 27, title: "Brickwork Damp-Proof Course Installation", category: "Builders", subCategory: "All", description: "DPC membrane laying, flashing, and rising damp prevention in masonry walls.", image: "images/dpc.jpg", steps: ["Lay mortar bed level.", "Roll out DPC membrane with 150mm overlaps."] },
-            { id: 28, title: "Roof Truss Pitch & Span Calculation", category: "Builders", subCategory: "All", description: "Timber roof truss engineering, spacing, bracing, and hurricane clip anchoring.", image: "images/roof.jpg", steps: ["Erect main gable trusses plumb.", "Install permanent diagonal rafter bracing."] },
-            { id: 29, title: "Deep-Clean Housekeeping & Stain Removal", category: "Housewives", subCategory: "All", description: "Professional household cleaning tips, chemical safety, and fabric stain removal.", image: "images/cleaning.jpg", steps: ["Pre-treat organic stains.", "Disinfect high-touch surfaces."] },
-            { id: 30, title: "Household Pantry Pest Control & Organization", category: "Housewives", subCategory: "All", description: "Airtight storage protocols, natural deterrents, and pantry moth eradication.", image: "images/pantry.jpg", steps: ["Inspect dry goods regularly.", "Store grains in sealed glass or plastic containers."] }
+        // Disable keyboard shortcuts for screen-grabbing, inspection, and copying
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'F12' || (e.ctrlKey && (e.key === 'u' || e.key === 's' || e.key === 'c' || e.key === 'p' || e.key === 'i'))) {
+                e.preventDefault();
+                alert('Content protection enabled: Copying and inspecting source code is restricted.');
+                return false;
+            }
+        });
+
+        function handleImageError(imgElement) {
+            imgElement.onerror = null;
+            imgElement.src = "https://placehold.co/600x400/0369a1/ffffff?text=Protected+Infographic";
+        }
+
+        const categoryTheme = {
+            "Farmers": { bg: "bg-gradient-to-br from-slate-800/90 via-slate-800/50 to-slate-900", border: "border-emerald-900/40", badgeBg: "bg-emerald-700", subBadgeBg: "bg-teal-700", buttonBg: "bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-500 hover:to-teal-500" },
+            "Builders": { bg: "bg-gradient-to-br from-slate-800/90 via-slate-800/50 to-slate-900", border: "border-indigo-900/40", badgeBg: "bg-indigo-700", subBadgeBg: "bg-slate-700", buttonBg: "bg-gradient-to-r from-indigo-600 to-slate-700 hover:from-indigo-500 hover:to-slate-600" },
+            "Handyman": { bg: "bg-gradient-to-br from-slate-800/90 via-slate-800/50 to-slate-900", border: "border-sky-900/40", badgeBg: "bg-sky-700", subBadgeBg: "bg-blue-700", buttonBg: "bg-gradient-to-r from-sky-600 to-blue-600 hover:from-sky-500 hover:to-blue-500" },
+            "Housewives": { bg: "bg-gradient-to-br from-slate-800/90 via-slate-800/50 to-slate-900", border: "border-rose-900/40", badgeBg: "bg-rose-700", subBadgeBg: "bg-pink-700", buttonBg: "bg-gradient-to-r from-rose-600 to-pink-600 hover:from-rose-500 hover:to-pink-500" }
+        };
+
+        const allGuides = [
+            {
+                id: "plough", title: "Plough Alignment & Attachment Guide", category: "Farmers", subCategory: "Crop Farming", image: "images/plough-alignment.jpg.jpg",
+                desc: "Step-by-step manual for rear-mounted plough alignment, 3-point hitch setup, and depth tuning for optimal soil inversion.",
+                steps: ["Level tractor and plough.", "Set front furrow width.", "Adjust draft links.", "Verify vertical alignment."]
+            },
+            {
+                id: "disc-harrow", title: "Disc Harrow Alignment Guide", category: "Farmers", subCategory: "Crop Farming", image: "images/disc-harrow.jpg.jpg",
+                desc: "Side alignment, gang angles, tractor tire matching, and hitch point leveling for uniform residue incorporation.",
+                steps: ["Adjust gang angles.", "Set hitch height.", "Inspect scraper blades.", "Grease bearings."]
+            },
+            {
+                id: "fertilizer-spreader", title: "Fertilizer Spreader Calibration", category: "Farmers", subCategory: "Crop Farming", image: "images/fertilizer-spreader.jpg.jpg",
+                desc: "Gate opening adjustments, catch-pan tests, spread width checking, and speed tuning for precise nutrient placement.",
+                steps: ["Perform stationary catch-test.", "Weigh collected fertilizer.", "Calculate CU.", "Adjust vane angles."]
+            },
+            {
+                id: "boom-sprayer", title: "Boom Sprayer Calibration", category: "Farmers", subCategory: "Crop Farming", image: "images/boom-sprayer.jpg.jpg",
+                desc: "Nozzle selection, pressure tuning, and output checks for accurate systemic chemical application.",
+                steps: ["Check nozzle tips.", "Measure pressure.", "Collect output.", "Ensure flow variation is within +/- 5%."]
+            },
+            {
+                id: "field-sprayer", title: "Field Sprayer Calibration", category: "Farmers", subCategory: "Crop Farming", image: "images/field-sprayer.jpg.jpg",
+                desc: "Comprehensive calibration procedures for large field sprayers, tank agitation, and drift reduction.",
+                steps: ["Fill 100m test track.", "Measure traverse time.", "Calculate tank mix volume.", "Calibrate gauges."]
+            },
+            {
+                id: "maize-planting", title: "Maize Planting Guide", category: "Farmers", subCategory: "Crop Farming", image: "images/maize-planting.jpg.jpg",
+                desc: "Seed spacing, population calculations, fertilizer disc placement, and depth settings for high yield emergence.",
+                steps: ["Select seed plate.", "Calibrate seed drop.", "Set depth (4-6 cm).", "Ensure good contact."]
+            },
+            {
+                id: "manure-spreader", title: "Manure Spreader Calibration", category: "Farmers", subCategory: "Crop Farming", image: "images/manure-spreader.jpg.jpg",
+                desc: "Application rates, beater speed adjustment, and spread uniformity for solid and semi-solid livestock manure.",
+                steps: ["Weigh empty spreader.", "Distribute tarps.", "Run spreader.", "Weigh samples."]
+            },
+            {
+                id: "slasher-guide", title: "Slasher Guide", category: "Farmers", subCategory: "Crop Farming", image: "images/slasher-guide.jpg.jpg",
+                desc: "Cutting height adjustments, skid shoe leveling, and safety chain inspections for pasture topping and weed control.",
+                steps: ["Adjust tail wheel.", "Inspect swing-away blades.", "Verify PTO Clutch.", "Check safety guards."]
+            },
+            {
+                id: "mist-sprayer", title: "Mist Sprayer Calibration", category: "Farmers", subCategory: "Fruit Farming", image: "images/mist-sprayer.jpg.jpg",
+                desc: "Air assistance and droplet distribution tuning for orchard canopies and dense foliage crops.",
+                steps: ["Check fan gearbox.", "Align air coulings.", "Use water-sensitive cards.", "Adjust pump pressure."]
+            },
+            {
+                id: "fruit-pruning", title: "Orchard Fruit Tree Pruning Manual", category: "Farmers", subCategory: "Fruit Farming", image: "images/fruit-pruning.jpg.jpg",
+                desc: "Comprehensive 9-step multi-panel visual guide for winter pruning, canopy health, and maximum sunlight penetration.",
+                steps: ["Sanitize tools.", "Assess canopy goals.", "Remove 3-Ds.", "Clear center canopy."]
+            },
+            {
+                id: "tree-density", title: "Orchard Tree Density Calculation Guide", category: "Farmers", subCategory: "Fruit Farming", isInteractive: true, interactiveUrl: "tree-density.html", image: "images/tree-density.jpg.jpg",
+                desc: "Interactive visual simulator and calculation tool for determining tree population per hectare.",
+                steps: ["Adjust row and tree spacing sliders.", "Observe live calculation.", "Analyze hectare population output."]
+            },
+            {
+                id: "cabbage-planting", title: "Cabbage Field Planting & Cultivation Guide", category: "Farmers", subCategory: "Vegetable Farming", image: "images/cabbage-planting.jpg.jpg",
+                desc: "Comprehensive 9-step multi-panel visual guide for commercial cabbage field setup, soil prep, basal fertilization, and pest management.",
+                steps: ["Deep plough and create raised beds.", "Maintain soil pH (6.0-6.8).", "Incorporate pre-plant fertilizer.", "Choose commercial varieties.", "Pre-mark holes.", "Use drip irrigation.", "Perform shallow cultivation.", "Scout for pests.", "Harvest."]
+            },
+            {
+                id: "carrot-planting", title: "Carrot Field Planting & Cultivation Guide", category: "Farmers", subCategory: "Vegetable Farming", image: "images/carrot-planting.jpg.jpg",
+                desc: "Comprehensive 9-step multi-panel visual guide for commercial carrot field setup, soil prep, and harvesting.",
+                steps: ["Deep plough and create raised beds.", "Maintain soil pH (6.0-6.8).", "Incorporate pre-plant fertilizer.", "Choose commercial varieties.", "Pre-mark rows.", "Use drip irrigation.", "Perform shallow cultivation.", "Scout for pests.", "Harvest."]
+            },
+            {
+                id: "onion-planting-1", title: "Commercial Onion Field Planting Guide", category: "Farmers", subCategory: "Vegetable Farming", image: "images/onion-planting-1.jpg.jpg",
+                desc: "Comprehensive guide for commercial onion field setup, soil prep, and precision planting.",
+                steps: ["Test soil pH.", "Incorporate basal fertilizers.", "Choose healthy seedlings.", "Set proper spacing."]
+            },
+            {
+                id: "onion-planting-2", title: "Onion Field Planting & Cultivation Guide", category: "Farmers", subCategory: "Vegetable Farming", image: "images/onion-planting-2.jpg.jpg",
+                desc: "Step-by-step visual manual covering soil preparation, planting materials, weed control, and curing.",
+                steps: ["Test soil pH.", "Choose seeds/transplants.", "Provide consistent water.", "Control weeds."]
+            },
+            {
+                id: "potato-planting", title: "Commercial Potato Field Planting Guide", category: "Farmers", subCategory: "Vegetable Farming", image: "images/potato-planting.jpg.jpg",
+                desc: "Comprehensive guide for commercial potato large-scale production, chitting, and hilling.",
+                steps: ["Test soil pH.", "Choose certified seed tubers.", "Set rows.", "Hill up soil ridges."]
+            },
+            {
+                id: "pumpkin-planting", title: "Commercial Pumpkin Field Planting Guide", category: "Farmers", subCategory: "Vegetable Farming", image: "images/pumpkin-planting.jpg.jpg",
+                desc: "Comprehensive guide for commercial pumpkin field setup, precision spacing, vine care, and harvest.",
+                steps: ["Test soil pH.", "Select certified seeds.", "Apply basal fertilizer.", "Set wide spacing.", "Plant seeds.", "Maintain water.", "Control weeds.", "Monitor pests.", "Harvest."]
+            },
+            {
+                id: "watermelon-planting", title: "Commercial Watermelon Field Planting Guide", category: "Farmers", subCategory: "Vegetable Farming", image: "images/watermelon-planting.jpg.jpg",
+                desc: "Comprehensive guide for commercial watermelon field setup, spacing, pest monitoring, and harvest.",
+                steps: ["Test soil pH.", "Choose seeds.", "Incorporate fertilizer.", "Set rows.", "Plant seeds.", "Provide irrigation.", "Control weeds.", "Monitor pests.", "Harvest."]
+            },
+            {
+                id: "tomato-planting", title: "Commercial Tomato Field Planting Guide", category: "Farmers", subCategory: "Vegetable Farming", image: "images/tomato-planting.jpg.jpg",
+                desc: "Comprehensive guide for commercial tomato production, transplanting, staking, and supported harvest.",
+                steps: ["Test soil pH.", "Use transplants.", "Incorporate fertilizer.", "Set rows.", "Plant deeply.", "Provide moisture.", "Manage mulch.", "Scout for pests.", "Harvest."]
+            },
+            {
+                id: "bell-pepper-planting", title: "Commercial Bell Pepper Field Planting Guide", category: "Farmers", subCategory: "Vegetable Farming", image: "images/bell-pepper-planting.jpg.jpg",
+                desc: "Comprehensive guide for commercial bell pepper field setup, soil prep, precision spacing, and harvest.",
+                steps: ["Test soil pH.", "Use seedlings.", "Incorporate fertilizer.", "Set rows.", "Plant deeply.", "Provide moisture.", "Control weeds.", "Scout for pests.", "Harvest."]
+            },
+            {
+                id: "green-bean-planting", title: "Commercial Green Bean Field Planting Guide", category: "Farmers", subCategory: "Vegetable Farming", image: "images/green-bean-planting.jpg.jpg",
+                desc: "Comprehensive guide for commercial green bean field setup, direct seeding, precision spacing, and harvest.",
+                steps: ["Test soil pH.", "Treat seeds.", "Incorporate fertilizer.", "Set rows.", "Direct seed.", "Provide moisture.", "Control weeds.", "Scout for pests.", "Harvest."]
+            },
+            {
+                id: "cattle-health", title: "Cattle Herd Health & Vaccination Schedule", category: "Farmers", subCategory: "Animal Farming", image: "https://placehold.co/600x400/065f46/ffffff?text=Animal+Farming",
+                desc: "Routine vaccinations, parasite control, and daily monitoring guidelines for beef and dairy cattle.",
+                steps: ["Maintain records.", "Administer annual boosters.", "Perform hoof trimming.", "Ensure clean water."]
+            },
+            {
+                id: "poultry-brooding", title: "Poultry Brooder Setup & Management", category: "Farmers", subCategory: "Poultry Farming", image: "https://placehold.co/600x400/065f46/ffffff?text=Poultry+Farming",
+                desc: "Temperature regulation, lighting programs, and biosecurity protocols for day-old chicks.",
+                steps: ["Pre-heat brooding house.", "Set up chick guards.", "Provide fresh water.", "Monitor temperatures."]
+            },
+            {
+                id: "foundation-pouring", title: "Concrete Foundation Pouring & Curing", category: "Builders", subCategory: "General", image: "https://placehold.co/600x400/334155/ffffff?text=Builders+Guide",
+                desc: "Excavation depth checks, formwork stability, reinforcement placement, and proper moisture curing.",
+                steps: ["Verify trench depth.", "Secure rebar mesh.", "Pour concrete evenly.", "Keep surface moist for 7 days."]
+            },
+            {
+                id: "hiller-build", title: "Raised Bed Hiller (Double Disc) Build Guide", category: "Handyman", subCategory: "Manufacture", image: "images/hiller-build.jpg.jpg",
+                desc: "Step-by-step practical fabrication and field tuning manual for building a heavy-duty double-disc raised bed hiller.",
+                steps: ["Cut square steel tubing.", "Weld hitch upright bracket.", "Cut vertical square shanks.", "Mount double-disc hubs.", "Attach shanks to toolbar.", "Test in workable soil."]
+            },
+            {
+                id: "bakkie-fertilizer-spreader", title: "Bakkie Differential Fertilizer Spreader Build Guide", category: "Handyman", subCategory: "Manufacture", image: "images/Fertilizer-spreader.jpg",
+                desc: "Step-by-step ground-driven fabrication manual for a bakkie differential fertilizer spreader.",
+                steps: ["Axle Prep & differential locking.", "Build chassis frame.", "Mount conical hopper.", "Align drive transfer & spinner.", "Fit metering gate.", "Field test & calibrate."]
+            },
+            {
+                id: "sheet-metal-calculators", title: "Universal Sheet Metal Workers Development Calculators", category: "Handyman", subCategory: "Metalwork & Fabrication", isInteractive: true, interactiveType: "sheetMetal", image: "https://placehold.co/600x400/0369a1/ffffff?text=Sheet+Metal+Calculators",
+                desc: "Complete universal calculator suite featuring parallel/radial layout patterns, square-to-round transitions, and bending.",
+                steps: ["Select tab.", "Enter dimensions.", "Review developments."]
+            },
+            {
+                id: "leak-repair", title: "Emergency Pipe Leak Repair & Sealing", category: "Handyman", subCategory: "Plumbing", image: "https://placehold.co/600x400/0369a1/ffffff?text=Handyman+Guide",
+                desc: "Quick steps to isolate main water lines, apply temporary rubber clamps, and replace damaged PVC/copper fittings.",
+                steps: ["Shut off water.", "Dry pipe section.", "Apply repair tape.", "Test pressure."]
+            },
+            {
+                id: "toilet-unblock", title: "How to Unblock a Toilet", category: "Handyman", subCategory: "Plumbing", image: "images/plumbing-repair.jpg.jpg",
+                desc: "Essential step-by-step procedure to safely unblock a toilet using overflow prevention, flange plungers, hot soapy water, or a toilet auger.",
+                steps: [
+                    "Prevent an overflow by pushing the flapper valve down or shutting off the water valve.",
+                    "Use a flange plunger to create a firm seal over the drain and plunge rapidly for 15-20 seconds.",
+                    "Apply the hot water and dish soap backup method to lubricate and break down grease/organic material.",
+                    "Employ a toilet auger or closet snake for tough obstructions by rotating clockwise and extracting."
+                ]
+            },
+            {
+                id: "meal-prep", title: "Weekly Family Meal Prep & Pantry Rotation", category: "Housewives", subCategory: "Meal Prep", image: "https://placehold.co/600x400/db2777/ffffff?text=Home+Guide",
+                desc: "Efficient batch cooking strategies, airtight storage organization, and FIFO pantry management.",
+                steps: ["Plan 7-day menu.", "Inventory pantry.", "Batch chop vegetables.", "Label containers."]
+            }
         ];
 
-        let currentFilter = 'All';
-        let currentSubFilter = 'All';
-        let activeGuideForModal = null;
+        let activeCategory = 'All';
+        let activeSubCategory = 'All';
+        let activeGuideId = null;
+        let loopInterval = null;
 
         function renderGuides() {
             const grid = document.getElementById('guidesGrid');
             const emptyState = document.getElementById('emptyState');
-            const searchVal = document.getElementById('searchInput').value.toLowerCase();
+            const subCategoryContainer = document.getElementById('subCategoryContainer');
+            const handymanSubCategoryContainer = document.getElementById('handymanSubCategoryContainer');
 
-            const filtered = guides.filter(g => {
-                const matchesSearch = g.title.toLowerCase().includes(searchVal) || g.description.toLowerCase().includes(searchVal);
-                const matchesCat = currentFilter === 'All' || g.category === currentFilter;
-                const matchesSubCat = currentSubFilter === 'All' || g.subCategory === currentSubFilter || g.subCategory === 'All';
-                return matchesSearch && matchesCat && matchesSubCat;
+            if (activeCategory === 'Farmers') {
+                subCategoryContainer.classList.remove('hidden');
+                handymanSubCategoryContainer.classList.add('hidden');
+            } else if (activeCategory === 'Handyman') {
+                subCategoryContainer.classList.add('hidden');
+                handymanSubCategoryContainer.classList.remove('hidden');
+            } else {
+                subCategoryContainer.classList.add('hidden');
+                handymanSubCategoryContainer.classList.add('hidden');
+                activeSubCategory = 'All';
+            }
+
+            const searchQuery = document.getElementById('searchInput').value.toLowerCase();
+            const filtered = allGuides.filter(g => {
+                const matchesCategory = activeCategory === 'All' || g.category === activeCategory;
+                const matchesSubCategory = activeSubCategory === 'All' || g.subCategory === activeSubCategory;
+                const guideDescription = g.desc || g.description || '';
+                const matchesSearch = g.title.toLowerCase().includes(searchQuery) || 
+                                      guideDescription.toLowerCase().includes(searchQuery) ||
+                                      g.category.toLowerCase().includes(searchQuery);
+                return matchesCategory && matchesSubCategory && matchesSearch;
             });
 
             document.getElementById('guide-count').innerText = filtered.length;
+            grid.innerHTML = '';
 
             if (filtered.length === 0) {
-                grid.innerHTML = '';
                 emptyState.classList.remove('hidden');
                 return;
+            } else {
+                emptyState.classList.add('hidden');
             }
 
-            emptyState.classList.add('hidden');
-            grid.innerHTML = filtered.map(g => `
-                <div onclick="openModal(${g.id})" class="bg-slate-800/90 rounded-3xl overflow-hidden shadow-xl border border-slate-700/80 hover:border-emerald-500/50 transition cursor-pointer flex flex-col justify-between group transform hover:-translate-y-1">
-                    <div class="relative h-48 bg-slate-950 overflow-hidden">
-                        <img src="${g.image}" alt="${g.title}" class="w-full h-full object-cover group-hover:scale-105 transition duration-300 opacity-90" onerror="handleImageError(this)">
-                        <div class="absolute inset-0 bg-gradient-to-t from-slate-900 via-transparent to-transparent"></div>
-                        <span class="absolute top-3 left-3 bg-slate-950/80 backdrop-blur-md text-amber-400 text-xs font-extrabold px-3 py-1 rounded-full uppercase tracking-wider border border-amber-500/40 shadow-md flex items-center gap-1.5">
-                            <i class="fa-solid fa-lock text-[10px]"></i> PREVIEW PROTECTED
-                        </span>
-                        <span class="absolute bottom-3 left-3 bg-slate-900/90 text-emerald-400 text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider border border-slate-700">
-                            ${g.category}
-                        </span>
-                    </div>
-                    <div class="p-5 flex flex-col flex-grow justify-between">
+            filtered.forEach(guide => {
+                const theme = categoryTheme[guide.category] || categoryTheme["Farmers"];
+                const card = document.createElement('div');
+                card.className = `${theme.bg} rounded-3xl shadow-md hover:shadow-xl ${theme.border} border overflow-hidden transition-all duration-300 flex flex-col justify-between group`;
+                
+                const cardDescription = guide.desc || guide.description || '';
+                let imageHtml = '';
+                
+                if (guide.image) {
+                    imageHtml = `
+                        <div class="relative h-48 bg-slate-950 overflow-hidden">
+                            <img src="${guide.image}" alt="${guide.title}" 
+                                 class="w-full h-full object-cover group-hover:scale-105 transition duration-500" style="filter: blur(1.5px); pointer-events: none;"
+                                 onerror="handleImageError(this)">
+                            <div class="absolute inset-0 bg-slate-950/15 flex items-center justify-center">
+                                <span class="bg-slate-900/85 text-slate-100 text-[10px] font-bold px-3 py-1 rounded-full uppercase tracking-wider backdrop-blur-sm shadow-md border border-slate-700/80">🔒 Preview Protected</span>
+                            </div>
+                        </div>
+                    `;
+                }
+
+                card.innerHTML = `
+                    ${imageHtml}
+                    <div class="p-5 sm:p-6 flex-grow flex flex-col justify-between">
                         <div>
-                            <h3 class="text-base font-extrabold text-white mb-2 group-hover:text-emerald-300 transition">${g.title}</h3>
-                            <p class="text-xs text-slate-300 line-clamp-2 font-medium">${g.description}</p>
+                            <div class="flex items-center justify-between mb-2">
+                                <span class="text-[10px] font-extrabold uppercase tracking-wider px-2.5 py-1 rounded-lg bg-slate-900 border border-slate-700 text-slate-300 shadow-2xs">${guide.category}</span>
+                            </div>
+                            <h3 class="text-lg font-bold text-white mb-2 group-hover:text-emerald-400 transition">${guide.title}</h3>
+                            <p class="text-slate-300 text-xs sm:text-sm line-clamp-3 mb-4 leading-relaxed">${cardDescription}</p>
                         </div>
-                        <div class="mt-4 pt-3 border-t border-slate-700/60 flex items-center justify-between text-xs font-bold text-amber-400">
-                            <span class="bg-emerald-950/90 text-emerald-300 px-3 py-1.5 rounded-xl border border-emerald-800/80 w-full text-center group-hover:bg-emerald-600 group-hover:text-white transition flex items-center justify-center gap-2">
-                                <i class="fa-solid fa-lock"></i> View Guide (Locked)
-                            </span>
+                        <div class="flex items-center gap-2.5 pt-4 border-t border-slate-800">
+                            <button onclick="openModal('${guide.id}')" class="flex-1 ${theme.buttonBg} text-white py-3 px-4 rounded-2xl text-xs font-bold transition flex items-center justify-center gap-2 shadow-md hover:shadow-lg transform active:scale-95">
+                                <i class="fa-solid fa-lock text-amber-300"></i> ${guide.isInteractive ? 'Launch Calculator' : 'View Guide (Locked)'}
+                            </button>
                         </div>
                     </div>
-                </div>
-            `).join('');
+                `;
+                grid.appendChild(card);
+            });
         }
 
-        function filterByCategory(cat) {
-            currentFilter = cat;
-            currentSubFilter = 'All';
-            
-            document.querySelectorAll('.category-btn').forEach(b => b.classList.remove('bg-slate-700', 'bg-emerald-600', 'bg-indigo-600', 'bg-sky-600', 'bg-rose-600', 'text-white'));
-            
-            const subContainer = document.getElementById('subCategoryContainer');
-            const handymanSubContainer = document.getElementById('handymanSubCategoryContainer');
-            
-            subContainer.classList.add('hidden');
-            handymanSubContainer.classList.add('hidden');
+        function filterByCategory(category) {
+            activeCategory = category;
+            activeSubCategory = 'All';
 
-            const activeBtn = document.getElementById(`cat-${cat}`);
+            document.querySelectorAll('.category-btn').forEach(btn => {
+                btn.className = "category-btn px-4 py-2 rounded-xl text-xs font-bold bg-slate-800 text-slate-300 border border-slate-700 hover:bg-slate-700 transition shadow-sm hover:scale-105";
+            });
+            const activeBtn = document.getElementById(`cat-${category}`);
             if (activeBtn) {
-                activeBtn.classList.add('text-white');
-                if(cat === 'Farmers') {
-                    activeBtn.classList.add('bg-emerald-600');
-                    subContainer.classList.remove('hidden');
-                } else if(cat === 'Builders') {
-                    activeBtn.classList.add('bg-indigo-600');
-                } else if(cat === 'Handyman') {
-                    activeBtn.classList.add('bg-sky-600');
-                    handymanSubContainer.classList.remove('hidden');
-                } else if(cat === 'Housewives') {
-                    activeBtn.classList.add('bg-rose-600');
-                } else {
-                    activeBtn.classList.add('bg-slate-700');
-                }
+                if (category === 'Farmers') activeBtn.className = "category-btn px-4 py-2 rounded-xl text-xs font-bold bg-emerald-700 text-white shadow-md transition scale-105";
+                else if (category === 'Builders') activeBtn.className = "category-btn px-4 py-2 rounded-xl text-xs font-bold bg-indigo-700 text-white shadow-md transition scale-105";
+                else if (category === 'Handyman') activeBtn.className = "category-btn px-4 py-2 rounded-xl text-xs font-bold bg-sky-700 text-white shadow-md transition scale-105";
+                else if (category === 'Housewives') activeBtn.className = "category-btn px-4 py-2 rounded-xl text-xs font-bold bg-rose-700 text-white shadow-md transition scale-105";
+                else activeBtn.className = "category-btn px-4 py-2 rounded-xl text-xs font-bold bg-slate-700 text-white shadow-md transition scale-105";
             }
+
             renderGuides();
         }
 
-        function filterBySubCategory(subCat) {
-            currentSubFilter = subCat;
+        function filterBySubCategory(subCategory) {
+            activeSubCategory = subCategory;
+
+            document.querySelectorAll('.subcat-btn').forEach(btn => {
+                btn.className = "subcat-btn px-3.5 py-1.5 rounded-xl text-xs font-bold bg-slate-800 text-emerald-300 border border-emerald-900/60 hover:bg-emerald-900 hover:text-white transition shadow-sm";
+            });
+            document.querySelectorAll('.hsubcat-btn').forEach(btn => {
+                btn.className = "hsubcat-btn px-3.5 py-1.5 rounded-xl text-xs font-bold bg-slate-800 text-sky-300 border border-sky-900/60 hover:bg-sky-900 hover:text-white transition shadow-sm";
+            });
+
+            const activeBtn = document.getElementById(`subcat-${subCategory}`) || document.getElementById(`hsubcat-${subCategory}`);
+            if (activeBtn) {
+                if (activeCategory === 'Handyman') {
+                    activeBtn.className = "hsubcat-btn px-3.5 py-1.5 rounded-xl text-xs font-bold bg-sky-700 text-white shadow-md transition";
+                } else {
+                    activeBtn.className = "subcat-btn px-3.5 py-1.5 rounded-xl text-xs font-bold bg-emerald-700 text-white shadow-md transition";
+                }
+            }
+
             renderGuides();
         }
 
@@ -384,124 +581,216 @@
             renderGuides();
         }
 
-        function handleImageError(img) {
-            img.src = 'https://images.unsplash.com/photo-1500937386664-56d1dfef3854?auto=format&fit=crop&w=600&q=80';
-        }
-
-        let previewInterval = null;
         function startCategoryLoop(category, event) {
             const popup = document.getElementById('categoryPreviewPopup');
             const titleEl = document.getElementById('previewTitle');
             const contentEl = document.getElementById('previewContent');
-            
-            let matched = category === 'All' ? guides : guides.filter(g => g.category === category);
-            if(matched.length === 0) return;
 
-            titleEl.innerText = `${category} Live Preview`;
+            const guidesInCat = category === 'All' ? allGuides : allGuides.filter(g => g.category === category);
+            if (guidesInCat.length === 0) return;
+
+            titleEl.innerText = `${category} (${guidesInCat.length} guides)`;
+            
+            let currentIndex = 0;
+            updateLoopItem(guidesInCat, currentIndex, contentEl);
+
+            clearInterval(loopInterval);
+            loopInterval = setInterval(() => {
+                currentIndex = (currentIndex + 1) % guidesInCat.length;
+                updateLoopItem(guidesInCat, currentIndex, contentEl);
+            }, 900);
+
             popup.classList.remove('hidden');
+        }
 
-            let index = 0;
-            contentEl.innerHTML = `<i class="fa-solid fa-spinner animate-spin mr-2"></i> ${matched[index].title}`;
-            
-            previewInterval = setInterval(() => {
-                index = (index + 1) % matched.length;
-                contentEl.innerHTML = `<span class="text-emerald-300 font-bold mr-2">#${index+1}</span> ${matched[index].title}`;
-            }, 800);
+        function updateLoopItem(guides, index, container) {
+            const guide = guides[index];
+            container.innerHTML = `
+                <div class="flex items-center gap-2.5 w-full">
+                    <span class="bg-emerald-500/20 text-emerald-400 font-bold px-2 py-0.5 rounded text-[10px] shrink-0">${index + 1}/${guides.length}</span>
+                    <span class="truncate font-semibold text-slate-100">${guide.title}</span>
+                </div>
+            `;
         }
 
         function stopCategoryLoop() {
-            clearInterval(previewInterval);
-            document.getElementById('categoryPreviewPopup').classList.add('hidden');
+            clearInterval(loopInterval);
+            const popup = document.getElementById('categoryPreviewPopup');
+            popup.classList.add('hidden');
         }
 
         function openModal(id) {
-            const guide = guides.find(g => g.id === id);
-            if(!guide) return;
-            activeGuideForModal = guide;
+            const guide = allGuides.find(g => g.id === id);
+            if (!guide) return;
+            activeGuideId = id;
 
             document.getElementById('modalTitle').innerText = guide.title;
-            document.getElementById('modalDescription').innerText = guide.description;
-            document.getElementById('modalImage').src = guide.image;
+            document.getElementById('modalDescription').innerText = guide.desc || guide.description || '';
             document.getElementById('modalCategoryBadge').innerText = guide.category;
             
             const subBadge = document.getElementById('modalSubCategoryBadge');
-            if(guide.subCategory && guide.subCategory !== 'All') {
+            if (guide.subCategory && guide.subCategory !== 'General') {
                 subBadge.innerText = guide.subCategory;
                 subBadge.classList.remove('hidden');
             } else {
                 subBadge.classList.add('hidden');
             }
 
-            const stepsList = document.getElementById('modalSteps');
-            stepsList.innerHTML = guide.steps.map((s, idx) => `
-                <li class="flex items-start gap-3 bg-slate-800/90 p-3.5 rounded-2xl border border-slate-700/80 text-xs font-medium text-slate-200 shadow-sm">
-                    <span class="bg-emerald-600 text-white font-bold w-5 h-5 rounded-full flex items-center justify-center shrink-0 text-xs">${idx + 1}</span>
-                    <span>${s}</span>
-                </li>
-            `).join('');
-
-            document.getElementById('secureOverlay').style.display = 'flex';
+            // Keep blur overlay active until purchase/download
+            document.getElementById('secureOverlay').classList.remove('hidden');
             document.getElementById('blurContentArea').classList.add('secure-blur');
             document.getElementById('modalImage').classList.add('secure-blur');
+
+            const modalImageContainer = document.getElementById('modalImageContainer');
+            const modalTextBody = document.getElementById('modalTextBody');
+            const modalCardWrapper = document.getElementById('modalCardWrapper');
+            
+            modalCardWrapper.classList.remove('max-w-5xl');
+            modalCardWrapper.classList.add('max-w-2xl');
+            modalTextBody.classList.remove('hidden');
+
+            if (guide.image) {
+                modalImageContainer.classList.remove('hidden');
+                document.getElementById('modalImage').src = guide.image;
+            }
+            
+            const stepsList = document.getElementById('modalSteps');
+            stepsList.innerHTML = '';
+            guide.steps.forEach((step, idx) => {
+                const li = document.createElement('li');
+                li.className = "flex items-start gap-3 text-sm text-slate-300 bg-slate-800 p-3.5 rounded-2xl border border-slate-700 shadow-sm";
+                li.innerHTML = `<span class="bg-sky-700 text-white text-xs font-extrabold w-6 h-6 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5 shadow-sm">${idx + 1}</span> <span class="font-medium">${step}</span>`;
+                stepsList.appendChild(li);
+            });
+
             document.getElementById('guideModal').classList.remove('hidden');
+            document.body.style.overflow = 'hidden';
         }
 
         function closeModal() {
             document.getElementById('guideModal').classList.add('hidden');
-            activeGuideForModal = null;
-        }
-
-        function downloadCurrentGuide() {
-            if(!activeGuideForModal) return;
-            document.getElementById('secureOverlay').style.display = 'none';
-            document.getElementById('blurContentArea').classList.remove('secure-blur');
-            document.getElementById('modalImage').classList.remove('secure-blur');
-            document.getElementById('modalCloseBtn').style.display = 'none';
-
-            const wrapper = document.getElementById('modalCardWrapper');
-            
-            html2canvas(wrapper, { scale: 2, backgroundColor: '#0f172a' }).then(canvas => {
-                const link = document.createElement('a');
-                link.download = `${activeGuideForModal.title.replace(/[^a-z0-9]/gi, '_').toLowerCase()}_guide.png`;
-                link.href = canvas.toDataURL('image/png');
-                link.click();
-
-                document.getElementById('secureOverlay').style.display = 'flex';
-                document.getElementById('blurContentArea').classList.add('secure-blur');
-                document.getElementById('modalImage').classList.add('secure-blur');
-                document.getElementById('modalCloseBtn').style.display = 'flex';
-            });
+            document.body.style.overflow = 'auto';
+            activeGuideId = null;
         }
 
         function openCalculatorModal() {
             document.getElementById('calculatorModal').classList.remove('hidden');
+            document.body.style.overflow = 'hidden';
+            calculateUtility();
+            calculateTankMix();
         }
+
         function closeCalculatorModal() {
             document.getElementById('calculatorModal').classList.add('hidden');
+            document.body.style.overflow = 'auto';
         }
 
-        function calculateSprayer() {
-            const rate = parseFloat(document.getElementById('sprayRate').value);
-            const width = parseFloat(document.getElementById('boomWidth').value);
-            const speed = parseFloat(document.getElementById('tractorSpeed').value);
-            if(isNaN(rate) || isNaN(width) || isNaN(speed) || speed === 0) return alert('Enter valid numbers.');
-            const flowPerNozzle = (rate * speed * 0.5) / 600;
-            const resDiv = document.getElementById('sprayResult');
-            resDiv.classList.remove('hidden');
-            resDiv.innerHTML = `<strong>Result:</strong> Required output = <strong>${flowPerNozzle.toFixed(2)} L/min</strong> at ${speed} km/h (${width}m boom).`;
+        function calculateUtility() {
+            const qty = parseFloat(document.getElementById('calcQty').value) || 0;
+            const rate = parseFloat(document.getElementById('calcRate').value) || 0;
+            document.getElementById('calcResult').innerText = (qty * rate).toFixed(1) + " units total";
         }
 
-        function calculateTreeDensity() {
-            const row = parseFloat(document.getElementById('rowSpacing').value);
-            const tree = parseFloat(document.getElementById('treeSpacing').value);
-            if(isNaN(row) || isNaN(tree) || row === 0 || tree === 0) return alert('Enter valid dimensions.');
-            const density = 10000 / (row * tree);
-            const resDiv = document.getElementById('treeResult');
-            resDiv.classList.remove('hidden');
-            resDiv.innerHTML = `<strong>Result:</strong> Density = <strong>${Math.round(density)} trees/ha</strong> (${row}m x ${tree}m).`;
+        function calculateTankMix() {
+            const cap = parseFloat(document.getElementById('tankCap').value) || 0;
+            const rate = parseFloat(document.getElementById('tankRate').value) || 0;
+            document.getElementById('tankResult').innerText = ((cap / 100) * rate).toFixed(1) + " mL / g total";
         }
 
-        window.onload = () => { renderGuides(); };
+        async function downloadCurrentGuide() {
+            const guide = allGuides.find(g => g.id === activeGuideId);
+            if (!guide) return;
+
+            const isInteractiveGuide = guide.isInteractive || false;
+            const assetUrl = guide.interactiveUrl || guide.image;
+            const assetExtension = isInteractiveGuide || guide.interactiveUrl ? 'html' : 'jpg';
+            const assetName = isInteractiveGuide ? 'Interactive_Tool' : 'Infographic';
+
+            if (confirm(`Download Package: ${guide.title}\nIncludes: Full Procedure Text + ${isInteractiveGuide ? 'Interactive HTML Tool' : 'Infographic JPG'} (ZIP Bundle)\nPrice: R20.00\n\nProceed to secure PayFast checkout?`)) {
+                
+                // Clear Blur and Watermark upon initiating checkout
+                document.getElementById('secureOverlay').classList.add('hidden');
+                document.getElementById('blurContentArea').classList.remove('secure-blur');
+                document.getElementById('modalImage').classList.remove('secure-blur');
+
+                // Prepare text procedure file content
+                let textContent = `GUIDE TITLE: ${guide.title}\n`;
+                textContent += `CATEGORY: ${guide.category} > ${guide.subCategory}\n\n`;
+                textContent += `OVERVIEW:\n${guide.desc || guide.description || ''}\n\n`;
+                textContent += `STEP-BY-STEP PROCEDURE:\n`;
+                guide.steps.forEach((step, i) => {
+                    textContent += `${i + 1}. ${step}\n`;
+                });
+
+                // Package both Text and Companion Asset (.html or .jpg) into a single ZIP file using JSZip
+                const zip = new JSZip();
+                const baseFilename = guide.title.replace(/[^a-zA-Z0-9]/g, '_');
+                
+                zip.file(`${baseFilename}_Guide.txt`, textContent);
+
+                if (assetUrl) {
+                    try {
+                        const response = await fetch(assetUrl);
+                        if (!response.ok) throw new Error('Network response was not ok');
+                        const blob = await response.blob();
+                        zip.file(`${baseFilename}_${assetName}.${assetExtension}`, blob);
+                    } catch (e) {
+                        console.warn("Could not fetch local asset (check if running via local server like Live Server). Packaging text guide only.", e);
+                    }
+                }
+
+                // Generate and trigger ZIP download first
+                zip.generateAsync({ type: "blob" }).then(function(content) {
+                    const zipLink = document.createElement('a');
+                    zipLink.href = URL.createObjectURL(content);
+                    zipLink.download = `${baseFilename}_Package.zip`;
+                    document.body.appendChild(zipLink);
+                    zipLink.click();
+                    document.body.removeChild(zipLink);
+
+                    // Submit to PayFast in a new tab with your prefilled contact info
+                    setTimeout(() => {
+                        const payfastUrl = 'https://www.payfast.co.za/eng/process';
+                        const form = document.createElement('form');
+                        form.method = 'POST';
+                        form.action = payfastUrl;
+                        form.target = '_blank';
+
+                        const guideDesc = guide.desc || guide.description || '';
+                        const paymentData = {
+                            merchant_id: '37563857',
+                            merchant_key: 'q1cd2rdny4a53',
+                            return_url: window.location.href, 
+                            cancel_url: window.location.href, 
+                            item_name: `Guide Package: ${guide.title}`,
+                            amount: '20.00', 
+                            item_description: guideDesc.substring(0, 100),
+                            name_first: 'Lukas',
+                            email_address: 'enozsprayers@gmail.com',
+                            cell_number: '0837599222'
+                        };
+
+                        for (const key in paymentData) {
+                            if (paymentData.hasOwnProperty(key)) {
+                                const input = document.createElement('input');
+                                input.type = 'hidden';
+                                input.name = key;
+                                input.value = paymentData[key];
+                                form.appendChild(input);
+                            }
+                        }
+
+                        document.body.appendChild(form);
+                        form.submit();
+                        document.body.removeChild(form);
+                    }, 500);
+                });
+            }
+        }
+
+        window.onload = function() {
+            renderGuides();
+        };
     </script>
 </body>
 </html>
