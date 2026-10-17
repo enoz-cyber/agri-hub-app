@@ -10,7 +10,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <!-- Inter Font -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <!-- html2canvas CDN for card screen grab capture -->
+    <!-- html2canvas CDN for high-res single card generation -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
     
     <!-- Inline Web Manifest for PWA Capabilities -->
@@ -141,6 +141,7 @@
 
     <!-- Guide Modal -->
     <div id="guideModal" class="fixed inset-0 bg-slate-950/80 backdrop-blur-md z-50 hidden flex items-center justify-center p-4 overflow-y-auto">
+        <!-- MODAL CARD WRAPPER: Structured cleanly as one cohesive graphic card -->
         <div id="modalCardWrapper" class="bg-slate-900 rounded-3xl max-w-2xl w-full overflow-hidden shadow-2xl transform transition-all my-8 border border-slate-700 relative text-slate-100">
             
             <div id="secureOverlay" class="secure-watermark flex-col text-center p-6 text-white" onclick="downloadCurrentGuide()">
@@ -150,13 +151,14 @@
                 <h3 class="text-lg font-extrabold mb-1 pointer-events-none">Protected Premium Guide</h3>
                 <p class="text-xs text-slate-300 max-w-xs mb-4 font-medium pointer-events-none">Full step-by-step procedures and high-res infographics are locked to prevent free usage and screen grabbing.</p>
                 <button type="button" onclick="event.stopPropagation(); downloadCurrentGuide();" class="bg-gradient-to-r from-amber-500 to-orange-500 hover:from-amber-400 hover:to-orange-400 text-slate-950 px-6 py-3 rounded-2xl text-xs font-extrabold transition shadow-lg flex items-center gap-2 transform hover:scale-105">
-                    <i class="fa-solid fa-cart-shopping"></i> Unlock & Download Card (R20.00)
+                    <i class="fa-solid fa-cart-shopping"></i> Unlock & Download Pro Card (R20.00)
                 </button>
             </div>
 
-            <div id="modalImageContainer" class="relative h-64 sm:h-72 bg-slate-950">
-                <img id="modalImage" src="" alt="Guide Image" class="w-full h-full object-cover opacity-90 secure-blur" onerror="handleImageError(this)">
-                <div class="absolute inset-0 bg-gradient-to-t from-slate-950/90 via-slate-950/30 to-transparent"></div>
+            <!-- Image Header Container -->
+            <div id="modalImageContainer" class="relative h-64 sm:h-80 bg-slate-950">
+                <img id="modalImage" src="" alt="Guide Image" class="w-full h-full object-cover secure-blur" onerror="handleImageError(this)">
+                <div class="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/20 to-transparent"></div>
                 <button id="modalCloseBtn" onclick="closeModal()" class="absolute top-4 right-4 bg-black/60 hover:bg-black/80 text-white w-9 h-9 rounded-full flex items-center justify-center transition border border-white/20 shadow-md z-30">
                     <i class="fa-solid fa-xmark text-sm"></i>
                 </button>
@@ -167,7 +169,8 @@
                 </div>
             </div>
 
-            <div id="modalTextBody" class="p-6 sm:p-8 space-y-6 max-h-[60vh] overflow-y-auto relative bg-slate-900">
+            <!-- Text Body Container -->
+            <div id="modalTextBody" class="p-6 sm:p-8 space-y-6 relative bg-slate-900">
                 <div class="secure-blur" id="blurContentArea">
                     <div>
                         <h3 class="text-xs font-bold uppercase text-slate-400 tracking-wider mb-2">Overview</h3>
@@ -179,9 +182,16 @@
                     </div>
                 </div>
                 
+                <!-- Footer branding included in the card graphic -->
+                <div id="cardBrandingFooter" class="pt-4 border-t border-slate-800 flex justify-between items-center text-[10px] text-slate-400 font-semibold uppercase tracking-wider">
+                    <span>Professional & Lifestyle Hub</span>
+                    <span>Verified Official Guide</span>
+                </div>
+
+                <!-- Interactive UI Action Footer (Hidden during screenshot capture) -->
                 <div id="modalActionFooter" class="border-t border-slate-800 pt-4 flex justify-between items-center z-30 relative">
                     <button onclick="downloadCurrentGuide()" class="bg-amber-500 hover:bg-amber-600 text-slate-950 px-5 py-2.5 rounded-xl text-xs font-bold transition flex items-center gap-2 shadow-md">
-                        <i class="fa-solid fa-download"></i> Unlock & Download Card - R20.00
+                        <i class="fa-solid fa-download"></i> Unlock & Download Pro Card - R20.00
                     </button>
                     <button onclick="closeModal()" class="bg-slate-800 hover:bg-slate-700 text-slate-200 px-5 py-2.5 rounded-xl text-xs font-semibold transition">Close</button>
                 </div>
@@ -631,7 +641,6 @@
             
             modalCardWrapper.classList.remove('max-w-5xl');
             modalCardWrapper.classList.add('max-w-2xl');
-            modalTextBody.classList.remove('hidden');
 
             if (guide.image) {
                 modalImageContainer.classList.remove('hidden');
@@ -681,47 +690,39 @@
             document.getElementById('tankResult').innerText = ((cap / 100) * rate).toFixed(1) + " mL / g total";
         }
 
-        // Optimized Crystal-Clear Card Screen Grab Capture (Hides UI Buttons & Unblurs Image)
+        // Professional Single Card Graphic Image Export (Clean, Crisp, and Complete)
         function downloadCurrentGuide() {
             const guide = allGuides.find(g => g.id === activeGuideId);
             if (!guide) return;
 
-            if (confirm(`Unlock & Download High-Res Guide Card: ${guide.title}\nPrice: R20.00\n\nProceed to PayFast Sandbox checkout?`)) {
+            if (confirm(`Unlock & Download Pro Guide Card: ${guide.title}\nPrice: R20.00\n\nProceed to PayFast Sandbox checkout?`)) {
                 
-                // Hide Overlay, Close Button & Action Footer
                 const secureOverlay = document.getElementById('secureOverlay');
                 const modalCloseBtn = document.getElementById('modalCloseBtn');
                 const modalActionFooter = document.getElementById('modalActionFooter');
+                const cardBrandingFooter = document.getElementById('cardBrandingFooter');
                 const blurContentArea = document.getElementById('blurContentArea');
                 const modalImage = document.getElementById('modalImage');
-                const modalTextBody = document.getElementById('modalTextBody');
                 const wrapper = document.getElementById('modalCardWrapper');
 
+                // Hide lock overlay, close icon, and action button footer
                 secureOverlay.classList.add('hidden');
                 modalCloseBtn.style.display = 'none';
                 modalActionFooter.style.display = 'none';
                 
-                // Completely remove blur & CSS filters for capture
+                // Unblur image and text completely
                 blurContentArea.classList.remove('secure-blur');
                 modalImage.classList.remove('secure-blur');
                 modalImage.style.filter = "none";
 
-                // Save old style and temporarily remove scrolling height limit for full unclipped rendering
-                const origMaxHeight = modalTextBody.style.maxHeight;
-                const origOverflow = modalTextBody.style.overflow;
-                modalTextBody.style.maxHeight = 'none';
-                modalTextBody.style.overflow = 'visible';
-
-                // Render at 3x scale for crisp high quality
-                html2canvas(wrapper, { scale: 3, backgroundColor: '#0f172a', useCORS: true }).then(canvas => {
+                // Render high-res single professional card image (Scale 3x for crisp output)
+                html2canvas(wrapper, { scale: 3, backgroundColor: '#0f172a', useCORS: true, logging: false }).then(canvas => {
                     const link = document.createElement('a');
-                    link.download = `${guide.title.replace(/[^a-z0-9]/gi, '_').toLowerCase()}_guide_card.png`;
+                    link.download = `${guide.title.replace(/[^a-z0-9]/gi, '_').toLowerCase()}_pro_card.png`;
                     link.href = canvas.toDataURL('image/png', 1.0);
                     link.click();
 
-                    // Restore original styles, buttons, and blurs
-                    modalTextBody.style.maxHeight = origMaxHeight;
-                    modalTextBody.style.overflow = origOverflow;
+                    // Restore modal UI state
                     modalCloseBtn.style.display = 'flex';
                     modalActionFooter.style.display = 'flex';
                     secureOverlay.classList.remove('hidden');
@@ -729,7 +730,7 @@
                     modalImage.classList.add('secure-blur');
                     modalImage.style.filter = "";
 
-                    // Redirect to PayFast Sandbox checkout
+                    // Trigger PayFast Sandbox checkout in a new tab
                     setTimeout(() => {
                         const payfastUrl = 'https://sandbox.payfast.co.za/eng/process';
                         const form = document.createElement('form');
