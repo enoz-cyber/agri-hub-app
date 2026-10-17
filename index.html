@@ -277,46 +277,6 @@
             "Housewives": { bg: "bg-gradient-to-br from-slate-800/90 via-slate-800/50 to-slate-900", border: "border-rose-900/40", badgeBg: "bg-rose-700", subBadgeBg: "bg-pink-700", buttonBg: "bg-gradient-to-r from-rose-600 to-pink-600 hover:from-rose-500 hover:to-pink-500" }
         };
 
-        const standaloneTreeDensityCalculatorHTML = `<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Orchard Tree Density & Population Calculator</title>
-    <script src="https://cdn.tailwindcss.com"><\/script>
-</head>
-<body class="bg-slate-900 text-slate-100 p-8 font-sans min-h-screen flex items-center justify-center">
-    <div class="bg-slate-800 p-8 rounded-3xl border border-teal-500/30 max-w-lg w-full shadow-2xl">
-        <h2 class="text-xl font-bold text-teal-400 mb-4 flex items-center gap-2">🌳 Orchard Tree Density Calculator</h2>
-        <p class="text-xs text-slate-300 mb-6">Calculate target tree count per hectare based on custom row and tree spacing specs.</p>
-        
-        <div class="space-y-4">
-            <div>
-                <label class="block text-xs font-semibold text-slate-300 mb-1">Row Spacing (meters)</label>
-                <input type="number" id="rowSpace" value="4.5" step="0.1" class="w-full bg-slate-900 border border-slate-700 p-3 rounded-xl text-sm text-white font-bold outline-none focus:ring-2 focus:ring-teal-500" oninput="calcDensity()">
-            </div>
-            <div>
-                <label class="block text-xs font-semibold text-slate-300 mb-1">Tree Spacing in Row (meters)</label>
-                <input type="number" id="treeSpace" value="2.0" step="0.1" class="w-full bg-slate-900 border border-slate-700 p-3 rounded-xl text-sm text-white font-bold outline-none focus:ring-2 focus:ring-teal-500" oninput="calcDensity()">
-            </div>
-            <div class="p-4 bg-slate-950 rounded-2xl border border-teal-800/60 mt-6 text-center">
-                <span class="text-xs text-slate-400 font-medium block mb-1">Estimated Density</span>
-                <span id="densityOut" class="text-2xl font-extrabold text-teal-300">1,111 Trees / Hectare</span>
-            </div>
-        </div>
-    </div>
-    <script>
-        function calcDensity() {
-            const r = parseFloat(document.getElementById('rowSpace').value) || 0;
-            const t = parseFloat(document.getElementById('treeSpace').value) || 0;
-            if(r <= 0 || t <= 0) return;
-            const d = Math.round(10000 / (r * t));
-            document.getElementById('densityOut').innerText = d.toLocaleString() + ' Trees / Hectare';
-        }
-        calcDensity();
-    <\/script>
-</body>
-</html>`;
-
         const allGuides = [
             {
                 id: "plough", title: "Plough Alignment & Attachment Guide", category: "Farmers", subCategory: "Crop Farming", image: "images/plough-alignment.jpg.jpg",
@@ -721,34 +681,55 @@
             document.getElementById('tankResult').innerText = ((cap / 100) * rate).toFixed(1) + " mL / g total";
         }
 
-        // Restored html2canvas Screenshot Card Download + Sandbox PayFast Checkout
+        // Optimized Crystal-Clear Card Screen Grab Capture (Hides UI Buttons & Unblurs Image)
         function downloadCurrentGuide() {
             const guide = allGuides.find(g => g.id === activeGuideId);
             if (!guide) return;
 
-            if (confirm(`Unlock & Download Guide Card: ${guide.title}\nPrice: R20.00\n\nProceed to PayFast Sandbox checkout?`)) {
+            if (confirm(`Unlock & Download High-Res Guide Card: ${guide.title}\nPrice: R20.00\n\nProceed to PayFast Sandbox checkout?`)) {
                 
-                // Clear Blur and Watermark so the screenshot is fully visible
-                document.getElementById('secureOverlay').classList.add('hidden');
-                document.getElementById('blurContentArea').classList.remove('secure-blur');
-                document.getElementById('modalImage').classList.remove('secure-blur');
-                document.getElementById('modalCloseBtn').style.display = 'none';
-
+                // Hide Overlay, Close Button & Action Footer
+                const secureOverlay = document.getElementById('secureOverlay');
+                const modalCloseBtn = document.getElementById('modalCloseBtn');
+                const modalActionFooter = document.getElementById('modalActionFooter');
+                const blurContentArea = document.getElementById('blurContentArea');
+                const modalImage = document.getElementById('modalImage');
+                const modalTextBody = document.getElementById('modalTextBody');
                 const wrapper = document.getElementById('modalCardWrapper');
 
-                html2canvas(wrapper, { scale: 2, backgroundColor: '#0f172a' }).then(canvas => {
+                secureOverlay.classList.add('hidden');
+                modalCloseBtn.style.display = 'none';
+                modalActionFooter.style.display = 'none';
+                
+                // Completely remove blur & CSS filters for capture
+                blurContentArea.classList.remove('secure-blur');
+                modalImage.classList.remove('secure-blur');
+                modalImage.style.filter = "none";
+
+                // Save old style and temporarily remove scrolling height limit for full unclipped rendering
+                const origMaxHeight = modalTextBody.style.maxHeight;
+                const origOverflow = modalTextBody.style.overflow;
+                modalTextBody.style.maxHeight = 'none';
+                modalTextBody.style.overflow = 'visible';
+
+                // Render at 3x scale for crisp high quality
+                html2canvas(wrapper, { scale: 3, backgroundColor: '#0f172a', useCORS: true }).then(canvas => {
                     const link = document.createElement('a');
-                    link.download = `${guide.title.replace(/[^a-z0-9]/gi, '_').toLowerCase()}_guide.png`;
-                    link.href = canvas.toDataURL('image/png');
+                    link.download = `${guide.title.replace(/[^a-z0-9]/gi, '_').toLowerCase()}_guide_card.png`;
+                    link.href = canvas.toDataURL('image/png', 1.0);
                     link.click();
 
-                    // Restore blur overlay and close button
-                    document.getElementById('secureOverlay').classList.remove('hidden');
-                    document.getElementById('blurContentArea').classList.add('secure-blur');
-                    document.getElementById('modalImage').classList.add('secure-blur');
-                    document.getElementById('modalCloseBtn').style.display = 'flex';
+                    // Restore original styles, buttons, and blurs
+                    modalTextBody.style.maxHeight = origMaxHeight;
+                    modalTextBody.style.overflow = origOverflow;
+                    modalCloseBtn.style.display = 'flex';
+                    modalActionFooter.style.display = 'flex';
+                    secureOverlay.classList.remove('hidden');
+                    blurContentArea.classList.add('secure-blur');
+                    modalImage.classList.add('secure-blur');
+                    modalImage.style.filter = "";
 
-                    // Trigger PayFast Sandbox checkout in a new tab
+                    // Redirect to PayFast Sandbox checkout
                     setTimeout(() => {
                         const payfastUrl = 'https://sandbox.payfast.co.za/eng/process';
                         const form = document.createElement('form');
