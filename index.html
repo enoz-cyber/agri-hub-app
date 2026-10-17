@@ -155,8 +155,8 @@
             </div>
 
             <!-- Image Header Container -->
-            <div id="modalImageContainer" class="relative bg-slate-950">
-                <img id="modalImage" src="" alt="Guide Image" class="w-full h-auto object-contain secure-blur" onerror="handleImageError(this)">
+            <div id="modalImageContainer" class="relative bg-slate-950 h-56 sm:h-64 flex items-center justify-center overflow-hidden border-b border-slate-800">
+                <img id="modalImage" src="" alt="Guide Image" class="w-full h-full object-cover secure-blur" onerror="handleImageError(this)">
                 <button id="modalCloseBtn" onclick="closeModal()" class="absolute top-4 right-4 bg-black/60 hover:bg-black/80 text-white w-9 h-9 rounded-full flex items-center justify-center transition border border-white/20 shadow-md z-30">
                     <i class="fa-solid fa-xmark text-sm"></i>
                 </button>
@@ -305,7 +305,7 @@
 
         function handleImageError(imgElement) {
             imgElement.onerror = null;
-            imgElement.src = "https://placehold.co/600x400/0369a1/ffffff?text=Protected+Infographic";
+            imgElement.src = "https://placehold.co/600x400/0369a1/ffffff?text=Plumbing+Repair+Guide";
         }
 
         const categoryTheme = {
@@ -492,7 +492,7 @@
                 steps: ["Shut off water.", "Dry pipe section.", "Apply repair tape.", "Test pressure."]
             },
             {
-                id: "toilet-unblock", title: "How to Unblock a Toilet", category: "Handyman", subCategory: "Plumbing", image: "images/plumbing-repair.jpg.jpg",
+                id: "toilet-unblock", title: "How to Unblock a Toilet", category: "Handyman", subCategory: "Plumbing", image: "images/plumbing-repar.jpg.jpg",
                 desc: "Essential step-by-step procedure to safely unblock a toilet using overflow prevention, flange plungers, hot soapy water, or a toilet auger.",
                 steps: [
                     "Prevent an overflow by pushing the flapper valve down or shutting off the water valve.",
@@ -699,7 +699,7 @@
             document.getElementById('modalImage').classList.add('secure-blur');
 
             const modalImageContainer = document.getElementById('modalImageContainer');
-            const modalTextBody = document.getElementById('modalTextBody');
+            const modalImage = document.getElementById('modalImage');
             const modalCardWrapper = document.getElementById('modalCardWrapper');
             
             modalCardWrapper.classList.remove('max-w-5xl');
@@ -707,7 +707,9 @@
 
             if (guide.image) {
                 modalImageContainer.classList.remove('hidden');
-                document.getElementById('modalImage').src = guide.image;
+                modalImage.src = guide.image;
+            } else {
+                modalImageContainer.classList.add('hidden');
             }
             
             const stepsList = document.getElementById('modalSteps');
