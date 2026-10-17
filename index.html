@@ -10,8 +10,8 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <!-- Inter Font -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <!-- JSZip CDN for bundling text and asset into a single package -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+    <!-- html2canvas CDN for card screen grab capture -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
     
     <!-- Inline Web Manifest for PWA Capabilities -->
     <link rel="manifest" href='data:application/manifest+json,{"name":"Professional & Lifestyle Hub","short_name":"HubApp","start_url":".","display":"standalone","background_color":"#065f46","theme_color":"#065f46"}'>
@@ -30,7 +30,6 @@
         ::-webkit-scrollbar-thumb:hover { background: #475569; }
         .glass-header { background: linear-gradient(135deg, #047857 0%, #065f46 50%, #022c22 100%); }
         
-        /* Optimized Blur Effect (Clearer View, Unreadable Text) */
         .secure-blur {
             filter: blur(4px);
             transition: filter 0.3s ease;
@@ -151,14 +150,14 @@
                 <h3 class="text-lg font-extrabold mb-1 pointer-events-none">Protected Premium Guide</h3>
                 <p class="text-xs text-slate-300 max-w-xs mb-4 font-medium pointer-events-none">Full step-by-step procedures and high-res infographics are locked to prevent free usage and screen grabbing.</p>
                 <button type="button" onclick="event.stopPropagation(); downloadCurrentGuide();" class="bg-gradient-to-r from-amber-500 to-orange-500 hover:from-amber-400 hover:to-orange-400 text-slate-950 px-6 py-3 rounded-2xl text-xs font-extrabold transition shadow-lg flex items-center gap-2 transform hover:scale-105">
-                    <i class="fa-solid fa-cart-shopping"></i> Unlock & Download Package (R20.00)
+                    <i class="fa-solid fa-cart-shopping"></i> Unlock & Download Card (R20.00)
                 </button>
             </div>
 
             <div id="modalImageContainer" class="relative h-64 sm:h-72 bg-slate-950">
                 <img id="modalImage" src="" alt="Guide Image" class="w-full h-full object-cover opacity-90 secure-blur" onerror="handleImageError(this)">
                 <div class="absolute inset-0 bg-gradient-to-t from-slate-950/90 via-slate-950/30 to-transparent"></div>
-                <button onclick="closeModal()" class="absolute top-4 right-4 bg-black/60 hover:bg-black/80 text-white w-9 h-9 rounded-full flex items-center justify-center transition border border-white/20 shadow-md z-30">
+                <button id="modalCloseBtn" onclick="closeModal()" class="absolute top-4 right-4 bg-black/60 hover:bg-black/80 text-white w-9 h-9 rounded-full flex items-center justify-center transition border border-white/20 shadow-md z-30">
                     <i class="fa-solid fa-xmark text-sm"></i>
                 </button>
                 <div class="absolute bottom-4 left-6 right-6 flex items-center gap-2 flex-wrap z-30 pointer-events-none">
@@ -180,9 +179,9 @@
                     </div>
                 </div>
                 
-                <div class="border-t border-slate-800 pt-4 flex justify-between items-center z-30 relative">
+                <div id="modalActionFooter" class="border-t border-slate-800 pt-4 flex justify-between items-center z-30 relative">
                     <button onclick="downloadCurrentGuide()" class="bg-amber-500 hover:bg-amber-600 text-slate-950 px-5 py-2.5 rounded-xl text-xs font-bold transition flex items-center gap-2 shadow-md">
-                        <i class="fa-solid fa-download"></i> Unlock Package (ZIP Bundle) - R20.00
+                        <i class="fa-solid fa-download"></i> Unlock & Download Card - R20.00
                     </button>
                     <button onclick="closeModal()" class="bg-slate-800 hover:bg-slate-700 text-slate-200 px-5 py-2.5 rounded-xl text-xs font-semibold transition">Close</button>
                 </div>
@@ -278,7 +277,6 @@
             "Housewives": { bg: "bg-gradient-to-br from-slate-800/90 via-slate-800/50 to-slate-900", border: "border-rose-900/40", badgeBg: "bg-rose-700", subBadgeBg: "bg-pink-700", buttonBg: "bg-gradient-to-r from-rose-600 to-pink-600 hover:from-rose-500 hover:to-pink-500" }
         };
 
-        // Embedded standalone HTML calculator string template
         const standaloneTreeDensityCalculatorHTML = `<!DOCTYPE html>
 <html lang="en">
 <head>
@@ -723,72 +721,34 @@
             document.getElementById('tankResult').innerText = ((cap / 100) * rate).toFixed(1) + " mL / g total";
         }
 
-        async function downloadCurrentGuide() {
+        // Restored html2canvas Screenshot Card Download + Sandbox PayFast Checkout
+        function downloadCurrentGuide() {
             const guide = allGuides.find(g => g.id === activeGuideId);
             if (!guide) return;
 
-            const isInteractiveGuide = guide.isInteractive || false;
-            const assetUrl = guide.interactiveUrl || guide.image;
-            const assetExtension = isInteractiveGuide || guide.interactiveUrl ? 'html' : 'jpg';
-            const assetName = isInteractiveGuide ? 'Interactive_Tool' : 'Infographic';
-
-            if (confirm(`Download Package: ${guide.title}\nIncludes: Full Procedure Text + ${isInteractiveGuide ? 'Interactive HTML Tool' : 'Infographic JPG'} (ZIP Bundle)\nPrice: R20.00\n\nProceed to PayFast Sandbox checkout?`)) {
+            if (confirm(`Unlock & Download Guide Card: ${guide.title}\nPrice: R20.00\n\nProceed to PayFast Sandbox checkout?`)) {
                 
+                // Clear Blur and Watermark so the screenshot is fully visible
                 document.getElementById('secureOverlay').classList.add('hidden');
                 document.getElementById('blurContentArea').classList.remove('secure-blur');
                 document.getElementById('modalImage').classList.remove('secure-blur');
+                document.getElementById('modalCloseBtn').style.display = 'none';
 
-                let textContent = `GUIDE TITLE: ${guide.title}\n`;
-                textContent += `CATEGORY: ${guide.category} > ${guide.subCategory}\n\n`;
-                textContent += `OVERVIEW:\n${guide.desc || guide.description || ''}\n\n`;
-                textContent += `STEP-BY-STEP PROCEDURE:\n`;
-                guide.steps.forEach((step, i) => {
-                    textContent += `${i + 1}. ${step}\n`;
-                });
+                const wrapper = document.getElementById('modalCardWrapper');
 
-                const zip = new JSZip();
-                const baseFilename = guide.title.replace(/[^a-zA-Z0-9]/g, '_');
-                
-                zip.file(`${baseFilename}_Guide.txt`, textContent);
+                html2canvas(wrapper, { scale: 2, backgroundColor: '#0f172a' }).then(canvas => {
+                    const link = document.createElement('a');
+                    link.download = `${guide.title.replace(/[^a-z0-9]/gi, '_').toLowerCase()}_guide.png`;
+                    link.href = canvas.toDataURL('image/png');
+                    link.click();
 
-                // Check if interactive calculator asset is requested
-                if (isInteractiveGuide) {
-                    let assetAdded = false;
-                    if (assetUrl) {
-                        try {
-                            const response = await fetch(assetUrl);
-                            if (response.ok) {
-                                const blob = await response.blob();
-                                zip.file(`${baseFilename}_${assetName}.${assetExtension}`, blob);
-                                assetAdded = true;
-                            }
-                        } catch (e) {
-                            console.warn("Could not fetch remote interactive HTML file. Using built-in standalone template.", e);
-                        }
-                    }
-                    if (!assetAdded) {
-                        zip.file(`${baseFilename}_Interactive_Calculator.html`, standaloneTreeDensityCalculatorHTML);
-                    }
-                } else if (assetUrl) {
-                    try {
-                        const response = await fetch(assetUrl);
-                        if (response.ok) {
-                            const blob = await response.blob();
-                            zip.file(`${baseFilename}_${assetName}.${assetExtension}`, blob);
-                        }
-                    } catch (e) {
-                        console.warn("Could not fetch image asset.", e);
-                    }
-                }
+                    // Restore blur overlay and close button
+                    document.getElementById('secureOverlay').classList.remove('hidden');
+                    document.getElementById('blurContentArea').classList.add('secure-blur');
+                    document.getElementById('modalImage').classList.add('secure-blur');
+                    document.getElementById('modalCloseBtn').style.display = 'flex';
 
-                zip.generateAsync({ type: "blob" }).then(function(content) {
-                    const zipLink = document.createElement('a');
-                    zipLink.href = URL.createObjectURL(content);
-                    zipLink.download = `${baseFilename}_Package.zip`;
-                    document.body.appendChild(zipLink);
-                    zipLink.click();
-                    document.body.removeChild(zipLink);
-
+                    // Trigger PayFast Sandbox checkout in a new tab
                     setTimeout(() => {
                         const payfastUrl = 'https://sandbox.payfast.co.za/eng/process';
                         const form = document.createElement('form');
@@ -799,7 +759,6 @@
                         const baseUrl = window.location.href.split('#')[0].split('?')[0];
                         const guideDesc = guide.desc || guide.description || '';
                         
-                        // Official Sandbox Merchant Credentials (10000100 / 46f0cd694581a)
                         const paymentData = {
                             merchant_id: '10000100',
                             merchant_key: '46f0cd694581a',
