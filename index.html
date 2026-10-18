@@ -182,7 +182,7 @@
 
             <!-- Image Header Container -->
             <div id="modalImageContainer" class="relative bg-slate-950 h-56 sm:h-64 flex items-center justify-center overflow-hidden border-b border-slate-800">
-                <img id="modalImage" src="" alt="Guide Image" class="w-full h-full object-cover secure-blur" onerror="handleImageError(this)">
+                <img id="modalImage" src="" alt="Guide Image" class="w-full h-full object-cover secure-blur" crossorigin="anonymous" onerror="handleImageError(this)">
                 <button id="modalCloseBtn" onclick="closeModal()" class="absolute top-4 right-4 bg-black/60 hover:bg-black/80 text-white w-9 h-9 rounded-full flex items-center justify-center transition border border-white/20 shadow-md z-30">
                     <i class="fa-solid fa-xmark text-sm"></i>
                 </button>
@@ -926,7 +926,7 @@
                 if (guide.image) {
                     imageHtml = `
                         <div class="relative h-48 bg-slate-950 overflow-hidden">
-                            <img src="${guide.image}" alt="${guide.title}" 
+                            <img src="${guide.image}" alt="${guide.title}" crossorigin="anonymous"
                                  class="w-full h-full object-cover group-hover:scale-105 transition duration-500" style="filter: blur(1.5px); pointer-events: none;"
                                  onerror="handleImageError(this)">
                             <div class="absolute inset-0 bg-slate-950/15 flex items-center justify-center">
@@ -1252,7 +1252,7 @@
 
                 offscreenCard.innerHTML = `
                     <div style="width:100%; background-color:#020617; border-bottom:1px solid #334155;">
-                        <img src="${guide.image}" style="width:100%; height:auto; display:block;" crossorigin="anonymous">
+                        <img src="${guide.image}" crossorigin="anonymous" style="width:100%; height:auto; display:block;">
                     </div>
                     <div style="padding:32px;">
                         <div style="margin-bottom:12px;">
@@ -1276,7 +1276,13 @@
 
                 document.body.appendChild(offscreenCard);
 
-                await html2canvas(offscreenCard, { scale: 3, backgroundColor: '#0f172a', useCORS: true, logging: false }).then(canvas => {
+                await html2canvas(offscreenCard, { 
+                    scale: 3, 
+                    backgroundColor: '#0f172a', 
+                    useCORS: true, 
+                    allowTaint: true, 
+                    logging: false 
+                }).then(canvas => {
                     const link = document.createElement('a');
                     link.download = `${guide.title.replace(/[^a-z0-9]/gi, '_').toLowerCase()}_pro_card.png`;
                     link.href = canvas.toDataURL('image/png', 1.0);
