@@ -1,4 +1,11 @@
-<script src="https://cdn.tailwindcss.com"></script>
+<!DOCTYPE html>
+<html lang="en" class="h-full">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Professional & Lifestyle Hub - Agri & Home Guides</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
     <!-- FontAwesome for icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <!-- Inter Font -->
@@ -68,7 +75,7 @@
 
     <main class="flex-grow max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-8">
         
-        <!-- Post-Payment Success Banner (Verskyn net nadat hulle van PayFast terugkeer) -->
+        <!-- Post-Payment Success Banner (Verskyn slegs na suksesvolle betaling) -->
         <div id="successPaymentBanner" class="hidden mb-8 bg-gradient-to-r from-emerald-900/90 via-teal-900/90 to-slate-900 border-2 border-emerald-500 p-6 rounded-3xl shadow-2xl relative backdrop-blur-md">
             <div class="flex flex-col md:flex-row items-center justify-between gap-4">
                 <div class="flex items-center gap-4">
@@ -77,7 +84,7 @@
                     </div>
                     <div>
                         <h3 class="text-lg font-extrabold text-white">Payment Successful! Thank You.</h3>
-                        <p class="text-xs text-emerald-200 mt-1 font-medium">Your transaction was verified via PayFast. You can now download your unlocked manual or guide below.</p>
+                        <p class="text-xs text-emerald-200 mt-1 font-medium">Your transaction was verified via PayFast. Click below to download your unlocked manual or guide.</p>
                     </div>
                 </div>
                 <button id="bannerDownloadBtn" onclick="executeUnlockedDownload()" class="bg-gradient-to-r from-emerald-500 to-teal-500 hover:from-emerald-400 hover:to-teal-400 text-slate-950 font-extrabold px-6 py-3 rounded-2xl text-xs transition shadow-lg flex items-center gap-2 transform hover:scale-105 shrink-0">
@@ -1152,7 +1159,8 @@
         async function executeUnlockedDownload() {
             const guideId = sessionStorage.getItem('pending_download_id');
             if (!guideId) {
-                alert("No pending download found. Please select and unlock a guide first.");
+                alert("No pending download found or it has already been downloaded.");
+                document.getElementById('successPaymentBanner').classList.add('hidden');
                 return;
             }
 
@@ -1240,17 +1248,22 @@
                     document.body.removeChild(offscreenCard);
                 });
             }
+
+            // MAAK SKOON SODAT DIE SKERM/BANNIER TOEMAAK EN NIE WEER KAN AFLAAI NIE
+            sessionStorage.removeItem('pending_download_id');
+            document.getElementById('successPaymentBanner').classList.add('hidden');
+            window.history.replaceState({}, document.title, window.location.pathname);
         }
 
         window.onload = function() {
             renderGuides();
 
-            // Kyk of die gebruiker van PayFast terugkeer met ?payment=success
             const urlParams = new URLSearchParams(window.location.search);
-            if (urlParams.get('payment') === 'success') {
+            if (urlParams.get('payment') === 'success' && sessionStorage.getItem('pending_download_id')) {
                 document.getElementById('successPaymentBanner').classList.remove('hidden');
-                // Skuif venster soheen sodatne hulle dit dadelik sien
                 window.scrollTo({ top: 0, behavior: 'smooth' });
+            } else {
+                document.getElementById('successPaymentBanner').classList.add('hidden');
             }
         };
     </script>
