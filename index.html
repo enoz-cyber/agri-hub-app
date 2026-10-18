@@ -1,11 +1,4 @@
-<!DOCTYPE html>
-<html lang="en" class="h-full">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Professional & Lifestyle Hub - Agri & Home Guides</title>
-    <!-- Tailwind CSS CDN -->
-    <script src="https://cdn.tailwindcss.com"></script>
+<script src="https://cdn.tailwindcss.com"></script>
     <!-- FontAwesome for icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <!-- Inter Font -->
@@ -75,6 +68,24 @@
 
     <main class="flex-grow max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-8">
         
+        <!-- Post-Payment Success Banner (Verskyn net nadat hulle van PayFast terugkeer) -->
+        <div id="successPaymentBanner" class="hidden mb-8 bg-gradient-to-r from-emerald-900/90 via-teal-900/90 to-slate-900 border-2 border-emerald-500 p-6 rounded-3xl shadow-2xl relative backdrop-blur-md">
+            <div class="flex flex-col md:flex-row items-center justify-between gap-4">
+                <div class="flex items-center gap-4">
+                    <div class="bg-emerald-500 text-slate-950 p-4 rounded-2xl shadow-lg">
+                        <i class="fa-solid fa-circle-check text-2xl font-extrabold"></i>
+                    </div>
+                    <div>
+                        <h3 class="text-lg font-extrabold text-white">Payment Successful! Thank You.</h3>
+                        <p class="text-xs text-emerald-200 mt-1 font-medium">Your transaction was verified via PayFast. You can now download your unlocked manual or guide below.</p>
+                    </div>
+                </div>
+                <button id="bannerDownloadBtn" onclick="executeUnlockedDownload()" class="bg-gradient-to-r from-emerald-500 to-teal-500 hover:from-emerald-400 hover:to-teal-400 text-slate-950 font-extrabold px-6 py-3 rounded-2xl text-xs transition shadow-lg flex items-center gap-2 transform hover:scale-105 shrink-0">
+                    <i class="fa-solid fa-download"></i> Download Unlocked Content Now
+                </button>
+            </div>
+        </div>
+
         <!-- Search and Category Filter Bar -->
         <div class="mb-8 flex flex-col md:flex-row justify-between items-center gap-4 bg-slate-800/90 p-4 sm:p-5 rounded-3xl shadow-lg border border-slate-700/80 relative backdrop-blur-sm">
             <div class="relative w-full md:w-80">
@@ -150,14 +161,14 @@
     <div id="guideModal" class="fixed inset-0 bg-slate-950/80 backdrop-blur-md z-50 hidden flex items-center justify-center p-4 overflow-y-auto">
         <div id="modalCardWrapper" class="bg-slate-900 rounded-3xl max-w-2xl w-full overflow-hidden shadow-2xl transform transition-all my-8 border border-slate-700 relative text-slate-100">
             
-            <div id="secureOverlay" class="secure-watermark flex-col text-center p-6 text-white" onclick="downloadCurrentGuide()">
+            <div id="secureOverlay" class="secure-watermark flex-col text-center p-6 text-white" onclick="initiatePayment()">
                 <div class="bg-amber-500/20 text-amber-300 p-4 rounded-2xl border border-amber-500/40 mb-3 backdrop-blur-md shadow-xl pointer-events-none">
                     <i class="fa-solid fa-lock text-3xl"></i>
                 </div>
                 <h3 id="overlayTitle" class="text-lg font-extrabold mb-1 pointer-events-none">Protected Premium Guide</h3>
-                <p id="overlayDesc" class="text-xs text-slate-300 max-w-xs mb-4 font-medium pointer-events-none">Full step-by-step procedures and high-res infographics are locked to prevent free usage and screen grabbing.</p>
-                <button type="button" onclick="event.stopPropagation(); downloadCurrentGuide();" class="bg-gradient-to-r from-amber-500 to-orange-500 hover:from-amber-400 hover:to-orange-400 text-slate-950 px-6 py-3 rounded-2xl text-xs font-extrabold transition shadow-lg flex items-center gap-2 transform hover:scale-105">
-                    <i class="fa-solid fa-cart-shopping"></i> <span id="overlayBtnText">Unlock & Download Pro Tool (R20.00)</span>
+                <p id="overlayDesc" class="text-xs text-slate-300 max-w-xs mb-4 font-medium pointer-events-none">Full step-by-step procedures and high-res infographics are locked. Complete payment via PayFast to unlock and download.</p>
+                <button type="button" onclick="event.stopPropagation(); initiatePayment();" class="bg-gradient-to-r from-amber-500 to-orange-500 hover:from-amber-400 hover:to-orange-400 text-slate-950 px-6 py-3 rounded-2xl text-xs font-extrabold transition shadow-lg flex items-center gap-2 transform hover:scale-105">
+                    <i class="fa-solid fa-cart-shopping"></i> <span id="overlayBtnText">Proceed to Secure Checkout (R20.00)</span>
                 </button>
             </div>
 
@@ -189,8 +200,8 @@
                 </div>
                 
                 <div id="modalActionFooter" class="border-t border-slate-800 pt-4 flex justify-between items-center z-30 relative">
-                    <button onclick="downloadCurrentGuide()" id="footerActionBtn" class="bg-amber-500 hover:bg-amber-600 text-slate-950 px-5 py-2.5 rounded-xl text-xs font-bold transition flex items-center gap-2 shadow-md">
-                        <i class="fa-solid fa-download"></i> Unlock & Download Pro Tool - R20.00
+                    <button onclick="initiatePayment()" id="footerActionBtn" class="bg-amber-500 hover:bg-amber-600 text-slate-950 px-5 py-2.5 rounded-xl text-xs font-bold transition flex items-center gap-2 shadow-md">
+                        <i class="fa-solid fa-lock"></i> Secure Checkout - R20.00
                     </button>
                     <button onclick="closeModal()" class="bg-slate-800 hover:bg-slate-700 text-slate-200 px-5 py-2.5 rounded-xl text-xs font-semibold transition">Close</button>
                 </div>
@@ -1003,13 +1014,13 @@
             if (guide.isPdf) {
                 document.getElementById('overlayTitle').innerText = "Protected Cloud Workshop Manual";
                 document.getElementById('overlayDesc').innerText = "Complete factory workshop manual and diagnostic PDF stored securely on Google Drive.";
-                document.getElementById('overlayBtnText').innerText = `Unlock & Download Manual (R${priceStr})`;
-                document.getElementById('footerActionBtn').innerHTML = `<i class="fa-solid fa-download"></i> Unlock & Download Manual - R${priceStr}`;
+                document.getElementById('overlayBtnText').innerText = `Proceed to Secure Checkout (R${priceStr})`;
+                document.getElementById('footerActionBtn').innerHTML = `<i class="fa-solid fa-lock"></i> Secure Checkout - R${priceStr}`;
             } else {
                 document.getElementById('overlayTitle').innerText = "Protected Premium Guide";
-                document.getElementById('overlayDesc').innerText = "Full step-by-step procedures and high-res infographics are locked to prevent free usage.";
-                document.getElementById('overlayBtnText').innerText = `Unlock & Download Pro Tool (R${priceStr})`;
-                document.getElementById('footerActionBtn').innerHTML = `<i class="fa-solid fa-download"></i> Unlock & Download Pro Tool - R${priceStr}`;
+                document.getElementById('overlayDesc').innerText = "Full step-by-step procedures and high-res infographics are locked.";
+                document.getElementById('overlayBtnText').innerText = `Proceed to Secure Checkout (R${priceStr})`;
+                document.getElementById('footerActionBtn').innerHTML = `<i class="fa-solid fa-lock"></i> Secure Checkout - R${priceStr}`;
             }
 
             document.getElementById('secureOverlay').classList.remove('hidden');
@@ -1086,32 +1097,37 @@
             document.getElementById('smAreaResult').innerText = area + " m² (approx)";
         }
 
-        async function downloadCurrentGuide() {
+        // Stuur gebruiker na PayFast toe (Geen aflaai vind plaas tot ná suksesvolle betaling nie)
+        function initiatePayment() {
             const guide = allGuides.find(g => g.id === activeGuideId);
             if (!guide) return;
 
-            const isInteractiveGuide = guide.isInteractive || false;
-            const isPdfGuide = guide.isPdf || false;
             const price = guide.price || "20.00";
-            const itemTypeName = isPdfGuide ? 'Workshop Manual (PDF)' : isInteractiveGuide ? 'Interactive HTML Tool' : 'Pro Guide Card';
 
-            if (confirm(`Unlock & Download ${itemTypeName}: ${guide.title}\nPrice: R${price}\n\nProceed to PayFast Sandbox checkout?`)) {
+            if (confirm(`Proceed to PayFast checkout for "${guide.title}" (R${price})?`)) {
+                let currentUrl = window.location.href.split('#')[0].split('?')[0];
+                if (!currentUrl.startsWith('http')) {
+                    currentUrl = 'https://enoz-cyber.github.io/agri-hub-app/';
+                }
 
-                // 1. Eers stuur ons die kliënt na PayFast Sandbox vir betaling
+                // Stoor die aktiewe guide id in sessionStorage sodat ons weet wat om af te laai wanneer hulle terugkeer
+                sessionStorage.setItem('pending_download_id', guide.id);
+
+                // Stuur terugkeer URL met 'n sukses-vlaggie (?payment=success)
+                const returnWithSuccess = currentUrl + "?payment=success";
+
                 const payfastUrl = 'https://sandbox.payfast.co.za/eng/process';
                 const form = document.createElement('form');
                 form.method = 'POST';
                 form.action = payfastUrl;
-                form.target = '_blank';
 
-                const baseUrl = window.location.href.split('#')[0].split('?')[0];
                 const guideDesc = guide.desc || guide.description || '';
                 
                 const paymentData = {
                     merchant_id: '10000100',
                     merchant_key: '46f0cd694581a',
-                    return_url: baseUrl, 
-                    cancel_url: baseUrl, 
+                    return_url: returnWithSuccess, 
+                    cancel_url: currentUrl, 
                     item_name: `Manual/Guide: ${guide.title}`,
                     amount: price, 
                     item_description: guideDesc.substring(0, 100)
@@ -1129,24 +1145,113 @@
 
                 document.body.appendChild(form);
                 form.submit();
-                document.body.removeChild(form);
+            }
+        }
 
-                // 2. Ná die betaling-formulier oopgemaak is, open ons die PDF of laai die hulpmiddel af
-                setTimeout(() => {
-                    if (isPdfGuide) {
-                        const link = document.createElement('a');
-                        link.href = guide.downloadUrl;
-                        link.target = '_blank';
-                        link.click();
-                    } else if (isInteractiveGuide) {
-                        // (Interaktiewe hulpmiddel logika)
+        // Slegs geroep NADAT PayFast hulle suksesvol teruggestuur het na die webwerf toe
+        async function executeUnlockedDownload() {
+            const guideId = sessionStorage.getItem('pending_download_id');
+            if (!guideId) {
+                alert("No pending download found. Please select and unlock a guide first.");
+                return;
+            }
+
+            const guide = allGuides.find(g => g.id === guideId);
+            if (!guide) return;
+
+            const isInteractiveGuide = guide.isInteractive || false;
+            const isPdfGuide = guide.isPdf || false;
+
+            if (isPdfGuide) {
+                window.open(guide.downloadUrl, '_blank');
+            } else if (isInteractiveGuide) {
+                let htmlContent = standaloneTreeDensityCalculatorHTML;
+                if (guide.interactiveUrl) {
+                    try {
+                        const res = await fetch(guide.interactiveUrl);
+                        if (res.ok) {
+                            htmlContent = await res.text();
+                        }
+                    } catch(e) {
+                        console.warn("Could not fetch remote interactive file. Using fallback.", e);
                     }
-                }, 1000);
+                }
+
+                const blob = new Blob([htmlContent], { type: 'text/html' });
+                const link = document.createElement('a');
+                link.download = `${guide.title.replace(/[^a-z0-9]/gi, '_').toLowerCase()}_interactive_tool.html`;
+                link.href = URL.createObjectURL(blob);
+                link.click();
+            } else {
+                const offscreenCard = document.createElement('div');
+                offscreenCard.style.position = 'fixed';
+                offscreenCard.style.top = '-9999px';
+                offscreenCard.style.left = '-9999px';
+                offscreenCard.style.width = '800px';
+                offscreenCard.style.backgroundColor = '#0f172a';
+                offscreenCard.style.color = '#f8fafc';
+                offscreenCard.style.fontFamily = "'Inter', sans-serif";
+                offscreenCard.style.borderRadius = '24px';
+                offscreenCard.style.overflow = 'hidden';
+                offscreenCard.style.padding = '0px';
+
+                let stepsHtml = '';
+                guide.steps.forEach((step, idx) => {
+                    stepsHtml += `
+                        <div style="display:flex; align-items:flex-start; gap:12px; background-color:#1e293b; padding:14px; border-radius:14px; margin-bottom:10px; border:1px solid #334155;">
+                            <span style="background-color:#0369a1; color:#ffffff; font-size:12px; font-weight:800; width:24px; height:24px; border-radius:50%; display:flex; align-items:center; justify-content:center; flex-shrink:0;">${idx + 1}</span>
+                            <span style="font-size:14px; font-weight:500; color:#cbd5e1; line-height:1.4;">${step}</span>
+                        </div>
+                    `;
+                });
+
+                offscreenCard.innerHTML = `
+                    <div style="width:100%; background-color:#020617; border-bottom:1px solid #334155;">
+                        <img src="${guide.image}" style="width:100%; height:auto; display:block;" crossorigin="anonymous">
+                    </div>
+                    <div style="padding:32px;">
+                        <div style="margin-bottom:12px;">
+                            <span style="background-color:#059669; color:#ffffff; font-size:11px; font-weight:800; padding:4px 12px; border-radius:9999px; text-transform:uppercase; letter-spacing:0.05em;">${guide.category}</span>
+                            ${guide.subCategory ? `<span style="background-color:#0f766e; color:#ffffff; font-size:11px; font-weight:800; padding:4px 12px; border-radius:9999px; text-transform:uppercase; letter-spacing:0.05em; margin-left:6px;">${guide.subCategory}</span>` : ''}
+                        </div>
+                        <h1 style="font-size:24px; font-weight:800; color:#ffffff; margin-bottom:16px;">${guide.title}</h1>
+                        <p style="font-size:14px; color:#94a3b8; line-height:1.6; margin-bottom:24px; font-weight:500;">${guide.desc || guide.description || ''}</p>
+                        
+                        <div style="border-top:1px solid #1e293b; padding-top:20px; margin-bottom:24px;">
+                            <h3 style="font-size:11px; font-weight:800; text-transform:uppercase; color:#64748b; letter-spacing:0.05em; margin-bottom:12px;">Step-by-Step Procedure</h3>
+                            ${stepsHtml}
+                        </div>
+
+                        <div style="border-top:1px solid #1e293b; padding-top:16px; display:flex; justify-content:space-between; align-items:center; font-size:11px; color:#64748b; font-weight:700; text-transform:uppercase; letter-spacing:0.05em;">
+                            <span>Professional & Lifestyle Hub</span>
+                            <span>Verified Official Guide</span>
+                        </div>
+                    </div>
+                `;
+
+                document.body.appendChild(offscreenCard);
+
+                await html2canvas(offscreenCard, { scale: 3, backgroundColor: '#0f172a', useCORS: true, logging: false }).then(canvas => {
+                    const link = document.createElement('a');
+                    link.download = `${guide.title.replace(/[^a-z0-9]/gi, '_').toLowerCase()}_pro_card.png`;
+                    link.href = canvas.toDataURL('image/png', 1.0);
+                    link.click();
+
+                    document.body.removeChild(offscreenCard);
+                });
             }
         }
 
         window.onload = function() {
             renderGuides();
+
+            // Kyk of die gebruiker van PayFast terugkeer met ?payment=success
+            const urlParams = new URLSearchParams(window.location.search);
+            if (urlParams.get('payment') === 'success') {
+                document.getElementById('successPaymentBanner').classList.remove('hidden');
+                // Skuif venster soheen sodatne hulle dit dadelik sien
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            }
         };
     </script>
 </body>
