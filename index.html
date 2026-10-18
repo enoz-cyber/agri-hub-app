@@ -176,7 +176,7 @@
                 <h3 id="overlayTitle" class="text-lg font-extrabold mb-1 pointer-events-none">Protected Premium Guide</h3>
                 <p id="overlayDesc" class="text-xs text-slate-300 max-w-xs mb-4 font-medium pointer-events-none">Full step-by-step procedures and high-res infographics are locked. Complete payment via PayFast to unlock and download.</p>
                 <button type="button" onclick="event.stopPropagation(); initiatePayment();" class="bg-gradient-to-r from-amber-500 to-orange-500 hover:from-amber-400 hover:to-orange-400 text-slate-950 px-6 py-3 rounded-2xl text-xs font-extrabold transition shadow-lg flex items-center gap-2 transform hover:scale-105">
-                    <i class="fa-solid fa-cart-shopping"></i> <span id="overlayBtnText">Proceed to Secure Checkout (R50.00)</span>
+                    <i class="fa-solid fa-cart-shopping"></i> <span id="overlayBtnText">Proceed to Secure Checkout (R20.00)</span>
                 </button>
             </div>
 
@@ -209,7 +209,7 @@
                 
                 <div id="modalActionFooter" class="border-t border-slate-800 pt-4 flex justify-between items-center z-30 relative">
                     <button onclick="initiatePayment()" id="footerActionBtn" class="bg-amber-500 hover:bg-amber-600 text-slate-950 px-5 py-2.5 rounded-xl text-xs font-bold transition flex items-center gap-2 shadow-md">
-                        <i class="fa-solid fa-lock"></i> Secure Checkout - R50.00
+                        <i class="fa-solid fa-lock"></i> Secure Checkout - R20.00
                     </button>
                     <button onclick="closeModal()" class="bg-slate-800 hover:bg-slate-700 text-slate-200 px-5 py-2.5 rounded-xl text-xs font-semibold transition">Close</button>
                 </div>
@@ -382,114 +382,114 @@
 </html>`;
 
         const allGuides = [
-            // --- FARMING GUIDES & PROCEDURES ---
+            // --- FARMING GUIDES & PROCEDURES (Price: R20.00) ---
             {
-                id: "plough", title: "Plough Alignment & Attachment Guide", category: "Farmers", subCategory: "Crop Farming", image: "images/plough-alignment.jpg",
+                id: "plough", title: "Plough Alignment & Attachment Guide", category: "Farmers", subCategory: "Crop Farming", image: "images/plough-alignment.jpg", price: "20.00",
                 desc: "Step-by-step manual for rear-mounted plough alignment, 3-point hitch setup, and depth tuning for optimal soil inversion.",
                 steps: ["Level tractor and plough.", "Set front furrow width.", "Adjust draft links.", "Verify vertical alignment."]
             },
             {
-                id: "disc-harrow", title: "Disc Harrow Alignment Guide", category: "Farmers", subCategory: "Crop Farming", image: "images/disc-harrow.jpg",
+                id: "disc-harrow", title: "Disc Harrow Alignment Guide", category: "Farmers", subCategory: "Crop Farming", image: "images/disc-harrow.jpg", price: "20.00",
                 desc: "Side alignment, gang angles, tractor tire matching, and hitch point leveling for uniform residue incorporation.",
                 steps: ["Adjust gang angles.", "Set hitch height.", "Inspect scraper blades.", "Grease bearings."]
             },
             {
-                id: "fertilizer-spreader-calibration", title: "Fertilizer Spreader Calibration", category: "Farmers", subCategory: "Crop Farming", image: "images/crop-fertilizer-calibration.jpg",
+                id: "fertilizer-spreader-calibration", title: "Fertilizer Spreader Calibration", category: "Farmers", subCategory: "Crop Farming", image: "images/crop-fertilizer-calibration.jpg", price: "20.00",
                 desc: "Step-by-step calibration guide and calculations for ground-driven and tractor-attached fertilizer spreaders.",
                 steps: ["Inspect spinner discs and vanes.", "Set correct PTO speed and forward travel speed.", "Perform stationary catch-test per chute.", "Calculate application rate per hectare and adjust gate openings."]
             },
             {
-                id: "boom-sprayer", title: "Boom Sprayer Calibration", category: "Farmers", subCategory: "Crop Farming", image: "images/boom-sprayer.jpg",
+                id: "boom-sprayer", title: "Boom Sprayer Calibration", category: "Farmers", subCategory: "Crop Farming", image: "images/boom-sprayer.jpg", price: "20.00",
                 desc: "Nozzle selection, pressure tuning, and output checks for accurate systemic chemical application.",
                 steps: ["Check nozzle tips.", "Measure pressure.", "Collect output.", "Ensure flow variation is within +/- 5%."]
             },
             {
-                id: "field-sprayer", title: "Field Sprayer Calibration", category: "Farmers", subCategory: "Crop Farming", image: "images/field-sprayer.jpg",
+                id: "field-sprayer", title: "Field Sprayer Calibration", category: "Farmers", subCategory: "Crop Farming", image: "images/field-sprayer.jpg", price: "20.00",
                 desc: "Comprehensive calibration procedures for large field sprayers, tank agitation, and drift reduction.",
                 steps: ["Fill 100m test track.", "Measure traverse time.", "Calculate tank mix volume.", "Calibrate gauges."]
             },
             {
-                id: "maize-planting", title: "Maize Planting Guide", category: "Farmers", subCategory: "Crop Farming", image: "images/maize-planting.jpg",
+                id: "maize-planting", title: "Maize Planting Guide", category: "Farmers", subCategory: "Crop Farming", image: "images/maize-planting.jpg", price: "20.00",
                 desc: "Seed spacing, population calculations, fertilizer disc placement, and depth settings for high yield emergence.",
                 steps: ["Select seed plate.", "Calibrate seed drop.", "Set depth (4-6 cm).", "Ensure good contact."]
             },
             {
-                id: "manure-spreader", title: "Manure Spreader Calibration", category: "Farmers", subCategory: "Crop Farming", image: "images/manure-spreader.jpg",
+                id: "manure-spreader", title: "Manure Spreader Calibration", category: "Farmers", subCategory: "Crop Farming", image: "images/manure-spreader.jpg", price: "20.00",
                 desc: "Application rates, beater speed adjustment, and spread uniformity for solid and semi-solid livestock manure.",
                 steps: ["Weigh empty spreader.", "Distribute tarps.", "Run spreader.", "Weigh samples."]
             },
             {
-                id: "slasher-guide", title: "Slasher Guide", category: "Farmers", subCategory: "Crop Farming", image: "images/slasher-guide.jpg",
+                id: "slasher-guide", title: "Slasher Guide", category: "Farmers", subCategory: "Crop Farming", image: "images/slasher-guide.jpg", price: "20.00",
                 desc: "Cutting height adjustments, skid shoe leveling, and safety chain inspections for pasture topping and weed control.",
                 steps: ["Adjust tail wheel.", "Inspect swing-away blades.", "Verify PTO Clutch.", "Check safety guards."]
             },
             {
-                id: "mist-sprayer", title: "Mist Sprayer Calibration", category: "Farmers", subCategory: "Fruit Farming", image: "images/mist-sprayer.jpg",
+                id: "mist-sprayer", title: "Mist Sprayer Calibration", category: "Farmers", subCategory: "Fruit Farming", image: "images/mist-sprayer.jpg", price: "20.00",
                 desc: "Air assistance and droplet distribution tuning for orchard canopies and dense foliage crops.",
                 steps: ["Check fan gearbox.", "Align air coulings.", "Use water-sensitive cards.", "Adjust pump pressure."]
             },
             {
-                id: "fruit-pruning", title: "Orchard Fruit Tree Pruning Manual", category: "Farmers", subCategory: "Fruit Farming", image: "images/fruit-pruning.jpg",
+                id: "fruit-pruning", title: "Orchard Fruit Tree Pruning Manual", category: "Farmers", subCategory: "Fruit Farming", image: "images/fruit-pruning.jpg", price: "20.00",
                 desc: "Comprehensive 9-step multi-panel visual guide for winter pruning, canopy health, and maximum sunlight penetration.",
                 steps: ["Sanitize tools.", "Assess canopy goals.", "Remove 3-Ds.", "Clear center canopy."]
             },
             {
-                id: "tree-density", title: "Orchard Tree Density Calculation Guide", category: "Farmers", subCategory: "Fruit Farming", isInteractive: true, interactiveUrl: "tree-density.html", image: "images/tree-density.jpg",
+                id: "tree-density", title: "Orchard Tree Density Calculation Guide", category: "Farmers", subCategory: "Fruit Farming", isInteractive: true, interactiveUrl: "tree-density.html", image: "images/tree-density.jpg", price: "20.00",
                 desc: "Interactive visual simulator and calculation tool for determining tree population per hectare.",
                 steps: ["Adjust row and tree spacing sliders.", "Observe live calculation.", "Analyze hectare population output."]
             },
             {
-                id: "cabbage-planting", title: "Cabbage Field Planting & Cultivation Guide", category: "Farmers", subCategory: "Vegetable Farming", image: "images/cabbage-planting.jpg",
+                id: "cabbage-planting", title: "Cabbage Field Planting & Cultivation Guide", category: "Farmers", subCategory: "Vegetable Farming", image: "images/cabbage-planting.jpg", price: "20.00",
                 desc: "Comprehensive 9-step multi-panel visual guide for commercial cabbage field setup, soil prep, basal fertilization, and pest management.",
                 steps: ["Deep plough and create raised beds.", "Maintain soil pH (6.0-6.8).", "Incorporate pre-plant fertilizer.", "Choose commercial varieties.", "Pre-mark holes.", "Use drip irrigation.", "Perform shallow cultivation.", "Scout for pests.", "Harvest."]
             },
             {
-                id: "carrot-planting", title: "Carrot Field Planting & Cultivation Guide", category: "Farmers", subCategory: "Vegetable Farming", image: "images/carrot-planting.jpg",
+                id: "carrot-planting", title: "Carrot Field Planting & Cultivation Guide", category: "Farmers", subCategory: "Vegetable Farming", image: "images/carrot-planting.jpg", price: "20.00",
                 desc: "Comprehensive 9-step multi-panel visual guide for commercial carrot field setup, soil prep, and harvesting.",
                 steps: ["Deep plough and create raised beds.", "Maintain soil pH (6.0-6.8).", "Incorporate pre-plant fertilizer.", "Choose commercial varieties.", "Pre-mark rows.", "Use drip irrigation.", "Perform shallow cultivation.", "Scout for pests.", "Harvest."]
             },
             {
-                id: "onion-planting-1", title: "Commercial Onion Field Planting Guide", category: "Farmers", subCategory: "Vegetable Farming", image: "images/onion-planting-1.jpg",
+                id: "onion-planting-1", title: "Commercial Onion Field Planting Guide", category: "Farmers", subCategory: "Vegetable Farming", image: "images/onion-planting-1.jpg", price: "20.00",
                 desc: "Comprehensive guide for commercial onion field setup, soil prep, and precision planting.",
                 steps: ["Test soil pH.", "Incorporate basal fertilizers.", "Choose healthy seedlings.", "Set proper spacing."]
             },
             {
-                id: "onion-planting-2", title: "Onion Field Planting & Cultivation Guide", category: "Farmers", subCategory: "Vegetable Farming", image: "images/onion-planting-2.jpg",
+                id: "onion-planting-2", title: "Onion Field Planting & Cultivation Guide", category: "Farmers", subCategory: "Vegetable Farming", image: "images/onion-planting-2.jpg", price: "20.00",
                 desc: "Step-by-step visual manual covering soil preparation, planting materials, weed control, and curing.",
                 steps: ["Test soil pH.", "Choose seeds/transplants.", "Provide consistent water.", "Control weeds."]
             },
             {
-                id: "potato-planting", title: "Commercial Potato Field Planting Guide", category: "Farmers", subCategory: "Vegetable Farming", image: "images/potato-planting.jpg",
+                id: "potato-planting", title: "Commercial Potato Field Planting Guide", category: "Farmers", subCategory: "Vegetable Farming", image: "images/potato-planting.jpg", price: "20.00",
                 desc: "Comprehensive guide for commercial potato large-scale production, chitting, and hilling.",
                 steps: ["Test soil pH.", "Choose certified seed tubers.", "Set rows.", "Hill up soil ridges."]
             },
             {
-                id: "pumpkin-planting", title: "Commercial Pumpkin Field Planting Guide", category: "Farmers", subCategory: "Vegetable Farming", image: "images/pumpkin-planting.jpg",
+                id: "pumpkin-planting", title: "Commercial Pumpkin Field Planting Guide", category: "Farmers", subCategory: "Vegetable Farming", image: "images/pumpkin-planting.jpg", price: "20.00",
                 desc: "Comprehensive guide for commercial pumpkin field setup, precision spacing, vine care, and harvest.",
                 steps: ["Test soil pH.", "Select certified seeds.", "Apply basal fertilizer.", "Set wide spacing.", "Plant seeds.", "Maintain water.", "Control weeds.", "Monitor pests.", "Harvest."]
             },
             {
-                id: "watermelon-planting", title: "Commercial Watermelon Field Planting Guide", category: "Farmers", subCategory: "Vegetable Farming", image: "images/watermelon-planting.jpg",
+                id: "watermelon-planting", title: "Commercial Watermelon Field Planting Guide", category: "Farmers", subCategory: "Vegetable Farming", image: "images/watermelon-planting.jpg", price: "20.00",
                 desc: "Comprehensive guide for commercial watermelon field setup, spacing, pest monitoring, and harvest.",
                 steps: ["Test soil pH.", "Choose seeds.", "Incorporate fertilizer.", "Set rows.", "Plant seeds.", "Provide irrigation.", "Control weeds.", "Monitor pests.", "Harvest."]
             },
             {
-                id: "tomato-planting", title: "Commercial Tomato Field Planting Guide", category: "Farmers", subCategory: "Vegetable Farming", image: "images/tomato-planting.jpg",
+                id: "tomato-planting", title: "Commercial Tomato Field Planting Guide", category: "Farmers", subCategory: "Vegetable Farming", image: "images/tomato-planting.jpg", price: "20.00",
                 desc: "Comprehensive guide for commercial tomato production, transplanting, staking, and supported harvest.",
                 steps: ["Test soil pH.", "Use transplants.", "Incorporate fertilizer.", "Set rows.", "Plant deeply.", "Provide moisture.", "Manage mulch.", "Scout for pests.", "Harvest."]
             },
             {
-                id: "bell-pepper-planting", title: "Commercial Bell Pepper Field Planting Guide", category: "Farmers", subCategory: "Vegetable Farming", image: "images/bell-pepper-planting.jpg",
+                id: "bell-pepper-planting", title: "Commercial Bell Pepper Field Planting Guide", category: "Farmers", subCategory: "Vegetable Farming", image: "images/bell-pepper-planting.jpg", price: "20.00",
                 desc: "Comprehensive guide for commercial bell pepper field setup, soil prep, precision spacing, and harvest.",
                 steps: ["Test soil pH.", "Use seedlings.", "Incorporate fertilizer.", "Set rows.", "Plant deeply.", "Provide moisture.", "Control weeds.", "Scout for pests.", "Harvest."]
             },
             {
-                id: "green-bean-planting", title: "Commercial Green Bean Field Planting Guide", category: "Farmers", subCategory: "Vegetable Farming", image: "images/green-bean-planting.jpg",
+                id: "green-bean-planting", title: "Commercial Green Bean Field Planting Guide", category: "Farmers", subCategory: "Vegetable Farming", image: "images/green-bean-planting.jpg", price: "20.00",
                 desc: "Comprehensive guide for commercial green bean field setup, direct seeding, precision spacing, and harvest.",
                 steps: ["Test soil pH.", "Treat seeds.", "Incorporate fertilizer.", "Set rows.", "Direct seed.", "Provide moisture.", "Control weeds.", "Scout for pests.", "Harvest."]
             },
             {
-                id: "cattle-health", title: "Cattle Herd Health & Vaccination Schedule", category: "Farmers", subCategory: "Animal Farming", image: "https://placehold.co/600x400/065f46/ffffff?text=Cattle+Health+Schedule",
+                id: "cattle-health", title: "Cattle Herd Health & Vaccination Schedule", category: "Farmers", subCategory: "Animal Farming", image: "https://placehold.co/600x400/065f46/ffffff?text=Cattle+Health+Schedule", price: "20.00",
                 desc: "Comprehensive South African regional livestock health master manual detailing growth stages, seasonal timelines, clostridial/botulism protocols, and parasite management.",
                 steps: [
                     "Newborn Calves (0-3 Months): Administer navel disinfection with iodine on Day 1. Ensure colostrum intake within the first 6 hours. Perform ear tagging, dehorning, and castration at 1 to 3 months. Give initial Clostridial (3-in-1 / 5-in-1) and Botulism vaccinations at 3 months, followed by a booster 4 weeks later.",
@@ -500,7 +500,7 @@
                 ]
             },
             {
-                id: "poultry-brooding", title: "Poultry Brooder Setup & Management", category: "Farmers", subCategory: "Poultry Farming", image: "https://placehold.co/600x400/065f46/ffffff?text=Poultry+Farming",
+                id: "poultry-brooding", title: "Poultry Brooder Setup & Management", category: "Farmers", subCategory: "Poultry Farming", image: "https://placehold.co/600x400/065f46/ffffff?text=Poultry+Farming", price: "20.00",
                 desc: "Temperature regulation, lighting programs, and biosecurity protocols for day-old chicks.",
                 steps: ["Pre-heat brooding house.", "Set up chick guards.", "Provide fresh water.", "Monitor temperatures."]
             },
@@ -837,7 +837,7 @@
                 steps: ["Engine overhauls", "Hydraulic maintenance", "Electrical testing", "Final assembly"]
             },
 
-            // --- FULLY CORRECTED SAME MANUALS COLLECTION (ALL 30 MODELS) - R50.00 ---
+            // --- SAME MANUALS COLLECTION (R50.00) ---
             {
                 id: "manual-same-1", title: "SAME ARGON 50-60-70 / 55F-65F-75F Workshop Manual", category: "Farmers", subCategory: "Same", image: "https://placehold.co/600x400/065f46/ffffff?text=SAME+Argon",
                 isPdf: true, downloadUrl: "https://drive.google.com/file/d/15NDcdO98I4rdvS1kIruhdJVniOKZs9uG/view?usp=drive_link", price: "50.00",
@@ -1025,9 +1025,9 @@
                 steps: ["Compact diesel engine service", "Compact transmission & clutch", "Hydraulic 3-point linkage", "Electrical & safety switches"]
             },
 
-            // --- BUILDERS, HANDYMAN, HOUSEWIVES ---
+            // --- BUILDERS, HANDYMAN, HOUSEWIVES (Price: R20.00) ---
             {
-                id: "foundation-pouring", title: "Concrete Foundation Pouring & Curing", category: "Builders", subCategory: "General", image: "images/concrete-foundation.jpg",
+                id: "foundation-pouring", title: "Concrete Foundation Pouring & Curing", category: "Builders", subCategory: "General", image: "images/concrete-foundation.jpg", price: "20.00",
                 desc: "Comprehensive technical master guide for professional concrete foundation pouring, trench preparation, formwork bracing, rebar chair spacing, mix ratios, vibration, and moisture curing protocols.",
                 steps: [
                     "Site Clearing & Soil Compaction: Strip organic topsoil entirely, expose firm subgrade, and compact using a mechanical plate compactor to achieve at least 95% Proctor density.",
@@ -1043,22 +1043,22 @@
                 ]
             },
             {
-                id: "hiller-build", title: "Raised Bed Hiller (Double Disc) Build Guide", category: "Handyman", subCategory: "Manufacture", image: "images/hiller-build.jpg",
+                id: "hiller-build", title: "Raised Bed Hiller (Double Disc) Build Guide", category: "Handyman", subCategory: "Manufacture", image: "images/hiller-build.jpg", price: "20.00",
                 desc: "Step-by-step practical fabrication and field tuning manual for building a heavy-duty double-disc raised bed hiller.",
                 steps: ["Cut square steel tubing.", "Weld hitch upright bracket.", "Cut vertical square shanks.", "Mount double-disc hubs.", "Attach shanks to toolbar.", "Test in workable soil."]
             },
             {
-                id: "bakkie-fertilizer-spreader", title: "Bakkie Differential Fertilizer Spreader Build Guide", category: "Handyman", subCategory: "Manufacture", image: "images/Fertilizer-spreader.jpg",
+                id: "bakkie-fertilizer-spreader", title: "Bakkie Differential Fertilizer Spreader Build Guide", category: "Handyman", subCategory: "Manufacture", image: "images/Fertilizer-spreader.jpg", price: "20.00",
                 desc: "Step-by-step ground-driven fabrication manual for a bakkie differential fertilizer spreader.",
                 steps: ["Axle Prep & differential locking.", "Build chassis frame.", "Mount conical hopper.", "Align drive transfer & spinner.", "Fit metering gate.", "Field test & calibrate."]
             },
             {
-                id: "toilet-unblock", title: "How to Unblock a Toilet", category: "Handyman", subCategory: "Plumbing", image: "images/plumbing-repair.jpg",
+                id: "toilet-unblock", title: "How to Unblock a Toilet", category: "Handyman", subCategory: "Plumbing", image: "images/plumbing-repair.jpg", price: "20.00",
                 desc: "Essential step-by-step procedure to safely unblock a toilet using overflow prevention, flange plungers, or a toilet auger.",
                 steps: ["Prevent overflow.", "Use flange plunger.", "Apply hot water & soap.", "Employ toilet auger."]
             },
             {
-                id: "meal-prep", title: "Weekly Family Meal Prep & Pantry Rotation", category: "Housewives", subCategory: "Meal Prep", image: "https://placehold.co/600x400/db2777/ffffff?text=Home+Guide",
+                id: "meal-prep", title: "Weekly Family Meal Prep & Pantry Rotation", category: "Housewives", subCategory: "Meal Prep", image: "https://placehold.co/600x400/db2777/ffffff?text=Home+Guide", price: "20.00",
                 desc: "Efficient batch cooking strategies, airtight storage organization, and FIFO pantry management.",
                 steps: ["Plan 7-day menu.", "Inventory pantry.", "Batch chop vegetables.", "Label containers."]
             }
@@ -1144,7 +1144,7 @@
                         </div>
                         <div class="flex items-center gap-2.5 pt-4 border-t border-slate-800">
                             <button onclick="openModal('${guide.id}')" class="flex-1 ${theme.buttonBg} text-white py-3 px-4 rounded-2xl text-xs font-bold transition flex items-center justify-center gap-2 shadow-md hover:shadow-lg transform active:scale-95">
-                                <i class="fa-solid ${guide.isPdf ? 'fa-file-pdf text-amber-300' : guide.isInteractive ? 'fa-calculator text-teal-300' : 'fa-lock text-amber-300'}"></i> ${guide.isPdf ? `Unlock & Download Manual${priceTag}` : guide.isInteractive ? 'Launch Calculator' : 'View Guide (Locked)'}
+                                <i class="fa-solid ${guide.isPdf ? 'fa-file-pdf text-amber-300' : guide.isInteractive ? 'fa-calculator text-teal-300' : 'fa-lock text-amber-300'}"></i> ${guide.isPdf ? `Unlock & Download Manual${priceTag}` : guide.isInteractive ? `Launch Calculator${priceTag}` : `View Guide${priceTag}`}
                             </button>
                         </div>
                     </div>
@@ -1253,7 +1253,7 @@
                 subBadge.classList.add('hidden');
             }
 
-            const priceStr = guide.price || "50.00";
+            const priceStr = guide.price || "20.00";
             if (guide.isPdf) {
                 document.getElementById('overlayTitle').innerText = "Protected Cloud Workshop Manual";
                 document.getElementById('overlayDesc').innerText = "Complete factory workshop manual and diagnostic PDF stored securely on Google Drive.";
@@ -1344,7 +1344,7 @@
             const guide = allGuides.find(g => g.id === activeGuideId);
             if (!guide) return;
 
-            const price = guide.price || "50.00";
+            const price = guide.price || "20.00";
 
             if (confirm(`Proceed to PayFast checkout for "${guide.title}" (R${price})?`)) {
                 let currentUrl = window.location.href.split('#')[0].split('?')[0];
