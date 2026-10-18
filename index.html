@@ -135,7 +135,6 @@
             <button onclick="filterBySubCategory('Animal Farming')" id="subcat-Animal Farming" class="subcat-btn px-3.5 py-1.5 rounded-xl text-xs font-bold bg-slate-800 text-emerald-300 border border-emerald-800 hover:bg-emerald-800 hover:text-white transition shadow-sm">Animal Farming</button>
             <button onclick="filterBySubCategory('Poultry Farming')" id="subcat-Poultry Farming" class="subcat-btn px-3.5 py-1.5 rounded-xl text-xs font-bold bg-slate-800 text-emerald-300 border border-emerald-800 hover:bg-emerald-800 hover:text-white transition shadow-sm">Poultry Farming</button>
             
-            <!-- Workshop Manual Brand Filters (Same bygevoeg) -->
             <button onclick="filterBySubCategory('Deutz')" id="subcat-Deutz" class="subcat-btn px-3.5 py-1.5 rounded-xl text-xs font-bold bg-slate-800 text-amber-300 border border-amber-800 hover:bg-amber-800 hover:text-white transition shadow-sm">Deutz</button>
             <button onclick="filterBySubCategory('Same')" id="subcat-Same" class="subcat-btn px-3.5 py-1.5 rounded-xl text-xs font-bold bg-slate-800 text-amber-300 border border-amber-800 hover:bg-amber-800 hover:text-white transition shadow-sm">Same</button>
             <button onclick="filterBySubCategory('Massey Ferguson')" id="subcat-Massey Ferguson" class="subcat-btn px-3.5 py-1.5 rounded-xl text-xs font-bold bg-slate-800 text-amber-300 border border-amber-800 hover:bg-amber-800 hover:text-white transition shadow-sm">Massey Ferguson</button>
@@ -834,9 +833,20 @@
 
             // --- BUILDERS, HANDYMAN, HOUSEWIVES ---
             {
-                id: "foundation-pouring", title: "Concrete Foundation Pouring & Curing", category: "Builders", subCategory: "General", image: "https://placehold.co/600x400/334155/ffffff?text=Builders+Guide",
-                desc: "Excavation depth checks, formwork stability, reinforcement placement, and proper moisture curing.",
-                steps: ["Verify trench depth.", "Secure rebar mesh.", "Pour concrete evenly.", "Keep surface moist for 7 days."]
+                id: "foundation-pouring", title: "Concrete Foundation Pouring & Curing", category: "Builders", subCategory: "General", image: "images/concrete-foundation.jpg",
+                desc: "Comprehensive technical master guide for professional concrete foundation pouring, trench preparation, formwork bracing, rebar chair spacing, mix ratios, vibration, and moisture curing protocols.",
+                steps: [
+                    "Site Clearing & Soil Compaction: Strip organic topsoil entirely, expose firm subgrade, and compact using a mechanical plate compactor to achieve at least 95% Proctor density.",
+                    "Trench Excavation & Depth Verification: Excavate trenches to engineered depth and verify level benchmarks using a laser level or water level.",
+                    "Sub-Base & Damp-Proof Membrane (DPM): Lay a 75mm blinding layer of crusher dust/sand, compact it, and install a heavy-duty 250-micron polyethylene damp-proof membrane.",
+                    "Formwork Construction & Bracing: Build rigid formwork using 32mm planks or marine plywood, secured with strongbacks and wooden stakes every 900mm to prevent blowout.",
+                    "Reinforcement Spacing & Cover Blocks: Position steel rebar grids or mesh using plastic or concrete cover blocks (minimum 50mm clearance) to ensure full steel encapsulation.",
+                    "Formwork Inspection & Pre-Pour Check: Inspect tie-wires, formwork alignment, squareness, and check that all debris, loose soil, and standing water are cleared.",
+                    "Mix Design & Slump Verification: Order or mix standard structural concrete (minimum 25 MPa / 3:2:1 ratio), ensuring a workable slump (75mm - 100mm) without excess water.",
+                    "Continuous Pouring & Spading: Pour concrete continuously from one corner to prevent cold joints; spade or mechanically vibrate the mix to release trapped air pockets.",
+                    "Screeding & Surface Finishing: Strike off excess concrete using a straightedge timber screed pulled across form edges, followed by a wood float or steel trowel finish.",
+                    "Moisture Curing Protocol: Begin curing as soon as the surface hardens by keeping it continuously moist with sprinklers, wet Hessian sacking, or curing compound for at least 7 days."
+                ]
             },
             {
                 id: "hiller-build", title: "Raised Bed Hiller (Double Disc) Build Guide", category: "Handyman", subCategory: "Manufacture", image: "images/hiller-build.jpg",
@@ -1136,7 +1146,6 @@
             document.getElementById('smAreaResult').innerText = area + " m² (approx)";
         }
 
-        // Stuur gebruiker na PayFast toe (Geen aflaai vind plaas tot ná suksesvolle betaling nie)
         function initiatePayment() {
             const guide = allGuides.find(g => g.id === activeGuideId);
             if (!guide) return;
@@ -1184,7 +1193,6 @@
             }
         }
 
-        // Slegs geroep NADAT PayFast hulle suksesvol teruggestuur het na die webwerf toe
         async function executeUnlockedDownload() {
             const guideId = sessionStorage.getItem('pending_download_id');
             if (!guideId) {
