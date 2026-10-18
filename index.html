@@ -176,7 +176,7 @@
                 <h3 id="overlayTitle" class="text-lg font-extrabold mb-1 pointer-events-none">Protected Premium Guide</h3>
                 <p id="overlayDesc" class="text-xs text-slate-300 max-w-xs mb-4 font-medium pointer-events-none">Full step-by-step procedures and high-res infographics are locked. Complete payment via PayFast to unlock and download.</p>
                 <button type="button" onclick="event.stopPropagation(); initiatePayment();" class="bg-gradient-to-r from-amber-500 to-orange-500 hover:from-amber-400 hover:to-orange-400 text-slate-950 px-6 py-3 rounded-2xl text-xs font-extrabold transition shadow-lg flex items-center gap-2 transform hover:scale-105">
-                    <i class="fa-solid fa-cart-shopping"></i> <span id="overlayBtnText">Proceed to Secure Checkout (R50.00)</span>
+                    <i class="fa-solid fa-cart-shopping"></i> <span id="overlayBtnText">Proceed to Secure Checkout (R20.00)</span>
                 </button>
             </div>
 
@@ -209,7 +209,7 @@
                 
                 <div id="modalActionFooter" class="border-t border-slate-800 pt-4 flex justify-between items-center z-30 relative">
                     <button onclick="initiatePayment()" id="footerActionBtn" class="bg-amber-500 hover:bg-amber-600 text-slate-950 px-5 py-2.5 rounded-xl text-xs font-bold transition flex items-center gap-2 shadow-md">
-                        <i class="fa-solid fa-lock"></i> Secure Checkout - R50.00
+                        <i class="fa-solid fa-lock"></i> Secure Checkout - R20.00
                     </button>
                     <button onclick="closeModal()" class="bg-slate-800 hover:bg-slate-700 text-slate-200 px-5 py-2.5 rounded-xl text-xs font-semibold transition">Close</button>
                 </div>
@@ -502,485 +502,514 @@
             // --- WORKSHOP MANUALS COLLECTION (Deutz) ---
             {
                 id: "manual-agrokid", title: "AGROKID 30-40-50 Workshop Manual", category: "Farmers", subCategory: "Deutz", image: "https://placehold.co/600x400/065f46/ffffff?text=Deutz+Agrokid",
-                isPdf: true, downloadUrl: "https://drive.google.com/file/d/17XUe0ubCs2tHeBtrr2oqWoPFQrDtRTZV/view?usp=drive_link", price: "50.00",
+                isPdf: true, downloadUrl: "https://drive.google.com/file/d/17XUe0ubCs2tHeBtrr2oqWoPFQrDtRTZV/view?usp=drive_link", price: "20.00",
                 desc: "Official factory workshop manual covering Deutz Agrokid 30, 40, and 50 tractor maintenance, hydraulics, and engine repair.",
                 steps: ["Complete mechanical specifications", "Hydraulic system troubleshooting", "Electrical wiring schematics", "Engine overhaul & torque settings"]
             },
             {
                 id: "manual-agrocompact", title: "AGROCOMPACT F60-F70-F80-F90 Workshop Manual", category: "Farmers", subCategory: "Deutz", image: "https://placehold.co/600x400/065f46/ffffff?text=Deutz+Agrocompact",
-                isPdf: true, downloadUrl: "https://drive.google.com/file/d/1BXI-VoI2DLH5lzXRjw8RJXATxFoGOXmB/view?usp=drive_link", price: "50.00",
+                isPdf: true, downloadUrl: "https://drive.google.com/file/d/1BXI-VoI2DLH5lzXRjw8RJXATxFoGOXmB/view?usp=drive_link", price: "20.00",
                 desc: "Comprehensive technical manual for Deutz Agrocompact series tractors, transmissions, and axles.",
                 steps: ["Transmission & gearbox service", "PTO clutch adjustments", "Brake & steering repairs", "Maintenance schedules"]
             },
             {
                 id: "manual-agrolux", title: "AGROLUX F50-F60-F70-F80 Workshop Manual", category: "Farmers", subCategory: "Deutz", image: "https://placehold.co/600x400/065f46/ffffff?text=Deutz+Agrolux",
-                isPdf: true, downloadUrl: "https://drive.google.com/file/d/1u3RfHd4HZlUjJN3L_kyUACi3ItVFK0gV/view?usp=drive_link", price: "50.00",
+                isPdf: true, downloadUrl: "https://drive.google.com/file/d/1u3RfHd4HZlUjJN3L_kyUACi3ItVFK0gV/view?usp=drive_link", price: "20.00",
                 desc: "Detailed workshop repair manual for Agrolux series tractors.",
                 steps: ["Engine maintenance", "Hydraulic lift linkage", "Electrical troubleshooting", "Assembly & disassembly"]
             },
             {
                 id: "manual-agroplus-60", title: "AGROPLUS 60-70-80 Workshop Manual", category: "Farmers", subCategory: "Deutz", image: "https://placehold.co/600x400/065f46/ffffff?text=Deutz+Agroplus",
-                isPdf: true, downloadUrl: "https://drive.google.com/file/d/1g-ULTNzM_FudwDnuQET49r1TldA4_xdO/view?usp=drive_link", price: "50.00",
+                isPdf: true, downloadUrl: "https://drive.google.com/file/d/1g-ULTNzM_FudwDnuQET49r1TldA4_xdO/view?usp=drive_link", price: "20.00",
                 desc: "Factory repair and service manual for Agroplus 60, 70, and 80 tractors.",
                 steps: ["Fuel system calibration", "Transmission diagnostics", "Hydraulic pressure testing", "Electrical wiring guide"]
             },
             {
                 id: "manual-agroplus-75", title: "AGROPLUS 75-85-95-100 Workshop Manual", category: "Farmers", subCategory: "Deutz", image: "https://placehold.co/600x400/065f46/ffffff?text=Deutz+Agroplus+75-100",
-                isPdf: true, downloadUrl: "https://drive.google.com/file/d/1A2OM6OOYgFjz6YSqI9NIcGJj5a9gYPtb/view?usp=drive_link", price: "50.00",
+                isPdf: true, downloadUrl: "https://drive.google.com/file/d/1A2OM6OOYgFjz6YSqI9NIcGJj5a9gYPtb/view?usp=drive_link", price: "20.00",
                 desc: "Advanced workshop manual covering Agroplus 75 through 100 models.",
                 steps: ["Engine disassembly", "Transmission overhaul", "Four-wheel drive axle service", "Cab controls & electronics"]
             },
             {
                 id: "manual-agrotrac", title: "AGROTRAC 110-130-150 Workshop Manual", category: "Farmers", subCategory: "Deutz", image: "https://placehold.co/600x400/065f46/ffffff?text=Deutz+Agrotrac",
-                isPdf: true, downloadUrl: "https://drive.google.com/file/d/1PG-j8cG1PzI9zwGMbYlQIjLW3NRVf8m5/view?usp=drive_link", price: "50.00",
+                isPdf: true, downloadUrl: "https://drive.google.com/file/d/1PG-j8cG1PzI9zwGMbYlQIjLW3NRVf8m5/view?usp=drive_link", price: "20.00",
                 desc: "Heavy-duty tractor workshop manual for Agrotrac high-horsepower models.",
                 steps: ["Engine cooling & fuel injection", "PowerShift transmission repair", "Rear hitch linkage calibration", "Safety & maintenance specs"]
             },
             {
                 id: "manual-agrotron-mk3-80", title: "AGROTRON 80-85-90-100-105 MK3 Workshop Manual", category: "Farmers", subCategory: "Deutz", image: "https://placehold.co/600x400/065f46/ffffff?text=Deutz+Agrotron",
-                isPdf: true, downloadUrl: "https://drive.google.com/file/d/1zmMZfQEoxeUg0G6v7SPHB_uhI-4BOK7V/view?usp=drive_link", price: "50.00",
+                isPdf: true, downloadUrl: "https://drive.google.com/file/d/1zmMZfQEoxeUg0G6v7SPHB_uhI-4BOK7V/view?usp=drive_link", price: "20.00",
                 desc: "Complete workshop manual for Deutz Agrotron MK3 series tractors.",
                 steps: ["Electronic engine management", "Transmission & powershift setup", "Hydraulic load sensing", "Diagnostic error codes"]
             },
             {
                 id: "manual-agrotron-80-105", title: "AGROTRON 80-90-100-105 Workshop Manual", category: "Farmers", subCategory: "Deutz", image: "https://placehold.co/600x400/065f46/ffffff?text=Deutz+Agrotron",
-                isPdf: true, downloadUrl: "https://drive.google.com/file/d/1q0sJBM7wwknARqX9or8yvQY2rB1pTA4z/view?usp=drive_link", price: "50.00",
+                isPdf: true, downloadUrl: "https://drive.google.com/file/d/1q0sJBM7wwknARqX9or8yvQY2rB1pTA4z/view?usp=drive_link", price: "20.00",
                 desc: "Technical service manual for Agrotron 80, 90, 100, and 105 tractor series.",
                 steps: ["Engine diagnostics", "Hydraulic system calibration", "Electrical schematics", "Brake & axle overhaul"]
             },
             {
                 id: "manual-agrotron-106-165", title: "AGROTRON 106-110-115-120-135-150-165 MK3 Manual", category: "Farmers", subCategory: "Deutz", image: "https://placehold.co/600x400/065f46/ffffff?text=Deutz+Agrotron",
-                isPdf: true, downloadUrl: "https://drive.google.com/file/d/1mis1n7z7WYqSF5qjdX7pjY9GMWPPd5Gr/view?usp=drive_link", price: "50.00",
+                isPdf: true, downloadUrl: "https://drive.google.com/file/d/1mis1n7z7WYqSF5qjdX7pjY9GMWPPd5Gr/view?usp=drive_link", price: "20.00",
                 desc: "Comprehensive repair manual for Agrotron MK3 heavy utility tractors.",
                 steps: ["Transmission teardown", "PowerShift adjustments", "Hydraulic pump testing", "Axle & suspension service"]
             },
             {
                 id: "manual-agrotron-108-128", title: "AGROTRON 108-118-128 Workshop Manual", category: "Farmers", subCategory: "Deutz", image: "https://placehold.co/600x400/065f46/ffffff?text=Deutz+Agrotron",
-                isPdf: true, downloadUrl: "https://drive.google.com/file/d/1Mt9rIXOZsCJEDZttgxnQ5SK-GYjI7ZDU/view?usp=drive_link", price: "50.00",
+                isPdf: true, downloadUrl: "https://drive.google.com/file/d/1Mt9rIXOZsCJEDZttgxnQ5SK-GYjI7ZDU/view?usp=drive_link", price: "20.00",
                 desc: "Official workshop service manual for Agrotron 108, 118, and 128 models.",
                 steps: ["Engine specifications", "Transmission servicing", "Hydraulic controls", "Electrical diagnostics"]
             },
             {
                 id: "manual-agrotron-130-165", title: "AGROTRON 130-140-155-165 MK3 Workshop Manual", category: "Farmers", subCategory: "Deutz", image: "https://placehold.co/600x400/065f46/ffffff?text=Deutz+Agrotron",
-                isPdf: true, downloadUrl: "https://drive.google.com/file/d/1ET78Ydir_bJXQg9SzIabx-1wqTrB-BCT/view?usp=drive_link", price: "50.00",
+                isPdf: true, downloadUrl: "https://drive.google.com/file/d/1ET78Ydir_bJXQg9SzIabx-1wqTrB-BCT/view?usp=drive_link", price: "20.00",
                 desc: "Detailed workshop manual for high-output Agrotron MK3 tractors.",
                 steps: ["Powertrain overhaul", "Hydraulics & hitch tuning", "Electronic control units", "Routine maintenance"]
             },
             {
                 id: "manual-agrotron-210-265", title: "AGROTRON 210-235-265 Workshop Manual", category: "Farmers", subCategory: "Deutz", image: "https://placehold.co/600x400/065f46/ffffff?text=Deutz+Agrotron",
-                isPdf: true, downloadUrl: "https://drive.google.com/file/d/1E0lFFheMpvlgrWU011yq81PCAhWr6UoT/view?usp=drive_link", price: "50.00",
+                isPdf: true, downloadUrl: "https://drive.google.com/file/d/1E0lFFheMpvlgrWU011yq81PCAhWr6UoT/view?usp=drive_link", price: "20.00",
                 desc: "Factory service manual for large-frame Deutz Agrotron 210, 235, and 265 tractors.",
                 steps: ["Engine repair procedures", "Heavy transmission service", "Axle & differential work", "Advanced diagnostics"]
             },
             {
                 id: "manual-agrotron-215-265", title: "AGROTRON 215-265 Workshop Manual", category: "Farmers", subCategory: "Deutz", image: "https://placehold.co/600x400/065f46/ffffff?text=Deutz+Agrotron",
-                isPdf: true, downloadUrl: "https://drive.google.com/file/d/1nt89RIBPNg3QBgQQpFaCy4KnARbrLJFP/view?usp=drive_link", price: "50.00",
+                isPdf: true, downloadUrl: "https://drive.google.com/file/d/1nt89RIBPNg3QBgQQpFaCy4KnARbrLJFP/view?usp=drive_link", price: "20.00",
                 desc: "Complete technical manual for Agrotron 215 and 265 tractor fleets.",
                 steps: ["Hydraulic system schematics", "Transmission maintenance", "Engine overhaul guide", "Electrical troubleshooting"]
             },
             {
                 id: "manual-deutz-engines-912", title: "ENGINES DEUTZ 912-913 Workshop Manual", category: "Farmers", subCategory: "Deutz", image: "https://placehold.co/600x400/065f46/ffffff?text=Deutz+Engines",
-                isPdf: true, downloadUrl: "https://drive.google.com/file/d/1_izqzFxH-Irebdd2zq3e_5_ETCCTekn3/view?usp=drive_link", price: "50.00",
+                isPdf: true, downloadUrl: "https://drive.google.com/file/d/1_izqzFxH-Irebdd2zq3e_5_ETCCTekn3/view?usp=drive_link", price: "20.00",
                 desc: "Comprehensive engine overhaul and service manual for air-cooled Deutz 912 and 913 series engines.",
                 steps: ["Cylinder head & valve clearance", "Fuel injection pump timing", "Lubrication & oil cooling", "Torque specifications"]
             },
             {
                 id: "manual-balance", title: "5650-5650 Balance Manual", category: "Farmers", subCategory: "Other", image: "https://placehold.co/600x400/065f46/ffffff?text=Balance+Manual",
-                isPdf: true, downloadUrl: "https://drive.google.com/file/d/1RtsDdGKjdUgZOT8dY5aRFMtDVUf8Zyim/view?usp=drive_link", price: "50.00",
+                isPdf: true, downloadUrl: "https://drive.google.com/file/d/1RtsDdGKjdUgZOT8dY5aRFMtDVUf8Zyim/view?usp=drive_link", price: "20.00",
                 desc: "Official service balance and adjustment documentation for specialized agricultural machinery.",
                 steps: ["Component calibration", "Balancing procedures", "Maintenance guidelines", "Technical tolerances"]
             },
-
-            // --- LATEST ADDED 31 TRACTOR MANUALS (BA - BM) NOW MOVED TO SAME ---
             {
-                id: "manual-recent-1", title: "Tractor Technical Workshop Manual BA", category: "Farmers", subCategory: "Same", image: "https://placehold.co/600x400/065f46/ffffff?text=Tractor+Manual",
-                isPdf: true, downloadUrl: "https://drive.google.com/file/d/1tr7zfafkasJA57p379NcBPMdTjvkScW-/view?usp=drive_link", price: "50.00",
-                desc: "Newly added official workshop service manual for agricultural tractors and mechanical systems.",
-                steps: ["System overhauls", "Hydraulic maintenance", "Electrical testing", "Routine upkeep"]
-            },
-            {
-                id: "manual-recent-2", title: "Tractor Technical Workshop Manual BB", category: "Farmers", subCategory: "Same", image: "https://placehold.co/600x400/065f46/ffffff?text=Tractor+Manual",
-                isPdf: true, downloadUrl: "https://drive.google.com/file/d/1-Ff19aPDucUw9dWd2npcO-WMMemu23Dg/view?usp=drive_link", price: "50.00",
-                desc: "Newly added official workshop service manual for agricultural tractors and mechanical systems.",
-                steps: ["System overhauls", "Hydraulic maintenance", "Electrical testing", "Routine upkeep"]
-            },
-            {
-                id: "manual-recent-3", title: "Tractor Technical Workshop Manual BC", category: "Farmers", subCategory: "Same", image: "https://placehold.co/600x400/065f46/ffffff?text=Tractor+Manual",
-                isPdf: true, downloadUrl: "https://drive.google.com/file/d/1QjqFjYC3ZGYc1cWzhdEAFWlUnTNHGb64/view?usp=drive_link", price: "50.00",
-                desc: "Newly added official workshop service manual for agricultural tractors and mechanical systems.",
-                steps: ["System overhauls", "Hydraulic maintenance", "Electrical testing", "Routine upkeep"]
-            },
-            {
-                id: "manual-recent-4", title: "Tractor Technical Workshop Manual BD", category: "Farmers", subCategory: "Same", image: "https://placehold.co/600x400/065f46/ffffff?text=Tractor+Manual",
-                isPdf: true, downloadUrl: "https://drive.google.com/file/d/1gJqxU5C_5rnuLE_nx-UiavVjvFsUKpMX/view?usp=drive_link", price: "50.00",
-                desc: "Newly added official workshop service manual for agricultural tractors and mechanical systems.",
-                steps: ["System overhauls", "Hydraulic maintenance", "Electrical testing", "Routine upkeep"]
-            },
-            {
-                id: "manual-recent-5", title: "Tractor Technical Workshop Manual BE", category: "Farmers", subCategory: "Same", image: "https://placehold.co/600x400/065f46/ffffff?text=Tractor+Manual",
-                isPdf: true, downloadUrl: "https://drive.google.com/file/d/1hY5uZLcRIOriKhf_N4QuKZ0qA2AiK6Cl/view?usp=drive_link", price: "50.00",
-                desc: "Newly added official workshop service manual for agricultural tractors and mechanical systems.",
-                steps: ["System overhauls", "Hydraulic maintenance", "Electrical testing", "Routine upkeep"]
-            },
-            {
-                id: "manual-recent-6", title: "Tractor Technical Workshop Manual BF", category: "Farmers", subCategory: "Same", image: "https://placehold.co/600x400/065f46/ffffff?text=Tractor+Manual",
-                isPdf: true, downloadUrl: "https://drive.google.com/file/d/1c7hM9del1RTOhIkkTYxjpiBUmmPGTOaZ/view?usp=drive_link", price: "50.00",
-                desc: "Newly added official workshop service manual for agricultural tractors and mechanical systems.",
-                steps: ["System overhauls", "Hydraulic maintenance", "Electrical testing", "Routine upkeep"]
-            },
-            {
-                id: "manual-latest-bg", title: "Tractor Technical Workshop Manual BG", category: "Farmers", subCategory: "Same", image: "https://placehold.co/600x400/065f46/ffffff?text=Tractor+Manual",
-                isPdf: true, downloadUrl: "https://drive.google.com/file/d/1LbUnbpMedFdKq_Sdkxj4oP8cLN3N6ECO/view?usp=drive_link", price: "50.00",
-                desc: "Newly added official workshop service manual for agricultural tractors and mechanical systems.",
-                steps: ["System overhauls", "Hydraulic maintenance", "Electrical testing", "Routine upkeep"]
-            },
-            {
-                id: "manual-latest-bh", title: "Tractor Technical Workshop Manual BH", category: "Farmers", subCategory: "Same", image: "https://placehold.co/600x400/065f46/ffffff?text=Tractor+Manual",
-                isPdf: true, downloadUrl: "https://drive.google.com/file/d/1os2_Q3DRCO2NZw9foBUoJLIDZ9teweZi/view?usp=drive_link", price: "50.00",
-                desc: "Newly added official workshop service manual for agricultural tractors and mechanical systems.",
-                steps: ["System overhauls", "Hydraulic maintenance", "Electrical testing", "Routine upkeep"]
-            },
-            {
-                id: "manual-latest-bi", title: "Tractor Technical Workshop Manual BI", category: "Farmers", subCategory: "Same", image: "https://placehold.co/600x400/065f46/ffffff?text=Tractor+Manual",
-                isPdf: true, downloadUrl: "https://drive.google.com/file/d/11WKO99186n38uVzZihER2wtFPJFe2ZLj/view?usp=drive_link", price: "50.00",
-                desc: "Newly added official workshop service manual for agricultural tractors and mechanical systems.",
-                steps: ["System overhauls", "Hydraulic maintenance", "Electrical testing", "Routine upkeep"]
-            },
-            {
-                id: "manual-latest-bj", title: "Tractor Technical Workshop Manual BJ", category: "Farmers", subCategory: "Same", image: "https://placehold.co/600x400/065f46/ffffff?text=Tractor+Manual",
-                isPdf: true, downloadUrl: "https://drive.google.com/file/d/1SqJa4HUWwcirzssprY7AD47MF8QfXH44/view?usp=drive_link", price: "50.00",
-                desc: "Newly added official workshop service manual for agricultural tractors and mechanical systems.",
-                steps: ["System overhauls", "Hydraulic maintenance", "Electrical testing", "Routine upkeep"]
-            },
-            {
-                id: "manual-latest-bk", title: "Tractor Technical Workshop Manual BK", category: "Farmers", subCategory: "Same", image: "https://placehold.co/600x400/065f46/ffffff?text=Tractor+Manual",
-                isPdf: true, downloadUrl: "https://drive.google.com/file/d/11B-ZwoAmcuWzC_ByjOR944FEYch1Im9W/view?usp=drive_link", price: "50.00",
-                desc: "Newly added official workshop service manual for agricultural tractors and mechanical systems.",
-                steps: ["System overhauls", "Hydraulic maintenance", "Electrical testing", "Routine upkeep"]
-            },
-            {
-                id: "manual-latest-bl", title: "Tractor Technical Workshop Manual BL", category: "Farmers", subCategory: "Same", image: "https://placehold.co/600x400/065f46/ffffff?text=Tractor+Manual",
-                isPdf: true, downloadUrl: "https://drive.google.com/file/d/13FwvC5i4xozXX6u-vmzz5nr0gJMLLkYf/view?usp=drive_link", price: "50.00",
-                desc: "Newly added official workshop service manual for agricultural tractors and mechanical systems.",
-                steps: ["System overhauls", "Hydraulic maintenance", "Electrical testing", "Routine upkeep"]
-            },
-            {
-                id: "manual-latest-bm", title: "Tractor Technical Workshop Manual BM", category: "Farmers", subCategory: "Same", image: "https://placehold.co/600x400/065f46/ffffff?text=Tractor+Manual",
-                isPdf: true, downloadUrl: "https://drive.google.com/file/d/1s8_tFwejcFxdy59gPPHh3lgou_Yibv0_/view?usp=drive_link", price: "50.00",
-                desc: "Newly added official workshop service manual for agricultural tractors and mechanical systems.",
-                steps: ["System overhauls", "Hydraulic maintenance", "Electrical testing", "Routine upkeep"]
-            },
-            // (Plus additional manuals A through AN in Same or Deutz category as appropriate)
-            {
-                id: "manual-additional-1", title: "Deutz Tractor Technical Workshop Manual A", category: "Farmers", subCategory: "Same", image: "https://placehold.co/600x400/065f46/ffffff?text=Deutz+Manual",
-                isPdf: true, downloadUrl: "https://drive.google.com/file/d/1Mt9rIXOZsCJEDZttgxnQ5SK-GYjI7ZDU/view?usp=drive_link", price: "50.00",
-                desc: "Specialized factory workshop documentation for agricultural machinery and tractors.",
+                id: "manual-additional-1", title: "Deutz Tractor Technical Workshop Manual A", category: "Farmers", subCategory: "Deutz", image: "https://placehold.co/600x400/065f46/ffffff?text=Deutz+Manual",
+                isPdf: true, downloadUrl: "https://drive.google.com/file/d/1Mt9rIXOZsCJEDZttgxnQ5SK-GYjI7ZDU/view?usp=drive_link", price: "20.00",
+                desc: "Specialized factory workshop documentation for Deutz agricultural machinery and tractors.",
                 steps: ["Mechanical diagnostics", "Hydraulic repairs", "Electrical troubleshooting", "Component assembly"]
             },
             {
-                id: "manual-additional-2", title: "Deutz Tractor Technical Workshop Manual B", category: "Farmers", subCategory: "Same", image: "https://placehold.co/600x400/065f46/ffffff?text=Deutz+Manual",
-                isPdf: true, downloadUrl: "https://drive.google.com/file/d/1XkcRTm7TsFuPkqWkbhN4cmeBUL_9eCQZ/view?usp=drive_link", price: "50.00",
+                id: "manual-additional-2", title: "Deutz Tractor Technical Workshop Manual B", category: "Farmers", subCategory: "Deutz", image: "https://placehold.co/600x400/065f46/ffffff?text=Deutz+Manual",
+                isPdf: true, downloadUrl: "https://drive.google.com/file/d/1XkcRTm7TsFuPkqWkbhN4cmeBUL_9eCQZ/view?usp=drive_link", price: "20.00",
                 desc: "Factory service manual covering mechanical systems and maintenance intervals.",
                 steps: ["Routine servicing", "Clutch & brake maintenance", "Steering system checks", "Hydraulic tests"]
             },
             {
-                id: "manual-additional-3", title: "Deutz Tractor Technical Workshop Manual C", category: "Farmers", subCategory: "Same", image: "https://placehold.co/600x400/065f46/ffffff?text=Deutz+Manual",
-                isPdf: true, downloadUrl: "https://drive.google.com/file/d/1tE2PrRTPO9D5EPJbTul4J2vDfpWltmBK/view?usp=drive_link", price: "50.00",
+                id: "manual-additional-3", title: "Deutz Tractor Technical Workshop Manual C", category: "Farmers", subCategory: "Deutz", image: "https://placehold.co/600x400/065f46/ffffff?text=Deutz+Manual",
+                isPdf: true, downloadUrl: "https://drive.google.com/file/d/1tE2PrRTPO9D5EPJbTul4J2vDfpWltmBK/view?usp=drive_link", price: "20.00",
                 desc: "Detailed technical repair manual for professional workshop technicians.",
                 steps: ["Engine and fuel setup", "Transmission diagnostics", "Axle maintenance", "Wiring diagrams"]
             },
             {
-                id: "manual-additional-4", title: "Deutz Tractor Technical Workshop Manual D", category: "Farmers", subCategory: "Same", image: "https://placehold.co/600x400/065f46/ffffff?text=Deutz+Manual",
-                isPdf: true, downloadUrl: "https://drive.google.com/file/d/1UHNld1aigZO1kchK0_B8nmVs6Ccmfy_I/view?usp=drive_link", price: "50.00",
+                id: "manual-additional-4", title: "Deutz Tractor Technical Workshop Manual D", category: "Farmers", subCategory: "Deutz", image: "https://placehold.co/600x400/065f46/ffffff?text=Deutz+Manual",
+                isPdf: true, downloadUrl: "https://drive.google.com/file/d/1UHNld1aigZO1kchK0_B8nmVs6Ccmfy_I/view?usp=drive_link", price: "20.00",
                 desc: "Authorized dealer workshop manual for advanced tractor systems.",
                 steps: ["Advanced diagnostics", "Hydraulic control valves", "Power train service", "Safety inspection"]
             },
             {
-                id: "manual-additional-5", title: "Deutz Tractor Technical Workshop Manual E", category: "Farmers", subCategory: "Same", image: "https://placehold.co/600x400/065f46/ffffff?text=Deutz+Manual",
-                isPdf: true, downloadUrl: "https://drive.google.com/file/d/1C4k-WX8iEnyu0gX8jqMs046UUi3sNv3H/view?usp=drive_link", price: "50.00",
+                id: "manual-additional-5", title: "Deutz Tractor Technical Workshop Manual E", category: "Farmers", subCategory: "Deutz", image: "https://placehold.co/600x400/065f46/ffffff?text=Deutz+Manual",
+                isPdf: true, downloadUrl: "https://drive.google.com/file/d/1C4k-WX8iEnyu0gX8jqMs046UUi3sNv3H/view?usp=drive_link", price: "20.00",
                 desc: "Official factory service manual for system calibration and repairs.",
                 steps: ["System calibration", "Repair procedures", "Torque specs", "Maintenance logs"]
             },
             {
-                id: "manual-additional-6", title: "Deutz Tractor Technical Workshop Manual F", category: "Farmers", subCategory: "Same", image: "https://placehold.co/600x400/065f46/ffffff?text=Deutz+Manual",
-                isPdf: true, downloadUrl: "https://drive.google.com/file/d/1xaYrAp0WFwzo9dcD3DKKUL__ZvwqU3sh/view?usp=drive_link", price: "50.00",
+                id: "manual-additional-6", title: "Deutz Tractor Technical Workshop Manual F", category: "Farmers", subCategory: "Deutz", image: "https://placehold.co/600x400/065f46/ffffff?text=Deutz+Manual",
+                isPdf: true, downloadUrl: "https://drive.google.com/file/d/1xaYrAp0WFwzo9dcD3DKKUL__ZvwqU3sh/view?usp=drive_link", price: "20.00",
                 desc: "Comprehensive workshop manual for tractor maintenance and overhauls.",
                 steps: ["Engine checks", "Gearbox servicing", "Differential setup", "Electrical troubleshooting"]
             },
             {
-                id: "manual-additional-7", title: "Deutz Tractor Technical Workshop Manual G", category: "Farmers", subCategory: "Same", image: "https://placehold.co/600x400/065f46/ffffff?text=Deutz+Manual",
-                isPdf: true, downloadUrl: "https://drive.google.com/file/d/16hel8Tt1QXnTlPwQCJD_tA4pcxx3HrV3/view?usp=drive_link", price: "50.00",
+                id: "manual-additional-7", title: "Deutz Tractor Technical Workshop Manual G", category: "Farmers", subCategory: "Deutz", image: "https://placehold.co/600x400/065f46/ffffff?text=Deutz+Manual",
+                isPdf: true, downloadUrl: "https://drive.google.com/file/d/16hel8Tt1QXnTlPwQCJD_tA4pcxx3HrV3/view?usp=drive_link", price: "20.00",
                 desc: "Technical service documentation for workshop repairs.",
                 steps: ["Fault isolation", "Part replacement guides", "Hydraulic checks", "Final testing"]
             },
             {
-                id: "manual-additional-8", title: "Deutz Tractor Technical Workshop Manual H", category: "Farmers", subCategory: "Same", image: "https://placehold.co/600x400/065f46/ffffff?text=Deutz+Manual",
-                isPdf: true, downloadUrl: "https://drive.google.com/file/d/1I38P7V88fcTNa7MtUAerEf12y-xNjMs1/view?usp=drive_link", price: "50.00",
+                id: "manual-additional-8", title: "Deutz Tractor Technical Workshop Manual H", category: "Farmers", subCategory: "Deutz", image: "https://placehold.co/600x400/065f46/ffffff?text=Deutz+Manual",
+                isPdf: true, downloadUrl: "https://drive.google.com/file/d/1I38P7V88fcTNa7MtUAerEf12y-xNjMs1/view?usp=drive_link", price: "20.00",
                 desc: "Official factory repair manual for mechanical and electrical systems.",
                 steps: ["Electrical checks", "Mechanical overhaul", "Fluid replacement", "Calibration"]
             },
             {
-                id: "manual-additional-9", title: "Deutz Tractor Technical Workshop Manual I", category: "Farmers", subCategory: "Same", image: "https://placehold.co/600x400/065f46/ffffff?text=Deutz+Manual",
-                isPdf: true, downloadUrl: "https://drive.google.com/file/d/1-85C-urw8krmSFwSrcS3SO1XCJCPb9_R/view?usp=drive_link", price: "50.00",
-                desc: "Comprehensive workshop guide for servicing tractors.",
+                id: "manual-additional-9", title: "Deutz Tractor Technical Workshop Manual I", category: "Farmers", subCategory: "Deutz", image: "https://placehold.co/600x400/065f46/ffffff?text=Deutz+Manual",
+                isPdf: true, downloadUrl: "https://drive.google.com/file/d/1-85C-urw8krmSFwSrcS3SO1XCJCPb9_R/view?usp=drive_link", price: "20.00",
+                desc: "Comprehensive workshop guide for servicing Deutz tractors.",
                 steps: ["Service intervals", "Engine tuning", "Hydraulic maintenance", "Troubleshooting"]
             },
             {
-                id: "manual-additional-10", title: "Deutz Tractor Technical Workshop Manual J", category: "Farmers", subCategory: "Same", image: "https://placehold.co/600x400/065f46/ffffff?text=Deutz+Manual",
-                isPdf: true, downloadUrl: "https://drive.google.com/file/d/17alp9w7cTJG4KRMmN5C7ymclDhns0JQK/view?usp=drive_link", price: "50.00",
+                id: "manual-additional-10", title: "Deutz Tractor Technical Workshop Manual J", category: "Farmers", subCategory: "Deutz", image: "https://placehold.co/600x400/065f46/ffffff?text=Deutz+Manual",
+                isPdf: true, downloadUrl: "https://drive.google.com/file/d/17alp9w7cTJG4KRMmN5C7ymclDhns0JQK/view?usp=drive_link", price: "20.00",
                 desc: "Authorized workshop manual for technical maintenance.",
                 steps: ["Inspection routines", "Repair specifications", "Diagnostic steps", "Safety checks"]
             },
             {
-                id: "manual-additional-11", title: "Deutz Tractor Technical Workshop Manual K", category: "Farmers", subCategory: "Same", image: "https://placehold.co/600x400/065f46/ffffff?text=Deutz+Manual",
-                isPdf: true, downloadUrl: "https://drive.google.com/file/d/1JlF9TBrZTjFvBgrgNPiDaievVtav2c_F/view?usp=drive_link", price: "50.00",
+                id: "manual-additional-11", title: "Deutz Tractor Technical Workshop Manual K", category: "Farmers", subCategory: "Deutz", image: "https://placehold.co/600x400/065f46/ffffff?text=Deutz+Manual",
+                isPdf: true, downloadUrl: "https://drive.google.com/file/d/1JlF9TBrZTjFvBgrgNPiDaievVtav2c_F/view?usp=drive_link", price: "20.00",
                 desc: "Factory technical manual for drivetrain and engine service.",
                 steps: ["Drivetrain checks", "Engine diagnostics", "Hydraulic service", "Assembly notes"]
             },
             {
-                id: "manual-additional-12", title: "Deutz Tractor Technical Workshop Manual L", category: "Farmers", subCategory: "Same", image: "https://placehold.co/600x400/065f46/ffffff?text=Deutz+Manual",
-                isPdf: true, downloadUrl: "https://drive.google.com/file/d/1ztK6T2-dikxRyIXN_YBDba1qVRImccqp/view?usp=drive_link", price: "50.00",
+                id: "manual-additional-12", title: "Deutz Tractor Technical Workshop Manual L", category: "Farmers", subCategory: "Deutz", image: "https://placehold.co/600x400/065f46/ffffff?text=Deutz+Manual",
+                isPdf: true, downloadUrl: "https://drive.google.com/file/d/1ztK6T2-dikxRyIXN_YBDba1qVRImccqp/view?usp=drive_link", price: "20.00",
                 desc: "Comprehensive repair instructions for tractor mechanics.",
                 steps: ["Component testing", "Repair guidelines", "Fluid specs", "System checks"]
             },
             {
-                id: "manual-additional-13", title: "Deutz Tractor Technical Workshop Manual M", category: "Farmers", subCategory: "Same", image: "https://placehold.co/600x400/065f46/ffffff?text=Deutz+Manual",
-                isPdf: true, downloadUrl: "https://drive.google.com/file/d/1TFr63OhVP5Ul_XhgfYLZTNWM4at-yUUG/view?usp=drive_link", price: "50.00",
+                id: "manual-additional-13", title: "Deutz Tractor Technical Workshop Manual M", category: "Farmers", subCategory: "Deutz", image: "https://placehold.co/600x400/065f46/ffffff?text=Deutz+Manual",
+                isPdf: true, downloadUrl: "https://drive.google.com/file/d/1TFr63OhVP5Ul_XhgfYLZTNWM4at-yUUG/view?usp=drive_link", price: "20.00",
                 desc: "Official factory workshop guide for tractor upkeep.",
                 steps: ["Maintenance guides", "Hydraulic upkeep", "Electrical testing", "Torque charts"]
             },
             {
-                id: "manual-additional-14", title: "Deutz Tractor Technical Workshop Manual N", category: "Farmers", subCategory: "Same", image: "https://placehold.co/600x400/065f46/ffffff?text=Deutz+Manual",
-                isPdf: true, downloadUrl: "https://drive.google.com/file/d/1nK5sH7pVQa77RFDnl5RVTJrYFlzZxm4C/view?usp=drive_link", price: "50.00",
+                id: "manual-additional-14", title: "Deutz Tractor Technical Workshop Manual N", category: "Farmers", subCategory: "Deutz", image: "https://placehold.co/600x400/065f46/ffffff?text=Deutz+Manual",
+                isPdf: true, downloadUrl: "https://drive.google.com/file/d/1nK5sH7pVQa77RFDnl5RVTJrYFlzZxm4C/view?usp=drive_link", price: "20.00",
                 desc: "Technical manual for tractor systems and major overhauls.",
                 steps: ["Major overhauls", "System testing", "Adjustment specs", "Safety guidelines"]
             },
             {
-                id: "manual-additional-15", title: "Deutz Tractor Technical Workshop Manual O", category: "Farmers", subCategory: "Same", image: "https://placehold.co/600x400/065f46/ffffff?text=Deutz+Manual",
-                isPdf: true, downloadUrl: "https://drive.google.com/file/d/1zTThS-IgPgRSG9Paxq8VYq3BEiEB_6MT/view?usp=drive_link", price: "50.00",
+                id: "manual-additional-15", title: "Deutz Tractor Technical Workshop Manual O", category: "Farmers", subCategory: "Deutz", image: "https://placehold.co/600x400/065f46/ffffff?text=Deutz+Manual",
+                isPdf: true, downloadUrl: "https://drive.google.com/file/d/1zTThS-IgPgRSG9Paxq8VYq3BEiEB_6MT/view?usp=drive_link", price: "20.00",
                 desc: "Workshop service documentation for agricultural equipment.",
                 steps: ["Routine checks", "Mechanical service", "Hydraulic diagnostics", "Repair steps"]
             },
             {
-                id: "manual-additional-16", title: "Deutz Tractor Technical Workshop Manual P", category: "Farmers", subCategory: "Same", image: "https://placehold.co/600x400/065f46/ffffff?text=Deutz+Manual",
-                isPdf: true, downloadUrl: "https://drive.google.com/file/d/1uhqVUUxuZULU6b16nZ7C-1x2FhxFJbQj/view?usp=drive_link", price: "50.00",
+                id: "manual-additional-16", title: "Deutz Tractor Technical Workshop Manual P", category: "Farmers", subCategory: "Deutz", image: "https://placehold.co/600x400/065f46/ffffff?text=Deutz+Manual",
+                isPdf: true, downloadUrl: "https://drive.google.com/file/d/1uhqVUUxuZULU6b16nZ7C-1x2FhxFJbQj/view?usp=drive_link", price: "20.00",
                 desc: "Factory repair manual for professional agricultural technicians.",
                 steps: ["Troubleshooting", "System repair", "Maintenance schedules", "Testing specs"]
             },
             {
-                id: "manual-additional-17", title: "Deutz Tractor Technical Workshop Manual Q", category: "Farmers", subCategory: "Same", image: "https://placehold.co/600x400/065f46/ffffff?text=Deutz+Manual",
-                isPdf: true, downloadUrl: "https://drive.google.com/file/d/1TwLD_dP0pNfttdFDzcp9Imxln0P2rk9X/view?usp=drive_link", price: "50.00",
-                desc: "Comprehensive reference manual for tractor repairs.",
+                id: "manual-additional-17", title: "Deutz Tractor Technical Workshop Manual Q", category: "Farmers", subCategory: "Deutz", image: "https://placehold.co/600x400/065f46/ffffff?text=Deutz+Manual",
+                isPdf: true, downloadUrl: "https://drive.google.com/file/d/1TwLD_dP0pNfttdFDzcp9Imxln0P2rk9X/view?usp=drive_link", price: "20.00",
+                desc: "Comprehensive reference manual for Deutz tractor repairs.",
                 steps: ["Technical data", "Adjustment procedures", "Component repairs", "Engine assembly"]
             },
             {
-                id: "manual-additional-18", title: "Deutz Tractor Technical Workshop Manual R", category: "Farmers", subCategory: "Same", image: "https://placehold.co/600x400/065f46/ffffff?text=Deutz+Manual",
-                isPdf: true, downloadUrl: "https://drive.google.com/file/d/1K92-wj5LsdoTBpQUOhoEnKNA2HTXXPCR/view?usp=drive_link", price: "50.00",
+                id: "manual-additional-18", title: "Deutz Tractor Technical Workshop Manual R", category: "Farmers", subCategory: "Deutz", image: "https://placehold.co/600x400/065f46/ffffff?text=Deutz+Manual",
+                isPdf: true, downloadUrl: "https://drive.google.com/file/d/1K92-wj5LsdoTBpQUOhoEnKNA2HTXXPCR/view?usp=drive_link", price: "20.00",
                 desc: "Official workshop manual for advanced mechanical servicing.",
                 steps: ["Mechanical service", "Hydraulic testing", "Electrical guides", "Torque specifications"]
             },
             {
-                id: "manual-additional-19", title: "Deutz Tractor Technical Workshop Manual S", category: "Farmers", subCategory: "Same", image: "https://placehold.co/600x400/065f46/ffffff?text=Deutz+Manual",
-                isPdf: true, downloadUrl: "https://drive.google.com/file/d/11B-zB1YOHZJhi2eTo1lK3rQ-WeWtubpx/view?usp=drive_link", price: "50.00",
+                id: "manual-additional-19", title: "Deutz Tractor Technical Workshop Manual S", category: "Farmers", subCategory: "Deutz", image: "https://placehold.co/600x400/065f46/ffffff?text=Deutz+Manual",
+                isPdf: true, downloadUrl: "https://drive.google.com/file/d/11B-zB1YOHZJhi2eTo1lK3rQ-WeWtubpx/view?usp=drive_link", price: "20.00",
                 desc: "Technical service manual for workshop repairs and adjustments.",
                 steps: ["Adjustment values", "Repair guidelines", "Maintenance specs", "Safety procedures"]
             },
             {
-                id: "manual-additional-20", title: "Deutz Tractor Technical Workshop Manual T", category: "Farmers", subCategory: "Same", image: "https://placehold.co/600x400/065f46/ffffff?text=Deutz+Manual",
-                isPdf: true, downloadUrl: "https://drive.google.com/file/d/14mcWjFV1Ce0m8Ni1G_8JVvvoH52z9mjT/view?usp=drive_link", price: "50.00",
+                id: "manual-additional-20", title: "Deutz Tractor Technical Workshop Manual T", category: "Farmers", subCategory: "Deutz", image: "https://placehold.co/600x400/065f46/ffffff?text=Deutz+Manual",
+                isPdf: true, downloadUrl: "https://drive.google.com/file/d/14mcWjFV1Ce0m8Ni1G_8JVvvoH52z9mjT/view?usp=drive_link", price: "20.00",
                 desc: "Comprehensive workshop manual for tractor maintenance.",
                 steps: ["Service checks", "Repair instructions", "Component layout", "Testing methods"]
             },
             {
-                id: "manual-additional-21", title: "Deutz Tractor Technical Workshop Manual U", category: "Farmers", subCategory: "Same", image: "https://placehold.co/600x400/065f46/ffffff?text=Deutz+Manual",
-                isPdf: true, downloadUrl: "https://drive.google.com/file/d/1ri_iZU5OQW6G4CvD-Tsrx-rNDvW9MrXp/view?usp=drive_link", price: "50.00",
+                id: "manual-additional-21", title: "Deutz Tractor Technical Workshop Manual U", category: "Farmers", subCategory: "Deutz", image: "https://placehold.co/600x400/065f46/ffffff?text=Deutz+Manual",
+                isPdf: true, downloadUrl: "https://drive.google.com/file/d/1ri_iZU5OQW6G4CvD-Tsrx-rNDvW9MrXp/view?usp=drive_link", price: "20.00",
                 desc: "Factory authorized service manual for agricultural machinery.",
                 steps: ["System overhauls", "Hydraulic repairs", "Electrical checks", "Routine upkeep"]
             },
             {
-                id: "manual-additional-22", title: "Deutz Tractor Technical Workshop Manual V", category: "Farmers", subCategory: "Same", image: "https://placehold.co/600x400/065f46/ffffff?text=Deutz+Manual",
-                isPdf: true, downloadUrl: "https://drive.google.com/file/d/1yHLOeFLsLCjqy7jR2fURGaLliOa70FC9/view?usp=drive_link", price: "50.00",
+                id: "manual-additional-22", title: "Deutz Tractor Technical Workshop Manual V", category: "Farmers", subCategory: "Deutz", image: "https://placehold.co/600x400/065f46/ffffff?text=Deutz+Manual",
+                isPdf: true, downloadUrl: "https://drive.google.com/file/d/1yHLOeFLsLCjqy7jR2fURGaLliOa70FC9/view?usp=drive_link", price: "20.00",
                 desc: "Official service manual for tractor maintenance and diagnostics.",
                 steps: ["Diagnostic testing", "Component servicing", "Adjustment procedures", "Safety notes"]
             },
             {
-                id: "manual-additional-23", title: "Deutz Tractor Technical Workshop Manual W", category: "Farmers", subCategory: "Same", image: "https://placehold.co/600x400/065f46/ffffff?text=Deutz+Manual",
-                isPdf: true, downloadUrl: "https://drive.google.com/file/d/1u021_FEo79AJOogIs7kY3slOvJptOn3t/view?usp=drive_link", price: "50.00",
+                id: "manual-additional-23", title: "Deutz Tractor Technical Workshop Manual W", category: "Farmers", subCategory: "Deutz", image: "https://placehold.co/600x400/065f46/ffffff?text=Deutz+Manual",
+                isPdf: true, downloadUrl: "https://drive.google.com/file/d/1u021_FEo79AJOogIs7kY3slOvJptOn3t/view?usp=drive_link", price: "20.00",
                 desc: "Comprehensive technical manual for tractor servicing.",
                 steps: ["Maintenance specs", "Repair procedures", "Hydraulic troubleshooting", "Assembly guides"]
             },
             {
-                id: "manual-additional-24", title: "Deutz Tractor Technical Workshop Manual X", category: "Farmers", subCategory: "Same", image: "https://placehold.co/600x400/065f46/ffffff?text=Deutz+Manual",
-                isPdf: true, downloadUrl: "https://drive.google.com/file/d/1OjpIpIIrVNBHPsXAN9CbwxQokO-k5Oxl/view?usp=drive_link", price: "50.00",
+                id: "manual-additional-24", title: "Deutz Tractor Technical Workshop Manual X", category: "Farmers", subCategory: "Deutz", image: "https://placehold.co/600x400/065f46/ffffff?text=Deutz+Manual",
+                isPdf: true, downloadUrl: "https://drive.google.com/file/d/1OjpIpIIrVNBHPsXAN9CbwxQokO-k5Oxl/view?usp=drive_link", price: "20.00",
                 desc: "Technical workshop guide for professional mechanics.",
                 steps: ["Mechanical maintenance", "Repair standards", "Tool requirements", "Inspection checklists"]
             },
             {
-                id: "manual-additional-25", title: "Deutz Tractor Technical Workshop Manual Y", category: "Farmers", subCategory: "Same", image: "https://placehold.co/600x400/065f46/ffffff?text=Deutz+Manual",
-                isPdf: true, downloadUrl: "https://drive.google.com/file/d/1R9RKHjAEt8qECU6MGhj7u-5quTwPUwX7/view?usp=drive_link", price: "50.00",
+                id: "manual-additional-25", title: "Deutz Tractor Technical Workshop Manual Y", category: "Farmers", subCategory: "Deutz", image: "https://placehold.co/600x400/065f46/ffffff?text=Deutz+Manual",
+                isPdf: true, downloadUrl: "https://drive.google.com/file/d/1R9RKHjAEt8qECU6MGhj7u-5quTwPUwX7/view?usp=drive_link", price: "20.00",
                 desc: "Official factory manual for tractor system maintenance.",
                 steps: ["System checks", "Repair guidelines", "Calibration steps", "Technical specs"]
             },
             {
-                id: "manual-additional-26", title: "Deutz Tractor Technical Workshop Manual Z", category: "Farmers", subCategory: "Same", image: "https://placehold.co/600x400/065f46/ffffff?text=Deutz+Manual",
-                isPdf: true, downloadUrl: "https://drive.google.com/file/d/1sPgbvmyE_-k-xqAjHonZuiR-P-cSkYEu/view?usp=drive_link", price: "50.00",
+                id: "manual-additional-26", title: "Deutz Tractor Technical Workshop Manual Z", category: "Farmers", subCategory: "Deutz", image: "https://placehold.co/600x400/065f46/ffffff?text=Deutz+Manual",
+                isPdf: true, downloadUrl: "https://drive.google.com/file/d/1sPgbvmyE_-k-xqAjHonZuiR-P-cSkYEu/view?usp=drive_link", price: "20.00",
                 desc: "Comprehensive service manual for tractor repairs.",
                 steps: ["Troubleshooting charts", "Overhaul procedures", "Maintenance specs", "Safety checks"]
             },
             {
-                id: "manual-additional-27", title: "Deutz Tractor Technical Workshop Manual AA", category: "Farmers", subCategory: "Same", image: "https://placehold.co/600x400/065f46/ffffff?text=Deutz+Manual",
-                isPdf: true, downloadUrl: "https://drive.google.com/file/d/1pS0VEUdTbAeoYgm94UVcg6TY2uI1xUCh/view?usp=drive_link", price: "50.00",
+                id: "manual-additional-27", title: "Deutz Tractor Technical Workshop Manual AA", category: "Farmers", subCategory: "Deutz", image: "https://placehold.co/600x400/065f46/ffffff?text=Deutz+Manual",
+                isPdf: true, downloadUrl: "https://drive.google.com/file/d/1pS0VEUdTbAeoYgm94UVcg6TY2uI1xUCh/view?usp=drive_link", price: "20.00",
                 desc: "Technical workshop reference for agricultural equipment.",
                 steps: ["Maintenance routines", "Repair instructions", "Hydraulic schematics", "Testing procedures"]
             },
             {
-                id: "manual-additional-28", title: "Deutz Tractor Technical Workshop Manual AB", category: "Farmers", subCategory: "Same", image: "https://placehold.co/600x400/065f46/ffffff?text=Deutz+Manual",
-                isPdf: true, downloadUrl: "https://drive.google.com/file/d/1ghTnWYwZDDORuEPl46loYDjRF80hgauf/view?usp=drive_link", price: "50.00",
+                id: "manual-additional-28", title: "Deutz Tractor Technical Workshop Manual AB", category: "Farmers", subCategory: "Deutz", image: "https://placehold.co/600x400/065f46/ffffff?text=Deutz+Manual",
+                isPdf: true, downloadUrl: "https://drive.google.com/file/d/1ghTnWYwZDDORuEPl46loYDjRF80hgauf/view?usp=drive_link", price: "20.00",
                 desc: "Factory service documentation for workshop technicians.",
                 steps: ["Component overhauls", "Repair guides", "Adjustment values", "Diagnostic checks"]
             },
             {
-                id: "manual-additional-29", title: "Deutz Tractor Technical Workshop Manual AC", category: "Farmers", subCategory: "Same", image: "https://placehold.co/600x400/065f46/ffffff?text=Deutz+Manual",
-                isPdf: true, downloadUrl: "https://drive.google.com/file/d/1U9I5lzK0oPe64K_EpFC1CBGtga6PCRL4/view?usp=drive_link", price: "50.00",
-                desc: "Comprehensive repair and maintenance manual for machinery.",
+                id: "manual-additional-29", title: "Deutz Tractor Technical Workshop Manual AC", category: "Farmers", subCategory: "Deutz", image: "https://placehold.co/600x400/065f46/ffffff?text=Deutz+Manual",
+                isPdf: true, downloadUrl: "https://drive.google.com/file/d/1U9I5lzK0oPe64K_EpFC1CBGtga6PCRL4/view?usp=drive_link", price: "20.00",
+                desc: "Comprehensive repair and maintenance manual for Deutz machinery.",
                 steps: ["Mechanical servicing", "Hydraulic repairs", "Electrical troubleshooting", "Routine checks"]
             },
             {
-                id: "manual-additional-30", title: "Deutz Tractor Technical Workshop Manual AD", category: "Farmers", subCategory: "Same", image: "https://placehold.co/600x400/065f46/ffffff?text=Deutz+Manual",
-                isPdf: true, downloadUrl: "https://drive.google.com/file/d/1nOmvjL4Bcg8n5CL4XHK_2cy3Ipbou6vw/view?usp=drive_link", price: "50.00",
+                id: "manual-additional-30", title: "Deutz Tractor Technical Workshop Manual AD", category: "Farmers", subCategory: "Deutz", image: "https://placehold.co/600x400/065f46/ffffff?text=Deutz+Manual",
+                isPdf: true, downloadUrl: "https://drive.google.com/file/d/1nOmvjL4Bcg8n5CL4XHK_2cy3Ipbou6vw/view?usp=drive_link", price: "20.00",
                 desc: "Official factory manual for tractor servicing and repairs.",
                 steps: ["Service procedures", "Component diagnostics", "Repair specifications", "Safety protocols"]
             },
             {
-                id: "manual-additional-31", title: "Deutz Tractor Technical Workshop Manual AE", category: "Farmers", subCategory: "Same", image: "https://placehold.co/600x400/065f46/ffffff?text=Deutz+Manual",
-                isPdf: true, downloadUrl: "https://drive.google.com/file/d/1YsyyxlpHf9WwqHtxAlICpVgq_7YZ5IOK/view?usp=drive_link", price: "50.00",
+                id: "manual-additional-31", title: "Deutz Tractor Technical Workshop Manual AE", category: "Farmers", subCategory: "Deutz", image: "https://placehold.co/600x400/065f46/ffffff?text=Deutz+Manual",
+                isPdf: true, downloadUrl: "https://drive.google.com/file/d/1YsyyxlpHf9WwqHtxAlICpVgq_7YZ5IOK/view?usp=drive_link", price: "20.00",
                 desc: "Technical workshop manual for agricultural tractors.",
                 steps: ["Maintenance schedules", "Repair instructions", "Hydraulic tests", "Assembly guides"]
             },
             {
-                id: "manual-additional-32", title: "Deutz Tractor Technical Workshop Manual AF", category: "Farmers", subCategory: "Same", image: "https://placehold.co/600x400/065f46/ffffff?text=Deutz+Manual",
-                isPdf: true, downloadUrl: "https://drive.google.com/file/d/1007IwJRZyW7OIvAtnW599AOCWdfzsqGQ/view?usp=drive_link", price: "50.00",
+                id: "manual-additional-32", title: "Deutz Tractor Technical Workshop Manual AF", category: "Farmers", subCategory: "Deutz", image: "https://placehold.co/600x400/065f46/ffffff?text=Deutz+Manual",
+                isPdf: true, downloadUrl: "https://drive.google.com/file/d/1007IwJRZyW7OIvAtnW599AOCWdfzsqGQ/view?usp=drive_link", price: "20.00",
                 desc: "Factory authorized service manual for mechanical repairs.",
                 steps: ["Mechanical overhauls", "Adjustment procedures", "Fault finding", "Testing notes"]
             },
             {
-                id: "manual-additional-33", title: "Deutz Tractor Technical Workshop Manual AG", category: "Farmers", subCategory: "Same", image: "https://placehold.co/600x400/065f46/ffffff?text=Deutz+Manual",
-                isPdf: true, downloadUrl: "https://drive.google.com/file/d/1VjCHyFLrPgufNrjN_CuLv1QEDZlK3f9T/view?usp=drive_link", price: "50.00",
+                id: "manual-additional-33", title: "Deutz Tractor Technical Workshop Manual AG", category: "Farmers", subCategory: "Deutz", image: "https://placehold.co/600x400/065f46/ffffff?text=Deutz+Manual",
+                isPdf: true, downloadUrl: "https://drive.google.com/file/d/1VjCHyFLrPgufNrjN_CuLv1QEDZlK3f9T/view?usp=drive_link", price: "20.00",
                 desc: "Comprehensive workshop manual for tractor service and maintenance.",
                 steps: ["Service routines", "Repair standards", "Component checks", "Technical data"]
             },
             {
-                id: "manual-additional-34", title: "Deutz Tractor Technical Workshop Manual AH", category: "Farmers", subCategory: "Same", image: "https://placehold.co/600x400/065f46/ffffff?text=Deutz+Manual",
-                isPdf: true, downloadUrl: "https://drive.google.com/file/d/1aL4au3fmEg1VcVgn6fg4qxpYYc1OEanP/view?usp=drive_link", price: "50.00",
+                id: "manual-additional-34", title: "Deutz Tractor Technical Workshop Manual AH", category: "Farmers", subCategory: "Deutz", image: "https://placehold.co/600x400/065f46/ffffff?text=Deutz+Manual",
+                isPdf: true, downloadUrl: "https://drive.google.com/file/d/1aL4au3fmEg1VcVgn6fg4qxpYYc1OEanP/view?usp=drive_link", price: "20.00",
                 desc: "Official factory manual for comprehensive tractor repairs.",
                 steps: ["Complete repairs", "Hydraulic service", "Electrical checks", "Safety guidelines"]
             },
             {
-                id: "manual-additional-35", title: "Deutz Tractor Technical Workshop Manual AI", category: "Farmers", subCategory: "Same", image: "https://placehold.co/600x400/065f46/ffffff?text=Deutz+Manual",
-                isPdf: true, downloadUrl: "https://drive.google.com/file/d/1Cb9aVTvnD529qWDLcErLbf5pqrh8vvoz/view?usp=drive_link", price: "50.00",
+                id: "manual-additional-35", title: "Deutz Tractor Technical Workshop Manual AI", category: "Farmers", subCategory: "Deutz", image: "https://placehold.co/600x400/065f46/ffffff?text=Deutz+Manual",
+                isPdf: true, downloadUrl: "https://drive.google.com/file/d/1Cb9aVTvnD529qWDLcErLbf5pqrh8vvoz/view?usp=drive_link", price: "20.00",
                 desc: "Official workshop manual for tractor maintenance and overhauls.",
                 steps: ["Overhaul procedures", "Maintenance intervals", "Hydraulic tuning", "Safety inspection"]
             },
             {
-                id: "manual-additional-36", title: "Deutz Tractor Technical Workshop Manual AJ", category: "Farmers", subCategory: "Same", image: "https://placehold.co/600x400/065f46/ffffff?text=Deutz+Manual",
-                isPdf: true, downloadUrl: "https://drive.google.com/file/d/1BZ9EZHDrDUpnveQam5_RW-5_sdjhduUJ/view?usp=drive_link", price: "50.00",
+                id: "manual-additional-36", title: "Deutz Tractor Technical Workshop Manual AJ", category: "Farmers", subCategory: "Deutz", image: "https://placehold.co/600x400/065f46/ffffff?text=Deutz+Manual",
+                isPdf: true, downloadUrl: "https://drive.google.com/file/d/1BZ9EZHDrDUpnveQam5_RW-5_sdjhduUJ/view?usp=drive_link", price: "20.00",
                 desc: "Comprehensive factory service manual for professional repairs.",
                 steps: ["Diagnostic testing", "Component replacement", "System calibration", "Repair notes"]
             },
             {
-                id: "manual-additional-37", title: "Deutz Tractor Technical Workshop Manual AK", category: "Farmers", subCategory: "Same", image: "https://placehold.co/600x400/065f46/ffffff?text=Deutz+Manual",
-                isPdf: true, downloadUrl: "https://drive.google.com/file/d/1SEe8Aj-aFKs-vTBNkRKQHLeaDsZBDOfg/view?usp=drive_link", price: "50.00",
+                id: "manual-additional-37", title: "Deutz Tractor Technical Workshop Manual AK", category: "Farmers", subCategory: "Deutz", image: "https://placehold.co/600x400/065f46/ffffff?text=Deutz+Manual",
+                isPdf: true, downloadUrl: "https://drive.google.com/file/d/1SEe8Aj-aFKs-vTBNkRKQHLeaDsZBDOfg/view?usp=drive_link", price: "20.00",
                 desc: "Detailed technical manual for tractor servicing and adjustments.",
                 steps: ["Adjustment values", "Mechanical repairs", "Electrical troubleshooting", "Testing specs"]
             },
             {
-                id: "manual-additional-38", title: "Deutz Tractor Technical Workshop Manual AL", category: "Farmers", subCategory: "Same", image: "https://placehold.co/600x400/065f46/ffffff?text=Deutz+Manual",
-                isPdf: true, downloadUrl: "https://drive.google.com/file/d/11C6T-hWIMWYNs6kikcxmeoFC-XScDUx3/view?usp=drive_link", price: "50.00",
+                id: "manual-additional-38", title: "Deutz Tractor Technical Workshop Manual AL", category: "Farmers", subCategory: "Deutz", image: "https://placehold.co/600x400/065f46/ffffff?text=Deutz+Manual",
+                isPdf: true, downloadUrl: "https://drive.google.com/file/d/11C6T-hWIMWYNs6kikcxmeoFC-XScDUx3/view?usp=drive_link", price: "20.00",
                 desc: "Official workshop manual for agricultural tractor mechanics.",
                 steps: ["Service routines", "Repair standards", "Fluid specifications", "Safety checks"]
             },
             {
-                id: "manual-additional-39", title: "Deutz Tractor Technical Workshop Manual AM", category: "Farmers", subCategory: "Same", image: "https://placehold.co/600x400/065f46/ffffff?text=Deutz+Manual",
-                isPdf: true, downloadUrl: "https://drive.google.com/file/d/1RY1NOpV8knNn4awCAF25_hlEmGB-LWTH/view?usp=drive_link", price: "50.00",
-                desc: "Comprehensive service documentation for tractor systems.",
+                id: "manual-additional-39", title: "Deutz Tractor Technical Workshop Manual AM", category: "Farmers", subCategory: "Deutz", image: "https://placehold.co/600x400/065f46/ffffff?text=Deutz+Manual",
+                isPdf: true, downloadUrl: "https://drive.google.com/file/d/1RY1NOpV8knNn4awCAF25_hlEmGB-LWTH/view?usp=drive_link", price: "20.00",
+                desc: "Comprehensive service documentation for Deutz tractor systems.",
                 steps: ["System checks", "Repair guidelines", "Maintenance checklists", "Troubleshooting"]
             },
             {
-                id: "manual-additional-40", title: "Deutz Tractor Technical Workshop Manual AN", category: "Farmers", subCategory: "Same", image: "https://placehold.co/600x400/065f46/ffffff?text=Deutz+Manual",
-                isPdf: true, downloadUrl: "https://drive.google.com/file/d/15_5j1VjP-ODga8Tjh-HF33qYoBlnKkxc/view?usp=drive_link", price: "50.00",
+                id: "manual-additional-40", title: "Deutz Tractor Technical Workshop Manual AN", category: "Farmers", subCategory: "Deutz", image: "https://placehold.co/600x400/065f46/ffffff?text=Deutz+Manual",
+                isPdf: true, downloadUrl: "https://drive.google.com/file/d/15_5j1VjP-ODga8Tjh-HF33qYoBlnKkxc/view?usp=drive_link", price: "20.00",
                 desc: "Factory authorized workshop manual for tractor overhauls.",
                 steps: ["Engine overhauls", "Hydraulic maintenance", "Electrical testing", "Final assembly"]
             },
+
+            // --- ALL 30 SAME MANUALS ADDED TO "Same" SUB-CATEGORY ---
             {
-                id: "manual-new-1", title: "Tractor Technical Workshop Manual AO", category: "Farmers", subCategory: "Same", image: "https://placehold.co/600x400/065f46/ffffff?text=Tractor+Manual",
-                isPdf: true, downloadUrl: "https://drive.google.com/file/d/15NDcdO98I4rdvS1kIruhdJVniOKZs9uG/view?usp=drive_link", price: "50.00",
-                desc: "Newly added official workshop service manual for agricultural tractors and mechanical systems.",
+                id: "manual-same-1", title: "Tractor Technical Workshop Manual AO", category: "Farmers", subCategory: "Same", image: "https://placehold.co/600x400/065f46/ffffff?text=Tractor+Manual",
+                isPdf: true, downloadUrl: "https://drive.google.com/file/d/15NDcdO98I4rdvS1kIruhdJVniOKZs9uG/view?usp=drive_link", price: "20.00",
+                desc: "Official workshop service manual for Same tractors and mechanical systems.",
                 steps: ["System overhauls", "Hydraulic maintenance", "Electrical testing", "Routine upkeep"]
             },
             {
-                id: "manual-new-2", title: "Tractor Technical Workshop Manual AP", category: "Farmers", subCategory: "Same", image: "https://placehold.co/600x400/065f46/ffffff?text=Tractor+Manual",
-                isPdf: true, downloadUrl: "https://drive.google.com/file/d/1eN8DteybKc0pR5d8avq435uNKso6XlR5/view?usp=drive_link", price: "50.00",
-                desc: "Newly added official workshop service manual for agricultural tractors and mechanical systems.",
+                id: "manual-same-2", title: "Tractor Technical Workshop Manual AP", category: "Farmers", subCategory: "Same", image: "https://placehold.co/600x400/065f46/ffffff?text=Tractor+Manual",
+                isPdf: true, downloadUrl: "https://drive.google.com/file/d/1eN8DteybKc0pR5d8avq435uNKso6XlR5/view?usp=drive_link", price: "20.00",
+                desc: "Official workshop service manual for Same tractors and mechanical systems.",
                 steps: ["System overhauls", "Hydraulic maintenance", "Electrical testing", "Routine upkeep"]
             },
             {
-                id: "manual-new-3", title: "Tractor Technical Workshop Manual AQ", category: "Farmers", subCategory: "Same", image: "https://placehold.co/600x400/065f46/ffffff?text=Tractor+Manual",
-                isPdf: true, downloadUrl: "https://drive.google.com/file/d/1_kf2OcCokPFAEUOuYFvgrDmeNuTaSJj-/view?usp=drive_link", price: "50.00",
-                desc: "Newly added official workshop service manual for agricultural tractors and mechanical systems.",
+                id: "manual-same-3", title: "Tractor Technical Workshop Manual AQ", category: "Farmers", subCategory: "Same", image: "https://placehold.co/600x400/065f46/ffffff?text=Tractor+Manual",
+                isPdf: true, downloadUrl: "https://drive.google.com/file/d/1_kf2OcCokPFAEUOuYFvgrDmeNuTaSJj-/view?usp=drive_link", price: "20.00",
+                desc: "Official workshop service manual for Same tractors and mechanical systems.",
                 steps: ["System overhauls", "Hydraulic maintenance", "Electrical testing", "Routine upkeep"]
             },
             {
-                id: "manual-new-4", title: "Tractor Technical Workshop Manual AR", category: "Farmers", subCategory: "Same", image: "https://placehold.co/600x400/065f46/ffffff?text=Tractor+Manual",
-                isPdf: true, downloadUrl: "https://drive.google.com/file/d/1M01ZE0CElzf_7ufxZDvXc_frBp210_rt/view?usp=drive_link", price: "50.00",
-                desc: "Newly added official workshop service manual for agricultural tractors and mechanical systems.",
+                id: "manual-same-4", title: "Tractor Technical Workshop Manual AR", category: "Farmers", subCategory: "Same", image: "https://placehold.co/600x400/065f46/ffffff?text=Tractor+Manual",
+                isPdf: true, downloadUrl: "https://drive.google.com/file/d/1M01ZE0CElzf_7ufxZDvXc_frBp210_rt/view?usp=drive_link", price: "20.00",
+                desc: "Official workshop service manual for Same tractors and mechanical systems.",
                 steps: ["System overhauls", "Hydraulic maintenance", "Electrical testing", "Routine upkeep"]
             },
             {
-                id: "manual-new-5", title: "Tractor Technical Workshop Manual AS", category: "Farmers", subCategory: "Same", image: "https://placehold.co/600x400/065f46/ffffff?text=Tractor+Manual",
-                isPdf: true, downloadUrl: "https://drive.google.com/file/d/1d6TawjKojp0fUFZl7J7HUYMxu5gxyafM/view?usp=drive_link", price: "50.00",
-                desc: "Newly added official workshop service manual for agricultural tractors and mechanical systems.",
+                id: "manual-same-5", title: "Tractor Technical Workshop Manual AS", category: "Farmers", subCategory: "Same", image: "https://placehold.co/600x400/065f46/ffffff?text=Tractor+Manual",
+                isPdf: true, downloadUrl: "https://drive.google.com/file/d/1d6TawjKojp0fUFZl7J7HUYMxu5gxyafM/view?usp=drive_link", price: "20.00",
+                desc: "Official workshop service manual for Same tractors and mechanical systems.",
                 steps: ["System overhauls", "Hydraulic maintenance", "Electrical testing", "Routine upkeep"]
             },
             {
-                id: "manual-new-6", title: "Tractor Technical Workshop Manual AT", category: "Farmers", subCategory: "Same", image: "https://placehold.co/600x400/065f46/ffffff?text=Tractor+Manual",
-                isPdf: true, downloadUrl: "https://drive.google.com/file/d/1f_FoMkE4g4jYoA5Fa8KsfZiypmpDNEvh/view?usp=drive_link", price: "50.00",
-                desc: "Newly added official workshop service manual for agricultural tractors and mechanical systems.",
+                id: "manual-same-6", title: "Tractor Technical Workshop Manual AT", category: "Farmers", subCategory: "Same", image: "https://placehold.co/600x400/065f46/ffffff?text=Tractor+Manual",
+                isPdf: true, downloadUrl: "https://drive.google.com/file/d/1f_FoMkE4g4jYoA5Fa8KsfZiypmpDNEvh/view?usp=drive_link", price: "20.00",
+                desc: "Official workshop service manual for Same tractors and mechanical systems.",
                 steps: ["System overhauls", "Hydraulic maintenance", "Electrical testing", "Routine upkeep"]
             },
             {
-                id: "manual-latest-1", title: "Tractor Technical Workshop Manual AU", category: "Farmers", subCategory: "Same", image: "https://placehold.co/600x400/065f46/ffffff?text=Tractor+Manual",
-                isPdf: true, downloadUrl: "https://drive.google.com/file/d/1rtJ8uvBUX2WcKQkpuB8BY7dz-dzLMSgI/view?usp=drive_link", price: "50.00",
-                desc: "Newly added official workshop service manual for agricultural tractors and mechanical systems.",
+                id: "manual-same-7", title: "Tractor Technical Workshop Manual AU", category: "Farmers", subCategory: "Same", image: "https://placehold.co/600x400/065f46/ffffff?text=Tractor+Manual",
+                isPdf: true, downloadUrl: "https://drive.google.com/file/d/1rtJ8uvBUX2WcKQkpuB8BY7dz-dzLMSgI/view?usp=drive_link", price: "20.00",
+                desc: "Official workshop service manual for Same tractors and mechanical systems.",
                 steps: ["System overhauls", "Hydraulic maintenance", "Electrical testing", "Routine upkeep"]
             },
             {
-                id: "manual-latest-2", title: "Tractor Technical Workshop Manual AV", category: "Farmers", subCategory: "Same", image: "https://placehold.co/600x400/065f46/ffffff?text=Tractor+Manual",
-                isPdf: true, downloadUrl: "https://drive.google.com/file/d/123cUCtDX_ardiGhxKOB7NJeTTR9KkAAY/view?usp=drive_link", price: "50.00",
-                desc: "Newly added official workshop service manual for agricultural tractors and mechanical systems.",
+                id: "manual-same-8", title: "Tractor Technical Workshop Manual AV", category: "Farmers", subCategory: "Same", image: "https://placehold.co/600x400/065f46/ffffff?text=Tractor+Manual",
+                isPdf: true, downloadUrl: "https://drive.google.com/file/d/123cUCtDX_ardiGhxKOB7NJeTTR9KkAAY/view?usp=drive_link", price: "20.00",
+                desc: "Official workshop service manual for Same tractors and mechanical systems.",
                 steps: ["System overhauls", "Hydraulic maintenance", "Electrical testing", "Routine upkeep"]
             },
             {
-                id: "manual-latest-3", title: "Tractor Technical Workshop Manual AW", category: "Farmers", subCategory: "Same", image: "https://placehold.co/600x400/065f46/ffffff?text=Tractor+Manual",
-                isPdf: true, downloadUrl: "https://drive.google.com/file/d/1B0SUDNVPn18utHTyTI_lQySYjO-25Eb3/view?usp=drive_link", price: "50.00",
-                desc: "Newly added official workshop service manual for agricultural tractors and mechanical systems.",
+                id: "manual-same-9", title: "Tractor Technical Workshop Manual AW", category: "Farmers", subCategory: "Same", image: "https://placehold.co/600x400/065f46/ffffff?text=Tractor+Manual",
+                isPdf: true, downloadUrl: "https://drive.google.com/file/d/1B0SUDNVPn18utHTyTI_lQySYjO-25Eb3/view?usp=drive_link", price: "20.00",
+                desc: "Official workshop service manual for Same tractors and mechanical systems.",
                 steps: ["System overhauls", "Hydraulic maintenance", "Electrical testing", "Routine upkeep"]
             },
             {
-                id: "manual-latest-4", title: "Tractor Technical Workshop Manual AX", category: "Farmers", subCategory: "Same", image: "https://placehold.co/600x400/065f46/ffffff?text=Tractor+Manual",
-                isPdf: true, downloadUrl: "https://drive.google.com/file/d/1RwDLyLRfdMwRAEuVeR5T3uc9kyrSe1Mz/view?usp=drive_link", price: "50.00",
-                desc: "Newly added official workshop service manual for agricultural tractors and mechanical systems.",
+                id: "manual-same-10", title: "Tractor Technical Workshop Manual AX", category: "Farmers", subCategory: "Same", image: "https://placehold.co/600x400/065f46/ffffff?text=Tractor+Manual",
+                isPdf: true, downloadUrl: "https://drive.google.com/file/d/1RwDLyLRfdMwRAEuVeR5T3uc9kyrSe1Mz/view?usp=drive_link", price: "20.00",
+                desc: "Official workshop service manual for Same tractors and mechanical systems.",
                 steps: ["System overhauls", "Hydraulic maintenance", "Electrical testing", "Routine upkeep"]
             },
             {
-                id: "manual-latest-5", title: "Tractor Technical Workshop Manual AY", category: "Farmers", subCategory: "Same", image: "https://placehold.co/600x400/065f46/ffffff?text=Tractor+Manual",
-                isPdf: true, downloadUrl: "https://drive.google.com/file/d/1McJvwP2fiRbjypUKhlIiFW2gSsjABMKN/view?usp=drive_link", price: "50.00",
-                desc: "Newly added official workshop service manual for agricultural tractors and mechanical systems.",
+                id: "manual-same-11", title: "Tractor Technical Workshop Manual AY", category: "Farmers", subCategory: "Same", image: "https://placehold.co/600x400/065f46/ffffff?text=Tractor+Manual",
+                isPdf: true, downloadUrl: "https://drive.google.com/file/d/1McJvwP2fiRbjypUKhlIiFW2gSsjABMKN/view?usp=drive_link", price: "20.00",
+                desc: "Official workshop service manual for Same tractors and mechanical systems.",
                 steps: ["System overhauls", "Hydraulic maintenance", "Electrical testing", "Routine upkeep"]
             },
             {
-                id: "manual-latest-6", title: "Tractor Technical Workshop Manual AZ", category: "Farmers", subCategory: "Same", image: "https://placehold.co/600x400/065f46/ffffff?text=Tractor+Manual",
-                isPdf: true, downloadUrl: "https://drive.google.com/file/d/1iAzMYqnLVcxaN0_vgMDomBIOVbJP1Xd/view?usp=drive_link", price: "50.00",
-                desc: "Newly added official workshop service manual for agricultural tractors and mechanical systems.",
+                id: "manual-same-12", title: "Tractor Technical Workshop Manual AZ", category: "Farmers", subCategory: "Same", image: "https://placehold.co/600x400/065f46/ffffff?text=Tractor+Manual",
+                isPdf: true, downloadUrl: "https://drive.google.com/file/d/1iAzMYqnLVcxaNn0_vgMDomBIOVbJP1Xd/view?usp=drive_link", price: "20.00",
+                desc: "Official workshop service manual for Same tractors and mechanical systems.",
+                steps: ["System overhauls", "Hydraulic maintenance", "Electrical testing", "Routine upkeep"]
+            },
+            {
+                id: "manual-same-13", title: "Tractor Technical Workshop Manual BA", category: "Farmers", subCategory: "Same", image: "https://placehold.co/600x400/065f46/ffffff?text=Tractor+Manual",
+                isPdf: true, downloadUrl: "https://drive.google.com/file/d/1-rDJJ8fjpOlnVjX2N9ypman2DIvwS04t/view?usp=drive_link", price: "20.00",
+                desc: "Official workshop service manual for Same tractors and mechanical systems.",
+                steps: ["System overhauls", "Hydraulic maintenance", "Electrical testing", "Routine upkeep"]
+            },
+            {
+                id: "manual-same-14", title: "Tractor Technical Workshop Manual BB", category: "Farmers", subCategory: "Same", image: "https://placehold.co/600x400/065f46/ffffff?text=Tractor+Manual",
+                isPdf: true, downloadUrl: "https://drive.google.com/file/d/1s3E-EnP9Qzhu1V0aarT18orhbM_QvGsY/view?usp=drive_link", price: "20.00",
+                desc: "Official workshop service manual for Same tractors and mechanical systems.",
+                steps: ["System overhauls", "Hydraulic maintenance", "Electrical testing", "Routine upkeep"]
+            },
+            {
+                id: "manual-same-15", title: "Tractor Technical Workshop Manual BC", category: "Farmers", subCategory: "Same", image: "https://placehold.co/600x400/065f46/ffffff?text=Tractor+Manual",
+                isPdf: true, downloadUrl: "https://drive.google.com/file/d/1LReXIrY_Lgo67wvbXntfkpggcM3iTUMw/view?usp=drive_link", price: "20.00",
+                desc: "Official workshop service manual for Same tractors and mechanical systems.",
+                steps: ["System overhauls", "Hydraulic maintenance", "Electrical testing", "Routine upkeep"]
+            },
+            {
+                id: "manual-same-16", title: "Tractor Technical Workshop Manual BD", category: "Farmers", subCategory: "Same", image: "https://placehold.co/600x400/065f46/ffffff?text=Tractor+Manual",
+                isPdf: true, downloadUrl: "https://drive.google.com/file/d/1pv0O5t4YjlrDAE0guZQcl4zfAlBy8lIT/view?usp=drive_link", price: "20.00",
+                desc: "Official workshop service manual for Same tractors and mechanical systems.",
+                steps: ["System overhauls", "Hydraulic maintenance", "Electrical testing", "Routine upkeep"]
+            },
+            {
+                id: "manual-same-17", title: "Tractor Technical Workshop Manual BE", category: "Farmers", subCategory: "Same", image: "https://placehold.co/600x400/065f46/ffffff?text=Tractor+Manual",
+                isPdf: true, downloadUrl: "https://drive.google.com/file/d/1F8_BWXTCifyhAxcdsF7etsYO1tyJ8Av-/view?usp=drive_link", price: "20.00",
+                desc: "Official workshop service manual for Same tractors and mechanical systems.",
+                steps: ["System overhauls", "Hydraulic maintenance", "Electrical testing", "Routine upkeep"]
+            },
+            {
+                id: "manual-same-18", title: "Tractor Technical Workshop Manual BF", category: "Farmers", subCategory: "Same", image: "https://placehold.co/600x400/065f46/ffffff?text=Tractor+Manual",
+                isPdf: true, downloadUrl: "https://drive.google.com/file/d/1tr7zfafkasJA57p379NcBPMdTjvkScW-/view?usp=drive_link", price: "20.00",
+                desc: "Official workshop service manual for Same tractors and mechanical systems.",
+                steps: ["System overhauls", "Hydraulic maintenance", "Electrical testing", "Routine upkeep"]
+            },
+            {
+                id: "manual-same-19", title: "Tractor Technical Workshop Manual BG", category: "Farmers", subCategory: "Same", image: "https://placehold.co/600x400/065f46/ffffff?text=Tractor+Manual",
+                isPdf: true, downloadUrl: "https://drive.google.com/file/d/1-Ff19aPDucUw9dWd2npcO-WMMemu23Dg/view?usp=drive_link", price: "20.00",
+                desc: "Official workshop service manual for Same tractors and mechanical systems.",
+                steps: ["System overhauls", "Hydraulic maintenance", "Electrical testing", "Routine upkeep"]
+            },
+            {
+                id: "manual-same-20", title: "Tractor Technical Workshop Manual BH", category: "Farmers", subCategory: "Same", image: "https://placehold.co/600x400/065f46/ffffff?text=Tractor+Manual",
+                isPdf: true, downloadUrl: "https://drive.google.com/file/d/1QjqFjYC3ZGYc1cWzhdEAFWlUnTNHGb64/view?usp=drive_link", price: "20.00",
+                desc: "Official workshop service manual for Same tractors and mechanical systems.",
+                steps: ["System overhauls", "Hydraulic maintenance", "Electrical testing", "Routine upkeep"]
+            },
+            {
+                id: "manual-same-21", title: "Tractor Technical Workshop Manual BI", category: "Farmers", subCategory: "Same", image: "https://placehold.co/600x400/065f46/ffffff?text=Tractor+Manual",
+                isPdf: true, downloadUrl: "https://drive.google.com/file/d/1gJqxU5C_5rnuLE_nx-UiavVjvFsUKpMX/view?usp=drive_link", price: "20.00",
+                desc: "Official workshop service manual for Same tractors and mechanical systems.",
+                steps: ["System overhauls", "Hydraulic maintenance", "Electrical testing", "Routine upkeep"]
+            },
+            {
+                id: "manual-same-22", title: "Tractor Technical Workshop Manual BJ", category: "Farmers", subCategory: "Same", image: "https://placehold.co/600x400/065f46/ffffff?text=Tractor+Manual",
+                isPdf: true, downloadUrl: "https://drive.google.com/file/d/1hY5uZLcRIOriKhf_N4QuKZ0qA2AiK6Cl/view?usp=drive_link", price: "20.00",
+                desc: "Official workshop service manual for Same tractors and mechanical systems.",
+                steps: ["System overhauls", "Hydraulic maintenance", "Electrical testing", "Routine upkeep"]
+            },
+            {
+                id: "manual-same-23", title: "Tractor Technical Workshop Manual BK", category: "Farmers", subCategory: "Same", image: "https://placehold.co/600x400/065f46/ffffff?text=Tractor+Manual",
+                isPdf: true, downloadUrl: "https://drive.google.com/file/d/1c7hM9del1RTOhIkkTYxjpiBUmmPGTOaZ/view?usp=drive_link", price: "20.00",
+                desc: "Official workshop service manual for Same tractors and mechanical systems.",
+                steps: ["System overhauls", "Hydraulic maintenance", "Electrical testing", "Routine upkeep"]
+            },
+            {
+                id: "manual-same-24", title: "Tractor Technical Workshop Manual BL", category: "Farmers", subCategory: "Same", image: "https://placehold.co/600x400/065f46/ffffff?text=Tractor+Manual",
+                isPdf: true, downloadUrl: "https://drive.google.com/file/d/1LbUnbpMedFdKq_Sdkxj4oP8cLN3N6ECO/view?usp=drive_link", price: "20.00",
+                desc: "Official workshop service manual for Same tractors and mechanical systems.",
+                steps: ["System overhauls", "Hydraulic maintenance", "Electrical testing", "Routine upkeep"]
+            },
+            {
+                id: "manual-same-25", title: "Tractor Technical Workshop Manual BM", category: "Farmers", subCategory: "Same", image: "https://placehold.co/600x400/065f46/ffffff?text=Tractor+Manual",
+                isPdf: true, downloadUrl: "https://drive.google.com/file/d/1os2_Q3DRCO2NZw9foBUoJLIDZ9teweZi/view?usp=drive_link", price: "20.00",
+                desc: "Official workshop service manual for Same tractors and mechanical systems.",
+                steps: ["System overhauls", "Hydraulic maintenance", "Electrical testing", "Routine upkeep"]
+            },
+            {
+                id: "manual-same-26", title: "Tractor Technical Workshop Manual BN", category: "Farmers", subCategory: "Same", image: "https://placehold.co/600x400/065f46/ffffff?text=Tractor+Manual",
+                isPdf: true, downloadUrl: "https://drive.google.com/file/d/11WKO99186n38uVzZihER2wtFPJFe2ZLj/view?usp=drive_link", price: "20.00",
+                desc: "Official workshop service manual for Same tractors and mechanical systems.",
+                steps: ["System overhauls", "Hydraulic maintenance", "Electrical testing", "Routine upkeep"]
+            },
+            {
+                id: "manual-same-27", title: "Tractor Technical Workshop Manual BO", category: "Farmers", subCategory: "Same", image: "https://placehold.co/600x400/065f46/ffffff?text=Tractor+Manual",
+                isPdf: true, downloadUrl: "https://drive.google.com/file/d/1SqJa4HUWwcirzssprY7AD47MF8QfXH44/view?usp=drive_link", price: "20.00",
+                desc: "Official workshop service manual for Same tractors and mechanical systems.",
+                steps: ["System overhauls", "Hydraulic maintenance", "Electrical testing", "Routine upkeep"]
+            },
+            {
+                id: "manual-same-28", title: "Tractor Technical Workshop Manual BP", category: "Farmers", subCategory: "Same", image: "https://placehold.co/600x400/065f46/ffffff?text=Tractor+Manual",
+                isPdf: true, downloadUrl: "https://drive.google.com/file/d/11B-ZwoAmcuWzC_ByjOR944FEYch1Im9W/view?usp=drive_link", price: "20.00",
+                desc: "Official workshop service manual for Same tractors and mechanical systems.",
+                steps: ["System overhauls", "Hydraulic maintenance", "Electrical testing", "Routine upkeep"]
+            },
+            {
+                id: "manual-same-29", title: "Tractor Technical Workshop Manual BQ", category: "Farmers", subCategory: "Same", image: "https://placehold.co/600x400/065f46/ffffff?text=Tractor+Manual",
+                isPdf: true, downloadUrl: "https://drive.google.com/file/d/13FwvC5i4xozXX6u-vmzz5nr0gJMLLkYf/view?usp=drive_link", price: "20.00",
+                desc: "Official workshop service manual for Same tractors and mechanical systems.",
+                steps: ["System overhauls", "Hydraulic maintenance", "Electrical testing", "Routine upkeep"]
+            },
+            {
+                id: "manual-same-30", title: "Tractor Technical Workshop Manual BR", category: "Farmers", subCategory: "Same", image: "https://placehold.co/600x400/065f46/ffffff?text=Tractor+Manual",
+                isPdf: true, downloadUrl: "https://drive.google.com/file/d/1s8_tFwejcFxdy59gPPHh3lgou_Yibv0_/view?usp=drive_link", price: "20.00",
+                desc: "Official workshop service manual for Same tractors and mechanical systems.",
                 steps: ["System overhauls", "Hydraulic maintenance", "Electrical testing", "Routine upkeep"]
             },
 
@@ -995,7 +1024,7 @@
                     "Formwork Construction & Bracing: Build rigid formwork using 32mm planks or marine plywood, secured with strongbacks and wooden stakes every 900mm to prevent blowout.",
                     "Reinforcement Spacing & Cover Blocks: Position steel rebar grids or mesh using plastic or concrete cover blocks (minimum 50mm clearance) to ensure full steel encapsulation.",
                     "Formwork Inspection & Pre-Pour Check: Inspect tie-wires, formwork alignment, squareness, and check that all debris, loose soil, and standing water are cleared.",
-                    "Mix Design & Slump Verification: Order or mix structural concrete (minimum 25 MPa / 3:2:1 ratio), ensuring a workable slump (75mm - 100mm) without excess water.",
+                    "Mix Design & Slump Verification: Order or mix standard structural concrete (minimum 25 MPa / 3:2:1 ratio), ensuring a workable slump (75mm - 100mm) without excess water.",
                     "Continuous Pouring & Spading: Pour concrete continuously from one corner to prevent cold joints; spade or mechanically vibrate the mix to release trapped air pockets.",
                     "Screeding & Surface Finishing: Strike off excess concrete using a straightedge timber screed pulled across form edges, followed by a wood float or steel trowel finish.",
                     "Moisture Curing Protocol: Begin curing as soon as the surface hardens by keeping it continuously moist with sprinklers, wet Hessian sacking, or curing compound for at least 7 days."
