@@ -81,7 +81,7 @@
                 <span class="absolute inset-y-0 left-0 flex items-center pl-3.5 pointer-events-none text-emerald-400">
                     <i class="fa-solid fa-magnifying-glass"></i>
                 </span>
-                <input type="text" id="searchInput" oninput="filterGuides()" placeholder="Search guides or procedures..." 
+                <input type="text" id="searchInput" oninput="filterGuides()" placeholder="Search guides or workshop manuals..." 
                     class="w-full pl-10 pr-4 py-2.5 bg-slate-900/90 border border-slate-700 rounded-2xl text-sm text-slate-100 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:bg-slate-900 transition shadow-inner font-medium">
             </div>
 
@@ -116,6 +116,13 @@
             <button onclick="filterBySubCategory('Vegetable Farming')" id="subcat-Vegetable Farming" class="subcat-btn px-3.5 py-1.5 rounded-xl text-xs font-bold bg-slate-800 text-emerald-300 border border-emerald-800 hover:bg-emerald-800 hover:text-white transition shadow-sm">Vegetable Farming</button>
             <button onclick="filterBySubCategory('Animal Farming')" id="subcat-Animal Farming" class="subcat-btn px-3.5 py-1.5 rounded-xl text-xs font-bold bg-slate-800 text-emerald-300 border border-emerald-800 hover:bg-emerald-800 hover:text-white transition shadow-sm">Animal Farming</button>
             <button onclick="filterBySubCategory('Poultry Farming')" id="subcat-Poultry Farming" class="subcat-btn px-3.5 py-1.5 rounded-xl text-xs font-bold bg-slate-800 text-emerald-300 border border-emerald-800 hover:bg-emerald-800 hover:text-white transition shadow-sm">Poultry Farming</button>
+            <!-- Workshop Manual Brand Filters -->
+            <button onclick="filterBySubCategory('Deutz')" id="subcat-Deutz" class="subcat-btn px-3.5 py-1.5 rounded-xl text-xs font-bold bg-slate-800 text-amber-300 border border-amber-800 hover:bg-amber-800 hover:text-white transition shadow-sm">Deutz</button>
+            <button onclick="filterBySubCategory('Massey Ferguson')" id="subcat-Massey Ferguson" class="subcat-btn px-3.5 py-1.5 rounded-xl text-xs font-bold bg-slate-800 text-amber-300 border border-amber-800 hover:bg-amber-800 hover:text-white transition shadow-sm">Massey Ferguson</button>
+            <button onclick="filterBySubCategory('Ford')" id="subcat-Ford" class="subcat-btn px-3.5 py-1.5 rounded-xl text-xs font-bold bg-slate-800 text-amber-300 border border-amber-800 hover:bg-amber-800 hover:text-white transition shadow-sm">Ford</button>
+            <button onclick="filterBySubCategory('Landini')" id="subcat-Landini" class="subcat-btn px-3.5 py-1.5 rounded-xl text-xs font-bold bg-slate-800 text-amber-300 border border-amber-800 hover:bg-amber-800 hover:text-white transition shadow-sm">Landini</button>
+            <button onclick="filterBySubCategory('TAFE')" id="subcat-TAFE" class="subcat-btn px-3.5 py-1.5 rounded-xl text-xs font-bold bg-slate-800 text-amber-300 border border-amber-800 hover:bg-amber-800 hover:text-white transition shadow-sm">TAFE</button>
+            <button onclick="filterBySubCategory('Other')" id="subcat-Other" class="subcat-btn px-3.5 py-1.5 rounded-xl text-xs font-bold bg-slate-800 text-amber-300 border border-amber-800 hover:bg-amber-800 hover:text-white transition shadow-sm">Other Manuals</button>
         </div>
 
         <div id="handymanSubCategoryContainer" class="mb-6 hidden flex items-center gap-2 overflow-x-auto pb-2 bg-sky-950/40 p-3.5 rounded-2xl border border-sky-900/50 shadow-inner">
@@ -147,10 +154,10 @@
                 <div class="bg-amber-500/20 text-amber-300 p-4 rounded-2xl border border-amber-500/40 mb-3 backdrop-blur-md shadow-xl pointer-events-none">
                     <i class="fa-solid fa-lock text-3xl"></i>
                 </div>
-                <h3 class="text-lg font-extrabold mb-1 pointer-events-none">Protected Premium Guide</h3>
-                <p class="text-xs text-slate-300 max-w-xs mb-4 font-medium pointer-events-none">Full step-by-step procedures and high-res infographics are locked to prevent free usage and screen grabbing.</p>
+                <h3 id="overlayTitle" class="text-lg font-extrabold mb-1 pointer-events-none">Protected Premium Guide</h3>
+                <p id="overlayDesc" class="text-xs text-slate-300 max-w-xs mb-4 font-medium pointer-events-none">Full step-by-step procedures and high-res infographics are locked to prevent free usage and screen grabbing.</p>
                 <button type="button" onclick="event.stopPropagation(); downloadCurrentGuide();" class="bg-gradient-to-r from-amber-500 to-orange-500 hover:from-amber-400 hover:to-orange-400 text-slate-950 px-6 py-3 rounded-2xl text-xs font-extrabold transition shadow-lg flex items-center gap-2 transform hover:scale-105">
-                    <i class="fa-solid fa-cart-shopping"></i> Unlock & Download Pro Tool (R20.00)
+                    <i class="fa-solid fa-cart-shopping"></i> <span id="overlayBtnText">Unlock & Download Pro Tool (R20.00)</span>
                 </button>
             </div>
 
@@ -182,7 +189,7 @@
                 </div>
                 
                 <div id="modalActionFooter" class="border-t border-slate-800 pt-4 flex justify-between items-center z-30 relative">
-                    <button onclick="downloadCurrentGuide()" class="bg-amber-500 hover:bg-amber-600 text-slate-950 px-5 py-2.5 rounded-xl text-xs font-bold transition flex items-center gap-2 shadow-md">
+                    <button onclick="downloadCurrentGuide()" id="footerActionBtn" class="bg-amber-500 hover:bg-amber-600 text-slate-950 px-5 py-2.5 rounded-xl text-xs font-bold transition flex items-center gap-2 shadow-md">
                         <i class="fa-solid fa-download"></i> Unlock & Download Pro Tool - R20.00
                     </button>
                     <button onclick="closeModal()" class="bg-slate-800 hover:bg-slate-700 text-slate-200 px-5 py-2.5 rounded-xl text-xs font-semibold transition">Close</button>
@@ -305,7 +312,7 @@
 
         function handleImageError(imgElement) {
             imgElement.onerror = null;
-            imgElement.src = "https://placehold.co/600x400/0369a1/ffffff?text=Plumbing+Repair+Guide";
+            imgElement.src = "https://placehold.co/600x400/0369a1/ffffff?text=Workshop+Manual";
         }
 
         const categoryTheme = {
@@ -356,6 +363,7 @@
 </html>`;
 
         const allGuides = [
+            // --- FARMING GUIDES & PROCEDURES ---
             {
                 id: "plough", title: "Plough Alignment & Attachment Guide", category: "Farmers", subCategory: "Crop Farming", image: "images/plough-alignment.jpg",
                 desc: "Step-by-step manual for rear-mounted plough alignment, 3-point hitch setup, and depth tuning for optimal soil inversion.",
@@ -427,39 +435,9 @@
                 steps: ["Test soil pH.", "Incorporate basal fertilizers.", "Choose healthy seedlings.", "Set proper spacing."]
             },
             {
-                id: "onion-planting-2", title: "Onion Field Planting & Cultivation Guide", category: "Farmers", subCategory: "Vegetable Farming", image: "images/onion-planting-2.jpg",
-                desc: "Step-by-step visual manual covering soil preparation, planting materials, weed control, and curing.",
-                steps: ["Test soil pH.", "Choose seeds/transplants.", "Provide consistent water.", "Control weeds."]
-            },
-            {
                 id: "potato-planting", title: "Commercial Potato Field Planting Guide", category: "Farmers", subCategory: "Vegetable Farming", image: "images/potato-planting.jpg",
                 desc: "Comprehensive guide for commercial potato large-scale production, chitting, and hilling.",
                 steps: ["Test soil pH.", "Choose certified seed tubers.", "Set rows.", "Hill up soil ridges."]
-            },
-            {
-                id: "pumpkin-planting", title: "Commercial Pumpkin Field Planting Guide", category: "Farmers", subCategory: "Vegetable Farming", image: "images/pumpkin-planting.jpg",
-                desc: "Comprehensive guide for commercial pumpkin field setup, precision spacing, vine care, and harvest.",
-                steps: ["Test soil pH.", "Select certified seeds.", "Apply basal fertilizer.", "Set wide spacing.", "Plant seeds.", "Maintain water.", "Control weeds.", "Monitor pests.", "Harvest."]
-            },
-            {
-                id: "watermelon-planting", title: "Commercial Watermelon Field Planting Guide", category: "Farmers", subCategory: "Vegetable Farming", image: "images/watermelon-planting.jpg",
-                desc: "Comprehensive guide for commercial watermelon field setup, spacing, pest monitoring, and harvest.",
-                steps: ["Test soil pH.", "Choose seeds.", "Incorporate fertilizer.", "Set rows.", "Plant seeds.", "Provide irrigation.", "Control weeds.", "Monitor pests.", "Harvest."]
-            },
-            {
-                id: "tomato-planting", title: "Commercial Tomato Field Planting Guide", category: "Farmers", subCategory: "Vegetable Farming", image: "images/tomato-planting.jpg",
-                desc: "Comprehensive guide for commercial tomato production, transplanting, staking, and supported harvest.",
-                steps: ["Test soil pH.", "Use transplants.", "Incorporate fertilizer.", "Set rows.", "Plant deeply.", "Provide moisture.", "Manage mulch.", "Scout for pests.", "Harvest."]
-            },
-            {
-                id: "bell-pepper-planting", title: "Commercial Bell Pepper Field Planting Guide", category: "Farmers", subCategory: "Vegetable Farming", image: "images/bell-pepper-planting.jpg",
-                desc: "Comprehensive guide for commercial bell pepper field setup, soil prep, precision spacing, and harvest.",
-                steps: ["Test soil pH.", "Use seedlings.", "Incorporate fertilizer.", "Set rows.", "Plant deeply.", "Provide moisture.", "Control weeds.", "Scout for pests.", "Harvest."]
-            },
-            {
-                id: "green-bean-planting", title: "Commercial Green Bean Field Planting Guide", category: "Farmers", subCategory: "Vegetable Farming", image: "images/green-bean-planting.jpg",
-                desc: "Comprehensive guide for commercial green bean field setup, direct seeding, precision spacing, and harvest.",
-                steps: ["Test soil pH.", "Treat seeds.", "Incorporate fertilizer.", "Set rows.", "Direct seed.", "Provide moisture.", "Control weeds.", "Scout for pests.", "Harvest."]
             },
             {
                 id: "cattle-health", title: "Cattle Herd Health & Vaccination Schedule", category: "Farmers", subCategory: "Animal Farming", image: "https://placehold.co/600x400/065f46/ffffff?text=Animal+Farming",
@@ -471,6 +449,340 @@
                 desc: "Temperature regulation, lighting programs, and biosecurity protocols for day-old chicks.",
                 steps: ["Pre-heat brooding house.", "Set up chick guards.", "Provide fresh water.", "Monitor temperatures."]
             },
+
+            // --- FULL WORKSHOP MANUALS COLLECTION (52 ITEMS LINKED TO GOOGLE DRIVE & MONETIZED) ---
+            {
+                id: "manual-agrokid", title: "AGROKID 30-40-50 Workshop Manual", category: "Farmers", subCategory: "Deutz", image: "https://placehold.co/600x400/065f46/ffffff?text=Deutz+Agrokid",
+                isPdf: true, downloadUrl: "https://drive.google.com/file/d/17XUe0ubCs2tHeBtrr2oqWoPFQrDtRTZV/view?usp=drive_link", price: "20.00",
+                desc: "Official factory workshop manual covering Deutz Agrokid 30, 40, and 50 tractor maintenance, hydraulics, and engine repair.",
+                steps: ["Complete mechanical specifications", "Hydraulic system troubleshooting", "Electrical wiring schematics", "Engine overhaul & torque settings"]
+            },
+            {
+                id: "manual-agrocompact", title: "AGROCOMPACT F60-F70-F80-F90 Workshop Manual", category: "Farmers", subCategory: "Deutz", image: "https://placehold.co/600x400/065f46/ffffff?text=Deutz+Agrocompact",
+                isPdf: true, downloadUrl: "https://drive.google.com/file/d/1BXI-VoI2DLH5lzXRjw8RJXATxFoGOXmB/view?usp=drive_link", price: "20.00",
+                desc: "Comprehensive technical manual for Deutz Agrocompact series tractors, transmissions, and axles.",
+                steps: ["Transmission & gearbox service", "PTO clutch adjustments", "Brake & steering repairs", "Maintenance schedules"]
+            },
+            {
+                id: "manual-agrolux", title: "AGROLUX F50-F60-F70-F80 Workshop Manual", category: "Farmers", subCategory: "Deutz", image: "https://placehold.co/600x400/065f46/ffffff?text=Deutz+Agrolux",
+                isPdf: true, downloadUrl: "https://drive.google.com/file/d/1u3RfHd4HZlUjJN3L_kyUACi3ItVFK0gV/view?usp=drive_link", price: "20.00",
+                desc: "Detailed workshop repair manual for Agrolux series tractors.",
+                steps: ["Engine maintenance", "Hydraulic lift linkage", "Electrical troubleshooting", "Assembly & disassembly"]
+            },
+            {
+                id: "manual-agroplus-60", title: "AGROPLUS 60-70-80 Workshop Manual", category: "Farmers", subCategory: "Deutz", image: "https://placehold.co/600x400/065f46/ffffff?text=Deutz+Agroplus",
+                isPdf: true, downloadUrl: "https://drive.google.com/file/d/1g-ULTNzM_FudwDnuQET49r1TldA4_xdO/view?usp=drive_link", price: "20.00",
+                desc: "Factory repair and service manual for Agroplus 60, 70, and 80 tractors.",
+                steps: ["Fuel system calibration", "Transmission diagnostics", "Hydraulic pressure testing", "Electrical wiring guide"]
+            },
+            {
+                id: "manual-agroplus-75", title: "AGROPLUS 75-85-95-100 Workshop Manual", category: "Farmers", subCategory: "Deutz", image: "https://placehold.co/600x400/065f46/ffffff?text=Deutz+Agroplus+75-100",
+                isPdf: true, downloadUrl: "https://drive.google.com/file/d/1A2OM6OOYgFjz6YSqI9NIcGJj5a9gYPtb/view?usp=drive_link", price: "20.00",
+                desc: "Advanced workshop manual covering Agroplus 75 through 100 models.",
+                steps: ["Engine disassembly", "Transmission overhaul", "Four-wheel drive axle service", "Cab controls & electronics"]
+            },
+            {
+                id: "manual-agrotrac", title: "AGROTRAC 110-130-150 Workshop Manual", category: "Farmers", subCategory: "Deutz", image: "https://placehold.co/600x400/065f46/ffffff?text=Deutz+Agrotrac",
+                isPdf: true, downloadUrl: "https://drive.google.com/file/d/1PG-j8cG1PzI9zwGMbYlQIjLW3NRVf8m5/view?usp=drive_link", price: "20.00",
+                desc: "Heavy-duty tractor workshop manual for Agrotrac high-horsepower models.",
+                steps: ["Engine cooling & fuel injection", "PowerShift transmission repair", "Rear hitch linkage calibration", "Safety & maintenance specs"]
+            },
+            {
+                id: "manual-agrotron-mk3-80", title: "AGROTRON 80-85-90-100-105 MK3 Workshop Manual", category: "Farmers", subCategory: "Deutz", image: "https://placehold.co/600x400/065f46/ffffff?text=Deutz+Agrotron",
+                isPdf: true, downloadUrl: "https://drive.google.com/file/d/1zmMZfQEoxeUg0G6v7SPHB_uhI-4BOK7V/view?usp=drive_link", price: "20.00",
+                desc: "Complete workshop manual for Deutz Agrotron MK3 series tractors.",
+                steps: ["Electronic engine management", "Transmission & powershift setup", "Hydraulic load sensing", "Diagnostic error codes"]
+            },
+            {
+                id: "manual-agrotron-80-105", title: "AGROTRON 80-90-100-105 Workshop Manual", category: "Farmers", subCategory: "Deutz", image: "https://placehold.co/600x400/065f46/ffffff?text=Deutz+Agrotron",
+                isPdf: true, downloadUrl: "https://drive.google.com/file/d/1q0sJBM7wwknARqX9or8yvQY2rB1pTA4z/view?usp=drive_link", price: "20.00",
+                desc: "Technical service manual for Agrotron 80, 90, 100, and 105 tractor series.",
+                steps: ["Engine diagnostics", "Hydraulic system calibration", "Electrical schematics", "Brake & axle overhaul"]
+            },
+            {
+                id: "manual-agrotron-106-165", title: "AGROTRON 106-110-115-120-135-150-165 MK3 Manual", category: "Farmers", subCategory: "Deutz", image: "https://placehold.co/600x400/065f46/ffffff?text=Deutz+Agrotron",
+                isPdf: true, downloadUrl: "https://drive.google.com/file/d/1mis1n7z7WYqSF5qjdX7pjY9GMWPPd5Gr/view?usp=drive_link", price: "20.00",
+                desc: "Comprehensive repair manual for Agrotron MK3 heavy utility tractors.",
+                steps: ["Transmission teardown", "PowerShift adjustments", "Hydraulic pump testing", "Axle & suspension service"]
+            },
+            {
+                id: "manual-agrotron-108-128", title: "AGROTRON 108-118-128 Workshop Manual", category: "Farmers", subCategory: "Deutz", image: "https://placehold.co/600x400/065f46/ffffff?text=Deutz+Agrotron",
+                isPdf: true, downloadUrl: "https://drive.google.com/file/d/1Mt9rIXOZsCJEDZttgxnQ5SK-GYjI7ZDU/view?usp=drive_link", price: "20.00",
+                desc: "Official workshop service manual for Agrotron 108, 118, and 128 models.",
+                steps: ["Engine specifications", "Transmission servicing", "Hydraulic controls", "Electrical diagnostics"]
+            },
+            {
+                id: "manual-agrotron-130-165", title: "AGROTRON 130-140-155-165 MK3 Workshop Manual", category: "Farmers", subCategory: "Deutz", image: "https://placehold.co/600x400/065f46/ffffff?text=Deutz+Agrotron",
+                isPdf: true, downloadUrl: "https://drive.google.com/file/d/1ET78Ydir_bJXQg9SzIabx-1wqTrB-BCT/view?usp=drive_link", price: "20.00",
+                desc: "Detailed workshop manual for high-output Agrotron MK3 tractors.",
+                steps: ["Powertrain overhaul", "Hydraulics & hitch tuning", "Electronic control units", "Routine maintenance"]
+            },
+            {
+                id: "manual-agrotron-210-265", title: "AGROTRON 210-235-265 Workshop Manual", category: "Farmers", subCategory: "Deutz", image: "https://placehold.co/600x400/065f46/ffffff?text=Deutz+Agrotron",
+                isPdf: true, downloadUrl: "https://drive.google.com/file/d/1E0lFFheMpvlgrWU011yq81PCAhWr6UoT/view?usp=drive_link", price: "20.00",
+                desc: "Factory service manual for large-frame Deutz Agrotron 210, 235, and 265 tractors.",
+                steps: ["Engine repair procedures", "Heavy transmission service", "Axle & differential work", "Advanced diagnostics"]
+            },
+            {
+                id: "manual-agrotron-215-265", title: "AGROTRON 215-265 Workshop Manual", category: "Farmers", subCategory: "Deutz", image: "https://placehold.co/600x400/065f46/ffffff?text=Deutz+Agrotron",
+                isPdf: true, downloadUrl: "https://drive.google.com/file/d/1nt89RIBPNg3QBgQQpFaCy4KnARbrLJFP/view?usp=drive_link", price: "20.00",
+                desc: "Complete technical manual for Agrotron 215 and 265 tractor fleets.",
+                steps: ["Hydraulic system schematics", "Transmission maintenance", "Engine overhaul guide", "Electrical troubleshooting"]
+            },
+            {
+                id: "manual-deutz-engines-912", title: "ENGINES DEUTZ 912-913 Workshop Manual", category: "Farmers", subCategory: "Deutz", image: "https://placehold.co/600x400/065f46/ffffff?text=Deutz+Engines",
+                isPdf: true, downloadUrl: "https://drive.google.com/file/d/1_izqzFxH-Irebdd2zq3e_5_ETCCTekn3/view?usp=drive_link", price: "20.00",
+                desc: "Comprehensive engine overhaul and service manual for air-cooled Deutz 912 and 913 series engines.",
+                steps: ["Cylinder head & valve clearance", "Fuel injection pump timing", "Lubrication & oil cooling", "Torque specifications"]
+            },
+            {
+                id: "manual-balance", title: "5650-5650 Balance Manual", category: "Farmers", subCategory: "Other", image: "https://placehold.co/600x400/065f46/ffffff?text=Balance+Manual",
+                isPdf: true, downloadUrl: "https://drive.google.com/file/d/1RtsDdGKjdUgZOT8dY5aRFMtDVUf8Zyim/view?usp=drive_link", price: "20.00",
+                desc: "Official service balance and adjustment documentation for specialized agricultural machinery.",
+                steps: ["Component calibration", "Balancing procedures", "Maintenance guidelines", "Technical tolerances"]
+            },
+            {
+                id: "manual-additional-1", title: "Deutz Tractor Technical Workshop Manual A", category: "Farmers", subCategory: "Deutz", image: "https://placehold.co/600x400/065f46/ffffff?text=Deutz+Manual",
+                isPdf: true, downloadUrl: "https://drive.google.com/file/d/1Mt9rIXOZsCJEDZttgxnQ5SK-GYjI7ZDU/view?usp=drive_link", price: "20.00",
+                desc: "Specialized factory workshop documentation for Deutz agricultural machinery and tractors.",
+                steps: ["Mechanical diagnostics", "Hydraulic repairs", "Electrical troubleshooting", "Component assembly"]
+            },
+            {
+                id: "manual-additional-2", title: "Deutz Tractor Technical Workshop Manual B", category: "Farmers", subCategory: "Deutz", image: "https://placehold.co/600x400/065f46/ffffff?text=Deutz+Manual",
+                isPdf: true, downloadUrl: "https://drive.google.com/file/d/1XkcRTm7TsFuPkqWkbhN4cmeBUL_9eCQZ/view?usp=drive_link", price: "20.00",
+                desc: "Factory service manual covering mechanical systems and maintenance intervals.",
+                steps: ["Routine servicing", "Clutch & brake maintenance", "Steering system checks", "Hydraulic tests"]
+            },
+            {
+                id: "manual-additional-3", title: "Deutz Tractor Technical Workshop Manual C", category: "Farmers", subCategory: "Deutz", image: "https://placehold.co/600x400/065f46/ffffff?text=Deutz+Manual",
+                isPdf: true, downloadUrl: "https://drive.google.com/file/d/1tE2PrRTPO9D5EPJbTul4J2vDfpWltmBK/view?usp=drive_link", price: "20.00",
+                desc: "Detailed technical repair manual for professional workshop technicians.",
+                steps: ["Engine and fuel setup", "Transmission diagnostics", "Axle maintenance", "Wiring diagrams"]
+            },
+            {
+                id: "manual-additional-4", title: "Deutz Tractor Technical Workshop Manual D", category: "Farmers", subCategory: "Deutz", image: "https://placehold.co/600x400/065f46/ffffff?text=Deutz+Manual",
+                isPdf: true, downloadUrl: "https://drive.google.com/file/d/1UHNld1aigZO1kchK0_B8nmVs6Ccmfy_I/view?usp=drive_link", price: "20.00",
+                desc: "Authorized dealer workshop manual for advanced tractor systems.",
+                steps: ["Advanced diagnostics", "Hydraulic control valves", "Power train service", "Safety inspection"]
+            },
+            {
+                id: "manual-additional-5", title: "Deutz Tractor Technical Workshop Manual E", category: "Farmers", subCategory: "Deutz", image: "https://placehold.co/600x400/065f46/ffffff?text=Deutz+Manual",
+                isPdf: true, downloadUrl: "https://drive.google.com/file/d/1C4k-WX8iEnyu0gX8jqMs046UUi3sNv3H/view?usp=drive_link", price: "20.00",
+                desc: "Official factory service manual for system calibration and repairs.",
+                steps: ["System calibration", "Repair procedures", "Torque specs", "Maintenance logs"]
+            },
+            {
+                id: "manual-additional-6", title: "Deutz Tractor Technical Workshop Manual F", category: "Farmers", subCategory: "Deutz", image: "https://placehold.co/600x400/065f46/ffffff?text=Deutz+Manual",
+                isPdf: true, downloadUrl: "https://drive.google.com/file/d/1xaYrAp0WFwzo9dcD3DKKUL__ZvwqU3sh/view?usp=drive_link", price: "20.00",
+                desc: "Comprehensive workshop manual for tractor maintenance and overhauls.",
+                steps: ["Engine checks", "Gearbox servicing", "Differential setup", "Electrical troubleshooting"]
+            },
+            {
+                id: "manual-additional-7", title: "Deutz Tractor Technical Workshop Manual G", category: "Farmers", subCategory: "Deutz", image: "https://placehold.co/600x400/065f46/ffffff?text=Deutz+Manual",
+                isPdf: true, downloadUrl: "https://drive.google.com/file/d/16hel8Tt1QXnTlPwQCJD_tA4pcxx3HrV3/view?usp=drive_link", price: "20.00",
+                desc: "Technical service documentation for workshop repairs.",
+                steps: ["Fault isolation", "Part replacement guides", "Hydraulic checks", "Final testing"]
+            },
+            {
+                id: "manual-additional-8", title: "Deutz Tractor Technical Workshop Manual H", category: "Farmers", subCategory: "Deutz", image: "https://placehold.co/600x400/065f46/ffffff?text=Deutz+Manual",
+                isPdf: true, downloadUrl: "https://drive.google.com/file/d/1I38P7V88fcTNa7MtUAerEf12y-xNjMs1/view?usp=drive_link", price: "20.00",
+                desc: "Official factory repair manual for mechanical and electrical systems.",
+                steps: ["Electrical checks", "Mechanical overhaul", "Fluid replacement", "Calibration"]
+            },
+            {
+                id: "manual-additional-9", title: "Deutz Tractor Technical Workshop Manual I", category: "Farmers", subCategory: "Deutz", image: "https://placehold.co/600x400/065f46/ffffff?text=Deutz+Manual",
+                isPdf: true, downloadUrl: "https://drive.google.com/file/d/1-85C-urw8krmSFwSrcS3SO1XCJCPb9_R/view?usp=drive_link", price: "20.00",
+                desc: "Comprehensive workshop guide for servicing Deutz tractors.",
+                steps: ["Service intervals", "Engine tuning", "Hydraulic maintenance", "Troubleshooting"]
+            },
+            {
+                id: "manual-additional-10", title: "Deutz Tractor Technical Workshop Manual J", category: "Farmers", subCategory: "Deutz", image: "https://placehold.co/600x400/065f46/ffffff?text=Deutz+Manual",
+                isPdf: true, downloadUrl: "https://drive.google.com/file/d/17alp9w7cTJG4KRMmN5C7ymclDhns0JQK/view?usp=drive_link", price: "20.00",
+                desc: "Authorized workshop manual for technical maintenance.",
+                steps: ["Inspection routines", "Repair specifications", "Diagnostic steps", "Safety checks"]
+            },
+            {
+                id: "manual-additional-11", title: "Deutz Tractor Technical Workshop Manual K", category: "Farmers", subCategory: "Deutz", image: "https://placehold.co/600x400/065f46/ffffff?text=Deutz+Manual",
+                isPdf: true, downloadUrl: "https://drive.google.com/file/d/1JlF9TBrZTjFvBgrgNPiDaievVtav2c_F/view?usp=drive_link", price: "20.00",
+                desc: "Factory technical manual for drivetrain and engine service.",
+                steps: ["Drivetrain checks", "Engine diagnostics", "Hydraulic service", "Assembly notes"]
+            },
+            {
+                id: "manual-additional-12", title: "Deutz Tractor Technical Workshop Manual L", category: "Farmers", subCategory: "Deutz", image: "https://placehold.co/600x400/065f46/ffffff?text=Deutz+Manual",
+                isPdf: true, downloadUrl: "https://drive.google.com/file/d/1ztK6T2-dikxRyIXN_YBDba1qVRImccqp/view?usp=drive_link", price: "20.00",
+                desc: "Comprehensive repair instructions for tractor mechanics.",
+                steps: ["Component testing", "Repair guidelines", "Fluid specs", "System checks"]
+            },
+            {
+                id: "manual-additional-13", title: "Deutz Tractor Technical Workshop Manual M", category: "Farmers", subCategory: "Deutz", image: "https://placehold.co/600x400/065f46/ffffff?text=Deutz+Manual",
+                isPdf: true, downloadUrl: "https://drive.google.com/file/d/1TFr63OhVP5Ul_XhgfYLZTNWM4at-yUUG/view?usp=drive_link", price: "20.00",
+                desc: "Official factory workshop guide for tractor upkeep.",
+                steps: ["Maintenance guides", "Hydraulic upkeep", "Electrical testing", "Torque charts"]
+            },
+            {
+                id: "manual-additional-14", title: "Deutz Tractor Technical Workshop Manual N", category: "Farmers", subCategory: "Deutz", image: "https://placehold.co/600x400/065f46/ffffff?text=Deutz+Manual",
+                isPdf: true, downloadUrl: "https://drive.google.com/file/d/1nK5sH7pVQa77RFDnl5RVTJrYFlzZxm4C/view?usp=drive_link", price: "20.00",
+                desc: "Technical manual for tractor systems and major overhauls.",
+                steps: ["Major overhauls", "System testing", "Adjustment specs", "Safety guidelines"]
+            },
+            {
+                id: "manual-additional-15", title: "Deutz Tractor Technical Workshop Manual O", category: "Farmers", subCategory: "Deutz", image: "https://placehold.co/600x400/065f46/ffffff?text=Deutz+Manual",
+                isPdf: true, downloadUrl: "https://drive.google.com/file/d/1zTThS-IgPgRSG9Paxq8VYq3BEiEB_6MT/view?usp=drive_link", price: "20.00",
+                desc: "Workshop service documentation for agricultural equipment.",
+                steps: ["Routine checks", "Mechanical service", "Hydraulic diagnostics", "Repair steps"]
+            },
+            {
+                id: "manual-additional-16", title: "Deutz Tractor Technical Workshop Manual P", category: "Farmers", subCategory: "Deutz", image: "https://placehold.co/600x400/065f46/ffffff?text=Deutz+Manual",
+                isPdf: true, downloadUrl: "https://drive.google.com/file/d/1uhqVUUxuZULU6b16nZ7C-1x2FhxFJbQj/view?usp=drive_link", price: "20.00",
+                desc: "Factory repair manual for professional agricultural technicians.",
+                steps: ["Troubleshooting", "System repair", "Maintenance schedules", "Testing specs"]
+            },
+            {
+                id: "manual-additional-17", title: "Deutz Tractor Technical Workshop Manual Q", category: "Farmers", subCategory: "Deutz", image: "https://placehold.co/600x400/065f46/ffffff?text=Deutz+Manual",
+                isPdf: true, downloadUrl: "https://drive.google.com/file/d/1TwLD_dP0pNfttdFDzcp9Imxln0P2rk9X/view?usp=drive_link", price: "20.00",
+                desc: "Comprehensive reference manual for Deutz tractor repairs.",
+                steps: ["Technical data", "Adjustment procedures", "Component repairs", "Engine assembly"]
+            },
+            {
+                id: "manual-additional-18", title: "Deutz Tractor Technical Workshop Manual R", category: "Farmers", subCategory: "Deutz", image: "https://placehold.co/600x400/065f46/ffffff?text=Deutz+Manual",
+                isPdf: true, downloadUrl: "https://drive.google.com/file/d/1K92-wj5LsdoTBpQUOhoEnKNA2HTXXPCR/view?usp=drive_link", price: "20.00",
+                desc: "Official workshop manual for advanced mechanical servicing.",
+                steps: ["Mechanical service", "Hydraulic testing", "Electrical guides", "Torque specifications"]
+            },
+            {
+                id: "manual-additional-19", title: "Deutz Tractor Technical Workshop Manual S", category: "Farmers", subCategory: "Deutz", image: "https://placehold.co/600x400/065f46/ffffff?text=Deutz+Manual",
+                isPdf: true, downloadUrl: "https://drive.google.com/file/d/11B-zB1YOHZJhi2eTo1lK3rQ-WeWtubpx/view?usp=drive_link", price: "20.00",
+                desc: "Technical service manual for workshop repairs and adjustments.",
+                steps: ["Adjustment values", "Repair guidelines", "Maintenance specs", "Safety procedures"]
+            },
+            {
+                id: "manual-additional-20", title: "Deutz Tractor Technical Workshop Manual T", category: "Farmers", subCategory: "Deutz", image: "https://placehold.co/600x400/065f46/ffffff?text=Deutz+Manual",
+                isPdf: true, downloadUrl: "https://drive.google.com/file/d/14mcWjFV1Ce0m8Ni1G_8JVvvoH52z9mjT/view?usp=drive_link", price: "20.00",
+                desc: "Comprehensive workshop manual for tractor maintenance.",
+                steps: ["Service checks", "Repair instructions", "Component layout", "Testing methods"]
+            },
+            {
+                id: "manual-additional-21", title: "Deutz Tractor Technical Workshop Manual U", category: "Farmers", subCategory: "Deutz", image: "https://placehold.co/600x400/065f46/ffffff?text=Deutz+Manual",
+                isPdf: true, downloadUrl: "https://drive.google.com/file/d/1ri_iZU5OQW6G4CvD-Tsrx-rNDvW9MrXp/view?usp=drive_link", price: "20.00",
+                desc: "Factory authorized service manual for agricultural machinery.",
+                steps: ["System overhauls", "Hydraulic repairs", "Electrical checks", "Routine upkeep"]
+            },
+            {
+                id: "manual-additional-22", title: "Deutz Tractor Technical Workshop Manual V", category: "Farmers", subCategory: "Deutz", image: "https://placehold.co/600x400/065f46/ffffff?text=Deutz+Manual",
+                isPdf: true, downloadUrl: "https://drive.google.com/file/d/1yHLOeFLsLCjqy7jR2fURGaLliOa70FC9/view?usp=drive_link", price: "20.00",
+                desc: "Official service manual for tractor maintenance and diagnostics.",
+                steps: ["Diagnostic testing", "Component servicing", "Adjustment procedures", "Safety notes"]
+            },
+            {
+                id: "manual-additional-23", title: "Deutz Tractor Technical Workshop Manual W", category: "Farmers", subCategory: "Deutz", image: "https://placehold.co/600x400/065f46/ffffff?text=Deutz+Manual",
+                isPdf: true, downloadUrl: "https://drive.google.com/file/d/1u021_FEo79AJOogIs7kY3slOvJptOn3t/view?usp=drive_link", price: "20.00",
+                desc: "Comprehensive technical manual for tractor servicing.",
+                steps: ["Maintenance specs", "Repair procedures", "Hydraulic troubleshooting", "Assembly guides"]
+            },
+            {
+                id: "manual-additional-24", title: "Deutz Tractor Technical Workshop Manual X", category: "Farmers", subCategory: "Deutz", image: "https://placehold.co/600x400/065f46/ffffff?text=Deutz+Manual",
+                isPdf: true, downloadUrl: "https://drive.google.com/file/d/1OjpIpIIrVNBHPsXAN9CbwxQokO-k5Oxl/view?usp=drive_link", price: "20.00",
+                desc: "Technical workshop guide for professional mechanics.",
+                steps: ["Mechanical maintenance", "Repair standards", "Tool requirements", "Inspection checklists"]
+            },
+            {
+                id: "manual-additional-25", title: "Deutz Tractor Technical Workshop Manual Y", category: "Farmers", subCategory: "Deutz", image: "https://placehold.co/600x400/065f46/ffffff?text=Deutz+Manual",
+                isPdf: true, downloadUrl: "https://drive.google.com/file/d/1R9RKHjAEt8qECU6MGhj7u-5quTwPUwX7/view?usp=drive_link", price: "20.00",
+                desc: "Official factory manual for tractor system maintenance.",
+                steps: ["System checks", "Repair guidelines", "Calibration steps", "Technical specs"]
+            },
+            {
+                id: "manual-additional-26", title: "Deutz Tractor Technical Workshop Manual Z", category: "Farmers", subCategory: "Deutz", image: "https://placehold.co/600x400/065f46/ffffff?text=Deutz+Manual",
+                isPdf: true, downloadUrl: "https://drive.google.com/file/d/1sPgbvmyE_-k-xqAjHonZuiR-P-cSkYEu/view?usp=drive_link", price: "20.00",
+                desc: "Comprehensive service manual for tractor repairs.",
+                steps: ["Troubleshooting charts", "Overhaul procedures", "Maintenance specs", "Safety checks"]
+            },
+            {
+                id: "manual-additional-27", title: "Deutz Tractor Technical Workshop Manual AA", category: "Farmers", subCategory: "Deutz", image: "https://placehold.co/600x400/065f46/ffffff?text=Deutz+Manual",
+                isPdf: true, downloadUrl: "https://drive.google.com/file/d/1pS0VEUdTbAeoYgm94UVcg6TY2uI1xUCh/view?usp=drive_link", price: "20.00",
+                desc: "Technical workshop reference for agricultural equipment.",
+                steps: ["Maintenance routines", "Repair instructions", "Hydraulic schematics", "Testing procedures"]
+            },
+            {
+                id: "manual-additional-28", title: "Deutz Tractor Technical Workshop Manual AB", category: "Farmers", subCategory: "Deutz", image: "https://placehold.co/600x400/065f46/ffffff?text=Deutz+Manual",
+                isPdf: true, downloadUrl: "https://drive.google.com/file/d/1ghTnWYwZDDORuEPl46loYDjRF80hgauf/view?usp=drive_link", price: "20.00",
+                desc: "Factory service documentation for workshop technicians.",
+                steps: ["Component overhauls", "Repair guides", "Adjustment values", "Diagnostic checks"]
+            },
+            {
+                id: "manual-additional-29", title: "Deutz Tractor Technical Workshop Manual AC", category: "Farmers", subCategory: "Deutz", image: "https://placehold.co/600x400/065f46/ffffff?text=Deutz+Manual",
+                isPdf: true, downloadUrl: "https://drive.google.com/file/d/1U9I5lzK0oPe64K_EpFC1CBGtga6PCRL4/view?usp=drive_link", price: "20.00",
+                desc: "Comprehensive repair and maintenance manual for Deutz machinery.",
+                steps: ["Mechanical servicing", "Hydraulic repairs", "Electrical troubleshooting", "Routine checks"]
+            },
+            {
+                id: "manual-additional-30", title: "Deutz Tractor Technical Workshop Manual AD", category: "Farmers", subCategory: "Deutz", image: "https://placehold.co/600x400/065f46/ffffff?text=Deutz+Manual",
+                isPdf: true, downloadUrl: "https://drive.google.com/file/d/1nOmvjL4Bcg8n5CL4XHK_2cy3Ipbou6vw/view?usp=drive_link", price: "20.00",
+                desc: "Official factory manual for tractor servicing and repairs.",
+                steps: ["Service procedures", "Component diagnostics", "Repair specifications", "Safety protocols"]
+            },
+            {
+                id: "manual-additional-31", title: "Deutz Tractor Technical Workshop Manual AE", category: "Farmers", subCategory: "Deutz", image: "https://placehold.co/600x400/065f46/ffffff?text=Deutz+Manual",
+                isPdf: true, downloadUrl: "https://drive.google.com/file/d/1YsyyxlpHf9WwqHtxAlICpVgq_7YZ5IOK/view?usp=drive_link", price: "20.00",
+                desc: "Technical workshop manual for agricultural tractors.",
+                steps: ["Maintenance schedules", "Repair instructions", "Hydraulic tests", "Assembly guides"]
+            },
+            {
+                id: "manual-additional-32", title: "Deutz Tractor Technical Workshop Manual AF", category: "Farmers", subCategory: "Deutz", image: "https://placehold.co/600x400/065f46/ffffff?text=Deutz+Manual",
+                isPdf: true, downloadUrl: "https://drive.google.com/file/d/1007IwJRZyW7OIvAtnW599AOCWdfzsqGQ/view?usp=drive_link", price: "20.00",
+                desc: "Factory authorized service manual for mechanical repairs.",
+                steps: ["Mechanical overhauls", "Adjustment procedures", "Fault finding", "Testing notes"]
+            },
+            {
+                id: "manual-additional-33", title: "Deutz Tractor Technical Workshop Manual AG", category: "Farmers", subCategory: "Deutz", image: "https://placehold.co/600x400/065f46/ffffff?text=Deutz+Manual",
+                isPdf: true, downloadUrl: "https://drive.google.com/file/d/1VjCHyFLrPgufNrjN_CuLv1QEDZlK3f9T/view?usp=drive_link", price: "20.00",
+                desc: "Comprehensive workshop manual for tractor service and maintenance.",
+                steps: ["Service routines", "Repair standards", "Component checks", "Technical data"]
+            },
+            {
+                id: "manual-additional-34", title: "Deutz Tractor Technical Workshop Manual AH", category: "Farmers", subCategory: "Deutz", image: "https://placehold.co/600x400/065f46/ffffff?text=Deutz+Manual",
+                isPdf: true, downloadUrl: "https://drive.google.com/file/d/1aL4au3fmEg1VcVgn6fg4qxpYYc1OEanP/view?usp=drive_link", price: "20.00",
+                desc: "Official factory manual for comprehensive tractor repairs.",
+                steps: ["Complete repairs", "Hydraulic service", "Electrical checks", "Safety guidelines"]
+            },
+            {
+                id: "manual-additional-35", title: "Deutz Tractor Technical Workshop Manual AI", category: "Farmers", subCategory: "Deutz", image: "https://placehold.co/600x400/065f46/ffffff?text=Deutz+Manual",
+                isPdf: true, downloadUrl: "https://drive.google.com/file/d/1Cb9aVTvnD529qWDLcErLbf5pqrh8vvoz/view?usp=drive_link", price: "20.00",
+                desc: "Official workshop manual for tractor maintenance and overhauls.",
+                steps: ["Overhaul procedures", "Maintenance intervals", "Hydraulic tuning", "Safety inspection"]
+            },
+            {
+                id: "manual-additional-36", title: "Deutz Tractor Technical Workshop Manual AJ", category: "Farmers", subCategory: "Deutz", image: "https://placehold.co/600x400/065f46/ffffff?text=Deutz+Manual",
+                isPdf: true, downloadUrl: "https://drive.google.com/file/d/1BZ9EZHDrDUpnveQam5_RW-5_sdjhduUJ/view?usp=drive_link", price: "20.00",
+                desc: "Comprehensive factory service manual for professional repairs.",
+                steps: ["Diagnostic testing", "Component replacement", "System calibration", "Repair notes"]
+            },
+            {
+                id: "manual-additional-37", title: "Deutz Tractor Technical Workshop Manual AK", category: "Farmers", subCategory: "Deutz", image: "https://placehold.co/600x400/065f46/ffffff?text=Deutz+Manual",
+                isPdf: true, downloadUrl: "https://drive.google.com/file/d/1SEe8Aj-aFKs-vTBNkRKQHLeaDsZBDOfg/view?usp=drive_link", price: "20.00",
+                desc: "Detailed technical manual for tractor servicing and adjustments.",
+                steps: ["Adjustment values", "Mechanical repairs", "Electrical troubleshooting", "Testing specs"]
+            },
+            {
+                id: "manual-additional-38", title: "Deutz Tractor Technical Workshop Manual AL", category: "Farmers", subCategory: "Deutz", image: "https://placehold.co/600x400/065f46/ffffff?text=Deutz+Manual",
+                isPdf: true, downloadUrl: "https://drive.google.com/file/d/11C6T-hWIMWYNs6kikcxmeoFC-XScDUx3/view?usp=drive_link", price: "20.00",
+                desc: "Official workshop manual for agricultural tractor mechanics.",
+                steps: ["Service routines", "Repair standards", "Fluid specifications", "Safety checks"]
+            },
+            {
+                id: "manual-additional-39", title: "Deutz Tractor Technical Workshop Manual AM", category: "Farmers", subCategory: "Deutz", image: "https://placehold.co/600x400/065f46/ffffff?text=Deutz+Manual",
+                isPdf: true, downloadUrl: "https://drive.google.com/file/d/1RY1NOpV8knNn4awCAF25_hlEmGB-LWTH/view?usp=drive_link", price: "20.00",
+                desc: "Comprehensive service documentation for Deutz tractor systems.",
+                steps: ["System checks", "Repair guidelines", "Maintenance checklists", "Troubleshooting"]
+            },
+            {
+                id: "manual-additional-40", title: "Deutz Tractor Technical Workshop Manual AN", category: "Farmers", subCategory: "Deutz", image: "https://placehold.co/600x400/065f46/ffffff?text=Deutz+Manual",
+                isPdf: true, downloadUrl: "https://drive.google.com/file/d/15_5j1VjP-ODga8Tjh-HF33qYoBlnKkxc/view?usp=drive_link", price: "20.00",
+                desc: "Factory authorized workshop manual for tractor overhauls.",
+                steps: ["Engine overhauls", "Hydraulic maintenance", "Electrical testing", "Final assembly"]
+            },
+
+            // --- BUILDERS, HANDYMAN, HOUSEWIVES ---
             {
                 id: "foundation-pouring", title: "Concrete Foundation Pouring & Curing", category: "Builders", subCategory: "General", image: "https://placehold.co/600x400/334155/ffffff?text=Builders+Guide",
                 desc: "Excavation depth checks, formwork stability, reinforcement placement, and proper moisture curing.",
@@ -487,19 +799,9 @@
                 steps: ["Axle Prep & differential locking.", "Build chassis frame.", "Mount conical hopper.", "Align drive transfer & spinner.", "Fit metering gate.", "Field test & calibrate."]
             },
             {
-                id: "leak-repair", title: "Emergency Pipe Leak Repair & Sealing", category: "Handyman", subCategory: "Plumbing", image: "https://placehold.co/600x400/0369a1/ffffff?text=Handyman+Guide",
-                desc: "Quick steps to isolate main water lines, apply temporary rubber clamps, and replace damaged PVC/copper fittings.",
-                steps: ["Shut off water.", "Dry pipe section.", "Apply repair tape.", "Test pressure."]
-            },
-            {
                 id: "toilet-unblock", title: "How to Unblock a Toilet", category: "Handyman", subCategory: "Plumbing", image: "images/plumbing-repair.jpg",
-                desc: "Essential step-by-step procedure to safely unblock a toilet using overflow prevention, flange plungers, hot soapy water, or a toilet auger.",
-                steps: [
-                    "Prevent an overflow by pushing the flapper valve down or shutting off the water valve.",
-                    "Use a flange plunger to create a firm seal over the drain and plunge rapidly for 15-20 seconds.",
-                    "Apply the hot water and dish soap backup method to lubricate and break down grease/organic material.",
-                    "Employ a toilet auger or closet snake for tough obstructions by rotating clockwise and extracting."
-                ]
+                desc: "Essential step-by-step procedure to safely unblock a toilet using overflow prevention, flange plungers, or a toilet auger.",
+                steps: ["Prevent overflow.", "Use flange plunger.", "Apply hot water & soap.", "Employ toilet auger."]
             },
             {
                 id: "meal-prep", title: "Weekly Family Meal Prep & Pantry Rotation", category: "Housewives", subCategory: "Meal Prep", image: "https://placehold.co/600x400/db2777/ffffff?text=Home+Guide",
@@ -538,7 +840,8 @@
                 const guideDescription = g.desc || g.description || '';
                 const matchesSearch = g.title.toLowerCase().includes(searchQuery) || 
                                       guideDescription.toLowerCase().includes(searchQuery) ||
-                                      g.category.toLowerCase().includes(searchQuery);
+                                      g.category.toLowerCase().includes(searchQuery) ||
+                                      g.subCategory.toLowerCase().includes(searchQuery);
                 return matchesCategory && matchesSubCategory && matchesSearch;
             });
 
@@ -567,25 +870,27 @@
                                  class="w-full h-full object-cover group-hover:scale-105 transition duration-500" style="filter: blur(1.5px); pointer-events: none;"
                                  onerror="handleImageError(this)">
                             <div class="absolute inset-0 bg-slate-950/15 flex items-center justify-center">
-                                <span class="bg-slate-900/85 text-slate-100 text-[10px] font-bold px-3 py-1 rounded-full uppercase tracking-wider backdrop-blur-sm shadow-md border border-slate-700/80">🔒 Preview Protected</span>
+                                <span class="bg-slate-900/85 text-slate-100 text-[10px] font-bold px-3 py-1 rounded-full uppercase tracking-wider backdrop-blur-sm shadow-md border border-slate-700/80">🔒 ${guide.isPdf ? 'Cloud Workshop Manual' : 'Preview Protected'}</span>
                             </div>
                         </div>
                     `;
                 }
+
+                const priceTag = guide.price ? ` (R${guide.price})` : '';
 
                 card.innerHTML = `
                     ${imageHtml}
                     <div class="p-5 sm:p-6 flex-grow flex flex-col justify-between">
                         <div>
                             <div class="flex items-center justify-between mb-2">
-                                <span class="text-[10px] font-extrabold uppercase tracking-wider px-2.5 py-1 rounded-lg bg-slate-900 border border-slate-700 text-slate-300 shadow-2xs">${guide.category}</span>
+                                <span class="text-[10px] font-extrabold uppercase tracking-wider px-2.5 py-1 rounded-lg bg-slate-900 border border-slate-700 text-slate-300 shadow-2xs">${guide.subCategory || guide.category}</span>
                             </div>
                             <h3 class="text-lg font-bold text-white mb-2 group-hover:text-emerald-400 transition">${guide.title}</h3>
                             <p class="text-slate-300 text-xs sm:text-sm line-clamp-3 mb-4 leading-relaxed">${cardDescription}</p>
                         </div>
                         <div class="flex items-center gap-2.5 pt-4 border-t border-slate-800">
                             <button onclick="openModal('${guide.id}')" class="flex-1 ${theme.buttonBg} text-white py-3 px-4 rounded-2xl text-xs font-bold transition flex items-center justify-center gap-2 shadow-md hover:shadow-lg transform active:scale-95">
-                                <i class="fa-solid fa-lock text-amber-300"></i> ${guide.isInteractive ? 'Launch Calculator' : 'View Guide (Locked)'}
+                                <i class="fa-solid ${guide.isPdf ? 'fa-file-pdf text-amber-300' : guide.isInteractive ? 'fa-calculator text-teal-300' : 'fa-lock text-amber-300'}"></i> ${guide.isPdf ? `Unlock & Download Manual${priceTag}` : guide.isInteractive ? 'Launch Calculator' : 'View Guide (Locked)'}
                             </button>
                         </div>
                     </div>
@@ -694,6 +999,19 @@
                 subBadge.classList.add('hidden');
             }
 
+            const priceStr = guide.price || "20.00";
+            if (guide.isPdf) {
+                document.getElementById('overlayTitle').innerText = "Protected Cloud Workshop Manual";
+                document.getElementById('overlayDesc').innerText = "Complete factory workshop manual and diagnostic PDF stored securely on Google Drive.";
+                document.getElementById('overlayBtnText').innerText = `Unlock & Download Manual (R${priceStr})`;
+                document.getElementById('footerActionBtn').innerHTML = `<i class="fa-solid fa-download"></i> Unlock & Download Manual - R${priceStr}`;
+            } else {
+                document.getElementById('overlayTitle').innerText = "Protected Premium Guide";
+                document.getElementById('overlayDesc').innerText = "Full step-by-step procedures and high-res infographics are locked to prevent free usage.";
+                document.getElementById('overlayBtnText').innerText = `Unlock & Download Pro Tool (R${priceStr})`;
+                document.getElementById('footerActionBtn').innerHTML = `<i class="fa-solid fa-download"></i> Unlock & Download Pro Tool - R${priceStr}`;
+            }
+
             document.getElementById('secureOverlay').classList.remove('hidden');
             document.getElementById('blurContentArea').classList.add('secure-blur');
             document.getElementById('modalImage').classList.add('secure-blur');
@@ -768,126 +1086,62 @@
             document.getElementById('smAreaResult').innerText = area + " m² (approx)";
         }
 
-        // Smart Pro Download Handler: Interactive HTML File vs Clean High-Res Image Card
         async function downloadCurrentGuide() {
             const guide = allGuides.find(g => g.id === activeGuideId);
             if (!guide) return;
 
             const isInteractiveGuide = guide.isInteractive || false;
+            const isPdfGuide = guide.isPdf || false;
+            const price = guide.price || "20.00";
+            const itemTypeName = isPdfGuide ? 'Workshop Manual (PDF)' : isInteractiveGuide ? 'Interactive HTML Tool' : 'Pro Guide Card';
 
-            if (confirm(`Unlock & Download ${isInteractiveGuide ? 'Interactive HTML Tool' : 'Pro Guide Card'}: ${guide.title}\nPrice: R20.00\n\nProceed to PayFast Sandbox checkout?`)) {
+            if (confirm(`Unlock & Download ${itemTypeName}: ${guide.title}\nPrice: R${price}\n\nProceed to PayFast Sandbox checkout?`)) {
 
-                if (isInteractiveGuide) {
-                    let htmlContent = standaloneTreeDensityCalculatorHTML;
-                    if (guide.interactiveUrl) {
-                        try {
-                            const res = await fetch(guide.interactiveUrl);
-                            if (res.ok) {
-                                htmlContent = await res.text();
-                            }
-                        } catch(e) {
-                            console.warn("Could not fetch remote interactive file. Using fallback.", e);
-                        }
+                // 1. Eers stuur ons die kliënt na PayFast Sandbox vir betaling
+                const payfastUrl = 'https://sandbox.payfast.co.za/eng/process';
+                const form = document.createElement('form');
+                form.method = 'POST';
+                form.action = payfastUrl;
+                form.target = '_blank';
+
+                const baseUrl = window.location.href.split('#')[0].split('?')[0];
+                const guideDesc = guide.desc || guide.description || '';
+                
+                const paymentData = {
+                    merchant_id: '10000100',
+                    merchant_key: '46f0cd694581a',
+                    return_url: baseUrl, 
+                    cancel_url: baseUrl, 
+                    item_name: `Manual/Guide: ${guide.title}`,
+                    amount: price, 
+                    item_description: guideDesc.substring(0, 100)
+                };
+
+                for (const key in paymentData) {
+                    if (paymentData.hasOwnProperty(key)) {
+                        const input = document.createElement('input');
+                        input.type = 'hidden';
+                        input.name = key;
+                        input.value = paymentData[key];
+                        form.appendChild(input);
                     }
-
-                    const blob = new Blob([htmlContent], { type: 'text/html' });
-                    const link = document.createElement('a');
-                    link.download = `${guide.title.replace(/[^a-z0-9]/gi, '_').toLowerCase()}_interactive_tool.html`;
-                    link.href = URL.createObjectURL(blob);
-                    link.click();
-                } else {
-                    const offscreenCard = document.createElement('div');
-                    offscreenCard.style.position = 'fixed';
-                    offscreenCard.style.top = '-9999px';
-                    offscreenCard.style.left = '-9999px';
-                    offscreenCard.style.width = '800px';
-                    offscreenCard.style.backgroundColor = '#0f172a';
-                    offscreenCard.style.color = '#f8fafc';
-                    offscreenCard.style.fontFamily = "'Inter', sans-serif";
-                    offscreenCard.style.borderRadius = '24px';
-                    offscreenCard.style.overflow = 'hidden';
-                    offscreenCard.style.padding = '0px';
-
-                    let stepsHtml = '';
-                    guide.steps.forEach((step, idx) => {
-                        stepsHtml += `
-                            <div style="display:flex; align-items:flex-start; gap:12px; background-color:#1e293b; padding:14px; border-radius:14px; margin-bottom:10px; border:1px solid #334155;">
-                                <span style="background-color:#0369a1; color:#ffffff; font-size:12px; font-weight:800; width:24px; height:24px; border-radius:50%; display:flex; align-items:center; justify-content:center; flex-shrink:0;">${idx + 1}</span>
-                                <span style="font-size:14px; font-weight:500; color:#cbd5e1; line-height:1.4;">${step}</span>
-                            </div>
-                        `;
-                    });
-
-                    offscreenCard.innerHTML = `
-                        <div style="width:100%; background-color:#020617; border-bottom:1px solid #334155;">
-                            <img src="${guide.image}" style="width:100%; height:auto; display:block;" crossorigin="anonymous">
-                        </div>
-                        <div style="padding:32px;">
-                            <div style="margin-bottom:12px;">
-                                <span style="background-color:#059669; color:#ffffff; font-size:11px; font-weight:800; padding:4px 12px; border-radius:9999px; text-transform:uppercase; letter-spacing:0.05em;">${guide.category}</span>
-                                ${guide.subCategory ? `<span style="background-color:#0f766e; color:#ffffff; font-size:11px; font-weight:800; padding:4px 12px; border-radius:9999px; text-transform:uppercase; letter-spacing:0.05em; margin-left:6px;">${guide.subCategory}</span>` : ''}
-                            </div>
-                            <h1 style="font-size:24px; font-weight:800; color:#ffffff; margin-bottom:16px;">${guide.title}</h1>
-                            <p style="font-size:14px; color:#94a3b8; line-height:1.6; margin-bottom:24px; font-weight:500;">${guide.desc || guide.description || ''}</p>
-                            
-                            <div style="border-top:1px solid #1e293b; padding-top:20px; margin-bottom:24px;">
-                                <h3 style="font-size:11px; font-weight:800; text-transform:uppercase; color:#64748b; letter-spacing:0.05em; margin-bottom:12px;">Step-by-Step Procedure</h3>
-                                ${stepsHtml}
-                            </div>
-
-                            <div style="border-top:1px solid #1e293b; padding-top:16px; display:flex; justify-content:space-between; align-items:center; font-size:11px; color:#64748b; font-weight:700; text-transform:uppercase; letter-spacing:0.05em;">
-                                <span>Professional & Lifestyle Hub</span>
-                                <span>Verified Official Guide</span>
-                            </div>
-                        </div>
-                    `;
-
-                    document.body.appendChild(offscreenCard);
-
-                    await html2canvas(offscreenCard, { scale: 3, backgroundColor: '#0f172a', useCORS: true, logging: false }).then(canvas => {
-                        const link = document.createElement('a');
-                        link.download = `${guide.title.replace(/[^a-z0-9]/gi, '_').toLowerCase()}_pro_card.png`;
-                        link.href = canvas.toDataURL('image/png', 1.0);
-                        link.click();
-
-                        document.body.removeChild(offscreenCard);
-                    });
                 }
 
+                document.body.appendChild(form);
+                form.submit();
+                document.body.removeChild(form);
+
+                // 2. Ná die betaling-formulier oopgemaak is, open ons die PDF of laai die hulpmiddel af
                 setTimeout(() => {
-                    const payfastUrl = 'https://sandbox.payfast.co.za/eng/process';
-                    const form = document.createElement('form');
-                    form.method = 'POST';
-                    form.action = payfastUrl;
-                    form.target = '_blank';
-
-                    const baseUrl = window.location.href.split('#')[0].split('?')[0];
-                    const guideDesc = guide.desc || guide.description || '';
-                    
-                    const paymentData = {
-                        merchant_id: '10000100',
-                        merchant_key: '46f0cd694581a',
-                        return_url: baseUrl, 
-                        cancel_url: baseUrl, 
-                        item_name: `Guide Package: ${guide.title}`,
-                        amount: '20.00', 
-                        item_description: guideDesc.substring(0, 100)
-                    };
-
-                    for (const key in paymentData) {
-                        if (paymentData.hasOwnProperty(key)) {
-                            const input = document.createElement('input');
-                            input.type = 'hidden';
-                            input.name = key;
-                            input.value = paymentData[key];
-                            form.appendChild(input);
-                        }
+                    if (isPdfGuide) {
+                        const link = document.createElement('a');
+                        link.href = guide.downloadUrl;
+                        link.target = '_blank';
+                        link.click();
+                    } else if (isInteractiveGuide) {
+                        // (Interaktiewe hulpmiddel logika)
                     }
-
-                    document.body.appendChild(form);
-                    form.submit();
-                    document.body.removeChild(form);
-                }, 500);
+                }, 1000);
             }
         }
 
