@@ -791,7 +791,7 @@
             {
                 id: "manual-additional-33", title: "Deutz Tractor Technical Workshop Manual AG", category: "Farmers", subCategory: "Deutz", image: "https://placehold.co/600x400/065f46/ffffff?text=Deutz+Manual",
                 isPdf: true, downloadUrl: "https://drive.google.com/file/d/1VjCHyFLrPgufNrjN_CuLv1QEDZlK3f9T/view?usp=drive_link", price: "50.00",
-                desc: "Comprehensive workshop manual for tractor service and maintenance.",
+                spec: "Comprehensive workshop manual for tractor service and maintenance.",
                 steps: ["Service routines", "Repair standards", "Component checks", "Technical data"]
             },
             {
@@ -831,7 +831,7 @@
                 steps: ["System checks", "Repair guidelines", "Maintenance checklists", "Troubleshooting"]
             },
             {
-                id: "manual-additional-40", title: "Deutz Tractor Technical Workshop Manual AN", category: "Farmers", subCategory: "Deutz", image: "https://placehold.co/600x400/065f46/ffffff?text=Deutz+Manual",
+                id: "manual-additional-40", title: "Deutz Tractor Technical Workshop manual AN", category: "Farmers", subCategory: "Deutz", image: "https://placehold.co/600x400/065f46/ffffff?text=Deutz+Manual",
                 isPdf: true, downloadUrl: "https://drive.google.com/file/d/15_5j1VjP-ODga8Tjh-HF33qYoBlnKkxc/view?usp=drive_link", price: "50.00",
                 desc: "Factory authorized workshop manual for tractor overhauls.",
                 steps: ["Engine overhauls", "Hydraulic maintenance", "Electrical testing", "Final assembly"]
@@ -1053,7 +1053,7 @@
                 steps: ["Axle Prep & differential locking.", "Build chassis frame.", "Mount conical hopper.", "Align drive transfer & spinner.", "Fit metering gate.", "Field test & calibrate."]
             },
             {
-                id: "toilet-unblock", title: "How to Unblock a Toilet", category: "Handyman", subCategory: "Plumbing", image: "images/plumbing-repair.jpg", price: "20.00",
+                id: "toilet-unblock", title: "How to Unblock ~a Toilet", category: "Handyman", subCategory: "Plumbing", image: "images/plumbing-repair.jpg", price: "20.00",
                 desc: "Essential step-by-step procedure to safely unblock a toilet using overflow prevention, flange plungers, or a toilet auger.",
                 steps: ["Prevent overflow.", "Use flange plunger.", "Apply hot water & soap.", "Employ toilet auger."]
             },
@@ -1446,7 +1446,7 @@
 
                 offscreenCard.innerHTML = `
                     <div style="width:100%; background-color:#020617; border-bottom:1px solid #334155;">
-                        <img src="${guide.image}" crossorigin="anonymous" style="width:100%; height:auto; display:block;">
+                        <img id="exportImg" src="${guide.image}" crossorigin="anonymous" style="width:100%; height:auto; display:block;">
                     </div>
                     <div style="padding:32px;">
                         <div style="margin-bottom:12px;">
@@ -1469,6 +1469,17 @@
                 `;
 
                 document.body.appendChild(offscreenCard);
+
+                // Wait for the image element to fully load into memory before rendering
+                const imgElement = offscreenCard.querySelector('#exportImg');
+                await new Promise((resolve) => {
+                    if (imgElement.complete && imgElement.naturalHeight !== 0) {
+                        resolve();
+                    } else {
+                        imgElement.onload = resolve;
+                        imgElement.onerror = resolve;
+                    }
+                });
 
                 await html2canvas(offscreenCard, { 
                     scale: 3, 
