@@ -330,6 +330,17 @@
         });
 
         function handleImageError(imgElement) {
+            if (!imgElement.dataset.fallbackStep) {
+                imgElement.dataset.fallbackStep = "1";
+                const currentSrc = imgElement.src;
+                if (currentSrc.includes('raw.githubusercontent.com')) {
+                    imgElement.src = currentSrc.replace('https://raw.githubusercontent.com/enoz-cyber/agri-hub-app/main/', './');
+                    return;
+                } else if (currentSrc.startsWith('./')) {
+                    imgElement.src = currentSrc.replace('./', 'https://raw.githubusercontent.com/enoz-cyber/agri-hub-app/main/');
+                    return;
+                }
+            }
             imgElement.onerror = null;
             imgElement.src = "https://placehold.co/600x400/0369a1/ffffff?text=Workshop+Manual";
         }
