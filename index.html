@@ -1027,6 +1027,16 @@
 
             // --- BUILDERS, HANDYMAN, HOUSEWIVES (Price: R20.00) ---
             {
+                id: "foundation-squaring", title: "Foundation Squaring & Layout Guide", category: "Builders", subCategory: "General", image: "images/foundation-squaring-guide.jpg", price: "20.00",
+                desc: "Step-by-step master guide for accurately laying out building lines, establishing baselines, applying the 3-4-5 rule for right angles, squaring walls, cross-measuring diagonals, and setting up batter boards.",
+                steps: [
+                    "Establish the Baseline: Drive Peg A into the ground, run a mason's line to Peg B, and measure/mark Corner B along the line.",
+                    "Apply the 3-4-5 Rule: Mark 3 units on the baseline from Corner A (Point X), measure 4 units outward, and measure a 5-unit hypotenuse from Point X to intersect the 4-unit line to drive Peg C.",
+                    "Extend and Square the Second Wall: Line up string from Corner A through Peg C, extend the string to the full required length, and mark Corner D.",
+                    "Verify and Secure Layout: Cross-measure diagonals A-D and B-C, adjust pegs until they match completely, build secure batter boards outside the footprint, transfer exact string lines to notches, and remove pegs to dig."
+                ]
+            },
+            {
                 id: "foundation-pouring", title: "Concrete Foundation Pouring & Curing", category: "Builders", subCategory: "General", image: "images/concrete-foundation.jpg", price: "20.00",
                 desc: "Comprehensive technical master guide for professional concrete foundation pouring, trench preparation, formwork bracing, rebar chair spacing, mix ratios, vibration, and moisture curing protocols.",
                 steps: [
@@ -1355,8 +1365,7 @@
                 sessionStorage.setItem('pending_download_id', guide.id);
                 const returnWithSuccess = currentUrl + "?payment=success";
 
-                // Live PayFast Production Endpoint
-                const payfastUrl = 'https://www.payfast.co.za/eng/process';
+                const payfastUrl = 'https://sandbox.payfast.co.za/eng/process';
                 const form = document.createElement('form');
                 form.method = 'POST';
                 form.action = payfastUrl;
@@ -1364,8 +1373,8 @@
                 const guideDesc = guide.desc || guide.description || '';
                 
                 const paymentData = {
-                    merchant_id: '37563857',
-                    merchant_key: 'eshmr1pqikmis',
+                    merchant_id: '10000100',
+                    merchant_key: '46f0cd694581a',
                     return_url: returnWithSuccess, 
                     cancel_url: currentUrl, 
                     item_name: `Manual/Guide: ${guide.title}`,
