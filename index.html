@@ -1120,7 +1120,7 @@
                 if (guide.image) {
                     imageHtml = `
                         <div class="relative h-48 bg-slate-950 overflow-hidden">
-                            <img src="${guide.image}" alt="${guide.title}" crossorigin="anonymous"
+                            <img src="${guide.image}" alt="${guide.title}" 
                                  class="w-full h-full object-cover group-hover:scale-105 transition duration-500" style="filter: blur(1.5px); pointer-events: none;"
                                  onerror="handleImageError(this)">
                             <div class="absolute inset-0 bg-slate-950/15 flex items-center justify-center">
@@ -1470,7 +1470,6 @@
 
                 document.body.appendChild(offscreenCard);
 
-                // Wait for the image element to fully load into memory before rendering
                 const imgElement = offscreenCard.querySelector('#exportImg');
                 await new Promise((resolve) => {
                     if (imgElement.complete && imgElement.naturalHeight !== 0) {
