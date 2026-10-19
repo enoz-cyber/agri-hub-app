@@ -182,7 +182,7 @@
 
             <!-- Image Header Container -->
             <div id="modalImageContainer" class="relative bg-slate-950 h-56 sm:h-64 flex items-center justify-center overflow-hidden border-b border-slate-800">
-                <img id="modalImage" src="" alt="Guide Image" class="w-full h-full object-cover secure-blur" crossorigin="anonymous" onerror="handleImageError(this)">
+                <img id="modalImage" src="" alt="Guide Image" class="w-full h-full object-cover secure-blur" onerror="handleImageError(this)">
                 <button id="modalCloseBtn" onclick="closeModal()" class="absolute top-4 right-4 bg-black/60 hover:bg-black/80 text-white w-9 h-9 rounded-full flex items-center justify-center transition border border-white/20 shadow-md z-30">
                     <i class="fa-solid fa-xmark text-sm"></i>
                 </button>
@@ -384,107 +384,107 @@
         const allGuides = [
             // --- FARMING GUIDES & PROCEDURES (Price: R20.00) ---
             {
-                id: "plough", title: "Plough Alignment & Attachment Guide", category: "Farmers", subCategory: "Crop Farming", image: "images/plough-alignment.jpg", price: "20.00",
+                id: "plough", title: "Plough Alignment & Attachment Guide", category: "Farmers", subCategory: "Crop Farming", image: "https://raw.githubusercontent.com/enoz-cyber/agri-hub-app/main/images/plough-alignment.jpg", price: "20.00",
                 desc: "Step-by-step manual for rear-mounted plough alignment, 3-point hitch setup, and depth tuning for optimal soil inversion.",
                 steps: ["Level tractor and plough.", "Set front furrow width.", "Adjust draft links.", "Verify vertical alignment."]
             },
             {
-                id: "disc-harrow", title: "Disc Harrow Alignment Guide", category: "Farmers", subCategory: "Crop Farming", image: "images/disc-harrow.jpg", price: "20.00",
+                id: "disc-harrow", title: "Disc Harrow Alignment Guide", category: "Farmers", subCategory: "Crop Farming", image: "https://raw.githubusercontent.com/enoz-cyber/agri-hub-app/main/images/disc-harrow.jpg", price: "20.00",
                 desc: "Side alignment, gang angles, tractor tire matching, and hitch point leveling for uniform residue incorporation.",
                 steps: ["Adjust gang angles.", "Set hitch height.", "Inspect scraper blades.", "Grease bearings."]
             },
             {
-                id: "fertilizer-spreader-calibration", title: "Fertilizer Spreader Calibration", category: "Farmers", subCategory: "Crop Farming", image: "images/crop-fertilizer-calibration.jpg", price: "20.00",
+                id: "fertilizer-spreader-calibration", title: "Fertilizer Spreader Calibration", category: "Farmers", subCategory: "Crop Farming", image: "https://raw.githubusercontent.com/enoz-cyber/agri-hub-app/main/images/crop-fertilizer-calibration.jpg", price: "20.00",
                 desc: "Step-by-step calibration guide and calculations for ground-driven and tractor-attached fertilizer spreaders.",
                 steps: ["Inspect spinner discs and vanes.", "Set correct PTO speed and forward travel speed.", "Perform stationary catch-test per chute.", "Calculate application rate per hectare and adjust gate openings."]
             },
             {
-                id: "boom-sprayer", title: "Boom Sprayer Calibration", category: "Farmers", subCategory: "Crop Farming", image: "images/boom-sprayer.jpg", price: "20.00",
+                id: "boom-sprayer", title: "Boom Sprayer Calibration", category: "Farmers", subCategory: "Crop Farming", image: "https://raw.githubusercontent.com/enoz-cyber/agri-hub-app/main/images/boom-sprayer.jpg", price: "20.00",
                 desc: "Nozzle selection, pressure tuning, and output checks for accurate systemic chemical application.",
                 steps: ["Check nozzle tips.", "Measure pressure.", "Collect output.", "Ensure flow variation is within +/- 5%."]
             },
             {
-                id: "field-sprayer", title: "Field Sprayer Calibration", category: "Farmers", subCategory: "Crop Farming", image: "images/field-sprayer.jpg", price: "20.00",
+                id: "field-sprayer", title: "Field Sprayer Calibration", category: "Farmers", subCategory: "Crop Farming", image: "https://raw.githubusercontent.com/enoz-cyber/agri-hub-app/main/images/field-sprayer.jpg", price: "20.00",
                 desc: "Comprehensive calibration procedures for large field sprayers, tank agitation, and drift reduction.",
                 steps: ["Fill 100m test track.", "Measure traverse time.", "Calculate tank mix volume.", "Calibrate gauges."]
             },
             {
-                id: "maize-planting", title: "Maize Planting Guide", category: "Farmers", subCategory: "Crop Farming", image: "images/maize-planting.jpg", price: "20.00",
+                id: "maize-planting", title: "Maize Planting Guide", category: "Farmers", subCategory: "Crop Farming", image: "https://raw.githubusercontent.com/enoz-cyber/agri-hub-app/main/images/maize-planting.jpg", price: "20.00",
                 desc: "Seed spacing, population calculations, fertilizer disc placement, and depth settings for high yield emergence.",
                 steps: ["Select seed plate.", "Calibrate seed drop.", "Set depth (4-6 cm).", "Ensure good contact."]
             },
             {
-                id: "manure-spreader", title: "Manure Spreader Calibration", category: "Farmers", subCategory: "Crop Farming", image: "images/manure-spreader.jpg", price: "20.00",
+                id: "manure-spreader", title: "Manure Spreader Calibration", category: "Farmers", subCategory: "Crop Farming", image: "https://raw.githubusercontent.com/enoz-cyber/agri-hub-app/main/images/manure-spreader.jpg", price: "20.00",
                 desc: "Application rates, beater speed adjustment, and spread uniformity for solid and semi-solid livestock manure.",
                 steps: ["Weigh empty spreader.", "Distribute tarps.", "Run spreader.", "Weigh samples."]
             },
             {
-                id: "slasher-guide", title: "Slasher Guide", category: "Farmers", subCategory: "Crop Farming", image: "images/slasher-guide.jpg", price: "20.00",
+                id: "slasher-guide", title: "Slasher Guide", category: "Farmers", subCategory: "Crop Farming", image: "https://raw.githubusercontent.com/enoz-cyber/agri-hub-app/main/images/slasher-guide.jpg", price: "20.00",
                 desc: "Cutting height adjustments, skid shoe leveling, and safety chain inspections for pasture topping and weed control.",
                 steps: ["Adjust tail wheel.", "Inspect swing-away blades.", "Verify PTO Clutch.", "Check safety guards."]
             },
             {
-                id: "mist-sprayer", title: "Mist Sprayer Calibration", category: "Farmers", subCategory: "Fruit Farming", image: "images/mist-sprayer.jpg", price: "20.00",
+                id: "mist-sprayer", title: "Mist Sprayer Calibration", category: "Farmers", subCategory: "Fruit Farming", image: "https://raw.githubusercontent.com/enoz-cyber/agri-hub-app/main/images/mist-sprayer.jpg", price: "20.00",
                 desc: "Air assistance and droplet distribution tuning for orchard canopies and dense foliage crops.",
                 steps: ["Check fan gearbox.", "Align air coulings.", "Use water-sensitive cards.", "Adjust pump pressure."]
             },
             {
-                id: "fruit-pruning", title: "Orchard Fruit Tree Pruning Manual", category: "Farmers", subCategory: "Fruit Farming", image: "images/fruit-pruning.jpg", price: "20.00",
+                id: "fruit-pruning", title: "Orchard Fruit Tree Pruning Manual", category: "Farmers", subCategory: "Fruit Farming", image: "https://raw.githubusercontent.com/enoz-cyber/agri-hub-app/main/images/fruit-pruning.jpg", price: "20.00",
                 desc: "Comprehensive 9-step multi-panel visual guide for winter pruning, canopy health, and maximum sunlight penetration.",
                 steps: ["Sanitize tools.", "Assess canopy goals.", "Remove 3-Ds.", "Clear center canopy."]
             },
             {
-                id: "tree-density", title: "Orchard Tree Density Calculation Guide", category: "Farmers", subCategory: "Fruit Farming", isInteractive: true, interactiveUrl: "tree-density.html", image: "images/tree-density.jpg", price: "20.00",
+                id: "tree-density", title: "Orchard Tree Density Calculation Guide", category: "Farmers", subCategory: "Fruit Farming", isInteractive: true, interactiveUrl: "tree-density.html", image: "https://raw.githubusercontent.com/enoz-cyber/agri-hub-app/main/images/tree-density.jpg", price: "20.00",
                 desc: "Interactive visual simulator and calculation tool for determining tree population per hectare.",
                 steps: ["Adjust row and tree spacing sliders.", "Observe live calculation.", "Analyze hectare population output."]
             },
             {
-                id: "cabbage-planting", title: "Cabbage Field Planting & Cultivation Guide", category: "Farmers", subCategory: "Vegetable Farming", image: "images/cabbage-planting.jpg", price: "20.00",
+                id: "cabbage-planting", title: "Cabbage Field Planting & Cultivation Guide", category: "Farmers", subCategory: "Vegetable Farming", image: "https://raw.githubusercontent.com/enoz-cyber/agri-hub-app/main/images/cabbage-planting.jpg", price: "20.00",
                 desc: "Comprehensive 9-step multi-panel visual guide for commercial cabbage field setup, soil prep, basal fertilization, and pest management.",
                 steps: ["Deep plough and create raised beds.", "Maintain soil pH (6.0-6.8).", "Incorporate pre-plant fertilizer.", "Choose commercial varieties.", "Pre-mark holes.", "Use drip irrigation.", "Perform shallow cultivation.", "Scout for pests.", "Harvest."]
             },
             {
-                id: "carrot-planting", title: "Carrot Field Planting & Cultivation Guide", category: "Farmers", subCategory: "Vegetable Farming", image: "images/carrot-planting.jpg", price: "20.00",
+                id: "carrot-planting", title: "Carrot Field Planting & Cultivation Guide", category: "Farmers", subCategory: "Vegetable Farming", image: "https://raw.githubusercontent.com/enoz-cyber/agri-hub-app/main/images/carrot-planting.jpg", price: "20.00",
                 desc: "Comprehensive 9-step multi-panel visual guide for commercial carrot field setup, soil prep, and harvesting.",
                 steps: ["Deep plough and create raised beds.", "Maintain soil pH (6.0-6.8).", "Incorporate pre-plant fertilizer.", "Choose commercial varieties.", "Pre-mark rows.", "Use drip irrigation.", "Perform shallow cultivation.", "Scout for pests.", "Harvest."]
             },
             {
-                id: "onion-planting-1", title: "Commercial Onion Field Planting Guide", category: "Farmers", subCategory: "Vegetable Farming", image: "images/onion-planting-1.jpg", price: "20.00",
+                id: "onion-planting-1", title: "Commercial Onion Field Planting Guide", category: "Farmers", subCategory: "Vegetable Farming", image: "https://raw.githubusercontent.com/enoz-cyber/agri-hub-app/main/images/onion-planting-1.jpg", price: "20.00",
                 desc: "Comprehensive guide for commercial onion field setup, soil prep, and precision planting.",
                 steps: ["Test soil pH.", "Incorporate basal fertilizers.", "Choose healthy seedlings.", "Set proper spacing."]
             },
             {
-                id: "onion-planting-2", title: "Onion Field Planting & Cultivation Guide", category: "Farmers", subCategory: "Vegetable Farming", image: "images/onion-planting-2.jpg", price: "20.00",
+                id: "onion-planting-2", title: "Onion Field Planting & Cultivation Guide", category: "Farmers", subCategory: "Vegetable Farming", image: "https://raw.githubusercontent.com/enoz-cyber/agri-hub-app/main/images/onion-planting-2.jpg", price: "20.00",
                 desc: "Step-by-step visual manual covering soil preparation, planting materials, weed control, and curing.",
                 steps: ["Test soil pH.", "Choose seeds/transplants.", "Provide consistent water.", "Control weeds."]
             },
             {
-                id: "potato-planting", title: "Commercial Potato Field Planting Guide", category: "Farmers", subCategory: "Vegetable Farming", image: "images/potato-planting.jpg", price: "20.00",
+                id: "potato-planting", title: "Commercial Potato Field Planting Guide", category: "Farmers", subCategory: "Vegetable Farming", image: "https://raw.githubusercontent.com/enoz-cyber/agri-hub-app/main/images/potato-planting.jpg", price: "20.00",
                 desc: "Comprehensive guide for commercial potato large-scale production, chitting, and hilling.",
                 steps: ["Test soil pH.", "Choose certified seed tubers.", "Set rows.", "Hill up soil ridges."]
             },
             {
-                id: "pumpkin-planting", title: "Commercial Pumpkin Field Planting Guide", category: "Farmers", subCategory: "Vegetable Farming", image: "images/pumpkin-planting.jpg", price: "20.00",
+                id: "pumpkin-planting", title: "Commercial Pumpkin Field Planting Guide", category: "Farmers", subCategory: "Vegetable Farming", image: "https://raw.githubusercontent.com/enoz-cyber/agri-hub-app/main/images/pumpkin-planting.jpg", price: "20.00",
                 desc: "Comprehensive guide for commercial pumpkin field setup, precision spacing, vine care, and harvest.",
                 steps: ["Test soil pH.", "Select certified seeds.", "Apply basal fertilizer.", "Set wide spacing.", "Plant seeds.", "Maintain water.", "Control weeds.", "Monitor pests.", "Harvest."]
             },
             {
-                id: "watermelon-planting", title: "Commercial Watermelon Field Planting Guide", category: "Farmers", subCategory: "Vegetable Farming", image: "images/watermelon-planting.jpg", price: "20.00",
+                id: "watermelon-planting", title: "Commercial Watermelon Field Planting Guide", category: "Farmers", subCategory: "Vegetable Farming", image: "https://raw.githubusercontent.com/enoz-cyber/agri-hub-app/main/images/watermelon-planting.jpg", price: "20.00",
                 desc: "Comprehensive guide for commercial watermelon field setup, spacing, pest monitoring, and harvest.",
                 steps: ["Test soil pH.", "Choose seeds.", "Incorporate fertilizer.", "Set rows.", "Plant seeds.", "Provide irrigation.", "Control weeds.", "Monitor pests.", "Harvest."]
             },
             {
-                id: "tomato-planting", title: "Commercial Tomato Field Planting Guide", category: "Farmers", subCategory: "Vegetable Farming", image: "images/tomato-planting.jpg", price: "20.00",
+                id: "tomato-planting", title: "Commercial Tomato Field Planting Guide", category: "Farmers", subCategory: "Vegetable Farming", image: "https://raw.githubusercontent.com/enoz-cyber/agri-hub-app/main/images/tomato-planting.jpg", price: "20.00",
                 desc: "Comprehensive guide for commercial tomato production, transplanting, staking, and supported harvest.",
                 steps: ["Test soil pH.", "Use transplants.", "Incorporate fertilizer.", "Set rows.", "Plant deeply.", "Provide moisture.", "Manage mulch.", "Scout for pests.", "Harvest."]
             },
             {
-                id: "bell-pepper-planting", title: "Commercial Bell Pepper Field Planting Guide", category: "Farmers", subCategory: "Vegetable Farming", image: "images/bell-pepper-planting.jpg", price: "20.00",
+                id: "bell-pepper-planting", title: "Commercial Bell Pepper Field Planting Guide", category: "Farmers", subCategory: "Vegetable Farming", image: "https://raw.githubusercontent.com/enoz-cyber/agri-hub-app/main/images/bell-pepper-planting.jpg", price: "20.00",
                 desc: "Comprehensive guide for commercial bell pepper field setup, soil prep, precision spacing, and harvest.",
                 steps: ["Test soil pH.", "Use seedlings.", "Incorporate fertilizer.", "Set rows.", "Plant deeply.", "Provide moisture.", "Control weeds.", "Scout for pests.", "Harvest."]
             },
             {
-                id: "green-bean-planting", title: "Commercial Green Bean Field Planting Guide", category: "Farmers", subCategory: "Vegetable Farming", image: "images/green-bean-planting.jpg", price: "20.00",
+                id: "green-bean-planting", title: "Commercial Green Bean Field Planting Guide", category: "Farmers", subCategory: "Vegetable Farming", image: "https://raw.githubusercontent.com/enoz-cyber/agri-hub-app/main/images/green-bean-planting.jpg", price: "20.00",
                 desc: "Comprehensive guide for commercial green bean field setup, direct seeding, precision spacing, and harvest.",
                 steps: ["Test soil pH.", "Treat seeds.", "Incorporate fertilizer.", "Set rows.", "Direct seed.", "Provide moisture.", "Control weeds.", "Scout for pests.", "Harvest."]
             },
@@ -1027,7 +1027,7 @@
 
             // --- BUILDERS, HANDYMAN, HOUSEWIVES (Price: R20.00) ---
             {
-                id: "foundation-pouring", title: "Concrete Foundation Pouring & Curing", category: "Builders", subCategory: "General", image: "images/concrete-foundation.jpg", price: "20.00",
+                id: "foundation-pouring", title: "Concrete Foundation Pouring & Curing", category: "Builders", subCategory: "General", image: "https://raw.githubusercontent.com/enoz-cyber/agri-hub-app/main/images/concrete-foundation.jpg", price: "20.00",
                 desc: "Comprehensive technical master guide for professional concrete foundation pouring, trench preparation, formwork bracing, rebar chair spacing, mix ratios, vibration, and moisture curing protocols.",
                 steps: [
                     "Site Clearing & Soil Compaction: Strip organic topsoil entirely, expose firm subgrade, and compact using a mechanical plate compactor to achieve at least 95% Proctor density.",
@@ -1043,17 +1043,17 @@
                 ]
             },
             {
-                id: "hiller-build", title: "Raised Bed Hiller (Double Disc) Build Guide", category: "Handyman", subCategory: "Manufacture", image: "images/hiller-build.jpg", price: "20.00",
+                id: "hiller-build", title: "Raised Bed Hiller (Double Disc) Build Guide", category: "Handyman", subCategory: "Manufacture", image: "https://raw.githubusercontent.com/enoz-cyber/agri-hub-app/main/images/hiller-build.jpg", price: "20.00",
                 desc: "Step-by-step practical fabrication and field tuning manual for building a heavy-duty double-disc raised bed hiller.",
                 steps: ["Cut square steel tubing.", "Weld hitch upright bracket.", "Cut vertical square shanks.", "Mount double-disc hubs.", "Attach shanks to toolbar.", "Test in workable soil."]
             },
             {
-                id: "bakkie-fertilizer-spreader", title: "Bakkie Differential Fertilizer Spreader Build Guide", category: "Handyman", subCategory: "Manufacture", image: "images/Fertilizer-spreader.jpg", price: "20.00",
+                id: "bakkie-fertilizer-spreader", title: "Bakkie Differential Fertilizer Spreader Build Guide", category: "Handyman", subCategory: "Manufacture", image: "https://raw.githubusercontent.com/enoz-cyber/agri-hub-app/main/images/Fertilizer-spreader.jpg", price: "20.00",
                 desc: "Step-by-step ground-driven fabrication manual for a bakkie differential fertilizer spreader.",
                 steps: ["Axle Prep & differential locking.", "Build chassis frame.", "Mount conical hopper.", "Align drive transfer & spinner.", "Fit metering gate.", "Field test & calibrate."]
             },
             {
-                id: "toilet-unblock", title: "How to Unblock ~a Toilet", category: "Handyman", subCategory: "Plumbing", image: "images/plumbing-repair.jpg", price: "20.00",
+                id: "toilet-unblock", title: "How to Unblock a Toilet", category: "Handyman", subCategory: "Plumbing", image: "https://raw.githubusercontent.com/enoz-cyber/agri-hub-app/main/images/plumbing-repair.jpg", price: "20.00",
                 desc: "Essential step-by-step procedure to safely unblock a toilet using overflow prevention, flange plungers, or a toilet auger.",
                 steps: ["Prevent overflow.", "Use flange plunger.", "Apply hot water & soap.", "Employ toilet auger."]
             },
@@ -1446,7 +1446,7 @@
 
                 offscreenCard.innerHTML = `
                     <div style="width:100%; background-color:#020617; border-bottom:1px solid #334155;">
-                        <img id="exportImg" src="${guide.image}" crossorigin="anonymous" style="width:100%; height:auto; display:block;">
+                        <img id="exportImg" src="${guide.image}" style="width:100%; height:auto; display:block;">
                     </div>
                     <div style="padding:32px;">
                         <div style="margin-bottom:12px;">
