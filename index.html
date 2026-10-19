@@ -833,7 +833,7 @@
             {
                 id: "manual-additional-40", title: "Deutz Tractor Technical Workshop Manual AN", category: "Farmers", subCategory: "Deutz", image: "https://placehold.co/600x400/065f46/ffffff?text=Deutz+Manual",
                 isPdf: true, downloadUrl: "https://drive.google.com/file/d/15_5j1VjP-ODga8Tjh-HF33qYoBlnKkxc/view?usp=drive_link", price: "50.00",
-                desc: "Factory authorized workshop manual for tractor overhauls.",
+                desc: "Factory authorized service manual for tractor overhauls.",
                 steps: ["Engine overhauls", "Hydraulic maintenance", "Electrical testing", "Final assembly"]
             },
 
@@ -1036,7 +1036,7 @@
                     "Formwork Construction & Bracing: Build rigid formwork using 32mm planks or marine plywood, secured with strongbacks and wooden stakes every 900mm to prevent blowout.",
                     "Reinforcement Spacing & Cover Blocks: Position steel rebar grids or mesh using plastic or concrete cover blocks (minimum 50mm clearance) to ensure full steel encapsulation.",
                     "Formwork Inspection & Pre-Pour Check: Inspect tie-wires, formwork alignment, squareness, and check that all debris, loose soil, and standing water are cleared.",
-                    "Mix Design & Slump Verification: Order or mix standard structural concrete (minimum 25 MPa / 3:2:1 ratio), ensuring a workable slump (75mm - 100mm) without excess water.",
+                    "Mix Design & Slump Verification: Order or mix structural concrete (minimum 25 MPa / 3:2:1 ratio), ensuring a workable slump (75mm - 100mm) without excess water.",
                     "Continuous Pouring & Spading: Pour concrete continuously from one corner to prevent cold joints; spade or mechanically vibrate the mix to release trapped air pockets.",
                     "Screeding & Surface Finishing: Strike off excess concrete using a straightedge timber screed pulled across form edges, followed by a wood float or steel trowel finish.",
                     "Moisture Curing Protocol: Begin curing as soon as the surface hardens by keeping it continuously moist with sprinklers, wet Hessian sacking, or curing compound for at least 7 days."
@@ -1355,7 +1355,7 @@
                 sessionStorage.setItem('pending_download_id', guide.id);
                 const returnWithSuccess = currentUrl + "?payment=success";
 
-                const payfastUrl = 'https://www.payfast.co.za/eng/process';
+                const payfastUrl = 'https://sandbox.payfast.co.za/eng/process';
                 const form = document.createElement('form');
                 form.method = 'POST';
                 form.action = payfastUrl;
@@ -1363,8 +1363,8 @@
                 const guideDesc = guide.desc || guide.description || '';
                 
                 const paymentData = {
-                    merchant_id: '37563857',
-                    merchant_key: 'eshmr1pqikmis',
+                    merchant_id: '10000100',
+                    merchant_key: '46f0cd694581a',
                     return_url: returnWithSuccess, 
                     cancel_url: currentUrl, 
                     item_name: `Manual/Guide: ${guide.title}`,
