@@ -382,26 +382,6 @@
 </html>`;
 
         const allGuides = [
-            // --- MASSEY FERGUSON PARTS MANUALS (Added) ---
-            {
-                id: "manual-mf-415", title: "Massey Ferguson 415 Parts Manual", category: "Farmers", subCategory: "Massey Ferguson", image: "https://placehold.co/600x400/065f46/ffffff?text=MF+415+Parts",
-                isPdf: true, downloadUrl: "https://drive.google.com/file/d/0B460_P5oTO9OYTZQa05jSTZsZjA/view?usp=drive_link&resourcekey=0-CcHmh_YCgWcQYI3NNQPxig", price: "50.00",
-                desc: "Official parts catalog and exploded component diagrams for Massey Ferguson 415 tractors.",
-                steps: ["Engine component assemblies", "Transmission and clutch parts", "Hydraulic system schematics", "Steering and axle diagrams"]
-            },
-            {
-                id: "manual-mf-460", title: "Massey Ferguson 460 Parts Manual", category: "Farmers", subCategory: "Massey Ferguson", image: "https://placehold.co/600x400/065f46/ffffff?text=MF+460+Parts",
-                isPdf: true, downloadUrl: "https://drive.google.com/file/d/0B460_P5oTO9OamYtT1lxcEc4WWM/view?usp=drive_link&resourcekey=0-6-vCLUU4DOc9vE-Crh4blQ", price: "50.00",
-                desc: "Comprehensive parts manual featuring detailed diagrams and part numbers for Massey Ferguson 460 models.",
-                steps: ["Sheet metal and body parts", "Electrical components and wiring", "Hitch and linkage assemblies", "Maintenance replacement parts"]
-            },
-            {
-                id: "manual-mf-5365", title: "Massey Ferguson 5365 Parts Manual", category: "Farmers", subCategory: "Massey Ferguson", image: "https://placehold.co/600x400/065f46/ffffff?text=MF+5365+Parts",
-                isPdf: true, downloadUrl: "https://drive.google.com/file/d/0B460_P5oTO9OZkV5MGdZRlVLTjA/view?usp=drive_link&resourcekey=0-zLEYOdAvyFH3ChYzGck_tA", price: "50.00",
-                desc: "Official factory parts manual for Massey Ferguson 5365 agricultural tractors.",
-                steps: ["Powertrain & transmission parts", "Hydraulic valves and pumps", "Cabin controls and filters", "Complete parts reference index"]
-            },
-
             // --- FARMING GUIDES & PROCEDURES (Price: R20.00) ---
             {
                 id: "plough", title: "Plough Alignment & Attachment Guide", category: "Farmers", subCategory: "Crop Farming", image: "images/plough-alignment.jpg", price: "20.00",
@@ -1045,6 +1025,26 @@
                 steps: ["Compact diesel engine service", "Compact transmission & clutch", "Hydraulic 3-point linkage", "Electrical & safety switches"]
             },
 
+            // --- MASSEY FERGUSON PARTS MANUALS COLLECTION (R50.00) ---
+            {
+                id: "manual-mf-415", title: "Massey Ferguson 415 Parts Manual", category: "Farmers", subCategory: "Massey Ferguson", image: "https://placehold.co/600x400/065f46/ffffff?text=MF+415+Parts",
+                isPdf: true, downloadUrl: "https://drive.google.com/file/d/0B460_P5oTO9OYTZQa05jSTZsZjA/view?usp=drive_link&resourcekey=0-CcHmh_YCgWcQYI3NNQPxig", price: "50.00",
+                desc: "Official parts catalog and exploded component diagrams for Massey Ferguson 415 tractors.",
+                steps: ["Engine component assemblies", "Transmission and clutch parts", "Hydraulic system schematics", "Steering and axle diagrams"]
+            },
+            {
+                id: "manual-mf-460", title: "Massey Ferguson 460 Parts Manual", category: "Farmers", subCategory: "Massey Ferguson", image: "https://placehold.co/600x400/065f46/ffffff?text=MF+460+Parts",
+                isPdf: true, downloadUrl: "https://drive.google.com/file/d/0B460_P5oTO9OamYtT1lxcEc4WWM/view?usp=drive_link&resourcekey=0-6-vCLUU4DOc9vE-Crh4blQ", price: "50.00",
+                desc: "Comprehensive parts manual featuring detailed diagrams and part numbers for Massey Ferguson 460 models.",
+                steps: ["Sheet metal and body parts", "Electrical components and wiring", "Hitch and linkage assemblies", "Maintenance replacement parts"]
+            },
+            {
+                id: "manual-mf-5365", title: "Massey Ferguson 5365 Parts Manual", category: "Farmers", subCategory: "Massey Ferguson", image: "https://placehold.co/600x400/065f46/ffffff?text=MF+5365+Parts",
+                isPdf: true, downloadUrl: "https://drive.google.com/file/d/0B460_P5oTO9OZkV5MGdZRlVLTjA/view?usp=drive_link&resourcekey=0-zLEYOdAvyFH3ChYzGck_tA", price: "50.00",
+                desc: "Official factory parts manual for Massey Ferguson 5365 agricultural tractors.",
+                steps: ["Powertrain & transmission parts", "Hydraulic valves and pumps", "Cabin controls and filters", "Complete parts reference index"]
+            },
+
             // --- BUILDERS, HANDYMAN, HOUSEWIVES (Price: R20.00) ---
             {
                 id: "foundation-squaring", title: "Foundation Squaring & Layout Guide", category: "Builders", subCategory: "General", image: "images/foundation-squaring-guide.jpg", price: "20.00",
@@ -1066,7 +1066,7 @@
                     "Formwork Construction & Bracing: Build rigid formwork using 32mm planks or marine plywood, secured with strongbacks and wooden stakes every 900mm to prevent blowout.",
                     "Reinforcement Spacing & Cover Blocks: Position steel rebar grids or mesh using plastic or concrete cover blocks (minimum 50mm clearance) to ensure full steel encapsulation.",
                     "Formwork Inspection & Pre-Pour Check: Inspect tie-wires, formwork alignment, squareness, and check that all debris, loose soil, and standing water are cleared.",
-                    "Mix Design & Slump Verification: Order or mix standard structural concrete (minimum 25 MPa / 3:2:1 ratio), ensuring a workable slump (75mm - 100mm) without excess water.",
+                    "Mix Design & Slump Verification: Order or mix structural concrete (minimum 25 MPa / 3:2:1 ratio), ensuring a workable slump (75mm - 100mm) without excess water.",
                     "Continuous Pouring & Spading: Pour concrete continuously from one corner to prevent cold joints; spade or mechanically vibrate the mix to release trapped air pockets.",
                     "Screeding & Surface Finishing: Strike off excess concrete using a straightedge timber screed pulled across form edges, followed by a wood float or steel trowel finish.",
                     "Moisture Curing Protocol: Begin curing as soon as the surface hardens by keeping it continuously moist with sprinklers, wet Hessian sacking, or curing compound for at least 7 days."
