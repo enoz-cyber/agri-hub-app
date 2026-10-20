@@ -898,7 +898,7 @@
             {
                 id: "manual-additional-40", title: "Deutz Tractor Technical Workshop Manual AN", category: "Farmers", subCategory: "Deutz", image: "https://placehold.co/600x400/065f46/ffffff?text=Deutz+Manual",
                 isPdf: true, downloadUrl: "https://drive.google.com/file/d/15_5j1VjP-ODga8Tjh-HF33qYoBlnKkxc/view?usp=drive_link", price: "50.00",
-                desc: "Factory authorized workshop manual for tractor overhauls.",
+                desc: "Factory authorized service manual for tractor overhauls.",
                 steps: ["Engine overhauls", "Hydraulic maintenance", "Electrical testing", "Final assembly"]
             },
 
@@ -1156,6 +1156,16 @@
                 id: "meal-prep", title: "Weekly Family Meal Prep & Pantry Rotation", category: "Housewives", subCategory: "Meal Prep", image: "https://placehold.co/600x400/db2777/ffffff?text=Home+Guide", price: "20.00",
                 desc: "Efficient batch cooking strategies, airtight storage organization, and FIFO pantry management.",
                 steps: ["Plan 7-day menu.", "Inventory pantry.", "Batch chop vegetables.", "Label containers."]
+            },
+            {
+                id: "muffin-tin-ice-cream", title: "Muffin Tin Ice Cream Station Hack", category: "Housewives", subCategory: "Home Hacks", image: "images/muffin-tin-ice-cream-station.jpg", price: "20.00",
+                desc: "Create a stable, mess-free ice cream toppings station using an inverted muffin tin to hold small topping cups securely in place.",
+                steps: [
+                    "Gather Supplies: Turn a standard 12-cup metal muffin tin upside down so the raised wells face upward. Collect small paper or silicone baking liners (or small topping cups), assorted toppings in small bowls, an ice cream scoop, and serving spoons.",
+                    "Secure the Cups: Place the inverted muffin tin flat on your counter or table. Place one small cup or paper liner over each raised well to ensure they fit securely without sliding or tipping.",
+                    "Fill Toppings: Fill each secured cup with a different ice cream topping (sprinkles, chocolate chips, M&Ms, crushed cookies, gummy bears, nuts, cherries, or hot fudge) for a stable and organized display.",
+                    "Serve & Enjoy: Set out the ice cream cones and let everyone scoop their favorite toppings with zero spills and total stability—perfect for kids and parties!"
+                ]
             }
         ];
 
@@ -1186,7 +1196,6 @@
             const filtered = allGuides.filter(g => {
                 const matchesCategory = activeCategory === 'All' || g.category === activeCategory;
                 
-                // Allow matching both "Other" and "Other Manuals"
                 let matchesSubCategory = activeSubCategory === 'All' || g.subCategory === activeSubCategory;
                 if (activeSubCategory === 'Other') {
                     matchesSubCategory = (g.subCategory === 'Other' || g.subCategory === 'Other Manuals');
