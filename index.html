@@ -46,10 +46,45 @@
             backdrop-filter: blur(4px);
             cursor: pointer;
         }
+
+        /* Splash Screen Transition */
+        #splashScreen {
+            transition: opacity 0.6s ease-in-out, visibility 0.6s ease-in-out;
+        }
     </style>
 </head>
 <body class="bg-slate-900 text-slate-100 h-full flex flex-col justify-between selection:bg-emerald-500 selection:text-white" oncontextmenu="return false;">
 
+    <!-- Interactive Splash / Showcase Loop Screen (Runs for ~3.5 seconds) -->
+    <div id="splashScreen" class="fixed inset-0 z-50 bg-gradient-to-br from-slate-950 via-emerald-950 to-slate-900 flex flex-col items-center justify-center p-6 text-center">
+        <div class="max-w-md w-full bg-slate-900/80 border border-emerald-500/30 backdrop-blur-xl p-8 rounded-3xl shadow-2xl relative overflow-hidden">
+            <!-- Background glow -->
+            <div class="absolute -top-24 -left-24 w-48 h-48 bg-emerald-500/20 rounded-full blur-3xl pointer-events-none"></div>
+            
+            <div class="bg-gradient-to-br from-emerald-400/20 to-teal-600/30 w-20 h-20 mx-auto rounded-3xl shadow-inner border border-emerald-400/30 flex items-center justify-center mb-6 backdrop-blur-md">
+                <i class="fa-solid fa-layer-group text-3xl text-emerald-300 animate-bounce"></i>
+            </div>
+            
+            <h2 class="text-2xl font-extrabold text-white mb-2 tracking-tight">Professional & Lifestyle Hub</h2>
+            <p class="text-xs text-emerald-200/90 font-medium mb-8">Loading Verified Guides, Tractor Manuals & Utilities...</p>
+
+            <!-- Dynamic Showcase Loop Rotator -->
+            <div class="h-16 bg-slate-950/80 border border-slate-800 rounded-2xl p-3 flex items-center justify-center gap-3 mb-6 shadow-inner">
+                <span id="splashIcon" class="text-emerald-400 text-xl">🌾</span>
+                <div class="text-left">
+                    <div id="splashCategory" class="text-[10px] font-extrabold uppercase tracking-wider text-emerald-400">Farmers & Tractors</div>
+                    <div id="splashText" class="text-xs text-slate-200 font-semibold truncate max-w-[220px]">Deutz, Same & Ford Workshop Manuals</div>
+                </div>
+            </div>
+
+            <!-- Progress Bar -->
+            <div class="w-full bg-slate-800 h-2 rounded-full overflow-hidden border border-slate-700">
+                <div id="splashProgressBar" class="bg-gradient-to-r from-emerald-500 to-teal-400 h-full w-0 transition-all duration-300"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Header -->
     <header class="glass-header text-white shadow-xl sticky top-0 z-40 border-b border-emerald-500/30">
         <div class="max-w-7xl mx-auto px-4 py-4 sm:px-6 lg:px-8 flex flex-col lg:flex-row justify-between items-center gap-4">
             <div class="flex items-center space-x-3.5">
@@ -1545,7 +1580,43 @@
             window.history.replaceState({}, document.title, window.location.pathname);
         }
 
+        // --- Splash Screen & Showcase Loop Controller ---
+        function runSplashScreenLoop() {
+            const showcaseSteps = [
+                { icon: "🌾", category: "Farmers & Tractors", text: "Deutz, Same, Ford & Massey Ferguson Manuals" },
+                { icon: "🏗️", category: "Builders & Layouts", text: "Foundation Squaring & Concrete Pouring Guides" },
+                { icon: "🛠️", category: "Handyman & Fabrication", text: "Double Disc Hiller & Spreader Build Blueprints" },
+                { icon: "🏠", category: "Housewives & Home", text: "Meal Prep, Pantry Rotation & Household Hacks" }
+            ];
+
+            let currentStep = 0;
+            const iconEl = document.getElementById('splashIcon');
+            const catEl = document.getElementById('splashCategory');
+            const textEl = document.getElementById('splashText');
+            const progressBar = document.getElementById('splashProgressBar');
+            const splashScreen = document.getElementById('splashScreen');
+
+            // Animate progress bar to 100% over 3.2 seconds
+            setTimeout(() => { progressBar.style.width = '100%'; }, 50);
+
+            // Rotate showcase text every 800ms
+            const loopTimer = setInterval(() => {
+                currentStep = (currentStep + 1) % showcaseSteps.length;
+                iconEl.innerText = showcaseSteps[currentStep].icon;
+                catEl.innerText = showcaseSteps[currentStep].category;
+                textEl.innerText = showcaseSteps[currentStep].text;
+            }, 800);
+
+            // Hide splash screen after 3.5 seconds
+            setTimeout(() => {
+                clearInterval(loopTimer);
+                splashScreen.style.opacity = '0';
+                splashScreen.style.visibility = 'hidden';
+            }, 3500);
+        }
+
         window.onload = function() {
+            runSplashScreenLoop();
             renderGuides();
 
             const urlParams = new URLSearchParams(window.location.search);
