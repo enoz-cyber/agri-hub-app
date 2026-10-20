@@ -650,6 +650,12 @@
                 steps: ["Bearing identification & cross-referencing", "Dimensional specifications & load ratings", "Installation & lubrication guidelines", "Maintenance & replacement specs"]
             },
             {
+                id: "manual-baldan-spares", title: "Baldan disc spares manual", category: "Farmers", subCategory: "Other", image: "https://placehold.co/600x400/065f46/ffffff?text=Baldan+Disc+Spares",
+                isPdf: true, downloadUrl: "https://drive.google.com/file/d/0B460_P5oTO9OdEY1TjFFZUpGTHc/view?usp=drive_link&resourcekey=0-lrcCzWi9Mmb99sMg9HhHqA", price: "50.00",
+                desc: "Official parts catalog and exploded component diagrams for Baldan disc harrows and tillage equipment.",
+                steps: ["Disc gang assembly spares", "Bearing and housing parts", "Scraper and spacer identification", "Frame and hitch components"]
+            },
+            {
                 id: "manual-ford-5610-7610", title: "Ford 5610 - 7610 User manual", category: "Farmers", subCategory: "Ford", image: "https://placehold.co/600x400/065f46/ffffff?text=Ford+5610-7610",
                 isPdf: true, downloadUrl: "https://drive.google.com/file/d/0B460_P5oTO9OQWdRdzNsSk5PcWM/view?usp=drive_link&resourcekey=0-wL4M6DvK07mSZbTVwg94EA", price: "50.00",
                 desc: "Official user and operation manual for Ford 5610 and 7610 agricultural tractors.",
@@ -1179,12 +1185,18 @@
             const searchQuery = document.getElementById('searchInput').value.toLowerCase();
             const filtered = allGuides.filter(g => {
                 const matchesCategory = activeCategory === 'All' || g.category === activeCategory;
-                const matchesSubCategory = activeSubCategory === 'All' || g.subCategory === activeSubCategory;
+                
+                // Allow matching both "Other" and "Other Manuals"
+                let matchesSubCategory = activeSubCategory === 'All' || g.subCategory === activeSubCategory;
+                if (activeSubCategory === 'Other') {
+                    matchesSubCategory = (g.subCategory === 'Other' || g.subCategory === 'Other Manuals');
+                }
+
                 const guideDescription = g.desc || g.description || '';
                 const matchesSearch = g.title.toLowerCase().includes(searchQuery) || 
                                       guideDescription.toLowerCase().includes(searchQuery) ||
                                       g.category.toLowerCase().includes(searchQuery) ||
-                                      g.subCategory.toLowerCase().includes(searchQuery);
+                                      (g.subCategory && g.subCategory.toLowerCase().includes(searchQuery));
                 return matchesCategory && matchesSubCategory && matchesSearch;
             });
 
