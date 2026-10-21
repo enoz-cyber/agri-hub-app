@@ -12,8 +12,6 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <!-- html2canvas CDN for high-res single card generation -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
-    <!-- QRCode.js CDN for dynamic QR code generation -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
     
     <!-- Inline Web Manifest for PWA Capabilities -->
     <link rel="manifest" href='data:application/manifest+json,{"name":"Professional & Lifestyle Hub","short_name":"HubApp","start_url":".","display":"standalone","background_color":"#065f46","theme_color":"#065f46"}'>
@@ -215,7 +213,7 @@
         </div>
     </main>
 
-    <!-- Guide Modal -->
+    <!-- Standard Guide Modal -->
     <div id="guideModal" class="fixed inset-0 bg-slate-950/80 backdrop-blur-md z-50 hidden flex items-center justify-center p-4 overflow-y-auto">
         <div id="modalCardWrapper" class="bg-slate-900 rounded-3xl max-w-2xl w-full overflow-hidden shadow-2xl transform transition-all my-8 border border-slate-700 relative text-slate-100">
             
@@ -267,14 +265,14 @@
         </div>
     </div>
 
-    <!-- Specialized Gas Installation Interactive Card Modal -->
+    <!-- Specialized Gas Installation Interactive Card Modal (R20 Fee & Redirect) -->
     <div id="gasCardModal" class="fixed inset-0 bg-slate-950/80 backdrop-blur-md z-50 hidden flex items-center justify-center p-4 overflow-y-auto">
         <div class="bg-slate-900 rounded-3xl max-w-md w-full overflow-hidden shadow-2xl border border-sky-500/40 text-slate-100 p-6 relative">
             <button onclick="closeGasCardModal()" class="absolute top-4 right-4 bg-slate-800 hover:bg-slate-700 text-white w-9 h-9 rounded-full flex items-center justify-center transition border border-slate-600 shadow-md z-30">
                 <i class="fa-solid fa-xmark text-sm"></i>
             </button>
 
-            <!-- Printable / Downloadable Card Block -->
+            <!-- Downloadable Safety Card Area -->
             <div id="gasCardRenderArea" class="bg-slate-950 p-6 rounded-2xl border border-slate-800 space-y-5">
                 <div class="flex items-center justify-between border-b border-slate-800 pb-4">
                     <div class="flex items-center gap-3">
@@ -288,18 +286,18 @@
                     </div>
                 </div>
 
-                <div class="space-y-2.5 text-xs text-slate-300">
-                    <div class="p-3 bg-slate-900/90 rounded-xl border border-slate-800 flex items-start gap-2.5">
-                        <i class="fa-solid fa-shield-halved text-amber-400 text-sm mt-0.5 shrink-0"></i>
+                <div class="space-y-3 text-xs text-slate-300">
+                    <div class="p-3.5 bg-slate-900 rounded-xl border border-slate-800 flex items-start gap-3">
+                        <i class="fa-solid fa-shield-halved text-amber-400 text-base mt-0.5 shrink-0"></i>
                         <div>
-                            <strong class="text-white block font-bold">Mandatory Certificate of Conformity (CoC)</strong>
+                            <strong class="text-white block font-bold mb-0.5">Mandatory Certificate of Conformity (CoC)</strong>
                             <span>Gas geysers must be installed by a registered SAQCC gas practitioner to issue a legal CoC for insurance validity.</span>
                         </div>
                     </div>
-                    <div class="p-3 bg-slate-900/90 rounded-xl border border-slate-800 flex items-start gap-2.5">
-                        <i class="fa-solid fa-triangle-exclamation text-sky-400 text-sm mt-0.5 shrink-0"></i>
+                    <div class="p-3.5 bg-slate-900 rounded-xl border border-slate-800 flex items-start gap-3">
+                        <i class="fa-solid fa-triangle-exclamation text-sky-400 text-base mt-0.5 shrink-0"></i>
                         <div>
-                            <strong class="text-white block font-bold">SANS 10087-1 Safety Regulations</strong>
+                            <strong class="text-white block font-bold mb-0.5">SANS 10087-1 Safety Regulations</strong>
                             <span>Strict clearance regulations apply regarding LPG cylinder placement relative to windows, drains, and electrical switches.</span>
                         </div>
                     </div>
@@ -309,19 +307,12 @@
                 <a href="https://gas.jlvorster.co.za/" target="_blank" class="block w-full bg-gradient-to-r from-sky-600 to-blue-600 hover:from-sky-500 hover:to-blue-500 text-white font-extrabold p-3.5 rounded-xl text-center text-xs transition shadow-lg flex items-center justify-center gap-2 border border-sky-400/30">
                     <i class="fa-solid fa-user-check"></i> Find / Verify SAQCC Gas Technician
                 </a>
-
-                <!-- QR Code Container -->
-                <div class="bg-slate-900 p-4 rounded-xl border border-slate-800 flex flex-col items-center text-center">
-                    <div id="gasCardQr" class="bg-white p-2.5 rounded-xl shadow-inner mb-2"></div>
-                    <span class="text-[10px] text-slate-400 font-bold tracking-wider uppercase">Scan to Verify Technicians</span>
-                    <span class="text-[11px] text-sky-400 font-semibold mt-0.5">gas.jlvorster.co.za</span>
-                </div>
             </div>
 
-            <!-- Download Button -->
-            <div class="mt-5 flex justify-end gap-3">
-                <button onclick="downloadGasCardPNG()" class="w-full bg-emerald-600 hover:bg-emerald-500 text-white font-bold py-3 px-4 rounded-xl text-xs transition flex items-center justify-center gap-2 shadow-md">
-                    <i class="fa-solid fa-download"></i> Download Card Image (PNG)
+            <!-- Download Button (Triggers PayFast or direct checkout/download) -->
+            <div class="mt-5">
+                <button onclick="downloadGasCardAndRedirect()" class="w-full bg-emerald-600 hover:bg-emerald-500 text-white font-bold py-3.5 px-4 rounded-xl text-xs transition flex items-center justify-center gap-2 shadow-md">
+                    <i class="fa-solid fa-download"></i> Download Card Image (R20.00)
                 </button>
             </div>
         </div>
@@ -1178,11 +1169,11 @@
                 steps: ["Powertrain & transmission parts", "Hydraulic valves and pumps", "Cabin controls and filters", "Complete parts reference index"]
             },
 
-            // --- BUILDERS, HANDYMAN, HOUSEWIVES (Price: R20.00) ---
+            // --- BUILDERS, HANDYMAN, HOUSEWIVES ---
             {
-                id: "gas-geyser-card", title: "Gas Geyser Safety & Installer Verification Card", category: "Handyman", subCategory: "Gas Installations", image: "https://placehold.co/600x400/0284c7/ffffff?text=Gas+Geyser+Safety+Card", price: "Free",
+                id: "gas-geyser-card", title: "Gas Geyser Safety & Installer Verification Card", category: "Handyman", subCategory: "Gas Installations", image: "https://placehold.co/600x400/0284c7/ffffff?text=Gas+Geyser+Safety+Card", price: "20.00",
                 isGasCard: true,
-                desc: "Interactive gas installation compliance card with safety regulations, Certificate of Conformity details, and a scannable QR code link to certified SAQCC Gas technicians.",
+                desc: "Gas installation compliance card with safety regulations and direct link access to certified SAQCC Gas technicians.",
                 steps: [
                     "Verify Installer Registration: Always use a licensed SAQCC Gas practitioner.",
                     "Ensure Certificate of Conformity (CoC): Mandatory for legal compliance and property insurance.",
@@ -1309,16 +1300,16 @@
                     imageHtml = `
                         <div class="relative h-48 bg-slate-950 overflow-hidden">
                             <img src="${guide.image}" alt="${guide.title}" crossorigin="anonymous"
-                                 class="w-full h-full object-cover group-hover:scale-105 transition duration-500" style="${guide.isGasCard ? '' : 'filter: blur(1.5px); pointer-events: none;'}"
+                                 class="w-full h-full object-cover group-hover:scale-105 transition duration-500" style="${guide.isGasCard ? 'filter: blur(1.5px); pointer-events: none;' : (guide.isPdf ? 'filter: blur(1.5px); pointer-events: none;' : 'filter: blur(1.5px); pointer-events: none;')}"
                                  onerror="handleImageError(this)">
                             <div class="absolute inset-0 bg-slate-950/15 flex items-center justify-center">
-                                <span class="bg-slate-900/85 text-slate-100 text-[10px] font-bold px-3 py-1 rounded-full uppercase tracking-wider backdrop-blur-sm shadow-md border border-slate-700/80">${guide.isGasCard ? '🔥 Interactive Safety Card' : guide.isPdf ? '🔒 Cloud Workshop Manual' : '🔒 Preview Protected'}</span>
+                                <span class="bg-slate-900/85 text-slate-100 text-[10px] font-bold px-3 py-1 rounded-full uppercase tracking-wider backdrop-blur-sm shadow-md border border-slate-700/80">${guide.isGasCard ? '🔒 Preview Protected (R20)' : guide.isPdf ? '🔒 Cloud Workshop Manual' : '🔒 Preview Protected'}</span>
                             </div>
                         </div>
                     `;
                 }
 
-                const priceTag = guide.price && guide.price !== 'Free' ? ` (R${guide.price})` : '';
+                const priceTag = (guide.price && guide.price !== 'Free') ? ` (R${guide.price})` : ' (Free)';
 
                 let actionBtnHtml = `
                     <button onclick="openModal('${guide.id}')" class="flex-1 ${theme.buttonBg} text-white py-3 px-4 rounded-2xl text-xs font-bold transition flex items-center justify-center gap-2 shadow-md hover:shadow-lg transform active:scale-95">
@@ -1329,7 +1320,7 @@
                 if (guide.isGasCard) {
                     actionBtnHtml = `
                         <button onclick="openGasCardModal()" class="flex-1 bg-gradient-to-r from-sky-600 to-blue-600 hover:from-sky-500 hover:to-blue-500 text-white py-3 px-4 rounded-2xl text-xs font-bold transition flex items-center justify-center gap-2 shadow-md hover:shadow-lg transform active:scale-95 border border-sky-400/30">
-                            <i class="fa-solid fa-qrcode text-sky-200"></i> Open & Download Gas Card
+                            <i class="fa-solid fa-lock text-amber-300"></i> View & Download Card (R20.00)
                         </button>
                     `;
                 }
@@ -1503,22 +1494,8 @@
             activeGuideId = null;
         }
 
-        /* --- Gas Installation Card Modal & QR Code Controls --- */
+        /* --- Gas Installation Card Controls & PayFast Checkout / Redirect --- */
         function openGasCardModal() {
-            const qrContainer = document.getElementById('gasCardQr');
-            qrContainer.innerHTML = '';
-            
-            if (typeof QRCode !== 'undefined') {
-                new QRCode(qrContainer, {
-                    text: "https://gas.jlvorster.co.za/",
-                    width: 120,
-                    height: 120,
-                    colorDark: "#020617",
-                    colorLight: "#ffffff",
-                    correctLevel: QRCode.CorrectLevel.H
-                });
-            }
-
             document.getElementById('gasCardModal').classList.remove('hidden');
             document.body.style.overflow = 'hidden';
         }
@@ -1528,22 +1505,52 @@
             document.body.style.overflow = 'auto';
         }
 
-        async function downloadGasCardPNG() {
-            const element = document.getElementById('gasCardRenderArea');
-            if (!element) return;
+        function downloadGasCardAndRedirect() {
+            // Set pending download ID for Gas Card to trigger PayFast checkout simulation / storage
+            sessionStorage.setItem('pending_download_id', 'gas-geyser-card');
+            closeGasCardModal();
+            
+            // Trigger PayFast checkout for R20.00
+            const guide = allGuides.find(g => g.id === 'gas-geyser-card');
+            if (!guide) return;
 
-            await html2canvas(element, {
-                scale: 3,
-                backgroundColor: '#020617',
-                useCORS: true,
-                allowTaint: true,
-                logging: false
-            }).then(canvas => {
-                const link = document.createElement('a');
-                link.download = `saqcc_gas_installation_card.png`;
-                link.href = canvas.toDataURL('image/png', 1.0);
-                link.click();
-            });
+            const price = "20.00";
+            if (confirm(`Proceed to PayFast checkout for "${guide.title}" (R${price})?`)) {
+                let currentUrl = window.location.href.split('#')[0].split('?')[0];
+                if (!currentUrl.startsWith('http')) {
+                    currentUrl = 'https://enoz-cyber.github.io/agri-hub-app/';
+                }
+
+                const returnWithSuccess = currentUrl + "?payment=success";
+
+                const payfastUrl = 'https://sandbox.payfast.co.za/eng/process';
+                const form = document.createElement('form');
+                form.method = 'POST';
+                form.action = payfastUrl;
+
+                const paymentData = {
+                    merchant_id: '10000100',
+                    merchant_key: '46f0cd694581a',
+                    return_url: returnWithSuccess, 
+                    cancel_url: currentUrl, 
+                    item_name: `Manual/Guide: ${guide.title}`,
+                    amount: price, 
+                    item_description: guide.desc.substring(0, 100)
+                };
+
+                for (const key in paymentData) {
+                    if (paymentData.hasOwnProperty(key)) {
+                        const input = document.createElement('input');
+                        input.type = 'hidden';
+                        input.name = key;
+                        input.value = paymentData[key];
+                        form.appendChild(input);
+                    }
+                }
+
+                document.body.appendChild(form);
+                form.submit();
+            }
         }
 
         function openCalculatorModal() {
@@ -1640,6 +1647,35 @@
 
             const guide = allGuides.find(g => g.id === guideId);
             if (!guide) return;
+
+            // Special handling for Gas Geyser Card post-payment download + automatic redirect
+            if (guide.isGasCard) {
+                const element = document.getElementById('gasCardRenderArea');
+                if (element) {
+                    await html2canvas(element, {
+                        scale: 3,
+                        backgroundColor: '#020617',
+                        useCORS: true,
+                        allowTaint: true,
+                        logging: false
+                    }).then(canvas => {
+                        const link = document.createElement('a');
+                        link.download = `saqcc_gas_installation_card.png`;
+                        link.href = canvas.toDataURL('image/png', 1.0);
+                        link.click();
+                    });
+                }
+
+                sessionStorage.removeItem('pending_download_id');
+                document.getElementById('successPaymentBanner').classList.add('hidden');
+                window.history.replaceState({}, document.title, window.location.pathname);
+
+                // Automatically redirect to https://gas.jlvorster.co.za/ after download
+                setTimeout(() => {
+                    window.location.href = "https://gas.jlvorster.co.za/";
+                }, 800);
+                return;
+            }
 
             const isInteractiveGuide = guide.isInteractive || false;
             const isPdfGuide = guide.isPdf || false;
