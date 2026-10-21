@@ -51,29 +51,14 @@
         #splashScreen {
             transition: opacity 0.6s ease-in-out, visibility 0.6s ease-in-out;
         }
-
-        /* Flashing Red Glow Animation */
-        @keyframes redPulseGlow {
-            0%, 100% {
-                box-shadow: 0 0 15px rgba(220, 38, 38, 0.8), 0 0 30px rgba(220, 38, 38, 0.4);
-                transform: scale(1);
-            }
-            50% {
-                box-shadow: 0 0 25px rgba(239, 68, 68, 1), 0 0 50px rgba(239, 68, 68, 0.7);
-                transform: scale(1.03);
-            }
-        }
-
-        .red-flash-btn {
-            animation: redPulseGlow 1.5s infinite ease-in-out;
-        }
     </style>
 </head>
 <body class="bg-slate-900 text-slate-100 h-full flex flex-col justify-between selection:bg-emerald-500 selection:text-white" oncontextmenu="return false;">
 
-    <!-- Interactive Splash / Showcase Loop Screen -->
+    <!-- Interactive Splash / Showcase Loop Screen (Runs for ~3.5 seconds) -->
     <div id="splashScreen" class="fixed inset-0 z-50 bg-gradient-to-br from-slate-950 via-emerald-950 to-slate-900 flex flex-col items-center justify-center p-6 text-center">
         <div class="max-w-md w-full bg-slate-900/80 border border-emerald-500/30 backdrop-blur-xl p-8 rounded-3xl shadow-2xl relative overflow-hidden">
+            <!-- Background glow -->
             <div class="absolute -top-24 -left-24 w-48 h-48 bg-emerald-500/20 rounded-full blur-3xl pointer-events-none"></div>
             
             <div class="bg-gradient-to-br from-emerald-400/20 to-teal-600/30 w-20 h-20 mx-auto rounded-3xl shadow-inner border border-emerald-400/30 flex items-center justify-center mb-6 backdrop-blur-md">
@@ -83,6 +68,7 @@
             <h2 class="text-2xl font-extrabold text-white mb-2 tracking-tight">Professional & Lifestyle Hub</h2>
             <p class="text-xs text-emerald-200/90 font-medium mb-8">Loading Verified Guides, Tractor Manuals & Utilities...</p>
 
+            <!-- Dynamic Showcase Loop Rotator -->
             <div class="h-16 bg-slate-950/80 border border-slate-800 rounded-2xl p-3 flex items-center justify-center gap-3 mb-6 shadow-inner">
                 <span id="splashIcon" class="text-emerald-400 text-xl">🌾</span>
                 <div class="text-left">
@@ -91,6 +77,7 @@
                 </div>
             </div>
 
+            <!-- Progress Bar -->
             <div class="w-full bg-slate-800 h-2 rounded-full overflow-hidden border border-slate-700">
                 <div id="splashProgressBar" class="bg-gradient-to-r from-emerald-500 to-teal-400 h-full w-0 transition-all duration-300"></div>
             </div>
@@ -110,6 +97,7 @@
                 </div>
             </div>
 
+            <!-- Header Contact Info (Email & WhatsApp) -->
             <div class="flex items-center gap-3 flex-wrap justify-center text-xs font-semibold text-emerald-100 bg-emerald-950/50 px-4 py-2 rounded-2xl border border-emerald-600/30 backdrop-blur-sm shadow-inner">
                 <a href="mailto:enozsprayers@gmail.com" class="flex items-center gap-1.5 hover:text-white transition">
                     <i class="fa-solid fa-envelope text-emerald-300"></i> enozsprayers@gmail.com
@@ -315,11 +303,13 @@
                     </div>
                 </div>
 
+                <!-- Protected Locked Action Link Button -->
                 <button onclick="downloadGasCardAndRedirect()" class="w-full bg-gradient-to-r from-sky-600 to-blue-600 hover:from-sky-500 hover:to-blue-500 text-white font-extrabold p-3.5 rounded-xl text-center text-xs transition shadow-lg flex items-center justify-center gap-2 border border-sky-400/30">
                     <i class="fa-solid fa-lock text-amber-300"></i> Find / Verify SAQCC Gas Technician (R20.00)
                 </button>
             </div>
 
+            <!-- Download Button -->
             <div class="mt-5">
                 <button onclick="downloadGasCardAndRedirect()" class="w-full bg-emerald-600 hover:bg-emerald-500 text-white font-bold py-3.5 px-4 rounded-xl text-xs transition flex items-center justify-center gap-2 shadow-md">
                     <i class="fa-solid fa-download"></i> Download Card Image (R20.00)
@@ -341,7 +331,62 @@
             </div>
             
             <div class="space-y-6">
-                <!-- Row 1: Bulk Material & Tank Mix -->
+
+                <!-- Row 1: Universal Unit Converter (12 Categories, Live Conversion & Swap Button) -->
+                <div class="bg-slate-800/70 p-5 rounded-2xl border border-emerald-900/50 shadow-sm">
+                    <div class="flex items-center justify-between mb-3 border-b border-slate-700/60 pb-2">
+                        <h4 class="font-bold text-xs uppercase tracking-wider text-emerald-400 flex items-center gap-2">
+                            <i class="fa-solid fa-arrow-right-arrow-left text-emerald-500"></i> Universal Unit Converter
+                        </h4>
+                        <span class="text-[10px] text-slate-400 font-semibold uppercase">12 Conversion Categories</span>
+                    </div>
+
+                    <div class="grid grid-cols-1 sm:grid-cols-4 gap-3 mb-4">
+                        <div class="sm:col-span-2">
+                            <label class="block text-xs font-semibold text-slate-300 mb-1">Conversion Category</label>
+                            <select id="converterCategory" onchange="updateConverterUnits()" class="w-full p-2.5 bg-slate-900 border border-slate-700 rounded-xl text-xs font-bold text-slate-100 focus:ring-2 focus:ring-emerald-500 outline-none shadow-inner">
+                                <option value="length">Length (mm, cm, m, km, inch, ft, yd, mile)</option>
+                                <option value="area">Area (sqm, sqkm, sqft, sqyd, acre, hectare)</option>
+                                <option value="volume">Volume (mL, L, m³, gal, qt, pt, cuft)</option>
+                                <option value="weight">Weight / Mass (mg, g, kg, ton, oz, lb)</option>
+                                <option value="temperature">Temperature (°C, °F, Kelvin)</option>
+                                <option value="pressure">Pressure (bar, psi, kPa, MPa, atm)</option>
+                                <option value="flow">Flow Rate (L/min, L/h, m³/h, GPM)</option>
+                                <option value="speed">Speed (km/h, mph, m/s, knot)</option>
+                                <option value="fueleconomy">Fuel Economy (L/100km, MPG US, MPG UK)</option>
+                                <option value="power">Power (kW, HP, W, BTU/h)</option>
+                                <option value="energy">Energy / Work (J, kJ, MJ, kWh, kcal, BTU)</option>
+                                <option value="force">Force (N, kN, lbf, kgf)</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block text-xs font-semibold text-slate-300 mb-1">From Unit</label>
+                            <select id="converterFromUnit" onchange="calculateUniversalConversion()" class="w-full p-2.5 bg-slate-900 border border-slate-700 rounded-xl text-xs font-semibold text-slate-100 focus:ring-2 focus:ring-emerald-500 outline-none shadow-inner"></select>
+                        </div>
+                        <div>
+                            <label class="block text-xs font-semibold text-slate-300 mb-1">To Unit</label>
+                            <select id="converterToUnit" onchange="calculateUniversalConversion()" class="w-full p-2.5 bg-slate-900 border border-slate-700 rounded-xl text-xs font-semibold text-slate-100 focus:ring-2 focus:ring-emerald-500 outline-none shadow-inner"></select>
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-1 sm:grid-cols-12 gap-3 items-center">
+                        <div class="sm:col-span-5">
+                            <label class="block text-xs font-semibold text-slate-300 mb-1">Value to Convert</label>
+                            <input type="number" id="converterInputVal" value="1" step="any" class="w-full p-2.5 bg-slate-900 border border-slate-700 rounded-xl text-sm font-bold text-slate-100 focus:ring-2 focus:ring-emerald-500 outline-none shadow-inner" oninput="calculateUniversalConversion()">
+                        </div>
+                        <div class="sm:col-span-2 flex items-end justify-center pt-2 sm:pt-4">
+                            <button onclick="swapUniversalUnits()" title="Swap Units" class="w-full sm:w-auto bg-slate-700 hover:bg-slate-600 text-emerald-300 p-2.5 rounded-xl text-xs font-bold transition flex items-center justify-center gap-1.5 border border-slate-600 shadow-sm">
+                                <i class="fa-solid fa-arrows-rotate"></i> <span class="sm:hidden">Swap</span>
+                            </button>
+                        </div>
+                        <div class="sm:col-span-5">
+                            <label class="block text-xs font-semibold text-emerald-400 mb-1">Converted Result</label>
+                            <div id="converterResult" class="p-2.5 bg-emerald-950/80 border border-emerald-800/60 rounded-xl font-extrabold text-emerald-300 text-center text-sm shadow-inner truncate">1.00 m = 1,000.00 mm</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Row 2: Bulk Material & Tank Mix -->
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <div class="bg-slate-800/70 p-5 rounded-2xl border border-emerald-900/50 shadow-sm">
                         <h4 class="font-bold text-xs uppercase tracking-wider text-emerald-400 mb-3 flex items-center gap-2">
@@ -380,58 +425,6 @@
                                 <label class="block text-xs font-semibold text-teal-400 mb-1">Chemical Needed for Full Tank</label>
                                 <div id="tankResult" class="p-2.5 bg-teal-950/80 border border-teal-800/60 rounded-xl font-bold text-teal-300 text-center shadow-inner">1,250.0 mL</div>
                             </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Row 2: Universal Unit Conversion Calculator with RED FLASHING FREE DOWNLOAD BUTTON -->
-                <div class="bg-gradient-to-br from-slate-800/90 to-slate-900 p-5 sm:p-6 rounded-2xl border border-red-500/40 shadow-xl relative overflow-hidden">
-                    <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 mb-4 pb-3 border-b border-slate-700/80">
-                        <div>
-                            <h4 class="font-extrabold text-sm uppercase tracking-wider text-red-400 flex items-center gap-2">
-                                <i class="fa-solid fa-arrows-rotate text-red-500"></i> Universal Unit Conversion Calculator
-                            </h4>
-                            <p class="text-xs text-slate-300 mt-0.5">Convert Length, Mass, Area, Volume, Temperature, Pressure, Speed, and Flow rates live.</p>
-                        </div>
-                        
-                        <!-- Flashing Red Free Download Button -->
-                        <button onclick="downloadUniversalConverterTool()" class="red-flash-btn bg-red-600 hover:bg-red-700 text-white font-extrabold px-5 py-2.5 rounded-xl text-xs uppercase tracking-wide transition-all duration-200 flex items-center gap-2 shrink-0 border border-red-400/50 cursor-pointer">
-                            <i class="fa-solid fa-circle-down text-sm animate-bounce"></i> Free Download
-                        </button>
-                    </div>
-
-                    <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 mb-4">
-                        <div>
-                            <label class="block text-xs font-semibold text-slate-300 mb-1">Category</label>
-                            <select id="uCatSelect" onchange="initUnitConverter()" class="w-full p-2.5 bg-slate-900 border border-slate-700 rounded-xl text-xs text-slate-100 focus:ring-2 focus:ring-red-500 outline-none shadow-inner font-semibold">
-                                <option value="length">Length (m, cm, mm, km, in, ft, yd, mi)</option>
-                                <option value="mass">Mass / Weight (kg, g, mg, lb, oz, ton)</option>
-                                <option value="area">Area (m², ha, km², ft², acre)</option>
-                                <option value="volume">Volume (L, mL, m³, gal, qt, pt)</option>
-                                <option value="temperature">Temperature (°C, °F, K)</option>
-                                <option value="pressure">Pressure (bar, psi, kPa, atm)</option>
-                                <option value="flow">Flow Rate (L/min, m³/h, GPM)</option>
-                                <option value="speed">Speed (km/h, mph, m/s)</option>
-                            </select>
-                        </div>
-                        <div>
-                            <label class="block text-xs font-semibold text-slate-300 mb-1">From Unit</label>
-                            <select id="uFromUnit" onchange="runUnitConversion()" class="w-full p-2.5 bg-slate-900 border border-slate-700 rounded-xl text-xs text-slate-100 focus:ring-2 focus:ring-red-500 outline-none shadow-inner font-semibold"></select>
-                        </div>
-                        <div>
-                            <label class="block text-xs font-semibold text-slate-300 mb-1">To Unit</label>
-                            <select id="uToUnit" onchange="runUnitConversion()" class="w-full p-2.5 bg-slate-900 border border-slate-700 rounded-xl text-xs text-slate-100 focus:ring-2 focus:ring-red-500 outline-none shadow-inner font-semibold"></select>
-                        </div>
-                    </div>
-
-                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 items-center">
-                        <div>
-                            <label class="block text-xs font-semibold text-slate-300 mb-1">Input Value</label>
-                            <input type="number" id="uInputValue" value="100" class="w-full p-2.5 bg-slate-900 border border-slate-700 rounded-xl text-sm font-bold text-slate-100 focus:ring-2 focus:ring-red-500 outline-none shadow-inner" oninput="runUnitConversion()">
-                        </div>
-                        <div>
-                            <label class="block text-xs font-semibold text-red-400 mb-1">Converted Output</label>
-                            <div id="uOutputResult" class="p-2.5 bg-slate-950 border border-red-800/60 rounded-xl font-extrabold text-red-300 text-center shadow-inner text-base">100 m = 328.08 ft</div>
                         </div>
                     </div>
                 </div>
@@ -545,6 +538,7 @@
 </html>`;
 
         const allGuides = [
+            // --- FARMING GUIDES & PROCEDURES (Price: R20.00) ---
             {
                 id: "plough", title: "Plough Alignment & Attachment Guide", category: "Farmers", subCategory: "Crop Farming", image: "images/plough-alignment.jpg", price: "20.00",
                 desc: "Step-by-step manual for rear-mounted plough alignment, 3-point hitch setup, and depth tuning for optimal soil inversion.",
@@ -671,6 +665,592 @@
                     "Monitor temperatures by observing chick behavior to identify comfort zones, calibrate sensors, and log data."
                 ]
             },
+
+            // --- TAFE PARTS MANUALS COLLECTION (R50.00) ---
+            {
+                id: "manual-tafe-engine-7502-8502", title: "Engine Parts Manual - 7502-8502", category: "Farmers", subCategory: "TAFE", image: "https://placehold.co/600x400/065f46/ffffff?text=TAFE+Engine+7502-8502",
+                isPdf: true, downloadUrl: "pdfs/Engine - 7502-8502.pdf", price: "50.00",
+                desc: "Official parts catalog and exploded component diagrams for TAFE 7502-8502 engine assemblies.",
+                steps: ["Cylinder block and head parts", "Pistons, rings, and crankshaft assemblies", "Fuel injection and manifold layouts", "Lubrication and cooling parts"]
+            },
+            {
+                id: "manual-tafe-engine-45-di", title: "Engine Parts Manual - TAFE 45 DI", category: "Farmers", subCategory: "TAFE", image: "https://placehold.co/600x400/065f46/ffffff?text=TAFE+Engine+45+DI",
+                isPdf: true, downloadUrl: "pdfs/Engine - TAFE 45 DI.pdf", price: "50.00",
+                desc: "Official parts catalog and exploded component diagrams for TAFE 45 DI engine maintenance and repairs.",
+                steps: ["Engine block components", "Valves and camshaft parts", "Fuel system and filter elements", "Gasket and seal kits"]
+            },
+            {
+                id: "manual-tafe-tractor-7502-8502", title: "Tractor Parts Manual - 7502-8502", category: "Farmers", subCategory: "TAFE", image: "https://placehold.co/600x400/065f46/ffffff?text=TAFE+Tractor+7502-8502",
+                isPdf: true, downloadUrl: "pdfs/Tractor - 7502-8502.pdf", price: "50.00",
+                desc: "Official comprehensive parts manual for TAFE 7502 and 8502 tractors, covering transmission, chassis, and hydraulics.",
+                steps: ["Transmission and gearbox assemblies", "Hydraulic lift and three-point linkage", "Steering and front axle components", "Electrical and body panels"]
+            },
+            {
+                id: "manual-tafe-tractor-45-di", title: "Tractor Parts Manual - TAFE 45 DI", category: "Farmers", subCategory: "TAFE", image: "https://placehold.co/600x400/065f46/ffffff?text=TAFE+Tractor+45+DI",
+                isPdf: true, downloadUrl: "pdfs/Tractor - TAFE 45 DI.pdf", price: "50.00",
+                desc: "Official comprehensive parts manual and exploded diagrams for the TAFE 45 DI tractor model.",
+                steps: ["Clutch and transmission parts", "Rear axle and differential", "Hydraulic pump and lines", "Steering assembly and linkage"]
+            },
+
+            // --- WORKSHOP MANUALS COLLECTION (Deutz) - R50.00 ---
+            {
+                id: "manual-agrokid", title: "AGROKID 30-40-50 Workshop Manual", category: "Farmers", subCategory: "Deutz", image: "https://placehold.co/600x400/065f46/ffffff?text=Deutz+Agrokid",
+                isPdf: true, downloadUrl: "https://drive.google.com/file/d/17XUe0ubCs2tHeBtrr2oqWoPFQrDtRTZV/view?usp=drive_link", price: "50.00",
+                desc: "Official factory workshop manual covering Deutz Agrokid 30, 40, and 50 tractor maintenance, hydraulics, and engine repair.",
+                steps: ["Complete mechanical specifications", "Hydraulic system troubleshooting", "Electrical wiring schematics", "Engine overhaul & torque settings"]
+            },
+            {
+                id: "manual-agrocompact", title: "AGROCOMPACT F60-F70-F80-F90 Workshop Manual", category: "Farmers", subCategory: "Deutz", image: "https://placehold.co/600x400/065f46/ffffff?text=Deutz+Agrocompact",
+                isPdf: true, downloadUrl: "https://drive.google.com/file/d/1BXI-VoI2DLH5lzXRjw8RJXATxFoGOXmB/view?usp=drive_link", price: "50.00",
+                desc: "Comprehensive technical manual for Deutz Agrocompact series tractors, transmissions, and axles.",
+                steps: ["Transmission & gearbox service", "PTO clutch adjustments", "Brake & steering repairs", "Maintenance schedules"]
+            },
+            {
+                id: "manual-agrolux", title: "AGROLUX F50-F60-F70-F80 Workshop Manual", category: "Farmers", subCategory: "Deutz", image: "https://placehold.co/600x400/065f46/ffffff?text=Deutz+Agrolux",
+                isPdf: true, downloadUrl: "https://drive.google.com/file/d/1u3RfHd4HZlUjJN3L_kyUACi3ItVFK0gV/view?usp=drive_link", price: "50.00",
+                desc: "Detailed workshop repair manual for Agrolux series tractors.",
+                steps: ["Engine maintenance", "Hydraulic lift linkage", "Electrical troubleshooting", "Assembly & disassembly"]
+            },
+            {
+                id: "manual-agroplus-60", title: "AGROPLUS 60-70-80 Workshop Manual", category: "Farmers", subCategory: "Deutz", image: "https://placehold.co/600x400/065f46/ffffff?text=Deutz+Agroplus",
+                isPdf: true, downloadUrl: "https://drive.google.com/file/d/1g-ULTNzM_FudwDnuQET49r1TldA4_xdO/view?usp=drive_link", price: "50.00",
+                desc: "Factory repair and service manual for Agroplus 60, 70, and 80 tractors.",
+                steps: ["Fuel system calibration", "Transmission diagnostics", "Hydraulic pressure testing", "Electrical wiring guide"]
+            },
+            {
+                id: "manual-agroplus-75", title: "AGROPLUS 75-85-95-100 Workshop Manual", category: "Farmers", subCategory: "Deutz", image: "https://placehold.co/600x400/065f46/ffffff?text=Deutz+Agroplus+75-100",
+                isPdf: true, downloadUrl: "https://drive.google.com/file/d/1A2OM6OOYgFjz6YSqI9NIcGJj5a9gYPtb/view?usp=drive_link", price: "50.00",
+                desc: "Advanced workshop manual covering Agroplus 75 through 100 models.",
+                steps: ["Engine disassembly", "Transmission overhaul", "Four-wheel drive axle service", "Cab controls & electronics"]
+            },
+            {
+                id: "manual-agrotrac", title: "AGROTRAC 110-130-150 Workshop Manual", category: "Farmers", subCategory: "Deutz", image: "https://placehold.co/600x400/065f46/ffffff?text=Deutz+Agrotrac",
+                isPdf: true, downloadUrl: "https://drive.google.com/file/d/1PG-j8cG1PzI9zwGMbYlQIjLW3NRVf8m5/view?usp=drive_link", price: "50.00",
+                desc: "Heavy-duty tractor workshop manual for Agrotrac high-horsepower models.",
+                steps: ["Engine cooling & fuel injection", "PowerShift transmission repair", "Rear hitch linkage calibration", "Safety & maintenance specs"]
+            },
+            {
+                id: "manual-agrotron-mk3-80", title: "AGROTRON 80-85-90-100-105 MK3 Workshop Manual", category: "Farmers", subCategory: "Deutz", image: "https://placehold.co/600x400/065f46/ffffff?text=Deutz+Agrotron",
+                isPdf: true, downloadUrl: "https://drive.google.com/file/d/1zmMZfQEoxeUg0G6v7SPHB_uhI-4BOK7V/view?usp=drive_link", price: "50.00",
+                desc: "Complete workshop manual for Deutz Agrotron MK3 series tractors.",
+                steps: ["Electronic engine management", "Transmission & powershift setup", "Hydraulic load sensing", "Diagnostic error codes"]
+            },
+            {
+                id: "manual-agrotron-80-105", title: "AGROTRON 80-90-100-105 Workshop Manual", category: "Farmers", subCategory: "Deutz", image: "https://placehold.co/600x400/065f46/ffffff?text=Deutz+Agrotron",
+                isPdf: true, downloadUrl: "https://drive.google.com/file/d/1q0sJBM7wwknARqX9or8yvQY2rB1pTA4z/view?usp=drive_link", price: "50.00",
+                desc: "Technical service manual for Agrotron 80, 90, 100, and 105 tractor series.",
+                steps: ["Engine diagnostics", "Hydraulic system calibration", "Electrical schematics", "Brake & axle overhaul"]
+            },
+            {
+                id: "manual-agrotron-106-165", title: "AGROTRON 106-110-115-120-135-150-165 MK3 Manual", category: "Farmers", subCategory: "Deutz", image: "https://placehold.co/600x400/065f46/ffffff?text=Deutz+Agrotron",
+                isPdf: true, downloadUrl: "https://drive.google.com/file/d/1mis1n7z7WYqSF5qjdX7pjY9GMWPPd5Gr/view?usp=drive_link", price: "50.00",
+                desc: "Comprehensive repair manual for Agrotron MK3 heavy utility tractors.",
+                steps: ["Transmission teardown", "PowerShift adjustments", "Hydraulic pump testing", "Axle & suspension service"]
+            },
+            {
+                id: "manual-agrotron-108-128", title: "AGROTRON 108-118-128 Workshop Manual", category: "Farmers", subCategory: "Deutz", image: "https://placehold.co/600x400/065f46/ffffff?text=Deutz+Agrotron",
+                isPdf: true, downloadUrl: "https://drive.google.com/file/d/1Mt9rIXOZsCJEDZttgxnQ5SK-GYjI7ZDU/view?usp=drive_link", price: "50.00",
+                desc: "Official workshop service manual for Agrotron 108, 118, and 128 models.",
+                steps: ["Engine specifications", "Transmission servicing", "Hydraulic controls", "Electrical diagnostics"]
+            },
+            {
+                id: "manual-agrotron-130-165", title: "AGROTRON 130-140-155-165 MK3 Workshop Manual", category: "Farmers", subCategory: "Deutz", image: "https://placehold.co/600x400/065f46/ffffff?text=Deutz+Agrotron",
+                isPdf: true, downloadUrl: "https://drive.google.com/file/d/1ET78Ydir_bJXQg9SzIabx-1wqTrB-BCT/view?usp=drive_link", price: "50.00",
+                desc: "Detailed workshop manual for high-output Agrotron MK3 tractors.",
+                steps: ["Powertrain overhaul", "Hydraulics & hitch tuning", "Electronic control units", "Routine maintenance"]
+            },
+            {
+                id: "manual-agrotron-210-265", title: "AGROTRON 210-235-265 Workshop Manual", category: "Farmers", subCategory: "Deutz", image: "https://placehold.co/600x400/065f46/ffffff?text=Deutz+Agrotron",
+                isPdf: true, downloadUrl: "https://drive.google.com/file/d/1E0lFFheMpvlgrWU011yq81PCAhWr6UoT/view?usp=drive_link", price: "50.00",
+                desc: "Factory service manual for large-frame Deutz Agrotron 210, 235, and 265 tractors.",
+                steps: ["Engine repair procedures", "Heavy transmission service", "Axle & differential work", "Advanced diagnostics"]
+            },
+            {
+                id: "manual-agrotron-215-265", title: "AGROTRON 215-265 Workshop Manual", category: "Farmers", subCategory: "Deutz", image: "https://placehold.co/600x400/065f46/ffffff?text=Deutz+Agrotron",
+                isPdf: true, downloadUrl: "https://drive.google.com/file/d/1nt89RIBPNg3QBgQQpFaCy4KnARbrLJFP/view?usp=drive_link", price: "50.00",
+                desc: "Complete technical manual for Agrotron 215 and 265 tractor fleets.",
+                steps: ["Hydraulic system schematics", "Transmission maintenance", "Engine overhaul guide", "Electrical troubleshooting"]
+            },
+            {
+                id: "manual-deutz-engines-912", title: "ENGINES DEUTZ 912-913 Workshop Manual", category: "Farmers", subCategory: "Deutz", image: "https://placehold.co/600x400/065f46/ffffff?text=Deutz+Engines",
+                isPdf: true, downloadUrl: "https://drive.google.com/file/d/1_izqzFxH-Irebdd2zq3e_5_ETCCTekn3/view?usp=drive_link", price: "50.00",
+                desc: "Comprehensive engine overhaul and service manual for air-cooled Deutz 912 and 913 series engines.",
+                steps: ["Cylinder head & valve clearance", "Fuel injection pump timing", "Lubrication & oil cooling", "Torque specifications"]
+            },
+            {
+                id: "manual-balance", title: "5650-5650 Balance Manual", category: "Farmers", subCategory: "Other", image: "https://placehold.co/600x400/065f46/ffffff?text=Balance+Manual",
+                isPdf: true, downloadUrl: "https://drive.google.com/file/d/1RtsDdGKjdUgZOT8dY5aRFMtDVUf8Zyim/view?usp=drive_link", price: "50.00",
+                desc: "Official service balance and adjustment documentation for specialized agricultural machinery.",
+                steps: ["Component calibration", "Balancing procedures", "Maintenance guidelines", "Technical tolerances"]
+            },
+            {
+                id: "manual-bearing-catalogue", title: "Bearing Catalogue", category: "Farmers", subCategory: "Other", image: "https://placehold.co/600x400/065f46/ffffff?text=Bearing+Catalogue",
+                isPdf: true, downloadUrl: "https://drive.google.com/file/d/0B460_P5oTO9OZkV5MGdZRlVLTjA/view?usp=drive_link&resourcekey=0-zLEYOdAvyFH3ChYzGck_tA", price: "50.00",
+                desc: "Bearing catalogue and technical reference guide.",
+                steps: ["Bearing identification & cross-referencing", "Dimensional specifications & load ratings", "Installation & lubrication guidelines", "Maintenance & replacement specs"]
+            },
+            {
+                id: "manual-baldan-spares", title: "Baldan disc spares manual", category: "Farmers", subCategory: "Other", image: "https://placehold.co/600x400/065f46/ffffff?text=Baldan+Disc+Spares",
+                isPdf: true, downloadUrl: "https://drive.google.com/file/d/0B460_P5oTO9OdEY1TjFFZUpGTHc/view?usp=drive_link&resourcekey=0-lrcCzWi9Mmb99sMg9HhHqA", price: "50.00",
+                desc: "Official parts catalog and exploded component diagrams for Baldan disc harrows and tillage equipment.",
+                steps: ["Disc gang assembly spares", "Bearing and housing parts", "Scraper and spacer identification", "Frame and hitch components"]
+            },
+            {
+                id: "manual-ford-5610-7610", title: "Ford 5610 - 7610 User manual", category: "Farmers", subCategory: "Ford", image: "https://placehold.co/600x400/065f46/ffffff?text=Ford+5610-7610",
+                isPdf: true, downloadUrl: "https://drive.google.com/file/d/0B460_P5oTO9OQWdRdzNsSk5PcWM/view?usp=drive_link&resourcekey=0-wL4M6DvK07mSZbTVwg94EA", price: "50.00",
+                desc: "Official user and operation manual for Ford 5610 and 7610 agricultural tractors.",
+                steps: ["Instrument panel & controls", "Operating procedures & PTO", "Routine maintenance & fluid specs", "Troubleshooting & safety guidelines"]
+            },
+            {
+                id: "manual-additional-1", title: "Deutz Tractor Technical Workshop Manual A", category: "Farmers", subCategory: "Deutz", image: "https://placehold.co/600x400/065f46/ffffff?text=Deutz+Manual",
+                isPdf: true, downloadUrl: "https://drive.google.com/file/d/1Mt9rIXOZsCJEDZttgxnQ5SK-GYjI7ZDU/view?usp=drive_link", price: "50.00",
+                desc: "Specialized factory workshop documentation for Deutz agricultural machinery and tractors.",
+                steps: ["Mechanical diagnostics", "Hydraulic repairs", "Electrical troubleshooting", "Component assembly"]
+            },
+            {
+                id: "manual-additional-2", title: "Deutz Tractor Technical Workshop Manual B", category: "Farmers", subCategory: "Deutz", image: "https://placehold.co/600x400/065f46/ffffff?text=Deutz+Manual",
+                isPdf: true, downloadUrl: "https://drive.google.com/file/d/1XkcRTm7TsFuPkqWkbhN4cmeBUL_9eCQZ/view?usp=drive_link", price: "50.00",
+                desc: "Factory service manual covering mechanical systems and maintenance intervals.",
+                steps: ["Routine servicing", "Clutch & brake maintenance", "Steering system checks", "Hydraulic tests"]
+            },
+            {
+                id: "manual-additional-3", title: "Deutz Tractor Technical Workshop Manual C", category: "Farmers", subCategory: "Deutz", image: "https://placehold.co/600x400/065f46/ffffff?text=Deutz+Manual",
+                isPdf: true, downloadUrl: "https://drive.google.com/file/d/1tE2PrRTPO9D5EPJbTul4J2vDfpWltmBK/view?usp=drive_link", price: "50.00",
+                desc: "Detailed technical repair manual for professional workshop technicians.",
+                steps: ["Engine and fuel setup", "Transmission diagnostics", "Axle maintenance", "Wiring diagrams"]
+            },
+            {
+                id: "manual-additional-4", title: "Deutz Tractor Technical Workshop Manual D", category: "Farmers", subCategory: "Deutz", image: "https://placehold.co/600x400/065f46/ffffff?text=Deutz+Manual",
+                isPdf: true, downloadUrl: "https://drive.google.com/file/d/1UHNld1aigZO1kchK0_B8nmVs6Ccmfy_I/view?usp=drive_link", price: "50.00",
+                desc: "Authorized dealer workshop manual for advanced tractor systems.",
+                steps: ["Advanced diagnostics", "Hydraulic control valves", "Power train service", "Safety inspection"]
+            },
+            {
+                id: "manual-additional-5", title: "Deutz Tractor Technical Workshop Manual E", category: "Farmers", subCategory: "Deutz", image: "https://placehold.co/600x400/065f46/ffffff?text=Deutz+Manual",
+                isPdf: true, downloadUrl: "https://drive.google.com/file/d/1C4k-WX8iEnyu0gX8jqMs046UUi3sNv3H/view?usp=drive_link", price: "50.00",
+                desc: "Official factory service manual for system calibration and repairs.",
+                steps: ["System calibration", "Repair procedures", "Torque specs", "Maintenance logs"]
+            },
+            {
+                id: "manual-additional-6", title: "Deutz Tractor Technical Workshop Manual F", category: "Farmers", subCategory: "Deutz", image: "https://placehold.co/600x400/065f46/ffffff?text=Deutz+Manual",
+                isPdf: true, downloadUrl: "https://drive.google.com/file/d/1xaYrAp0WFwzo9dcD3DKKUL__ZvwqU3sh/view?usp=drive_link", price: "50.00",
+                desc: "Comprehensive workshop manual for tractor maintenance and overhauls.",
+                steps: ["Engine checks", "Gearbox servicing", "Differential setup", "Electrical troubleshooting"]
+            },
+            {
+                id: "manual-additional-7", title: "Deutz Tractor Technical Workshop Manual G", category: "Farmers", subCategory: "Deutz", image: "https://placehold.co/600x400/065f46/ffffff?text=Deutz+Manual",
+                isPdf: true, downloadUrl: "https://drive.google.com/file/d/16hel8Tt1QXnTlPwQCJD_tA4pcxx3HrV3/view?usp=drive_link", price: "50.00",
+                desc: "Technical service documentation for workshop repairs.",
+                steps: ["Fault isolation", "Part replacement guides", "Hydraulic checks", "Final testing"]
+            },
+            {
+                id: "manual-additional-8", title: "Deutz Tractor Technical Workshop Manual H", category: "Farmers", subCategory: "Deutz", image: "https://placehold.co/600x400/065f46/ffffff?text=Deutz+Manual",
+                isPdf: true, downloadUrl: "https://drive.google.com/file/d/1I38P7V88fcTNa7MtUAerEf12y-xNjMs1/view?usp=drive_link", price: "50.00",
+                desc: "Official factory repair manual for mechanical and electrical systems.",
+                steps: ["Electrical checks", "Mechanical overhaul", "Fluid replacement", "Calibration"]
+            },
+            {
+                id: "manual-additional-9", title: "Deutz Tractor Technical Workshop Manual I", category: "Farmers", subCategory: "Deutz", image: "https://placehold.co/600x400/065f46/ffffff?text=Deutz+Manual",
+                isPdf: true, downloadUrl: "https://drive.google.com/file/d/1-85C-urw8krmSFwSrcS3SO1XCJCPb9_R/view?usp=drive_link", price: "50.00",
+                desc: "Comprehensive workshop guide for servicing Deutz tractors.",
+                steps: ["Service intervals", "Engine tuning", "Hydraulic maintenance", "Troubleshooting"]
+            },
+            {
+                id: "manual-additional-10", title: "Deutz Tractor Technical Workshop Manual J", category: "Farmers", subCategory: "Deutz", image: "https://placehold.co/600x400/065f46/ffffff?text=Deutz+Manual",
+                isPdf: true, downloadUrl: "https://drive.google.com/file/d/17alp9w7cTJG4KRMmN5C7ymclDhns0JQK/view?usp=drive_link", price: "50.00",
+                desc: "Authorized workshop manual for technical maintenance.",
+                steps: ["Inspection routines", "Repair specifications", "Diagnostic steps", "Safety checks"]
+            },
+            {
+                id: "manual-additional-11", title: "Deutz Tractor Technical Workshop Manual K", category: "Farmers", subCategory: "Deutz", image: "https://placehold.co/600x400/065f46/ffffff?text=Deutz+Manual",
+                isPdf: true, downloadUrl: "https://drive.google.com/file/d/1JlF9TBrZTjFvBgrgNPiDaievVtav2c_F/view?usp=drive_link", price: "50.00",
+                desc: "Factory technical manual for drivetrain and engine service.",
+                steps: ["Drivetrain checks", "Engine diagnostics", "Hydraulic service", "Assembly notes"]
+            },
+            {
+                id: "manual-additional-12", title: "Deutz Tractor Technical Workshop Manual L", category: "Farmers", subCategory: "Deutz", image: "https://placehold.co/600x400/065f46/ffffff?text=Deutz+Manual",
+                isPdf: true, downloadUrl: "https://drive.google.com/file/d/1ztK6T2-dikxRyIXN_YBDba1qVRImccqp/view?usp=drive_link", price: "50.00",
+                desc: "Comprehensive repair instructions for tractor mechanics.",
+                steps: ["Component testing", "Repair guidelines", "Fluid specs", "System checks"]
+            },
+            {
+                id: "manual-additional-13", title: "Deutz Tractor Technical Workshop Manual M", category: "Farmers", subCategory: "Deutz", image: "https://placehold.co/600x400/065f46/ffffff?text=Deutz+Manual",
+                isPdf: true, downloadUrl: "https://drive.google.com/file/d/1TFr63OhVP5Ul_XhgfYLZTNWM4at-yUUG/view?usp=drive_link", price: "50.00",
+                desc: "Official factory workshop guide for tractor upkeep.",
+                steps: ["Maintenance guides", "Hydraulic upkeep", "Electrical testing", "Torque charts"]
+            },
+            {
+                id: "manual-additional-14", title: "Deutz Tractor Technical Workshop Manual N", category: "Farmers", subCategory: "Deutz", image: "https://placehold.co/600x400/065f46/ffffff?text=Deutz+Manual",
+                isPdf: true, downloadUrl: "https://drive.google.com/file/d/1nK5sH7pVQa77RFDnl5RVTJrYFlzZxm4C/view?usp=drive_link", price: "50.00",
+                desc: "Technical manual for tractor systems and major overhauls.",
+                steps: ["Major overhauls", "System testing", "Adjustment specs", "Safety guidelines"]
+            },
+            {
+                id: "manual-additional-15", title: "Deutz Tractor Technical Workshop Manual O", category: "Farmers", subCategory: "Deutz", image: "https://placehold.co/600x400/065f46/ffffff?text=Deutz+Manual",
+                isPdf: true, downloadUrl: "https://drive.google.com/file/d/1zTThS-IgPgRSG9Paxq8VYq3BEiEB_6MT/view?usp=drive_link", price: "50.00",
+                desc: "Workshop service documentation for agricultural equipment.",
+                steps: ["Routine checks", "Mechanical service", "Hydraulic diagnostics", "Repair steps"]
+            },
+            {
+                id: "manual-additional-16", title: "Deutz Tractor Technical Workshop Manual P", category: "Farmers", subCategory: "Deutz", image: "https://placehold.co/600x400/065f46/ffffff?text=Deutz+Manual",
+                isPdf: true, downloadUrl: "https://drive.google.com/file/d/1uhqVUUxuZULU6b16nZ7C-1x2FhxFJbQj/view?usp=drive_link", price: "50.00",
+                desc: "Factory repair manual for professional agricultural technicians.",
+                steps: ["Troubleshooting", "System repair", "Maintenance schedules", "Testing specs"]
+            },
+            {
+                id: "manual-additional-17", title: "Deutz Tractor Technical Workshop Manual Q", category: "Farmers", subCategory: "Deutz", image: "https://placehold.co/600x400/065f46/ffffff?text=Deutz+Manual",
+                isPdf: true, downloadUrl: "https://drive.google.com/file/d/1TwLD_dP0pNfttdFDzcp9Imxln0P2rk9X/view?usp=drive_link", price: "50.00",
+                desc: "Comprehensive reference manual for Deutz tractor repairs.",
+                steps: ["Technical data", "Adjustment procedures", "Component repairs", "Engine assembly"]
+            },
+            {
+                id: "manual-additional-18", title: "Deutz Tractor Technical Workshop Manual R", category: "Farmers", subCategory: "Deutz", image: "https://placehold.co/600x400/065f46/ffffff?text=Deutz+Manual",
+                isPdf: true, downloadUrl: "https://drive.google.com/file/d/1K92-wj5LsdoTBpQUOhoEnKNA2HTXXPCR/view?usp=drive_link", price: "50.00",
+                desc: "Official workshop manual for advanced mechanical servicing.",
+                steps: ["Mechanical service", "Hydraulic testing", "Electrical guides", "Torque specifications"]
+            },
+            {
+                id: "manual-additional-19", title: "Deutz Tractor Technical Workshop Manual S", category: "Farmers", subCategory: "Deutz", image: "https://placehold.co/600x400/065f46/ffffff?text=Deutz+Manual",
+                isPdf: true, downloadUrl: "https://drive.google.com/file/d/11B-zB1YOHZJhi2eTo1lK3rQ-WeWtubpx/view?usp=drive_link", price: "50.00",
+                desc: "Technical service manual for workshop repairs and adjustments.",
+                steps: ["Adjustment values", "Repair guidelines", "Maintenance specs", "Safety procedures"]
+            },
+            {
+                id: "manual-additional-20", title: "Deutz Tractor Technical Workshop Manual T", category: "Farmers", subCategory: "Deutz", image: "https://placehold.co/600x400/065f46/ffffff?text=Deutz+Manual",
+                isPdf: true, downloadUrl: "https://drive.google.com/file/d/14mcWjFV1Ce0m8Ni1G_8JVvvoH52z9mjT/view?usp=drive_link", price: "50.00",
+                desc: "Comprehensive workshop manual for tractor maintenance.",
+                steps: ["Service checks", "Repair instructions", "Component layout", "Testing methods"]
+            },
+            {
+                id: "manual-additional-21", title: "Deutz Tractor Technical Workshop Manual U", category: "Farmers", subCategory: "Deutz", image: "https://placehold.co/600x400/065f46/ffffff?text=Deutz+Manual",
+                isPdf: true, downloadUrl: "https://drive.google.com/file/d/1ri_iZU5OQW6G4CvD-Tsrx-rNDvW9MrXp/view?usp=drive_link", price: "50.00",
+                desc: "Factory authorized service manual for agricultural machinery.",
+                steps: ["System overhauls", "Hydraulic repairs", "Electrical checks", "Routine upkeep"]
+            },
+            {
+                id: "manual-additional-22", title: "Deutz Tractor Technical Workshop Manual V", category: "Farmers", subCategory: "Deutz", image: "https://placehold.co/600x400/065f46/ffffff?text=Deutz+Manual",
+                isPdf: true, downloadUrl: "https://drive.google.com/file/d/1yHLOeFLsLCjqy7jR2fURGaLliOa70FC9/view?usp=drive_link", price: "50.00",
+                desc: "Official service manual for tractor maintenance and diagnostics.",
+                steps: ["Diagnostic testing", "Component servicing", "Adjustment procedures", "Safety notes"]
+            },
+            {
+                id: "manual-additional-23", title: "Deutz Tractor Technical Workshop Manual W", category: "Farmers", subCategory: "Deutz", image: "https://placehold.co/600x400/065f46/ffffff?text=Deutz+Manual",
+                isPdf: true, downloadUrl: "https://drive.google.com/file/d/1u021_FEo79AJOogIs7kY3slOvJptOn3t/view?usp=drive_link", price: "50.00",
+                desc: "Comprehensive technical manual for tractor servicing.",
+                steps: ["Maintenance specs", "Repair procedures", "Hydraulic troubleshooting", "Assembly guides"]
+            },
+            {
+                id: "manual-additional-24", title: "Deutz Tractor Technical Workshop Manual X", category: "Farmers", subCategory: "Deutz", image: "https://placehold.co/600x400/065f46/ffffff?text=Deutz+Manual",
+                isPdf: true, downloadUrl: "https://drive.google.com/file/d/1OjpIpIIrVNBHPsXAN9CbwxQokO-k5Oxl/view?usp=drive_link", price: "50.00",
+                desc: "Technical workshop guide for professional mechanics.",
+                steps: ["Mechanical maintenance", "Repair standards", "Tool requirements", "Inspection checklists"]
+            },
+            {
+                id: "manual-additional-25", title: "Deutz Tractor Technical Workshop Manual Y", category: "Farmers", subCategory: "Deutz", image: "https://placehold.co/600x400/065f46/ffffff?text=Deutz+Manual",
+                isPdf: true, downloadUrl: "https://drive.google.com/file/d/1R9RKHjAEt8qECU6MGhj7u-5quTwPUwX7/view?usp=drive_link", price: "50.00",
+                desc: "Official factory manual for tractor system maintenance.",
+                steps: ["System checks", "Repair guidelines", "Calibration steps", "Technical specs"]
+            },
+            {
+                id: "manual-additional-26", title: "Deutz Tractor Technical Workshop Manual Z", category: "Farmers", subCategory: "Deutz", image: "https://placehold.co/600x400/065f46/ffffff?text=Deutz+Manual",
+                isPdf: true, downloadUrl: "https://drive.google.com/file/d/1sPgbvmyE_-k-xqAjHonZuiR-P-cSkYEu/view?usp=drive_link", price: "50.00",
+                desc: "Comprehensive service manual for tractor repairs.",
+                steps: ["Troubleshooting charts", "Overhaul procedures", "Maintenance specs", "Safety checks"]
+            },
+            {
+                id: "manual-additional-27", title: "Deutz Tractor Technical Workshop Manual AA", category: "Farmers", subCategory: "Deutz", image: "https://placehold.co/600x400/065f46/ffffff?text=Deutz+Manual",
+                isPdf: true, downloadUrl: "https://drive.google.com/file/d/1pS0VEUdTbAeoYgm94UVcg6TY2uI1xUCh/view?usp=drive_link", price: "50.00",
+                desc: "Technical workshop reference for agricultural equipment.",
+                steps: ["Maintenance routines", "Repair instructions", "Hydraulic schematics", "Testing procedures"]
+            },
+            {
+                id: "manual-additional-28", title: "Deutz Tractor Technical Workshop Manual AB", category: "Farmers", subCategory: "Deutz", image: "https://placehold.co/600x400/065f46/ffffff?text=Deutz+Manual",
+                isPdf: true, downloadUrl: "https://drive.google.com/file/d/1ghTnWYwZDDORuEPl46loYDjRF80hgauf/view?usp=drive_link", price: "50.00",
+                desc: "Factory service documentation for workshop technicians.",
+                steps: ["Component overhauls", "Repair guides", "Adjustment values", "Diagnostic checks"]
+            },
+            {
+                id: "manual-additional-29", title: "Deutz Tractor Technical Workshop Manual AC", category: "Farmers", subCategory: "Deutz", image: "https://placehold.co/600x400/065f46/ffffff?text=Deutz+Manual",
+                isPdf: true, downloadUrl: "https://drive.google.com/file/d/1U9I5lzK0oPe64K_EpFC1CBGtga6PCRL4/view?usp=drive_link", price: "50.00",
+                desc: "Comprehensive repair and maintenance manual for Deutz machinery.",
+                steps: ["Mechanical servicing", "Hydraulic repairs", "Electrical troubleshooting", "Routine checks"]
+            },
+            {
+                id: "manual-additional-30", title: "Deutz Tractor Technical Workshop Manual AD", category: "Farmers", subCategory: "Deutz", image: "https://placehold.co/600x400/065f46/ffffff?text=Deutz+Manual",
+                isPdf: true, downloadUrl: "https://drive.google.com/file/d/1nOmvjL4Bcg8n5CL4XHK_2cy3Ipbou6vw/view?usp=drive_link", price: "50.00",
+                desc: "Official factory manual for tractor servicing and repairs.",
+                steps: ["Service procedures", "Component diagnostics", "Repair specifications", "Safety protocols"]
+            },
+            {
+                id: "manual-additional-31", title: "Deutz Tractor Technical Workshop Manual AE", category: "Farmers", subCategory: "Deutz", image: "https://placehold.co/600x400/065f46/ffffff?text=Deutz+Manual",
+                isPdf: true, downloadUrl: "https://drive.google.com/file/d/1YsyyxlpHf9WwqHtxAlICpVgq_7YZ5IOK/view?usp=drive_link", price: "50.00",
+                desc: "Technical workshop manual for agricultural tractors.",
+                steps: ["Maintenance schedules", "Repair instructions", "Hydraulic tests", "Assembly guides"]
+            },
+            {
+                id: "manual-additional-32", title: "Deutz Tractor Technical Workshop Manual AF", category: "Farmers", subCategory: "Deutz", image: "https://placehold.co/600x400/065f46/ffffff?text=Deutz+Manual",
+                isPdf: true, downloadUrl: "https://drive.google.com/file/d/1007IwJRZyW7OIvAtnW599AOCWdfzsqGQ/view?usp=drive_link", price: "50.00",
+                desc: "Factory authorized service manual for mechanical repairs.",
+                steps: ["Mechanical overhauls", "Adjustment procedures", "Fault finding", "Testing notes"]
+            },
+            {
+                id: "manual-additional-33", title: "Deutz Tractor Technical Workshop Manual AG", category: "Farmers", subCategory: "Deutz", image: "https://placehold.co/600x400/065f46/ffffff?text=Deutz+Manual",
+                isPdf: true, downloadUrl: "https://drive.google.com/file/d/1VjCHyFLrPgufNrjN_CuLv1QEDZlK3f9T/view?usp=drive_link", price: "50.00",
+                desc: "Comprehensive workshop manual for tractor service and maintenance.",
+                steps: ["Service routines", "Repair standards", "Component checks", "Technical data"]
+            },
+            {
+                id: "manual-additional-34", title: "Deutz Tractor Technical Workshop Manual AH", category: "Farmers", subCategory: "Deutz", image: "https://placehold.co/600x400/065f46/ffffff?text=Deutz+Manual",
+                isPdf: true, downloadUrl: "https://drive.google.com/file/d/1aL4au3fmEg1VcVgn6fg4qxpYYc1OEanP/view?usp=drive_link", price: "50.00",
+                desc: "Official factory manual for comprehensive tractor repairs.",
+                steps: ["Complete repairs", "Hydraulic service", "Electrical checks", "Safety guidelines"]
+            },
+            {
+                id: "manual-additional-35", title: "Deutz Tractor Technical Workshop Manual AI", category: "Farmers", subCategory: "Deutz", image: "https://placehold.co/600x400/065f46/ffffff?text=Deutz+Manual",
+                isPdf: true, downloadUrl: "https://drive.google.com/file/d/1Cb9aVTvnD529qWDLcErLbf5pqrh8vvoz/view?usp=drive_link", price: "50.00",
+                desc: "Official workshop manual for tractor maintenance and overhauls.",
+                steps: ["Overhaul procedures", "Maintenance intervals", "Hydraulic tuning", "Safety inspection"]
+            },
+            {
+                id: "manual-additional-36", title: "Deutz Tractor Technical Workshop Manual AJ", category: "Farmers", subCategory: "Deutz", image: "https://placehold.co/600x400/065f46/ffffff?text=Deutz+Manual",
+                isPdf: true, downloadUrl: "https://drive.google.com/file/d/1BZ9EZHDrDUpnveQam5_RW-5_sdjhduUJ/view?usp=drive_link", price: "50.00",
+                desc: "Comprehensive factory service manual for professional repairs.",
+                steps: ["Diagnostic testing", "Component replacement", "System calibration", "Repair notes"]
+            },
+            {
+                id: "manual-additional-37", title: "Deutz Tractor Technical Workshop Manual AK", category: "Farmers", subCategory: "Deutz", image: "https://placehold.co/600x400/065f46/ffffff?text=Deutz+Manual",
+                isPdf: true, downloadUrl: "https://drive.google.com/file/d/1SEe8Aj-aFKs-vTBNkRKQHLeaDsZBDOfg/view?usp=drive_link", price: "50.00",
+                desc: "Detailed technical manual for tractor servicing and adjustments.",
+                steps: ["Adjustment values", "Mechanical repairs", "Electrical troubleshooting", "Testing specs"]
+            },
+            {
+                id: "manual-additional-38", title: "Deutz Tractor Technical Workshop Manual AL", category: "Farmers", subCategory: "Deutz", image: "https://placehold.co/600x400/065f46/ffffff?text=Deutz+Manual",
+                isPdf: true, downloadUrl: "https://drive.google.com/file/d/11C6T-hWIMWYNs6kikcxmeoFC-XScDUx3/view?usp=drive_link", price: "50.00",
+                desc: "Official workshop manual for agricultural tractor mechanics.",
+                steps: ["Service routines", "Repair standards", "Fluid specifications", "Safety checks"]
+            },
+            {
+                id: "manual-additional-39", title: "Deutz Tractor Technical Workshop Manual AM", category: "Farmers", subCategory: "Deutz", image: "https://placehold.co/600x400/065f46/ffffff?text=Deutz+Manual",
+                isPdf: true, downloadUrl: "https://drive.google.com/file/d/1RY1NOpV8knNn4awCAF25_hlEmGB-LWTH/view?usp=drive_link", price: "50.00",
+                desc: "Comprehensive service documentation for Deutz tractor systems.",
+                steps: ["System checks", "Repair guidelines", "Maintenance checklists", "Troubleshooting"]
+            },
+            {
+                id: "manual-additional-40", title: "Deutz Tractor Technical Workshop Manual AN", category: "Farmers", subCategory: "Deutz", image: "https://placehold.co/600x400/065f46/ffffff?text=Deutz+Manual",
+                isPdf: true, downloadUrl: "https://drive.google.com/file/d/15_5j1VjP-ODga8Tjh-HF33qYoBlnKkxc/view?usp=drive_link", price: "50.00",
+                desc: "Factory authorized service manual for tractor overhauls.",
+                steps: ["Engine overhauls", "Hydraulic maintenance", "Electrical testing", "Final assembly"]
+            },
+
+            // --- SAME MANUALS COLLECTION (R50.00) ---
+            {
+                id: "manual-same-1", title: "SAME ARGON 50-60-70 / 55F-65F-75F Workshop Manual", category: "Farmers", subCategory: "Same", image: "https://placehold.co/600x400/065f46/ffffff?text=SAME+Argon",
+                isPdf: true, downloadUrl: "https://drive.google.com/file/d/15NDcdO98I4rdvS1kIruhdJVniOKZs9uG/view?usp=drive_link", price: "50.00",
+                desc: "Official factory workshop manual for SAME Argon 50, 60, 70 and 55F, 65F, 75F orchard and utility tractors.",
+                steps: ["Engine overhaul & fuel system", "Transmission & PTO service", "Hydraulic linkage diagnostics", "Electrical wiring & steering"]
+            },
+            {
+                id: "manual-same-2", title: "SAME ARGON 55-70 / 55F-70F Classic Workshop Manual", category: "Farmers", subCategory: "Same", image: "https://placehold.co/600x400/065f46/ffffff?text=SAME+Argon+Classic",
+                isPdf: true, downloadUrl: "https://drive.google.com/file/d/1eN8DteybKc0pR5d8avq435uNKso6XlR5/view?usp=drive_link", price: "50.00",
+                desc: "Comprehensive repair and maintenance manual for SAME Argon 55, 70 and Classic 55F, 70F models.",
+                steps: ["Mechanical specifications", "Clutch & gearbox servicing", "Four-wheel drive axle repair", "Brake system adjustments"]
+            },
+            {
+                id: "manual-same-3", title: "SAME DIAMOND 210-235-265 Workshop Manual", category: "Farmers", subCategory: "Same", image: "https://placehold.co/600x400/065f46/ffffff?text=SAME+Diamond",
+                isPdf: true, downloadUrl: "https://drive.google.com/file/d/1_kf2OcCokPFAEUOuYFvgrDmeNuTaSJj-/view?usp=drive_link", price: "50.00",
+                desc: "Heavy-duty factory workshop manual for SAME Diamond high-horsepower 210, 235, and 265 tractors.",
+                steps: ["High-output engine servicing", "Powershift transmission overhaul", "Load-sensing hydraulics", "Electronic control unit diagnostics"]
+            },
+            {
+                id: "manual-same-4", title: "SAME DIAMOND II 230-260 Workshop Manual", category: "Farmers", subCategory: "Same", image: "https://placehold.co/600x400/065f46/ffffff?text=SAME+Diamond+II",
+                isPdf: true, downloadUrl: "https://drive.google.com/file/d/1M01ZE0CElzf_7ufxZDvXc_frBp210_rt/view?usp=drive_link", price: "50.00",
+                desc: "Advanced service manual covering SAME Diamond II series 230 and 260 tractors.",
+                steps: ["Engine management system", "Transmission calibration", "Front axle suspension setup", "Hydraulic pressure testing"]
+            },
+            {
+                id: "manual-same-5", title: "SAME DORADO 55-60-65-70-75-85 Workshop Manual", category: "Farmers", subCategory: "Same", image: "https://placehold.co/600x400/065f46/ffffff?text=SAME+Dorado",
+                isPdf: true, downloadUrl: "https://drive.google.com/file/d/1d6TawjKojp0fUFZl7J7HUYMxu5gxyafM/view?usp=drive_link", price: "50.00",
+                desc: "Official factory repair manual for SAME Dorado utility tractors from 55 to 85 HP.",
+                steps: ["Engine fuel injection setup", "Shuttle transmission service", "Rear hitch controls", "Electrical troubleshooting"]
+            },
+            {
+                id: "manual-same-6", title: "SAME DORADO 55-70-75-90-100 F Workshop Manual", category: "Farmers", subCategory: "Same", image: "https://placehold.co/600x400/065f46/ffffff?text=SAME+Dorado+F",
+                isPdf: true, downloadUrl: "https://drive.google.com/file/d/1f_FoMkE4g4jYoA5Fa8KsfZiypmpDNEvh/view?usp=drive_link", price: "50.00",
+                desc: "Specialized orchard and vineyard workshop manual for SAME Dorado F series.",
+                steps: ["Narrow axle geometry", "Hydraulic pump servicing", "Cooling & lubrication", "Steering and braking systems"]
+            },
+            {
+                id: "manual-same-7", title: "SAME DORADO 66-76-86 Power Shuttle Manual", category: "Farmers", subCategory: "Same", image: "https://placehold.co/600x400/065f46/ffffff?text=SAME+Dorado+Shuttle",
+                isPdf: true, downloadUrl: "https://drive.google.com/file/d/1rtJ8uvBUX2WcKQkpuB8BY7dz-dzLMSgI/view?usp=drive_link", price: "50.00",
+                desc: "Comprehensive diagnostic and repair manual for SAME Dorado 66, 76, and 86 with Power Shuttle transmission.",
+                steps: ["Power shuttle clutch calibration", "Electronic control diagnostics", "Hydraulic valve setup", "Maintenance intervals"]
+            },
+            {
+                id: "manual-same-8", title: "SAME DORADO S-V 70-75-90-100 Workshop Manual", category: "Farmers", subCategory: "Same", image: "https://placehold.co/600x400/065f46/ffffff?text=SAME+Dorado+SV",
+                isPdf: true, downloadUrl: "https://drive.google.com/file/d/123cUCtDX_ardiGhxKOB7NJeTTR9KkAAY/view?usp=drive_link", price: "50.00",
+                desc: "Factory workshop guide for SAME Dorado S and V specialized vineyard and orchard tractors.",
+                steps: ["Specialized narrow body systems", "Front PTO & hitch setup", "Hydraulic circuit diagrams", "Axle alignment"]
+            },
+            {
+                id: "manual-same-9", title: "ENGINES SAME 1000.3-1000.4-1000.6 W EURO II", category: "Farmers", subCategory: "Same", image: "https://placehold.co/600x400/065f46/ffffff?text=SAME+Engines",
+                isPdf: true, downloadUrl: "https://drive.google.com/file/d/1B0SUDNVPn18utHTyTI_lQySYjO-25Eb3/view?usp=drive_link", price: "50.00",
+                desc: "Complete engine overhaul and service manual for SAME 1000 series 3, 4, and 6-cylinder Euro II diesel engines.",
+                steps: ["Cylinder head & valve timing", "Fuel injection pump calibration", "Turbocharger & cooling service", "Torque specs & clearances"]
+            },
+            {
+                id: "manual-same-10", title: "SAME EXPLORER 75-85-95 Workshop Manual", category: "Farmers", subCategory: "Same", image: "https://placehold.co/600x400/065f46/ffffff?text=SAME+Explorer",
+                isPdf: true, downloadUrl: "https://drive.google.com/file/d/1RwDLyLRfdMwRAEuVeR5T3uc9kyrSe1Mz/view?usp=drive_link", price: "50.00",
+                desc: "Official factory workshop manual for the popular SAME Explorer 75, 85, and 95 utility tractors.",
+                steps: ["Engine maintenance", "Transmission & splitter gearbox", "Four-wheel drive engagement", "Hydraulic lift maintenance"]
+            },
+            {
+                id: "manual-same-11", title: "SAME EXPLORER 75T-75TB-85T-85TB-95T-95TB Manual", category: "Farmers", subCategory: "Same", image: "https://placehold.co/600x400/065f46/ffffff?text=SAME+Explorer+TB",
+                isPdf: true, downloadUrl: "https://drive.google.com/file/d/1McJvwP2fiRbjypUKhlIiFW2gSsjABMKN/view?usp=drive_link", price: "50.00",
+                desc: "Specialized service manual for SAME Explorer T and TB low-profile orchard/utility tractor models.",
+                steps: ["Low-profile platform setup", "Specialized steering & brakes", "Hydraulic remote valves", "Electrical checks"]
+            },
+            {
+                id: "manual-same-12", title: "SAME EXPLORER II 75-85-95 Special Workshop Manual", category: "Farmers", subCategory: "Same", image: "https://placehold.co/600x400/065f46/ffffff?text=SAME+Explorer+II",
+                isPdf: true, downloadUrl: "https://drive.google.com/file/d/1iAzMYqnLVcxaNn0_vgMDomBIOVbJP1Xd/view?usp=drive_link", price: "50.00",
+                desc: "Factory workshop manual for SAME Explorer II 75, 85, 95 Special edition tractors.",
+                steps: ["Mechanical repairs", "Transmission overhaul", "Rear axle & PTO service", "Hydraulic system testing"]
+            },
+            {
+                id: "manual-same-13", title: "FRONT AXLE FOR DIAMOND 210-235-265 Manual", category: "Farmers", subCategory: "Same", image: "https://placehold.co/600x400/065f46/ffffff?text=Diamond+Front+Axle",
+                isPdf: true, downloadUrl: "https://drive.google.com/file/d/1-rDJJ8fjpOlnVjX2N9ypman2DIvwS04t/view?usp=drive_link", price: "50.00",
+                desc: "Specialized heavy-duty front axle repair and maintenance manual for SAME Diamond 210, 235, and 265.",
+                steps: ["Axle casing & differential", "Final reduction hubs", "Steering cylinders & geometry", "Lubrication & torque specs"]
+            },
+            {
+                id: "manual-same-14", title: "FRONT AXLE FOR IRON 100-110-120 Manual", category: "Farmers", subCategory: "Same", image: "https://placehold.co/600x400/065f46/ffffff?text=Iron+Axle+100-120",
+                isPdf: true, downloadUrl: "https://drive.google.com/file/d/1s3E-EnP9Qzhu1V0aarT18orhbM_QvGsY/view?usp=drive_link", price: "50.00",
+                desc: "Workshop manual covering front axle, 4WD engagement, and steering for SAME Iron 100, 110, and 120.",
+                steps: ["Front differential teardown", "Hub reduction service", "Steering sensor calibration", "Maintenance schedules"]
+            },
+            {
+                id: "manual-same-15", title: "FRONT AXLE FOR IRON 120S-130S Manual", category: "Farmers", subCategory: "Same", image: "https://placehold.co/600x400/065f46/ffffff?text=Iron+Axle+120S-130S",
+                isPdf: true, downloadUrl: "https://drive.google.com/file/d/1LReXIrY_Lgo67wvbXntfkpggcM3iTUMw/view?usp=drive_link", price: "50.00",
+                desc: "Detailed technical guide for front axle overhaul on SAME Iron 120S and 130S tractors.",
+                steps: ["Suspension & steering linkage", "Brake disc inspection", "Differential lock repair", "Assembly guidelines"]
+            },
+            {
+                id: "manual-same-16", title: "FRONT AXLE FOR IRON 150-150.7-165.7 Manual", category: "Farmers", subCategory: "Same", image: "https://placehold.co/600x400/065f46/ffffff?text=Iron+Axle+150-165",
+                isPdf: true, downloadUrl: "https://drive.google.com/file/d/1pv0O5t4YjlrDAE0guZQcl4zfAlBy8lIT/view?usp=drive_link", price: "50.00",
+                desc: "Front axle and suspension service manual for high-horsepower SAME Iron 150, 150.7, and 165.7.",
+                steps: ["Heavy-duty axle overhaul", "Epicyclic reduction gears", "Steering hydraulic rams", "Alignment & testing"]
+            },
+            {
+                id: "manual-same-17", title: "SAME GOLDEN 60-65-75-85 / Compatto 60V-75V Manual", category: "Farmers", subCategory: "Same", image: "https://placehold.co/600x400/065f46/ffffff?text=SAME+Golden",
+                isPdf: true, downloadUrl: "https://drive.google.com/file/d/1F8_BWXTCifyhAxcdsF7etsYO1tyJ8Av-/view?usp=drive_link", price: "50.00",
+                desc: "Official workshop manual for SAME Golden series (60, 65, 75, 85) and Compatto 60V, 75V vineyard models.",
+                steps: ["Engine & fuel system", "Transmission gearbox service", "Hydraulic lift & steering", "Electrical system schematics"]
+            },
+            {
+                id: "manual-same-18", title: "HYDRAULIC INVERSOR 80-105 Workshop Manual", category: "Farmers", subCategory: "Same", image: "https://placehold.co/600x400/065f46/ffffff?text=Hydraulic+Inversor+80-105",
+                isPdf: true, downloadUrl: "https://drive.google.com/file/d/1tr7zfafkasJA57p379NcBPMdTjvkScW-/view?usp=drive_link", price: "50.00",
+                desc: "Specialized hydraulic reverser (inversor) service manual for SAME 80 to 105 HP tractor models.",
+                steps: ["Hydraulic inversor control valve", "Pressure testing & adjustment", "Clutch pack overhaul", "Diagnostic troubleshooting"]
+            },
+            {
+                id: "manual-same-19", title: "HYDRAULIC INVERSOR 110-130 Workshop Manual", category: "Farmers", subCategory: "Same", image: "https://placehold.co/600x400/065f46/ffffff?text=Hydraulic+Inversor+110-130",
+                isPdf: true, downloadUrl: "https://drive.google.com/file/d/1-Ff19aPDucUw9dWd2npcO-WMMemu23Dg/view?usp=drive_link", price: "50.00",
+                desc: "Workshop repair manual for the hydraulic power shuttle/inversor system on SAME 110 to 130 HP tractors.",
+                steps: ["Control valve calibration", "Solenoid valve testing", "Hydraulic pump flow check", "Fault code diagnostics"]
+            },
+            {
+                id: "manual-same-20", title: "SAME IRON 100-110-120 Hi-Line Workshop Manual", category: "Farmers", subCategory: "Same", image: "https://placehold.co/600x400/065f46/ffffff?text=SAME+Iron+HiLine",
+                isPdf: true, downloadUrl: "https://drive.google.com/file/d/1QjqFjYC3ZGYc1cWzhdEAFWlUnTNHGb64/view?usp=drive_link", price: "50.00",
+                desc: "Factory service manual for SAME Iron 100, 110, and 120 Hi-Line deluxe cab tractors.",
+                steps: ["Engine management", "Hi-Line transmission & powershift", "Cab electronic controls", "Hydraulic load sensing"]
+            },
+            {
+                id: "manual-same-21", title: "SAME IRON 100-110-120 Standard Workshop Manual", category: "Farmers", subCategory: "Same", image: "https://placehold.co/600x400/065f46/ffffff?text=SAME+Iron+100-120",
+                isPdf: true, downloadUrl: "https://drive.google.com/file/d/1gJqxU5C_5rnuLE_nx-UiavVjvFsUKpMX/view?usp=drive_link", price: "50.00",
+                desc: "Complete workshop manual for standard SAME Iron 100, 110, and 120 tractors.",
+                steps: ["Engine overhaul", "Transmission & rear axle service", "Hydraulic system calibration", "Wiring diagrams"]
+            },
+            {
+                id: "manual-same-22", title: "SAME IRON 130S-140S-150S-165S Workshop Manual", category: "Farmers", subCategory: "Same", image: "https://placehold.co/600x400/065f46/ffffff?text=SAME+Iron+S",
+                isPdf: true, downloadUrl: "https://drive.google.com/file/d/1hY5uZLcRIOriKhf_N4QuKZ0qA2AiK6Cl/view?usp=drive_link", price: "50.00",
+                desc: "Official factory repair manual for high-performance SAME Iron S series (130S, 140S, 150S, 165S).",
+                steps: ["Heavy powertrain servicing", "Powershift & shuttle setup", "Advanced hydraulics", "Electronic diagnostics"]
+            },
+            {
+                id: "manual-same-23", title: "SAME IRON 175S-190S-200 Workshop Manual", category: "Farmers", subCategory: "Same", image: "https://placehold.co/600x400/065f46/ffffff?text=SAME+Iron+200",
+                isPdf: true, downloadUrl: "https://drive.google.com/file/d/1c7hM9del1RTOhIkkTYxjpiBUmmPGTOaZ/view?usp=drive_link", price: "50.00",
+                desc: "Comprehensive workshop manual for large-frame SAME Iron 175S, 190S, and 200 flagship tractors.",
+                steps: ["High-power engine service", "Heavy transmission & differential", "Load-sensing hydraulics", "Cabin electronics & ECU"]
+            },
+            {
+                id: "manual-same-24", title: "SAME KRYPTON 80-90-100 / F78-F88-F98 Manual", category: "Farmers", subCategory: "Same", image: "https://placehold.co/600x400/065f46/ffffff?text=SAME+Krypton",
+                isPdf: true, downloadUrl: "https://drive.google.com/file/d/1LbUnbpMedFdKq_Sdkxj4oP8cLN3N6ECO/view?usp=drive_link", price: "50.00",
+                desc: "Specialized crawler tractor workshop manual for SAME Krypton 80, 90, 100 and F78, F88, F98 models.",
+                steps: ["Track tension & undercarriage", "Steering clutches & brakes", "Crawler transmission service", "Engine & cooling maintenance"]
+            },
+            {
+                id: "manual-same-25", title: "SAME LASER 110-130-150 Workshop Manual", category: "Farmers", subCategory: "Same", image: "https://placehold.co/600x400/065f46/ffffff?text=SAME+Laser",
+                isPdf: true, downloadUrl: "https://drive.google.com/file/d/1os2_Q3DRCO2NZw9foBUoJLIDZ9teweZi/view?usp=drive_link", price: "50.00",
+                desc: "Classic heavy-duty workshop manual for the legendary SAME Laser 110, 130, and 150 tractors.",
+                steps: ["Air/water-cooled engine overhaul", "Synchromesh gearbox repair", "Rear lift & PTO clutch", "Hydraulic & steering systems"]
+            },
+            {
+                id: "manual-same-26", title: "SAME ROCK 55-60-70 Workshop Manual", category: "Farmers", subCategory: "Same", image: "https://placehold.co/600x400/065f46/ffffff?text=SAME+Rock",
+                isPdf: true, downloadUrl: "https://drive.google.com/file/d/11WKO99186n38uVzZihER2wtFPJFe2ZLj/view?usp=drive_link", price: "50.00",
+                desc: "Official factory service manual for SAME Rock 55, 60, and 70 utility tractors.",
+                steps: ["Engine maintenance & tuning", "Gearbox & clutch repair", "Hydraulic hitch adjustments", "Electrical checks"]
+            },
+            {
+                id: "manual-same-27", title: "SAME RUBIN 120-135-150 Workshop Manual", category: "Farmers", subCategory: "Same", image: "https://placehold.co/600x400/065f46/ffffff?text=SAME+Rubin+120-150",
+                isPdf: true, downloadUrl: "https://drive.google.com/file/d/1SqJa4HUWwcirzssprY7AD47MF8QfXH44/view?usp=drive_link", price: "50.00",
+                desc: "Comprehensive workshop manual for SAME Rubin high-power 120, 135, and 150 tractors.",
+                steps: ["Engine management", "Powershift transmission", "Hydraulic load sensing system", "Axle & brake overhauls"]
+            },
+            {
+                id: "manual-same-28", title: "SAME RUBIN 160-180-200 Workshop Manual", category: "Farmers", subCategory: "Same", image: "https://placehold.co/600x400/065f46/ffffff?text=SAME+Rubin+160-200",
+                isPdf: true, downloadUrl: "https://drive.google.com/file/d/11B-ZwoAmcuWzC_ByjOR944FEYch1Im9W/view?usp=drive_link", price: "50.00",
+                desc: "Heavy-duty factory repair manual for large SAME Rubin series 160, 180, and 200 models.",
+                steps: ["Advanced powertrain overhaul", "Hydraulic pump & valve service", "Electronic control calibration", "Differential & final drives"]
+            },
+            {
+                id: "manual-same-29", title: "SAME SILVER 80-90-100.4-100.6 Workshop Manual", category: "Farmers", subCategory: "Same", image: "https://placehold.co/600x400/065f46/ffffff?text=SAME+Silver+80-100",
+                isPdf: true, downloadUrl: "https://drive.google.com/file/d/13FwvC5i4xozXX6u-vmzz5nr0gJMLLkYf/view?usp=drive_link", price: "50.00",
+                desc: "Official factory workshop manual for SAME Silver 80, 90, 100.4, and 100.6 utility tractors.",
+                steps: ["4-cylinder & 6-cylinder engines", "Transmission & splitter setup", "Hydraulic lift & PTO controls", "Steering & electrical diagnostics"]
+            },
+            {
+                id: "manual-same-30", title: "SAME SILVER 110-130 Workshop Manual", category: "Farmers", subCategory: "Same", image: "https://placehold.co/600x400/065f46/ffffff?text=SAME+Silver+110-130",
+                isPdf: true, downloadUrl: "https://drive.google.com/file/d/1s8_tFwejcFxdy59gPPHh3lgou_Yibv0_/view?usp=drive_link", price: "50.00",
+                desc: "Complete technical service manual for medium-heavy SAME Silver 110 and 130 tractors.",
+                steps: ["Engine troubleshooting", "Powershift gearbox maintenance", "Hydraulic pressure testing", "Brake & axle overhaul"]
+            },
+            {
+                id: "manual-same-31", title: "SAME SOLARIS 30-40-50 Workshop Manual", category: "Farmers", subCategory: "Same", image: "https://placehold.co/600x400/065f46/ffffff?text=SAME+Solaris",
+                isPdf: true, downloadUrl: "https://drive.google.com/file/d/1C4k-WX8iEnyu0gX8jqMs046UUi3sNv3H/view?usp=drive_link", price: "50.00",
+                desc: "Compact tractor workshop manual for SAME Solaris 30, 40, and 50 municipal and orchard tractors.",
+                steps: ["Compact diesel engine service", "Compact transmission & clutch", "Hydraulic 3-point linkage", "Electrical & safety switches"]
+            },
+
+            // --- MASSEY FERGUSON PARTS MANUALS COLLECTION (R50.00) ---
+            {
+                id: "manual-mf-415", title: "Massey Ferguson 415 Parts Manual", category: "Farmers", subCategory: "Massey Ferguson", image: "https://placehold.co/600x400/065f46/ffffff?text=MF+415+Parts",
+                isPdf: true, downloadUrl: "https://drive.google.com/file/d/0B460_P5oTO9OYTZQa05jSTZsZjA/view?usp=drive_link&resourcekey=0-CcHmh_YCgWcQYI3NNQPxig", price: "50.00",
+                desc: "Official parts catalog and exploded component diagrams for Massey Ferguson 415 tractors.",
+                steps: ["Engine component assemblies", "Transmission and clutch parts", "Hydraulic system schematics", "Steering and axle diagrams"]
+            },
+            {
+                id: "manual-mf-460", title: "Massey Ferguson 460 Parts Manual", category: "Farmers", subCategory: "Massey Ferguson", image: "https://placehold.co/600x400/065f46/ffffff?text=MF+460+Parts",
+                isPdf: true, downloadUrl: "https://drive.google.com/file/d/0B460_P5oTO9OamYtT1lxcEc4WWM/view?usp=drive_link&resourcekey=0-6-vCLUU4DOc9vE-Crh4blQ", price: "50.00",
+                desc: "Comprehensive parts manual featuring detailed diagrams and part numbers for Massey Ferguson 460 models.",
+                steps: ["Sheet metal and body parts", "Electrical components and wiring", "Hitch and linkage assemblies", "Maintenance replacement parts"]
+            },
+            {
+                id: "manual-mf-5365", title: "Massey Ferguson 5365 Parts Manual", category: "Farmers", subCategory: "Massey Ferguson", image: "https://placehold.co/600x400/065f46/ffffff?text=MF+5365+Parts",
+                isPdf: true, downloadUrl: "https://drive.google.com/file/d/0B460_P5oTO9OUFdiR2JjWGdNVXM/view?usp=drive_link&resourcekey=0-KkrBWZQwgK_wrYW8WlyM-w", price: "50.00",
+                desc: "Official factory parts manual for Massey Ferguson 5365 agricultural tractors.",
+                steps: ["Powertrain & transmission parts", "Hydraulic valves and pumps", "Cabin controls and filters", "Complete parts reference index"]
+            },
+
+            // --- BUILDERS, HANDYMAN, HOUSEWIVES ---
             {
                 id: "sheet-metal-cone", title: "Sheet Metal Cone Fabrication Guide", category: "Handyman", subCategory: "Metalwork & Fabrication", image: "images/sheet-metal-cone-fabrication.jpg", price: "20.00",
                 desc: "Step-by-step master guide for calculating sector angles, marking patterns, cutting, forming, and joining a sheet metal cone.",
@@ -1006,6 +1586,7 @@
             activeGuideId = null;
         }
 
+        /* --- Gas Installation Card Controls & PayFast Checkout / Redirect --- */
         function openGasCardModal() {
             document.getElementById('gasCardModal').classList.remove('hidden');
             document.body.style.overflow = 'hidden';
@@ -1069,7 +1650,7 @@
             calculateUtility();
             calculateTankMix();
             calculateSheetMetal();
-            initUnitConverter();
+            updateConverterUnits();
         }
 
         function closeCalculatorModal() {
@@ -1102,218 +1683,172 @@
         }
 
         /* --- Universal Unit Converter Engine --- */
-        const unitData = {
+        const universalUnitsData = {
             length: {
-                units: { m: 1, cm: 0.01, mm: 0.001, km: 1000, inch: 0.0254, ft: 0.3048, yd: 0.9144, mi: 1609.344 },
-                names: { m: "Meters (m)", cm: "Centimeters (cm)", mm: "Millimeters (mm)", km: "Kilometers (km)", inch: "Inches (in)", ft: "Feet (ft)", yd: "Yards (yd)", mi: "Miles (mi)" }
-            },
-            mass: {
-                units: { kg: 1, g: 0.001, mg: 0.000001, lb: 0.453592, oz: 0.0283495, ton: 1000 },
-                names: { kg: "Kilograms (kg)", g: "Grams (g)", mg: "Milligrams (mg)", lb: "Pounds (lb)", oz: "Ounces (oz)", ton: "Metric Tons (t)" }
+                mm: { name: "Millimeters (mm)", factor: 0.001 },
+                cm: { name: "Centimeters (cm)", factor: 0.01 },
+                m: { name: "Meters (m)", factor: 1 },
+                km: { name: "Kilometers (km)", factor: 1000 },
+                inch: { name: "Inches (in)", factor: 0.0254 },
+                ft: { name: "Feet (ft)", factor: 0.3048 },
+                yd: { name: "Yards (yd)", factor: 0.9144 },
+                mile: { name: "Miles (mi)", factor: 1609.344 }
             },
             area: {
-                units: { sqm: 1, ha: 10000, sqkm: 1000000, sqft: 0.092903, acre: 4046.86 },
-                names: { sqm: "Square Meters (m²)", ha: "Hectares (ha)", sqkm: "Square Kilometers (km²)", sqft: "Square Feet (ft²)", acre: "Acres" }
+                sqm: { name: "Square Meters (m²)", factor: 1 },
+                sqkm: { name: "Square Kilometers (km²)", factor: 1000000 },
+                sqft: { name: "Square Feet (ft²)", factor: 0.092903 },
+                sqyd: { name: "Square Yards (yd²)", factor: 0.836127 },
+                acre: { name: "Acres", factor: 4046.86 },
+                hectare: { name: "Hectares (ha)", factor: 10000 }
             },
             volume: {
-                units: { L: 1, mL: 0.001, cum: 1000, gal: 3.78541, qt: 0.946353, pt: 0.473176 },
-                names: { L: "Liters (L)", mL: "Milliliters (mL)", cum: "Cubic Meters (m³)", gal: "US Gallons (gal)", qt: "US Quarts (qt)", pt: "US Pints (pt)" }
+                mL: { name: "Milliliters (mL)", factor: 0.001 },
+                L: { name: "Liters (L)", factor: 1 },
+                m3: { name: "Cubic Meters (m³)", factor: 1000 },
+                gal: { name: "Gallons (US gal)", factor: 3.78541 },
+                qt: { name: "Quarts (US qt)", factor: 0.946353 },
+                pt: { name: "Pints (US pt)", factor: 0.473176 },
+                cuft: { name: "Cubic Feet (ft³)", factor: 28.3168 }
+            },
+            weight: {
+                mg: { name: "Milligrams (mg)", factor: 0.000001 },
+                g: { name: "Grams (g)", factor: 0.001 },
+                kg: { name: "Kilograms (kg)", factor: 1 },
+                ton: { name: "Metric Tons (t)", factor: 1000 },
+                oz: { name: "Ounces (oz)", factor: 0.0283495 },
+                lb: { name: "Pounds (lb)", factor: 0.453592 }
             },
             temperature: {
-                special: true,
-                names: { c: "Celsius (°C)", f: "Fahrenheit (°F)", k: "Kelvin (K)" }
+                c: { name: "Celsius (°C)" },
+                f: { name: "Fahrenheit (°F)" },
+                k: { name: "Kelvin (K)" }
             },
             pressure: {
-                units: { bar: 1, psi: 0.0689476, kpa: 0.01, atm: 1.01325 },
-                names: { bar: "Bar", psi: "PSI (lbs/in²)", kpa: "Kilopascals (kPa)", atm: "Atmospheres (atm)" }
+                bar: { name: "Bar", factor: 100000 },
+                psi: { name: "PSI (lbf/in²)", factor: 6894.76 },
+                kPa: { name: "Kilopascals (kPa)", factor: 1000 },
+                MPa: { name: "Megapascals (MPa)", factor: 1000000 },
+                atm: { name: "Atmospheres (atm)", factor: 101325 }
             },
             flow: {
-                units: { lmin: 1, cumh: 16.6667, gpm: 3.78541 },
-                names: { lmin: "Liters per Minute (L/min)", cumh: "Cubic Meters per Hour (m³/h)", gpm: "Gallons per Minute (GPM)" }
+                lmin: { name: "Liters / Minute (L/min)", factor: 1 },
+                lh: { name: "Liters / Hour (L/h)", factor: 0.0166667 },
+                m3h: { name: "Cubic Meters / Hour (m³/h)", factor: 16.6667 },
+                gpm: { name: "Gallons / Minute (GPM)", factor: 3.78541 }
             },
             speed: {
-                units: { kmh: 1, mph: 1.60934, ms: 3.6 },
-                names: { kmh: "Kilometers / Hour (km/h)", mph: "Miles / Hour (mph)", ms: "Meters / Second (m/s)" }
+                kmh: { name: "Kilometers / Hour (km/h)", factor: 0.277778 },
+                mph: { name: "Miles / Hour (mph)", factor: 0.44704 },
+                ms: { name: "Meters / Second (m/s)", factor: 1 },
+                knot: { name: "Knots (kt)", factor: 0.514444 }
+            },
+            fueleconomy: {
+                l100km: { name: "Liters / 100 km (L/100km)" },
+                mpgus: { name: "Miles / Gallon (US MPG)" },
+                mpguk: { name: "Miles / Gallon (UK MPG)" }
+            },
+            power: {
+                kW: { name: "Kilowatts (kW)", factor: 1000 },
+                HP: { name: "Horsepower (hp)", factor: 745.7 },
+                W: { name: "Watts (W)", factor: 1 },
+                btuh: { name: "BTU / Hour (BTU/h)", factor: 0.293071 }
+            },
+            energy: {
+                J: { name: "Joules (J)", factor: 1 },
+                kJ: { name: "Kilojoules (kJ)", factor: 1000 },
+                MJ: { name: "Megajoules (MJ)", factor: 1000000 },
+                kWh: { name: "Kilowatt-hours (kWh)", factor: 3600000 },
+                kcal: { name: "Kilocalories (kcal)", factor: 4184 },
+                BTU: { name: "British Thermal Units (BTU)", factor: 1055.06 }
+            },
+            force: {
+                N: { name: "Newtons (N)", factor: 1 },
+                kN: { name: "Kilonewtons (kN)", factor: 1000 },
+                lbf: { name: "Pound-force (lbf)", factor: 4.44822 },
+                kgf: { name: "Kilogram-force (kgf)", factor: 9.80665 }
             }
         };
 
-        function initUnitConverter() {
-            const cat = document.getElementById('uCatSelect').value;
-            const fromSelect = document.getElementById('uFromUnit');
-            const toSelect = document.getElementById('uToUnit');
+        function updateConverterUnits() {
+            const cat = document.getElementById('converterCategory').value;
+            const fromSelect = document.getElementById('converterFromUnit');
+            const toSelect = document.getElementById('converterToUnit');
             
+            const unitsObj = universalUnitsData[cat];
+            const keys = Object.keys(unitsObj);
+
             fromSelect.innerHTML = '';
             toSelect.innerHTML = '';
 
-            const catInfo = unitData[cat];
-            const names = catInfo.names;
-
-            let firstKey = null;
-            let secondKey = null;
-            let count = 0;
-
-            for (const key in names) {
-                if (count === 0) firstKey = key;
-                if (count === 1) secondKey = key;
-                count++;
-
+            keys.forEach((k, idx) => {
                 const opt1 = document.createElement('option');
-                opt1.value = key;
-                opt1.innerText = names[key];
+                opt1.value = k;
+                opt1.textContent = unitsObj[k].name;
                 fromSelect.appendChild(opt1);
 
                 const opt2 = document.createElement('option');
-                opt2.value = key;
-                opt2.innerText = names[key];
+                opt2.value = k;
+                opt2.textContent = unitsObj[k].name;
                 toSelect.appendChild(opt2);
+            });
+
+            if (keys.length > 1) {
+                toSelect.selectedIndex = 1;
             }
 
-            if (secondKey) {
-                toSelect.value = secondKey;
-            }
-
-            runUnitConversion();
+            calculateUniversalConversion();
         }
 
-        function runUnitConversion() {
-            const cat = document.getElementById('uCatSelect').value;
-            const fromUnit = document.getElementById('uFromUnit').value;
-            const toUnit = document.getElementById('uToUnit').value;
-            const val = parseFloat(document.getElementById('uInputValue').value) || 0;
-            const outputEl = document.getElementById('uOutputResult');
+        function swapUniversalUnits() {
+            const fromSelect = document.getElementById('converterFromUnit');
+            const toSelect = document.getElementById('converterToUnit');
+            
+            const temp = fromSelect.value;
+            fromSelect.value = toSelect.value;
+            toSelect.value = temp;
+
+            calculateUniversalConversion();
+        }
+
+        function calculateUniversalConversion() {
+            const cat = document.getElementById('converterCategory').value;
+            const fromUnit = document.getElementById('converterFromUnit').value;
+            const toUnit = document.getElementById('converterToUnit').value;
+            const val = parseFloat(document.getElementById('converterInputVal').value) || 0;
+            const resultEl = document.getElementById('converterResult');
+
+            if (!fromUnit || !toUnit) return;
+
+            let result = 0;
 
             if (cat === 'temperature') {
-                let res = val;
-                if (fromUnit === 'c' && toUnit === 'f') res = (val * 9/5) + 32;
-                else if (fromUnit === 'c' && toUnit === 'k') res = val + 273.15;
-                else if (fromUnit === 'f' && toUnit === 'c') res = (val - 32) * 5/9;
-                else if (fromUnit === 'f' && toUnit === 'k') res = (val - 32) * 5/9 + 273.15;
-                else if (fromUnit === 'k' && toUnit === 'c') res = val - 273.15;
-                else if (fromUnit === 'k' && toUnit === 'f') res = (val - 273.15) * 9/5 + 32;
-                
-                outputEl.innerText = `${val} ${fromUnit.toUpperCase()} = ${res.toFixed(2)} ${toUnit.toUpperCase()}`;
-                return;
+                if (fromUnit === toUnit) result = val;
+                else if (fromUnit === 'c' && toUnit === 'f') result = (val * 9/5) + 32;
+                else if (fromUnit === 'c' && toUnit === 'k') result = val + 273.15;
+                else if (fromUnit === 'f' && toUnit === 'c') result = (val - 32) * 5/9;
+                else if (fromUnit === 'f' && toUnit === 'k') result = (val - 32) * 5/9 + 273.15;
+                else if (fromUnit === 'k' && toUnit === 'c') result = val - 273.15;
+                else if (fromUnit === 'k' && toUnit === 'f') result = (val - 273.15) * 9/5 + 32;
+            } else if (cat === 'fueleconomy') {
+                if (fromUnit === toUnit) result = val;
+                else if (val <= 0) result = 0;
+                else if (fromUnit === 'l100km' && toUnit === 'mpgus') result = 235.215 / val;
+                else if (fromUnit === 'l100km' && toUnit === 'mpguk') result = 282.481 / val;
+                else if (fromUnit === 'mpgus' && toUnit === 'l100km') result = 235.215 / val;
+                else if (fromUnit === 'mpguk' && toUnit === 'l100km') result = 282.481 / val;
+                else if (fromUnit === 'mpgus' && toUnit === 'mpguk') result = val * 1.20095;
+                else if (fromUnit === 'mpguk' && toUnit === 'mpgus') result = val / 1.20095;
+            } else {
+                const unitsObj = universalUnitsData[cat];
+                const baseVal = val * unitsObj[fromUnit].factor;
+                result = baseVal / unitsObj[toUnit].factor;
             }
 
-            const units = unitData[cat].units;
-            const inBase = val * units[fromUnit];
-            const result = inBase / units[toUnit];
+            const formattedVal = Number.isInteger(val) ? val.toLocaleString() : val.toString();
+            const formattedResult = (Math.abs(result) < 0.0001 && result !== 0) ? result.toExponential(4) : result.toLocaleString(undefined, { maximumFractionDigits: 4 });
 
-            outputEl.innerText = `${val} ${fromUnit} = ${result.toLocaleString(undefined, {maximumFractionDigits: 4})} ${toUnit}`;
-        }
-
-        function downloadUniversalConverterTool() {
-            const converterHTML = `<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Universal Unit Converter - Standalone Utility</title>
-    <script src="https://cdn.tailwindcss.com"><\/script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-</head>
-<body class="bg-slate-900 text-slate-100 p-6 min-h-screen flex items-center justify-center font-sans">
-    <div class="max-w-lg w-full bg-slate-800 border border-red-500/40 p-6 rounded-3xl shadow-2xl">
-        <h2 class="text-xl font-extrabold text-red-400 mb-2 flex items-center gap-2">
-            <i class="fa-solid fa-arrows-rotate"></i> Universal Unit Converter
-        </h2>
-        <p class="text-xs text-slate-300 mb-6">Free Standalone Offline Converter for Length, Mass, Area, Volume, Temperature & Pressure.</p>
-
-        <div class="space-y-4">
-            <div>
-                <label class="block text-xs font-semibold text-slate-300 mb-1">Select Category</label>
-                <select id="uCatSelect" onchange="initUnitConverter()" class="w-full p-3 bg-slate-900 border border-slate-700 rounded-xl text-sm text-white font-bold outline-none focus:ring-2 focus:ring-red-500">
-                    <option value="length">Length (m, cm, mm, km, in, ft, yd, mi)</option>
-                    <option value="mass">Mass / Weight (kg, g, mg, lb, oz, ton)</option>
-                    <option value="area">Area (m², ha, km², ft², acre)</option>
-                    <option value="volume">Volume (L, mL, m³, gal, qt, pt)</option>
-                    <option value="temperature">Temperature (°C, °F, K)</option>
-                    <option value="pressure">Pressure (bar, psi, kPa, atm)</option>
-                </select>
-            </div>
-            <div class="grid grid-cols-2 gap-3">
-                <div>
-                    <label class="block text-xs font-semibold text-slate-300 mb-1">From Unit</label>
-                    <select id="uFromUnit" onchange="runUnitConversion()" class="w-full p-3 bg-slate-900 border border-slate-700 rounded-xl text-sm text-white font-bold outline-none focus:ring-2 focus:ring-red-500"></select>
-                </div>
-                <div>
-                    <label class="block text-xs font-semibold text-slate-300 mb-1">To Unit</label>
-                    <select id="uToUnit" onchange="runUnitConversion()" class="w-full p-3 bg-slate-900 border border-slate-700 rounded-xl text-sm text-white font-bold outline-none focus:ring-2 focus:ring-red-500"></select>
-                </div>
-            </div>
-            <div>
-                <label class="block text-xs font-semibold text-slate-300 mb-1">Value to Convert</label>
-                <input type="number" id="uInputValue" value="100" class="w-full p-3 bg-slate-900 border border-slate-700 rounded-xl text-sm text-white font-bold outline-none focus:ring-2 focus:ring-red-500" oninput="runUnitConversion()">
-            </div>
-            <div class="p-4 bg-slate-950 rounded-2xl border border-red-800/60 mt-6 text-center">
-                <span class="text-xs text-slate-400 font-medium block mb-1">Converted Result</span>
-                <span id="uOutputResult" class="text-xl font-extrabold text-red-300">100 m = 328.08 ft</span>
-            </div>
-        </div>
-    </div>
-    <script>
-        const unitData = {
-            length: { units: { m: 1, cm: 0.01, mm: 0.001, km: 1000, inch: 0.0254, ft: 0.3048, yd: 0.9144, mi: 1609.344 }, names: { m: "Meters (m)", cm: "Centimeters (cm)", mm: "Millimeters (mm)", km: "Kilometers (km)", inch: "Inches (in)", ft: "Feet (ft)", yd: "Yards (yd)", mi: "Miles (mi)" } },
-            mass: { units: { kg: 1, g: 0.001, mg: 0.000001, lb: 0.453592, oz: 0.0283495, ton: 1000 }, names: { kg: "Kilograms (kg)", g: "Grams (g)", mg: "Milligrams (mg)", lb: "Pounds (lb)", oz: "Ounces (oz)", ton: "Metric Tons (t)" } },
-            area: { units: { sqm: 1, ha: 10000, sqkm: 1000000, sqft: 0.092903, acre: 4046.86 }, names: { sqm: "Square Meters (m²)", ha: "Hectares (ha)", sqkm: "Square Kilometers (km²)", sqft: "Square Feet (ft²)", acre: "Acres" } },
-            volume: { units: { L: 1, mL: 0.001, cum: 1000, gal: 3.78541, qt: 0.946353, pt: 0.473176 }, names: { L: "Liters (L)", mL: "Milliliters (mL)", cum: "Cubic Meters (m³)", gal: "US Gallons (gal)", qt: "US Quarts (qt)", pt: "US Pints (pt)" } },
-            temperature: { special: true, names: { c: "Celsius (°C)", f: "Fahrenheit (°F)", k: "Kelvin (K)" } },
-            pressure: { units: { bar: 1, psi: 0.0689476, kpa: 0.01, atm: 1.01325 }, names: { bar: "Bar", psi: "PSI (lbs/in²)", kpa: "Kilopascals (kPa)", atm: "Atmospheres (atm)" } }
-        };
-
-        function initUnitConverter() {
-            const cat = document.getElementById('uCatSelect').value;
-            const fromSelect = document.getElementById('uFromUnit');
-            const toSelect = document.getElementById('uToUnit');
-            fromSelect.innerHTML = ''; toSelect.innerHTML = '';
-            const names = unitData[cat].names;
-            let count = 0, firstKey = null, secondKey = null;
-            for (const key in names) {
-                if (count === 0) firstKey = key;
-                if (count === 1) secondKey = key;
-                count++;
-                fromSelect.options.add(new Option(names[key], key));
-                toSelect.options.add(new Option(names[key], key));
-            }
-            if (secondKey) toSelect.value = secondKey;
-            runUnitConversion();
-        }
-
-        function runUnitConversion() {
-            const cat = document.getElementById('uCatSelect').value;
-            const fromUnit = document.getElementById('uFromUnit').value;
-            const toUnit = document.getElementById('uToUnit').value;
-            const val = parseFloat(document.getElementById('uInputValue').value) || 0;
-            const outputEl = document.getElementById('uOutputResult');
-
-            if (cat === 'temperature') {
-                let res = val;
-                if (fromUnit === 'c' && toUnit === 'f') res = (val * 9/5) + 32;
-                else if (fromUnit === 'c' && toUnit === 'k') res = val + 273.15;
-                else if (fromUnit === 'f' && toUnit === 'c') res = (val - 32) * 5/9;
-                else if (fromUnit === 'f' && toUnit === 'k') res = (val - 32) * 5/9 + 273.15;
-                else if (fromUnit === 'k' && toUnit === 'c') res = val - 273.15;
-                else if (fromUnit === 'k' && toUnit === 'f') res = (val - 273.15) * 9/5 + 32;
-                outputEl.innerText = val + ' ' + fromUnit.toUpperCase() + ' = ' + res.toFixed(2) + ' ' + toUnit.toUpperCase();
-                return;
-            }
-
-            const units = unitData[cat].units;
-            const inBase = val * units[fromUnit];
-            const result = inBase / units[toUnit];
-            outputEl.innerText = val + ' ' + fromUnit + ' = ' + result.toLocaleString(undefined, {maximumFractionDigits: 4}) + ' ' + toUnit;
-        }
-
-        initUnitConverter();
-    <\/script>
-</body>
-</html>`;
-
-            const blob = new Blob([converterHTML], { type: 'text/html' });
-            const link = document.createElement('a');
-            link.download = `universal_unit_converter_standalone.html`;
-            link.href = URL.createObjectURL(blob);
-            link.click();
+            resultEl.innerText = `${formattedVal} ${fromUnit} = ${formattedResult} ${toUnit}`;
         }
 
         function initiatePayment() {
@@ -1496,6 +2031,7 @@
             window.history.replaceState({}, document.title, window.location.pathname);
         }
 
+        // --- Splash Screen & Showcase Loop Controller ---
         function runSplashScreenLoop() {
             const showcaseSteps = [
                 { icon: "🌾", category: "Farmers & Tractors", text: "Deutz, Same, Ford & Massey Ferguson Manuals" },
