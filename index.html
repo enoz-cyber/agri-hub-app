@@ -611,6 +611,32 @@
                 ]
             },
 
+            // --- TAFE PARTS MANUALS COLLECTION (R50.00) ---
+            {
+                id: "manual-tafe-engine-7502-8502", title: "Engine Parts Manual - 7502-8502", category: "Farmers", subCategory: "TAFE", image: "https://placehold.co/600x400/065f46/ffffff?text=TAFE+Engine+7502-8502",
+                isPdf: true, downloadUrl: "pdfs/Engine - 7502-8502.pdf", price: "50.00",
+                desc: "Official parts catalog and exploded component diagrams for TAFE 7502-8502 engine assemblies.",
+                steps: ["Cylinder block and head parts", "Pistons, rings, and crankshaft assemblies", "Fuel injection and manifold layouts", "Lubrication and cooling parts"]
+            },
+            {
+                id: "manual-tafe-engine-45-di", title: "Engine Parts Manual - TAFE 45 DI", category: "Farmers", subCategory: "TAFE", image: "https://placehold.co/600x400/065f46/ffffff?text=TAFE+Engine+45+DI",
+                isPdf: true, downloadUrl: "pdfs/Engine - TAFE 45 DI.pdf", price: "50.00",
+                desc: "Official parts catalog and exploded component diagrams for TAFE 45 DI engine maintenance and repairs.",
+                steps: ["Engine block components", "Valves and camshaft parts", "Fuel system and filter elements", "Gasket and seal kits"]
+            },
+            {
+                id: "manual-tafe-tractor-7502-8502", title: "Tractor Parts Manual - 7502-8502", category: "Farmers", subCategory: "TAFE", image: "https://placehold.co/600x400/065f46/ffffff?text=TAFE+Tractor+7502-8502",
+                isPdf: true, downloadUrl: "pdfs/Tractor - 7502-8502.pdf", price: "50.00",
+                desc: "Official comprehensive parts manual for TAFE 7502 and 8502 tractors, covering transmission, chassis, and hydraulics.",
+                steps: ["Transmission and gearbox assemblies", "Hydraulic lift and three-point linkage", "Steering and front axle components", "Electrical and body panels"]
+            },
+            {
+                id: "manual-tafe-tractor-45-di", title: "Tractor Parts Manual - TAFE 45 DI", category: "Farmers", subCategory: "TAFE", image: "https://placehold.co/600x400/065f46/ffffff?text=TAFE+Tractor+45+DI",
+                isPdf: true, downloadUrl: "pdfs/Tractor - TAFE 45 DI.pdf", price: "50.00",
+                desc: "Official comprehensive parts manual and exploded diagrams for the TAFE 45 DI tractor model.",
+                steps: ["Clutch and transmission parts", "Rear axle and differential", "Hydraulic pump and lines", "Steering assembly and linkage"]
+            },
+
             // --- WORKSHOP MANUALS COLLECTION (Deutz) - R50.00 ---
             {
                 id: "manual-agrokid", title: "AGROKID 30-40-50 Workshop Manual", category: "Farmers", subCategory: "Deutz", image: "https://placehold.co/600x400/065f46/ffffff?text=Deutz+Agrokid",
@@ -1447,7 +1473,7 @@
             const priceStr = guide.price || "20.00";
             if (guide.isPdf) {
                 document.getElementById('overlayTitle').innerText = "Protected Cloud Workshop Manual";
-                document.getElementById('overlayDesc').innerText = "Complete factory workshop manual and diagnostic PDF stored securely on Google Drive.";
+                document.getElementById('overlayDesc').innerText = "Complete factory workshop manual and diagnostic PDF stored securely.";
                 document.getElementById('overlayBtnText').innerText = `Proceed to Secure Checkout (R${priceStr})`;
                 document.getElementById('footerActionBtn').innerHTML = `<i class="fa-solid fa-lock"></i> Secure Checkout - R${priceStr}`;
             } else {
@@ -1506,12 +1532,10 @@
         }
 
         function downloadGasCardAndRedirect() {
-            // Save pending download ID to both session storage and local storage to prevent wiping issues
             sessionStorage.setItem('pending_download_id', 'gas-geyser-card');
             localStorage.setItem('pending_download_id', 'gas-geyser-card');
             closeGasCardModal();
             
-            // Trigger PayFast checkout for R20.00
             const guide = allGuides.find(g => g.id === 'gas-geyser-card');
             if (!guide) return;
 
@@ -1640,7 +1664,6 @@
         }
 
         async function executeUnlockedDownload() {
-            // Retrieve from sessionStorage or fallback to localStorage, or default to gas-geyser-card if missing
             let guideId = sessionStorage.getItem('pending_download_id') || localStorage.getItem('pending_download_id') || 'gas-geyser-card';
 
             const guide = allGuides.find(g => g.id === guideId);
@@ -1650,7 +1673,6 @@
                 return;
             }
 
-            // Special handling for Gas Geyser Card post-payment download + automatic redirect
             if (guide.isGasCard) {
                 const element = document.getElementById('gasCardRenderArea');
                 if (element) {
@@ -1673,7 +1695,6 @@
                 document.getElementById('successPaymentBanner').classList.add('hidden');
                 window.history.replaceState({}, document.title, window.location.pathname);
 
-                // Automatically redirect to https://gas.jlvorster.co.za/ after download
                 setTimeout(() => {
                     window.location.href = "https://gas.jlvorster.co.za/";
                 }, 800);
@@ -1790,10 +1811,8 @@
             const progressBar = document.getElementById('splashProgressBar');
             const splashScreen = document.getElementById('splashScreen');
 
-            // Animate progress bar to 100% over 3.2 seconds
             setTimeout(() => { progressBar.style.width = '100%'; }, 50);
 
-            // Rotate showcase text every 800ms
             const loopTimer = setInterval(() => {
                 currentStep = (currentStep + 1) % showcaseSteps.length;
                 iconEl.innerText = showcaseSteps[currentStep].icon;
@@ -1801,7 +1820,6 @@
                 textEl.innerText = showcaseSteps[currentStep].text;
             }, 800);
 
-            // Hide splash screen after 3.5 seconds
             setTimeout(() => {
                 clearInterval(loopTimer);
                 splashScreen.style.opacity = '0';
