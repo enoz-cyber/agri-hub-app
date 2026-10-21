@@ -194,7 +194,7 @@
         <div id="handymanSubCategoryContainer" class="mb-6 hidden flex items-center gap-2 overflow-x-auto pb-2 bg-sky-950/40 p-3.5 rounded-2xl border border-sky-900/50 shadow-inner">
             <span class="text-xs font-extrabold text-sky-300 uppercase tracking-wider mr-2 flex items-center gap-1.5"><i class="fa-solid fa-filter text-sky-400"></i> Handyman Sub-Categories:</span>
             <button onclick="filterBySubCategory('All')" id="hsubcat-All" class="hsubcat-btn px-3.5 py-1.5 rounded-xl text-xs font-bold bg-sky-700 text-white transition shadow-sm">All Handyman</button>
-            <button onclick="filterBySubCategory('Installation')" id="hsubcat-Installation" class="hsubcat-btn px-3.5 py-1.5 rounded-xl text-xs font-bold bg-slate-800 text-sky-300 border border-sky-800 hover:bg-sky-800 hover:text-white transition shadow-sm">Installation</button>
+            <button onclick="filterBySubCategory('Gas Installations')" id="hsubcat-Gas Installations" class="hsubcat-btn px-3.5 py-1.5 rounded-xl text-xs font-bold bg-slate-800 text-sky-300 border border-sky-800 hover:bg-sky-800 hover:text-white transition shadow-sm">Gas Installations</button>
             <button onclick="filterBySubCategory('Manufacture')" id="hsubcat-Manufacture" class="hsubcat-btn px-3.5 py-1.5 rounded-xl text-xs font-bold bg-slate-800 text-sky-300 border border-sky-800 hover:bg-sky-800 hover:text-white transition shadow-sm">Manufacture</button>
             <button onclick="filterBySubCategory('Metalwork & Fabrication')" id="hsubcat-Metalwork & Fabrication" class="hsubcat-btn px-3.5 py-1.5 rounded-xl text-xs font-bold bg-slate-800 text-sky-300 border border-sky-800 hover:bg-sky-800 hover:text-white transition shadow-sm">Metalwork & Fabrication</button>
             <button onclick="filterBySubCategory('Plumbing')" id="hsubcat-Plumbing" class="hsubcat-btn px-3.5 py-1.5 rounded-xl text-xs font-bold bg-slate-800 text-sky-300 border border-sky-800 hover:bg-sky-800 hover:text-white transition shadow-sm">Plumbing</button>
@@ -213,7 +213,7 @@
         </div>
     </main>
 
-    <!-- Guide Modal -->
+    <!-- Standard Guide Modal -->
     <div id="guideModal" class="fixed inset-0 bg-slate-950/80 backdrop-blur-md z-50 hidden flex items-center justify-center p-4 overflow-y-auto">
         <div id="modalCardWrapper" class="bg-slate-900 rounded-3xl max-w-2xl w-full overflow-hidden shadow-2xl transform transition-all my-8 border border-slate-700 relative text-slate-100">
             
@@ -261,6 +261,59 @@
                     </button>
                     <button onclick="closeModal()" class="bg-slate-800 hover:bg-slate-700 text-slate-200 px-5 py-2.5 rounded-xl text-xs font-semibold transition">Close</button>
                 </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Specialized Gas Installation Interactive Card Modal -->
+    <div id="gasCardModal" class="fixed inset-0 bg-slate-950/80 backdrop-blur-md z-50 hidden flex items-center justify-center p-4 overflow-y-auto">
+        <div class="bg-slate-900 rounded-3xl max-w-md w-full overflow-hidden shadow-2xl border border-sky-500/40 text-slate-100 p-6 relative">
+            <button onclick="closeGasCardModal()" class="absolute top-4 right-4 bg-slate-800 hover:bg-slate-700 text-white w-9 h-9 rounded-full flex items-center justify-center transition border border-slate-600 shadow-md z-30">
+                <i class="fa-solid fa-xmark text-sm"></i>
+            </button>
+
+            <!-- Downloadable Safety Card Area -->
+            <div id="gasCardRenderArea" class="bg-slate-950 p-6 rounded-2xl border border-slate-800 space-y-5">
+                <div class="flex items-center justify-between border-b border-slate-800 pb-4">
+                    <div class="flex items-center gap-3">
+                        <div class="bg-sky-500/20 text-sky-400 p-3 rounded-2xl border border-sky-500/30">
+                            <i class="fa-solid fa-fire-flame-simple text-2xl"></i>
+                        </div>
+                        <div>
+                            <h3 class="text-base font-extrabold text-white leading-tight">Gas Geyser Safety Card</h3>
+                            <p class="text-[11px] text-sky-400 font-semibold uppercase tracking-wider">Compliance & SAQCC Register</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="space-y-3 text-xs text-slate-300">
+                    <div class="p-3.5 bg-slate-900 rounded-xl border border-slate-800 flex items-start gap-3">
+                        <i class="fa-solid fa-shield-halved text-amber-400 text-base mt-0.5 shrink-0"></i>
+                        <div>
+                            <strong class="text-white block font-bold mb-0.5">Mandatory Certificate of Conformity (CoC)</strong>
+                            <span>Gas geysers must be installed by a registered SAQCC gas practitioner to issue a legal CoC for insurance validity.</span>
+                        </div>
+                    </div>
+                    <div class="p-3.5 bg-slate-900 rounded-xl border border-slate-800 flex items-start gap-3">
+                        <i class="fa-solid fa-triangle-exclamation text-sky-400 text-base mt-0.5 shrink-0"></i>
+                        <div>
+                            <strong class="text-white block font-bold mb-0.5">SANS 10087-1 Safety Regulations</strong>
+                            <span>Strict clearance regulations apply regarding LPG cylinder placement relative to windows, drains, and electrical switches.</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Protected Locked Action Link Button -->
+                <button onclick="downloadGasCardAndRedirect()" class="w-full bg-gradient-to-r from-sky-600 to-blue-600 hover:from-sky-500 hover:to-blue-500 text-white font-extrabold p-3.5 rounded-xl text-center text-xs transition shadow-lg flex items-center justify-center gap-2 border border-sky-400/30">
+                    <i class="fa-solid fa-lock text-amber-300"></i> Find / Verify SAQCC Gas Technician (R20.00)
+                </button>
+            </div>
+
+            <!-- Download Button -->
+            <div class="mt-5">
+                <button onclick="downloadGasCardAndRedirect()" class="w-full bg-emerald-600 hover:bg-emerald-500 text-white font-bold py-3.5 px-4 rounded-xl text-xs transition flex items-center justify-center gap-2 shadow-md">
+                    <i class="fa-solid fa-download"></i> Download Card Image (R20.00)
+                </button>
             </div>
         </div>
     </div>
@@ -430,32 +483,6 @@
 </html>`;
 
         const allGuides = [
-            // --- TAFE SPARES & PARTS MANUALS (R50.00) ---
-            {
-                id: "tafe-engine-7502-8502", title: "TAFE Engine Spares Manual - 7502 / 8502", category: "Farmers", subCategory: "TAFE", image: "https://placehold.co/600x400/065f46/ffffff?text=TAFE+Engine+7502-8502",
-                isPdf: true, downloadUrl: "./pdfs/Engine - 7502-8502.pdf", price: "50.00",
-                desc: "Official factory engine parts catalog and spare parts manual for TAFE 7502 and 8502 series engines.",
-                steps: ["Cylinder block & head assemblies", "Pistons, crankshaft & bearings", "Fuel injection pump & lines", "Gasket sets & torque specifications"]
-            },
-            {
-                id: "tafe-engine-45-di", title: "TAFE Engine Spares Manual - TAFE 45 DI", category: "Farmers", subCategory: "TAFE", image: "https://placehold.co/600x400/065f46/ffffff?text=TAFE+Engine+45+DI",
-                isPdf: true, downloadUrl: "./pdfs/Engine - TAFE 45 DI.pdf", price: "50.00",
-                desc: "Comprehensive engine spares and replacement parts catalog for TAFE 45 DI tractor engines.",
-                steps: ["Simpson diesel engine components", "Cooling & lubrication system parts", "Valves & timing gear catalog", "Filters and maintenance kits"]
-            },
-            {
-                id: "tafe-tractor-7502-8502", title: "TAFE Tractor Spares Manual - 7502 / 8502", category: "Farmers", subCategory: "TAFE", image: "https://placehold.co/600x400/065f46/ffffff?text=TAFE+Tractor+7502-8502",
-                isPdf: true, downloadUrl: "./pdfs/Tractor - 7502-8502.pdf", price: "50.00",
-                desc: "Complete chassis, transmission, and hydraulic spare parts manual for TAFE 7502 and 8502 tractors.",
-                steps: ["Gearbox & clutch replacement parts", "Rear axle and 4WD front axle spares", "Hydraulic lift linkage components", "Brake & steering mechanism parts"]
-            },
-            {
-                id: "tafe-tractor-45-di", title: "TAFE Tractor Spares Manual - TAFE 45 DI", category: "Farmers", subCategory: "TAFE", image: "https://placehold.co/600x400/065f46/ffffff?text=TAFE+Tractor+45+DI",
-                isPdf: true, downloadUrl: "./pdfs/Tractor - TAFE 45 DI.pdf", price: "50.00",
-                desc: "Full tractor body, transmission, and hydraulic spares breakdown manual for TAFE 45 DI.",
-                steps: ["3-Point linkage & drawbar parts", "Sliding mesh transmission breakdown", "Hydraulic pump and control valve spares", "Electrical wiring & body sheet metal"]
-            },
-
             // --- FARMING GUIDES & PROCEDURES (Price: R20.00) ---
             {
                 id: "plough", title: "Plough Alignment & Attachment Guide", category: "Farmers", subCategory: "Crop Farming", image: "images/plough-alignment.jpg", price: "20.00",
@@ -693,33 +720,6 @@
                 desc: "Official user and operation manual for Ford 5610 and 7610 agricultural tractors.",
                 steps: ["Instrument panel & controls", "Operating procedures & PTO", "Routine maintenance & fluid specs", "Troubleshooting & safety guidelines"]
             },
-            
-            // --- TAFE SPARES & PARTS MANUALS (R50.00) ---
-            {
-                id: "tafe-engine-7502-8502", title: "TAFE Engine Spares Manual - 7502 / 8502", category: "Farmers", subCategory: "TAFE", image: "https://placehold.co/600x400/065f46/ffffff?text=TAFE+Engine+7502-8502",
-                isPdf: true, downloadUrl: "./pdfs/Engine - 7502-8502.pdf", price: "50.00",
-                desc: "Official factory engine parts catalog and spare parts manual for TAFE 7502 and 8502 series engines.",
-                steps: ["Cylinder block & head assemblies", "Pistons, crankshaft & bearings", "Fuel injection pump & lines", "Gasket sets & torque specifications"]
-            },
-            {
-                id: "tafe-engine-45-di", title: "TAFE Engine Spares Manual - TAFE 45 DI", category: "Farmers", subCategory: "TAFE", image: "https://placehold.co/600x400/065f46/ffffff?text=TAFE+Engine+45+DI",
-                isPdf: true, downloadUrl: "./pdfs/Engine - TAFE 45 DI.pdf", price: "50.00",
-                desc: "Comprehensive engine spares and replacement parts catalog for TAFE 45 DI tractor engines.",
-                steps: ["Simpson diesel engine components", "Cooling & lubrication system parts", "Valves & timing gear catalog", "Filters and maintenance kits"]
-            },
-            {
-                id: "tafe-tractor-7502-8502", title: "TAFE Tractor Spares Manual - 7502 / 8502", category: "Farmers", subCategory: "TAFE", image: "https://placehold.co/600x400/065f46/ffffff?text=TAFE+Tractor+7502-8502",
-                isPdf: true, downloadUrl: "./pdfs/Tractor - 7502-8502.pdf", price: "50.00",
-                desc: "Complete chassis, transmission, and hydraulic spare parts manual for TAFE 7502 and 8502 tractors.",
-                steps: ["Gearbox & clutch replacement parts", "Rear axle and 4WD front axle spares", "Hydraulic lift linkage components", "Brake & steering mechanism parts"]
-            },
-            {
-                id: "tafe-tractor-45-di", title: "TAFE Tractor Spares Manual - TAFE 45 DI", category: "Farmers", subCategory: "TAFE", image: "https://placehold.co/600x400/065f46/ffffff?text=TAFE+Tractor+45+DI",
-                isPdf: true, downloadUrl: "./pdfs/Tractor - TAFE 45 DI.pdf", price: "50.00",
-                desc: "Full tractor body, transmission, and hydraulic spares breakdown manual for TAFE 45 DI.",
-                steps: ["3-Point linkage & drawbar parts", "Sliding mesh transmission breakdown", "Hydraulic pump and control valve spares", "Electrical wiring & body sheet metal"]
-            },
-
             {
                 id: "manual-additional-1", title: "Deutz Tractor Technical Workshop Manual A", category: "Farmers", subCategory: "Deutz", image: "https://placehold.co/600x400/065f46/ffffff?text=Deutz+Manual",
                 isPdf: true, downloadUrl: "https://drive.google.com/file/d/1Mt9rIXOZsCJEDZttgxnQ5SK-GYjI7ZDU/view?usp=drive_link", price: "50.00",
@@ -1169,7 +1169,17 @@
                 steps: ["Powertrain & transmission parts", "Hydraulic valves and pumps", "Cabin controls and filters", "Complete parts reference index"]
             },
 
-            // --- BUILDERS, HANDYMAN, HOUSEWIVES (Price: R20.00) ---
+            // --- BUILDERS, HANDYMAN, HOUSEWIVES ---
+            {
+                id: "gas-geyser-card", title: "Gas Geyser Safety & Installer Verification Card", category: "Handyman", subCategory: "Gas Installations", image: "https://placehold.co/600x400/0284c7/ffffff?text=Gas+Geyser+Safety+Card", price: "20.00",
+                isGasCard: true,
+                desc: "Gas installation compliance card with safety regulations and direct link access to certified SAQCC Gas technicians.",
+                steps: [
+                    "Verify Installer Registration: Always use a licensed SAQCC Gas practitioner.",
+                    "Ensure Certificate of Conformity (CoC): Mandatory for legal compliance and property insurance.",
+                    "Adhere to SANS 10087-1 Regulations: Observe required safety distances between gas bottles, windows, doors, and electrical points."
+                ]
+            },
             {
                 id: "foundation-squaring", title: "Foundation Squaring & Layout Guide", category: "Builders", subCategory: "General", image: "images/foundation-squaring-guide.jpg", price: "20.00",
                 desc: "Step-by-step master guide for accurately laying out building lines, establishing baselines, applying the 3-4-5 rule for right angles, squaring walls, cross-measuring diagonals, and setting up batter boards.",
@@ -1290,16 +1300,30 @@
                     imageHtml = `
                         <div class="relative h-48 bg-slate-950 overflow-hidden">
                             <img src="${guide.image}" alt="${guide.title}" crossorigin="anonymous"
-                                 class="w-full h-full object-cover group-hover:scale-105 transition duration-500" style="filter: blur(1.5px); pointer-events: none;"
+                                 class="w-full h-full object-cover group-hover:scale-105 transition duration-500" style="${guide.isGasCard ? 'filter: blur(1.5px); pointer-events: none;' : (guide.isPdf ? 'filter: blur(1.5px); pointer-events: none;' : 'filter: blur(1.5px); pointer-events: none;')}"
                                  onerror="handleImageError(this)">
                             <div class="absolute inset-0 bg-slate-950/15 flex items-center justify-center">
-                                <span class="bg-slate-900/85 text-slate-100 text-[10px] font-bold px-3 py-1 rounded-full uppercase tracking-wider backdrop-blur-sm shadow-md border border-slate-700/80">🔒 ${guide.isPdf ? 'Cloud Workshop Manual' : 'Preview Protected'}</span>
+                                <span class="bg-slate-900/85 text-slate-100 text-[10px] font-bold px-3 py-1 rounded-full uppercase tracking-wider backdrop-blur-sm shadow-md border border-slate-700/80">${guide.isGasCard ? '🔒 Preview Protected (R20)' : guide.isPdf ? '🔒 Cloud Workshop Manual' : '🔒 Preview Protected'}</span>
                             </div>
                         </div>
                     `;
                 }
 
-                const priceTag = guide.price ? ` (R${guide.price})` : '';
+                const priceTag = (guide.price && guide.price !== 'Free') ? ` (R${guide.price})` : ' (Free)';
+
+                let actionBtnHtml = `
+                    <button onclick="openModal('${guide.id}')" class="flex-1 ${theme.buttonBg} text-white py-3 px-4 rounded-2xl text-xs font-bold transition flex items-center justify-center gap-2 shadow-md hover:shadow-lg transform active:scale-95">
+                        <i class="fa-solid ${guide.isPdf ? 'fa-file-pdf text-amber-300' : guide.isInteractive ? 'fa-calculator text-teal-300' : 'fa-lock text-amber-300'}"></i> ${guide.isPdf ? `Unlock & Download Manual${priceTag}` : guide.isInteractive ? `Launch Calculator${priceTag}` : `View Guide${priceTag}`}
+                    </button>
+                `;
+
+                if (guide.isGasCard) {
+                    actionBtnHtml = `
+                        <button onclick="openGasCardModal()" class="flex-1 bg-gradient-to-r from-sky-600 to-blue-600 hover:from-sky-500 hover:to-blue-500 text-white py-3 px-4 rounded-2xl text-xs font-bold transition flex items-center justify-center gap-2 shadow-md hover:shadow-lg transform active:scale-95 border border-sky-400/30">
+                            <i class="fa-solid fa-lock text-amber-300"></i> View & Download Card (R20.00)
+                        </button>
+                    `;
+                }
 
                 card.innerHTML = `
                     ${imageHtml}
@@ -1312,9 +1336,7 @@
                             <p class="text-slate-300 text-xs sm:text-sm line-clamp-3 mb-4 leading-relaxed">${cardDescription}</p>
                         </div>
                         <div class="flex items-center gap-2.5 pt-4 border-t border-slate-800">
-                            <button onclick="openModal('${guide.id}')" class="flex-1 ${theme.buttonBg} text-white py-3 px-4 rounded-2xl text-xs font-bold transition flex items-center justify-center gap-2 shadow-md hover:shadow-lg transform active:scale-95">
-                                <i class="fa-solid ${guide.isPdf ? 'fa-file-pdf text-amber-300' : guide.isInteractive ? 'fa-calculator text-teal-300' : 'fa-lock text-amber-300'}"></i> ${guide.isPdf ? `Unlock & Download Manual${priceTag}` : guide.isInteractive ? `Launch Calculator${priceTag}` : `View Guide${priceTag}`}
-                            </button>
+                            ${actionBtnHtml}
                         </div>
                     </div>
                 `;
@@ -1472,6 +1494,66 @@
             activeGuideId = null;
         }
 
+        /* --- Gas Installation Card Controls & PayFast Checkout / Redirect --- */
+        function openGasCardModal() {
+            document.getElementById('gasCardModal').classList.remove('hidden');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeGasCardModal() {
+            document.getElementById('gasCardModal').classList.add('hidden');
+            document.body.style.overflow = 'auto';
+        }
+
+        function downloadGasCardAndRedirect() {
+            // Save pending download ID to both session storage and local storage to prevent wiping issues
+            sessionStorage.setItem('pending_download_id', 'gas-geyser-card');
+            localStorage.setItem('pending_download_id', 'gas-geyser-card');
+            closeGasCardModal();
+            
+            // Trigger PayFast checkout for R20.00
+            const guide = allGuides.find(g => g.id === 'gas-geyser-card');
+            if (!guide) return;
+
+            const price = "20.00";
+            if (confirm(`Proceed to PayFast checkout for "${guide.title}" (R${price})?`)) {
+                let currentUrl = window.location.href.split('#')[0].split('?')[0];
+                if (!currentUrl.startsWith('http')) {
+                    currentUrl = 'https://enoz-cyber.github.io/agri-hub-app/';
+                }
+
+                const returnWithSuccess = currentUrl + "?payment=success";
+
+                const payfastUrl = 'https://sandbox.payfast.co.za/eng/process';
+                const form = document.createElement('form');
+                form.method = 'POST';
+                form.action = payfastUrl;
+
+                const paymentData = {
+                    merchant_id: '10000100',
+                    merchant_key: '46f0cd694581a',
+                    return_url: returnWithSuccess, 
+                    cancel_url: currentUrl, 
+                    item_name: `Manual/Guide: ${guide.title}`,
+                    amount: price, 
+                    item_description: guide.desc.substring(0, 100)
+                };
+
+                for (const key in paymentData) {
+                    if (paymentData.hasOwnProperty(key)) {
+                        const input = document.createElement('input');
+                        input.type = 'hidden';
+                        input.name = key;
+                        input.value = paymentData[key];
+                        form.appendChild(input);
+                    }
+                }
+
+                document.body.appendChild(form);
+                form.submit();
+            }
+        }
+
         function openCalculatorModal() {
             document.getElementById('calculatorModal').classList.remove('hidden');
             document.body.style.overflow = 'hidden';
@@ -1522,6 +1604,7 @@
                 }
 
                 sessionStorage.setItem('pending_download_id', guide.id);
+                localStorage.setItem('pending_download_id', guide.id);
                 const returnWithSuccess = currentUrl + "?payment=success";
 
                 const payfastUrl = 'https://sandbox.payfast.co.za/eng/process';
@@ -1557,15 +1640,45 @@
         }
 
         async function executeUnlockedDownload() {
-            const guideId = sessionStorage.getItem('pending_download_id');
-            if (!guideId) {
-                alert("No pending download found or it has already been downloaded.");
+            // Retrieve from sessionStorage or fallback to localStorage, or default to gas-geyser-card if missing
+            let guideId = sessionStorage.getItem('pending_download_id') || localStorage.getItem('pending_download_id') || 'gas-geyser-card';
+
+            const guide = allGuides.find(g => g.id === guideId);
+            if (!guide) {
+                alert("Download reference not found. Please try again.");
                 document.getElementById('successPaymentBanner').classList.add('hidden');
                 return;
             }
 
-            const guide = allGuides.find(g => g.id === guideId);
-            if (!guide) return;
+            // Special handling for Gas Geyser Card post-payment download + automatic redirect
+            if (guide.isGasCard) {
+                const element = document.getElementById('gasCardRenderArea');
+                if (element) {
+                    await html2canvas(element, {
+                        scale: 3,
+                        backgroundColor: '#020617',
+                        useCORS: true,
+                        allowTaint: true,
+                        logging: false
+                    }).then(canvas => {
+                        const link = document.createElement('a');
+                        link.download = `saqcc_gas_installation_card.png`;
+                        link.href = canvas.toDataURL('image/png', 1.0);
+                        link.click();
+                    });
+                }
+
+                sessionStorage.removeItem('pending_download_id');
+                localStorage.removeItem('pending_download_id');
+                document.getElementById('successPaymentBanner').classList.add('hidden');
+                window.history.replaceState({}, document.title, window.location.pathname);
+
+                // Automatically redirect to https://gas.jlvorster.co.za/ after download
+                setTimeout(() => {
+                    window.location.href = "https://gas.jlvorster.co.za/";
+                }, 800);
+                return;
+            }
 
             const isInteractiveGuide = guide.isInteractive || false;
             const isPdfGuide = guide.isPdf || false;
@@ -1656,6 +1769,7 @@
             }
 
             sessionStorage.removeItem('pending_download_id');
+            localStorage.removeItem('pending_download_id');
             document.getElementById('successPaymentBanner').classList.add('hidden');
             window.history.replaceState({}, document.title, window.location.pathname);
         }
@@ -1700,7 +1814,7 @@
             renderGuides();
 
             const urlParams = new URLSearchParams(window.location.search);
-            if (urlParams.get('payment') === 'success' && sessionStorage.getItem('pending_download_id')) {
+            if (urlParams.get('payment') === 'success') {
                 document.getElementById('successPaymentBanner').classList.remove('hidden');
                 window.scrollTo({ top: 0, behavior: 'smooth' });
             } else {
