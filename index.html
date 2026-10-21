@@ -55,9 +55,10 @@
 </head>
 <body class="bg-slate-900 text-slate-100 h-full flex flex-col justify-between selection:bg-emerald-500 selection:text-white" oncontextmenu="return false;">
 
-    <!-- Interactive Splash / Showcase Loop Screen -->
+    <!-- Interactive Splash / Showcase Loop Screen (Runs for ~3.5 seconds) -->
     <div id="splashScreen" class="fixed inset-0 z-50 bg-gradient-to-br from-slate-950 via-emerald-950 to-slate-900 flex flex-col items-center justify-center p-6 text-center">
         <div class="max-w-md w-full bg-slate-900/80 border border-emerald-500/30 backdrop-blur-xl p-8 rounded-3xl shadow-2xl relative overflow-hidden">
+            <!-- Background glow -->
             <div class="absolute -top-24 -left-24 w-48 h-48 bg-emerald-500/20 rounded-full blur-3xl pointer-events-none"></div>
             
             <div class="bg-gradient-to-br from-emerald-400/20 to-teal-600/30 w-20 h-20 mx-auto rounded-3xl shadow-inner border border-emerald-400/30 flex items-center justify-center mb-6 backdrop-blur-md">
@@ -67,14 +68,16 @@
             <h2 class="text-2xl font-extrabold text-white mb-2 tracking-tight">Professional & Lifestyle Hub</h2>
             <p class="text-xs text-emerald-200/90 font-medium mb-8">Loading Verified Guides, Tractor Manuals & Utilities...</p>
 
+            <!-- Dynamic Showcase Loop Rotator -->
             <div class="h-16 bg-slate-950/80 border border-slate-800 rounded-2xl p-3 flex items-center justify-center gap-3 mb-6 shadow-inner">
                 <span id="splashIcon" class="text-emerald-400 text-xl">🌾</span>
                 <div class="text-left">
                     <div id="splashCategory" class="text-[10px] font-extrabold uppercase tracking-wider text-emerald-400">Farmers & Tractors</div>
-                    <div id="splashText" class="text-xs text-slate-200 font-semibold truncate max-w-[220px]">Deutz, Same, Ford & TAFE Spares Manuals</div>
+                    <div id="splashText" class="text-xs text-slate-200 font-semibold truncate max-w-[220px]">Deutz, Same & Ford Workshop Manuals</div>
                 </div>
             </div>
 
+            <!-- Progress Bar -->
             <div class="w-full bg-slate-800 h-2 rounded-full overflow-hidden border border-slate-700">
                 <div id="splashProgressBar" class="bg-gradient-to-r from-emerald-500 to-teal-400 h-full w-0 transition-all duration-300"></div>
             </div>
@@ -94,6 +97,7 @@
                 </div>
             </div>
 
+            <!-- Header Contact Info (Email & WhatsApp) -->
             <div class="flex items-center gap-3 flex-wrap justify-center text-xs font-semibold text-emerald-100 bg-emerald-950/50 px-4 py-2 rounded-2xl border border-emerald-600/30 backdrop-blur-sm shadow-inner">
                 <a href="mailto:enozsprayers@gmail.com" class="flex items-center gap-1.5 hover:text-white transition">
                     <i class="fa-solid fa-envelope text-emerald-300"></i> enozsprayers@gmail.com
@@ -155,6 +159,7 @@
                 <button onclick="filterByCategory('Housewives')" onmouseenter="startCategoryLoop('Housewives', event)" onmouseleave="stopCategoryLoop()" id="cat-Housewives" class="category-btn px-4 py-2 rounded-xl text-xs font-bold bg-rose-950/80 text-rose-300 border border-rose-700/60 hover:bg-rose-600 hover:text-white transition shadow-sm hover:scale-105">🏠 Housewives</button>
             </div>
 
+            <!-- Floating Preview Popup Box -->
             <div id="categoryPreviewPopup" class="hidden absolute top-20 left-6 z-50 w-80 bg-slate-900/95 backdrop-blur-md text-white p-4 rounded-2xl shadow-2xl border border-slate-700 pointer-events-none transition-all duration-150">
                 <h4 id="previewTitle" class="text-xs font-extrabold uppercase tracking-wider text-emerald-400 mb-2 border-b border-slate-700 pb-1.5">Category Live Loop</h4>
                 <div id="previewContent" class="text-xs text-slate-200 font-medium min-h-[40px] flex items-center"></div>
@@ -189,7 +194,7 @@
         <div id="handymanSubCategoryContainer" class="mb-6 hidden flex items-center gap-2 overflow-x-auto pb-2 bg-sky-950/40 p-3.5 rounded-2xl border border-sky-900/50 shadow-inner">
             <span class="text-xs font-extrabold text-sky-300 uppercase tracking-wider mr-2 flex items-center gap-1.5"><i class="fa-solid fa-filter text-sky-400"></i> Handyman Sub-Categories:</span>
             <button onclick="filterBySubCategory('All')" id="hsubcat-All" class="hsubcat-btn px-3.5 py-1.5 rounded-xl text-xs font-bold bg-sky-700 text-white transition shadow-sm">All Handyman</button>
-            <button onclick="filterBySubCategory('Gas Installations')" id="hsubcat-Gas Installations" class="hsubcat-btn px-3.5 py-1.5 rounded-xl text-xs font-bold bg-slate-800 text-sky-300 border border-sky-800 hover:bg-sky-800 hover:text-white transition shadow-sm">Gas Installations</button>
+            <button onclick="filterBySubCategory('Installation')" id="hsubcat-Installation" class="hsubcat-btn px-3.5 py-1.5 rounded-xl text-xs font-bold bg-slate-800 text-sky-300 border border-sky-800 hover:bg-sky-800 hover:text-white transition shadow-sm">Installation</button>
             <button onclick="filterBySubCategory('Manufacture')" id="hsubcat-Manufacture" class="hsubcat-btn px-3.5 py-1.5 rounded-xl text-xs font-bold bg-slate-800 text-sky-300 border border-sky-800 hover:bg-sky-800 hover:text-white transition shadow-sm">Manufacture</button>
             <button onclick="filterBySubCategory('Metalwork & Fabrication')" id="hsubcat-Metalwork & Fabrication" class="hsubcat-btn px-3.5 py-1.5 rounded-xl text-xs font-bold bg-slate-800 text-sky-300 border border-sky-800 hover:bg-sky-800 hover:text-white transition shadow-sm">Metalwork & Fabrication</button>
             <button onclick="filterBySubCategory('Plumbing')" id="hsubcat-Plumbing" class="hsubcat-btn px-3.5 py-1.5 rounded-xl text-xs font-bold bg-slate-800 text-sky-300 border border-sky-800 hover:bg-sky-800 hover:text-white transition shadow-sm">Plumbing</button>
@@ -208,7 +213,7 @@
         </div>
     </main>
 
-    <!-- Standard Guide Modal -->
+    <!-- Guide Modal -->
     <div id="guideModal" class="fixed inset-0 bg-slate-950/80 backdrop-blur-md z-50 hidden flex items-center justify-center p-4 overflow-y-auto">
         <div id="modalCardWrapper" class="bg-slate-900 rounded-3xl max-w-2xl w-full overflow-hidden shadow-2xl transform transition-all my-8 border border-slate-700 relative text-slate-100">
             
@@ -223,6 +228,7 @@
                 </button>
             </div>
 
+            <!-- Image Header Container -->
             <div id="modalImageContainer" class="relative bg-slate-950 h-56 sm:h-64 flex items-center justify-center overflow-hidden border-b border-slate-800">
                 <img id="modalImage" src="" alt="Guide Image" class="w-full h-full object-cover secure-blur" crossorigin="anonymous" onerror="handleImageError(this)">
                 <button id="modalCloseBtn" onclick="closeModal()" class="absolute top-4 right-4 bg-black/60 hover:bg-black/80 text-white w-9 h-9 rounded-full flex items-center justify-center transition border border-white/20 shadow-md z-30">
@@ -230,6 +236,7 @@
                 </button>
             </div>
 
+            <!-- Text Body Container -->
             <div id="modalTextBody" class="p-6 sm:p-8 space-y-6 relative bg-slate-900">
                 <div class="flex items-center gap-2 flex-wrap mb-2">
                     <span id="modalCategoryBadge" class="bg-emerald-600 text-white text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider shadow-sm">Category</span>
@@ -258,56 +265,6 @@
         </div>
     </div>
 
-    <!-- Specialized Gas Installation Interactive Card Modal -->
-    <div id="gasCardModal" class="fixed inset-0 bg-slate-950/80 backdrop-blur-md z-50 hidden flex items-center justify-center p-4 overflow-y-auto">
-        <div class="bg-slate-900 rounded-3xl max-w-md w-full overflow-hidden shadow-2xl border border-sky-500/40 text-slate-100 p-6 relative">
-            <button onclick="closeGasCardModal()" class="absolute top-4 right-4 bg-slate-800 hover:bg-slate-700 text-white w-9 h-9 rounded-full flex items-center justify-center transition border border-slate-600 shadow-md z-30">
-                <i class="fa-solid fa-xmark text-sm"></i>
-            </button>
-
-            <div id="gasCardRenderArea" class="bg-slate-950 p-6 rounded-2xl border border-slate-800 space-y-5">
-                <div class="flex items-center justify-between border-b border-slate-800 pb-4">
-                    <div class="flex items-center gap-3">
-                        <div class="bg-sky-500/20 text-sky-400 p-3 rounded-2xl border border-sky-500/30">
-                            <i class="fa-solid fa-fire-flame-simple text-2xl"></i>
-                        </div>
-                        <div>
-                            <h3 class="text-base font-extrabold text-white leading-tight">Gas Geyser Safety Card</h3>
-                            <p class="text-[11px] text-sky-400 font-semibold uppercase tracking-wider">Compliance & SAQCC Register</p>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="space-y-3 text-xs text-slate-300">
-                    <div class="p-3.5 bg-slate-900 rounded-xl border border-slate-800 flex items-start gap-3">
-                        <i class="fa-solid fa-shield-halved text-amber-400 text-base mt-0.5 shrink-0"></i>
-                        <div>
-                            <strong class="text-white block font-bold mb-0.5">Mandatory Certificate of Conformity (CoC)</strong>
-                            <span>Gas geysers must be installed by a registered SAQCC gas practitioner to issue a legal CoC for insurance validity.</span>
-                        </div>
-                    </div>
-                    <div class="p-3.5 bg-slate-900 rounded-xl border border-slate-800 flex items-start gap-3">
-                        <i class="fa-solid fa-triangle-exclamation text-sky-400 text-base mt-0.5 shrink-0"></i>
-                        <div>
-                            <strong class="text-white block font-bold mb-0.5">SANS 10087-1 Safety Regulations</strong>
-                            <span>Strict clearance regulations apply regarding LPG cylinder placement relative to windows, drains, and electrical switches.</span>
-                        </div>
-                    </div>
-                </div>
-
-                <button onclick="downloadGasCardAndRedirect()" class="w-full bg-gradient-to-r from-sky-600 to-blue-600 hover:from-sky-500 hover:to-blue-500 text-white font-extrabold p-3.5 rounded-xl text-center text-xs transition shadow-lg flex items-center justify-center gap-2 border border-sky-400/30">
-                    <i class="fa-solid fa-lock text-amber-300"></i> Find / Verify SAQCC Gas Technician (R20.00)
-                </button>
-            </div>
-
-            <div class="mt-5">
-                <button onclick="downloadGasCardAndRedirect()" class="w-full bg-emerald-600 hover:bg-emerald-500 text-white font-bold py-3.5 px-4 rounded-xl text-xs transition flex items-center justify-center gap-2 shadow-md">
-                    <i class="fa-solid fa-download"></i> Download Card Image (R20.00)
-                </button>
-            </div>
-        </div>
-    </div>
-
     <!-- Quick Utilities & Calculators Modal -->
     <div id="calculatorModal" class="fixed inset-0 bg-slate-950/70 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4 overflow-y-auto">
         <div class="bg-slate-900 rounded-3xl max-w-4xl w-full overflow-hidden shadow-2xl p-6 sm:p-8 border border-slate-700 max-h-[90vh] overflow-y-auto text-slate-100">
@@ -321,6 +278,7 @@
             </div>
             
             <div class="space-y-6">
+                <!-- Row 1: Bulk Material & Tank Mix -->
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <div class="bg-slate-800/70 p-5 rounded-2xl border border-emerald-900/50 shadow-sm">
                         <h4 class="font-bold text-xs uppercase tracking-wider text-emerald-400 mb-3 flex items-center gap-2">
@@ -363,6 +321,7 @@
                     </div>
                 </div>
 
+                <!-- Row 2: Sheet Metal Workers Development Calculator Suite -->
                 <div class="bg-slate-800/70 p-5 rounded-2xl border border-sky-900/50 shadow-sm">
                     <h4 class="font-bold text-xs uppercase tracking-wider text-sky-400 mb-3 flex items-center gap-2">
                         <i class="fa-solid fa-sheet-plastic text-sky-500"></i> Sheet Metal Workers Development Calculator
@@ -607,25 +566,25 @@
                 id: "cattle-health", title: "Cattle Herd Health & Vaccination Schedule", category: "Farmers", subCategory: "Animal Farming", image: "https://placehold.co/600x400/065f46/ffffff?text=Cattle+Health+Schedule", price: "20.00",
                 desc: "Comprehensive South African regional livestock health master manual detailing growth stages, seasonal timelines, clostridial/botulism protocols, and parasite management.",
                 steps: [
-                    "Newborn Calves (0-3 Months): Administer navel disinfection with iodine on Day 1. Ensure colostrum intake within the first 6 hours. Perform ear tagging, dehorning, and castration at 1 to 3 months. Give initial Clostridial and Botulism vaccinations at 3 months.",
-                    "Weaners & Growing Stock (4-12 Months): Mandatory Brucellosis (S19 or RB51) vaccination to all heifer calves between 4 and 8 months. Complete clostridial booster shots.",
-                    "Adult Breeding Herd - Spring: Administer annual booster vaccinations for Botulism (Lamsiekte) and Clostridial diseases 6 weeks prior to breeding season.",
-                    "Summer & Wet Season: Apply regular acaricide dip or pour-on rotation to combat vectors of Redwater, Anaplasmosis, and Heartwater.",
-                    "Winter & Dry Season: Provide appropriate phosphate/protein licks or winter energy supplements."
+                    "Newborn Calves (0-3 Months): Administer navel disinfection with iodine on Day 1. Ensure colostrum intake within the first 6 hours. Perform ear tagging, dehorning, and castration at 1 to 3 months. Give initial Clostridial (3-in-1 / 5-in-1) and Botulism vaccinations at 3 months, followed by a booster 4 weeks later.",
+                    "Weaners & Growing Stock (4-12 Months - Pre-Winter): Administer mandatory Brucellosis (S19 or RB51) vaccination to all heifer calves between 4 and 8 months. Complete clostridial booster shots before weaning stress. Implement targeted internal deworming and regional tick control.",
+                    "Adult Breeding Herd - Spring (Sep-Nov / Pre-Calving): Administer annual booster vaccinations for Botulism (Lamsiekte), Clostridial diseases, and reproductive tract infections (Vibriosis/Trichomoniasis) 6 weeks prior to the breeding season.",
+                    "Summer & Wet Season (Dec-Apr / Peak Tick & Parasite Risk): Apply regular acaricide dip or pour-on rotation to combat vectors of Redwater, Anaplasmosis (Galsiekte), and Heartwater. Monitor calves closely for tick-borne diseases and administer corrective treatments.",
+                    "Winter & Dry Season (May-Aug / Nutritional Maintenance): Provide appropriate phosphate/protein licks or winter energy supplements. Conduct bull breeding soundness evaluations (sperm motility and physical exams) 6 weeks prior to joining."
                 ]
             },
             {
                 id: "poultry-brooding", title: "Poultry Brooder Setup & Management", category: "Farmers", subCategory: "Poultry Farming", image: "images/image_74ce6420.jpg", price: "20.00",
                 desc: "Temperature regulation, lighting programs, and biosecurity protocols for day-old chicks.",
                 steps: [
-                    "Pre-heat brooding house 24-48 hours before and verify floor temperature (30-32°C).",
-                    "Set up chick guards with a circular boundary and eliminate drafty pockets.",
-                    "Provide fresh water by cleaning, disinfecting, and flushing lines.",
-                    "Monitor temperatures by observing chick behavior."
+                    "Pre-heat brooding house 24-48 hours before and verify floor temperature (30-32°C) with an infrared scan.",
+                    "Set up chick guards with a circular boundary (min. 2.4m diam.) and eliminate sharp corners and drafty pockets.",
+                    "Provide fresh water by cleaning, disinfecting, and flushing lines, and positioning founts, bell drinkers, and nipple lines correctly.",
+                    "Monitor temperatures by observing chick behavior to identify comfort zones, calibrate sensors, and log data."
                 ]
             },
 
-            // --- DEUTZ WORKSHOP MANUALS COLLECTION (R50.00) ---
+            // --- WORKSHOP MANUALS COLLECTION (Deutz) - R50.00 ---
             {
                 id: "manual-agrokid", title: "AGROKID 30-40-50 Workshop Manual", category: "Farmers", subCategory: "Deutz", image: "https://placehold.co/600x400/065f46/ffffff?text=Deutz+Agrokid",
                 isPdf: true, downloadUrl: "https://drive.google.com/file/d/17XUe0ubCs2tHeBtrr2oqWoPFQrDtRTZV/view?usp=drive_link", price: "50.00",
@@ -710,6 +669,297 @@
                 desc: "Comprehensive engine overhaul and service manual for air-cooled Deutz 912 and 913 series engines.",
                 steps: ["Cylinder head & valve clearance", "Fuel injection pump timing", "Lubrication & oil cooling", "Torque specifications"]
             },
+            {
+                id: "manual-balance", title: "5650-5650 Balance Manual", category: "Farmers", subCategory: "Other", image: "https://placehold.co/600x400/065f46/ffffff?text=Balance+Manual",
+                isPdf: true, downloadUrl: "https://drive.google.com/file/d/1RtsDdGKjdUgZOT8dY5aRFMtDVUf8Zyim/view?usp=drive_link", price: "50.00",
+                desc: "Official service balance and adjustment documentation for specialized agricultural machinery.",
+                steps: ["Component calibration", "Balancing procedures", "Maintenance guidelines", "Technical tolerances"]
+            },
+            {
+                id: "manual-bearing-catalogue", title: "Bearing Catalogue", category: "Farmers", subCategory: "Other", image: "https://placehold.co/600x400/065f46/ffffff?text=Bearing+Catalogue",
+                isPdf: true, downloadUrl: "https://drive.google.com/file/d/0B460_P5oTO9OZkV5MGdZRlVLTjA/view?usp=drive_link&resourcekey=0-zLEYOdAvyFH3ChYzGck_tA", price: "50.00",
+                desc: "Bearing catalogue and technical reference guide.",
+                steps: ["Bearing identification & cross-referencing", "Dimensional specifications & load ratings", "Installation & lubrication guidelines", "Maintenance & replacement specs"]
+            },
+            {
+                id: "manual-baldan-spares", title: "Baldan disc spares manual", category: "Farmers", subCategory: "Other", image: "https://placehold.co/600x400/065f46/ffffff?text=Baldan+Disc+Spares",
+                isPdf: true, downloadUrl: "https://drive.google.com/file/d/0B460_P5oTO9OdEY1TjFFZUpGTHc/view?usp=drive_link&resourcekey=0-lrcCzWi9Mmb99sMg9HhHqA", price: "50.00",
+                desc: "Official parts catalog and exploded component diagrams for Baldan disc harrows and tillage equipment.",
+                steps: ["Disc gang assembly spares", "Bearing and housing parts", "Scraper and spacer identification", "Frame and hitch components"]
+            },
+            {
+                id: "manual-ford-5610-7610", title: "Ford 5610 - 7610 User manual", category: "Farmers", subCategory: "Ford", image: "https://placehold.co/600x400/065f46/ffffff?text=Ford+5610-7610",
+                isPdf: true, downloadUrl: "https://drive.google.com/file/d/0B460_P5oTO9OQWdRdzNsSk5PcWM/view?usp=drive_link&resourcekey=0-wL4M6DvK07mSZbTVwg94EA", price: "50.00",
+                desc: "Official user and operation manual for Ford 5610 and 7610 agricultural tractors.",
+                steps: ["Instrument panel & controls", "Operating procedures & PTO", "Routine maintenance & fluid specs", "Troubleshooting & safety guidelines"]
+            },
+            
+            // --- TAFE SPARES & PARTS MANUALS (R50.00) ---
+            {
+                id: "tafe-engine-7502-8502", title: "TAFE Engine Spares Manual - 7502 / 8502", category: "Farmers", subCategory: "TAFE", image: "https://placehold.co/600x400/065f46/ffffff?text=TAFE+Engine+7502-8502",
+                isPdf: true, downloadUrl: "./pdfs/Engine - 7502-8502.pdf", price: "50.00",
+                desc: "Official factory engine parts catalog and spare parts manual for TAFE 7502 and 8502 series engines.",
+                steps: ["Cylinder block & head assemblies", "Pistons, crankshaft & bearings", "Fuel injection pump & lines", "Gasket sets & torque specifications"]
+            },
+            {
+                id: "tafe-engine-45-di", title: "TAFE Engine Spares Manual - TAFE 45 DI", category: "Farmers", subCategory: "TAFE", image: "https://placehold.co/600x400/065f46/ffffff?text=TAFE+Engine+45+DI",
+                isPdf: true, downloadUrl: "./pdfs/Engine - TAFE 45 DI.pdf", price: "50.00",
+                desc: "Comprehensive engine spares and replacement parts catalog for TAFE 45 DI tractor engines.",
+                steps: ["Simpson diesel engine components", "Cooling & lubrication system parts", "Valves & timing gear catalog", "Filters and maintenance kits"]
+            },
+            {
+                id: "tafe-tractor-7502-8502", title: "TAFE Tractor Spares Manual - 7502 / 8502", category: "Farmers", subCategory: "TAFE", image: "https://placehold.co/600x400/065f46/ffffff?text=TAFE+Tractor+7502-8502",
+                isPdf: true, downloadUrl: "./pdfs/Tractor - 7502-8502.pdf", price: "50.00",
+                desc: "Complete chassis, transmission, and hydraulic spare parts manual for TAFE 7502 and 8502 tractors.",
+                steps: ["Gearbox & clutch replacement parts", "Rear axle and 4WD front axle spares", "Hydraulic lift linkage components", "Brake & steering mechanism parts"]
+            },
+            {
+                id: "tafe-tractor-45-di", title: "TAFE Tractor Spares Manual - TAFE 45 DI", category: "Farmers", subCategory: "TAFE", image: "https://placehold.co/600x400/065f46/ffffff?text=TAFE+Tractor+45+DI",
+                isPdf: true, downloadUrl: "./pdfs/Tractor - TAFE 45 DI.pdf", price: "50.00",
+                desc: "Full tractor body, transmission, and hydraulic spares breakdown manual for TAFE 45 DI.",
+                steps: ["3-Point linkage & drawbar parts", "Sliding mesh transmission breakdown", "Hydraulic pump and control valve spares", "Electrical wiring & body sheet metal"]
+            },
+
+            {
+                id: "manual-additional-1", title: "Deutz Tractor Technical Workshop Manual A", category: "Farmers", subCategory: "Deutz", image: "https://placehold.co/600x400/065f46/ffffff?text=Deutz+Manual",
+                isPdf: true, downloadUrl: "https://drive.google.com/file/d/1Mt9rIXOZsCJEDZttgxnQ5SK-GYjI7ZDU/view?usp=drive_link", price: "50.00",
+                desc: "Specialized factory workshop documentation for Deutz agricultural machinery and tractors.",
+                steps: ["Mechanical diagnostics", "Hydraulic repairs", "Electrical troubleshooting", "Component assembly"]
+            },
+            {
+                id: "manual-additional-2", title: "Deutz Tractor Technical Workshop Manual B", category: "Farmers", subCategory: "Deutz", image: "https://placehold.co/600x400/065f46/ffffff?text=Deutz+Manual",
+                isPdf: true, downloadUrl: "https://drive.google.com/file/d/1XkcRTm7TsFuPkqWkbhN4cmeBUL_9eCQZ/view?usp=drive_link", price: "50.00",
+                desc: "Factory service manual covering mechanical systems and maintenance intervals.",
+                steps: ["Routine servicing", "Clutch & brake maintenance", "Steering system checks", "Hydraulic tests"]
+            },
+            {
+                id: "manual-additional-3", title: "Deutz Tractor Technical Workshop Manual C", category: "Farmers", subCategory: "Deutz", image: "https://placehold.co/600x400/065f46/ffffff?text=Deutz+Manual",
+                isPdf: true, downloadUrl: "https://drive.google.com/file/d/1tE2PrRTPO9D5EPJbTul4J2vDfpWltmBK/view?usp=drive_link", price: "50.00",
+                desc: "Detailed technical repair manual for professional workshop technicians.",
+                steps: ["Engine and fuel setup", "Transmission diagnostics", "Axle maintenance", "Wiring diagrams"]
+            },
+            {
+                id: "manual-additional-4", title: "Deutz Tractor Technical Workshop Manual D", category: "Farmers", subCategory: "Deutz", image: "https://placehold.co/600x400/065f46/ffffff?text=Deutz+Manual",
+                isPdf: true, downloadUrl: "https://drive.google.com/file/d/1UHNld1aigZO1kchK0_B8nmVs6Ccmfy_I/view?usp=drive_link", price: "50.00",
+                desc: "Authorized dealer workshop manual for advanced tractor systems.",
+                steps: ["Advanced diagnostics", "Hydraulic control valves", "Power train service", "Safety inspection"]
+            },
+            {
+                id: "manual-additional-5", title: "Deutz Tractor Technical Workshop Manual E", category: "Farmers", subCategory: "Deutz", image: "https://placehold.co/600x400/065f46/ffffff?text=Deutz+Manual",
+                isPdf: true, downloadUrl: "https://drive.google.com/file/d/1C4k-WX8iEnyu0gX8jqMs046UUi3sNv3H/view?usp=drive_link", price: "50.00",
+                desc: "Official factory service manual for system calibration and repairs.",
+                steps: ["System calibration", "Repair procedures", "Torque specs", "Maintenance logs"]
+            },
+            {
+                id: "manual-additional-6", title: "Deutz Tractor Technical Workshop Manual F", category: "Farmers", subCategory: "Deutz", image: "https://placehold.co/600x400/065f46/ffffff?text=Deutz+Manual",
+                isPdf: true, downloadUrl: "https://drive.google.com/file/d/1xaYrAp0WFwzo9dcD3DKKUL__ZvwqU3sh/view?usp=drive_link", price: "50.00",
+                desc: "Comprehensive workshop manual for tractor maintenance and overhauls.",
+                steps: ["Engine checks", "Gearbox servicing", "Differential setup", "Electrical troubleshooting"]
+            },
+            {
+                id: "manual-additional-7", title: "Deutz Tractor Technical Workshop Manual G", category: "Farmers", subCategory: "Deutz", image: "https://placehold.co/600x400/065f46/ffffff?text=Deutz+Manual",
+                isPdf: true, downloadUrl: "https://drive.google.com/file/d/16hel8Tt1QXnTlPwQCJD_tA4pcxx3HrV3/view?usp=drive_link", price: "50.00",
+                desc: "Technical service documentation for workshop repairs.",
+                steps: ["Fault isolation", "Part replacement guides", "Hydraulic checks", "Final testing"]
+            },
+            {
+                id: "manual-additional-8", title: "Deutz Tractor Technical Workshop Manual H", category: "Farmers", subCategory: "Deutz", image: "https://placehold.co/600x400/065f46/ffffff?text=Deutz+Manual",
+                isPdf: true, downloadUrl: "https://drive.google.com/file/d/1I38P7V88fcTNa7MtUAerEf12y-xNjMs1/view?usp=drive_link", price: "50.00",
+                desc: "Official factory repair manual for mechanical and electrical systems.",
+                steps: ["Electrical checks", "Mechanical overhaul", "Fluid replacement", "Calibration"]
+            },
+            {
+                id: "manual-additional-9", title: "Deutz Tractor Technical Workshop Manual I", category: "Farmers", subCategory: "Deutz", image: "https://placehold.co/600x400/065f46/ffffff?text=Deutz+Manual",
+                isPdf: true, downloadUrl: "https://drive.google.com/file/d/1-85C-urw8krmSFwSrcS3SO1XCJCPb9_R/view?usp=drive_link", price: "50.00",
+                desc: "Comprehensive workshop guide for servicing Deutz tractors.",
+                steps: ["Service intervals", "Engine tuning", "Hydraulic maintenance", "Troubleshooting"]
+            },
+            {
+                id: "manual-additional-10", title: "Deutz Tractor Technical Workshop Manual J", category: "Farmers", subCategory: "Deutz", image: "https://placehold.co/600x400/065f46/ffffff?text=Deutz+Manual",
+                isPdf: true, downloadUrl: "https://drive.google.com/file/d/17alp9w7cTJG4KRMmN5C7ymclDhns0JQK/view?usp=drive_link", price: "50.00",
+                desc: "Authorized workshop manual for technical maintenance.",
+                steps: ["Inspection routines", "Repair specifications", "Diagnostic steps", "Safety checks"]
+            },
+            {
+                id: "manual-additional-11", title: "Deutz Tractor Technical Workshop Manual K", category: "Farmers", subCategory: "Deutz", image: "https://placehold.co/600x400/065f46/ffffff?text=Deutz+Manual",
+                isPdf: true, downloadUrl: "https://drive.google.com/file/d/1JlF9TBrZTjFvBgrgNPiDaievVtav2c_F/view?usp=drive_link", price: "50.00",
+                desc: "Factory technical manual for drivetrain and engine service.",
+                steps: ["Drivetrain checks", "Engine diagnostics", "Hydraulic service", "Assembly notes"]
+            },
+            {
+                id: "manual-additional-12", title: "Deutz Tractor Technical Workshop Manual L", category: "Farmers", subCategory: "Deutz", image: "https://placehold.co/600x400/065f46/ffffff?text=Deutz+Manual",
+                isPdf: true, downloadUrl: "https://drive.google.com/file/d/1ztK6T2-dikxRyIXN_YBDba1qVRImccqp/view?usp=drive_link", price: "50.00",
+                desc: "Comprehensive repair instructions for tractor mechanics.",
+                steps: ["Component testing", "Repair guidelines", "Fluid specs", "System checks"]
+            },
+            {
+                id: "manual-additional-13", title: "Deutz Tractor Technical Workshop Manual M", category: "Farmers", subCategory: "Deutz", image: "https://placehold.co/600x400/065f46/ffffff?text=Deutz+Manual",
+                isPdf: true, downloadUrl: "https://drive.google.com/file/d/1TFr63OhVP5Ul_XhgfYLZTNWM4at-yUUG/view?usp=drive_link", price: "50.00",
+                desc: "Official factory workshop guide for tractor upkeep.",
+                steps: ["Maintenance guides", "Hydraulic upkeep", "Electrical testing", "Torque charts"]
+            },
+            {
+                id: "manual-additional-14", title: "Deutz Tractor Technical Workshop Manual N", category: "Farmers", subCategory: "Deutz", image: "https://placehold.co/600x400/065f46/ffffff?text=Deutz+Manual",
+                isPdf: true, downloadUrl: "https://drive.google.com/file/d/1nK5sH7pVQa77RFDnl5RVTJrYFlzZxm4C/view?usp=drive_link", price: "50.00",
+                desc: "Technical manual for tractor systems and major overhauls.",
+                steps: ["Major overhauls", "System testing", "Adjustment specs", "Safety guidelines"]
+            },
+            {
+                id: "manual-additional-15", title: "Deutz Tractor Technical Workshop Manual O", category: "Farmers", subCategory: "Deutz", image: "https://placehold.co/600x400/065f46/ffffff?text=Deutz+Manual",
+                isPdf: true, downloadUrl: "https://drive.google.com/file/d/1zTThS-IgPgRSG9Paxq8VYq3BEiEB_6MT/view?usp=drive_link", price: "50.00",
+                desc: "Workshop service documentation for agricultural equipment.",
+                steps: ["Routine checks", "Mechanical service", "Hydraulic diagnostics", "Repair steps"]
+            },
+            {
+                id: "manual-additional-16", title: "Deutz Tractor Technical Workshop Manual P", category: "Farmers", subCategory: "Deutz", image: "https://placehold.co/600x400/065f46/ffffff?text=Deutz+Manual",
+                isPdf: true, downloadUrl: "https://drive.google.com/file/d/1uhqVUUxuZULU6b16nZ7C-1x2FhxFJbQj/view?usp=drive_link", price: "50.00",
+                desc: "Factory repair manual for professional agricultural technicians.",
+                steps: ["Troubleshooting", "System repair", "Maintenance schedules", "Testing specs"]
+            },
+            {
+                id: "manual-additional-17", title: "Deutz Tractor Technical Workshop Manual Q", category: "Farmers", subCategory: "Deutz", image: "https://placehold.co/600x400/065f46/ffffff?text=Deutz+Manual",
+                isPdf: true, downloadUrl: "https://drive.google.com/file/d/1TwLD_dP0pNfttdFDzcp9Imxln0P2rk9X/view?usp=drive_link", price: "50.00",
+                desc: "Comprehensive reference manual for Deutz tractor repairs.",
+                steps: ["Technical data", "Adjustment procedures", "Component repairs", "Engine assembly"]
+            },
+            {
+                id: "manual-additional-18", title: "Deutz Tractor Technical Workshop Manual R", category: "Farmers", subCategory: "Deutz", image: "https://placehold.co/600x400/065f46/ffffff?text=Deutz+Manual",
+                isPdf: true, downloadUrl: "https://drive.google.com/file/d/1K92-wj5LsdoTBpQUOhoEnKNA2HTXXPCR/view?usp=drive_link", price: "50.00",
+                desc: "Official workshop manual for advanced mechanical servicing.",
+                steps: ["Mechanical service", "Hydraulic testing", "Electrical guides", "Torque specifications"]
+            },
+            {
+                id: "manual-additional-19", title: "Deutz Tractor Technical Workshop Manual S", category: "Farmers", subCategory: "Deutz", image: "https://placehold.co/600x400/065f46/ffffff?text=Deutz+Manual",
+                isPdf: true, downloadUrl: "https://drive.google.com/file/d/11B-zB1YOHZJhi2eTo1lK3rQ-WeWtubpx/view?usp=drive_link", price: "50.00",
+                desc: "Technical service manual for workshop repairs and adjustments.",
+                steps: ["Adjustment values", "Repair guidelines", "Maintenance specs", "Safety procedures"]
+            },
+            {
+                id: "manual-additional-20", title: "Deutz Tractor Technical Workshop Manual T", category: "Farmers", subCategory: "Deutz", image: "https://placehold.co/600x400/065f46/ffffff?text=Deutz+Manual",
+                isPdf: true, downloadUrl: "https://drive.google.com/file/d/14mcWjFV1Ce0m8Ni1G_8JVvvoH52z9mjT/view?usp=drive_link", price: "50.00",
+                desc: "Comprehensive workshop manual for tractor maintenance.",
+                steps: ["Service checks", "Repair instructions", "Component layout", "Testing methods"]
+            },
+            {
+                id: "manual-additional-21", title: "Deutz Tractor Technical Workshop Manual U", category: "Farmers", subCategory: "Deutz", image: "https://placehold.co/600x400/065f46/ffffff?text=Deutz+Manual",
+                isPdf: true, downloadUrl: "https://drive.google.com/file/d/1ri_iZU5OQW6G4CvD-Tsrx-rNDvW9MrXp/view?usp=drive_link", price: "50.00",
+                desc: "Factory authorized service manual for agricultural machinery.",
+                steps: ["System overhauls", "Hydraulic repairs", "Electrical checks", "Routine upkeep"]
+            },
+            {
+                id: "manual-additional-22", title: "Deutz Tractor Technical Workshop Manual V", category: "Farmers", subCategory: "Deutz", image: "https://placehold.co/600x400/065f46/ffffff?text=Deutz+Manual",
+                isPdf: true, downloadUrl: "https://drive.google.com/file/d/1yHLOeFLsLCjqy7jR2fURGaLliOa70FC9/view?usp=drive_link", price: "50.00",
+                desc: "Official service manual for tractor maintenance and diagnostics.",
+                steps: ["Diagnostic testing", "Component servicing", "Adjustment procedures", "Safety notes"]
+            },
+            {
+                id: "manual-additional-23", title: "Deutz Tractor Technical Workshop Manual W", category: "Farmers", subCategory: "Deutz", image: "https://placehold.co/600x400/065f46/ffffff?text=Deutz+Manual",
+                isPdf: true, downloadUrl: "https://drive.google.com/file/d/1u021_FEo79AJOogIs7kY3slOvJptOn3t/view?usp=drive_link", price: "50.00",
+                desc: "Comprehensive technical manual for tractor servicing.",
+                steps: ["Maintenance specs", "Repair procedures", "Hydraulic troubleshooting", "Assembly guides"]
+            },
+            {
+                id: "manual-additional-24", title: "Deutz Tractor Technical Workshop Manual X", category: "Farmers", subCategory: "Deutz", image: "https://placehold.co/600x400/065f46/ffffff?text=Deutz+Manual",
+                isPdf: true, downloadUrl: "https://drive.google.com/file/d/1OjpIpIIrVNBHPsXAN9CbwxQokO-k5Oxl/view?usp=drive_link", price: "50.00",
+                desc: "Technical workshop guide for professional mechanics.",
+                steps: ["Mechanical maintenance", "Repair standards", "Tool requirements", "Inspection checklists"]
+            },
+            {
+                id: "manual-additional-25", title: "Deutz Tractor Technical Workshop Manual Y", category: "Farmers", subCategory: "Deutz", image: "https://placehold.co/600x400/065f46/ffffff?text=Deutz+Manual",
+                isPdf: true, downloadUrl: "https://drive.google.com/file/d/1R9RKHjAEt8qECU6MGhj7u-5quTwPUwX7/view?usp=drive_link", price: "50.00",
+                desc: "Official factory manual for tractor system maintenance.",
+                steps: ["System checks", "Repair guidelines", "Calibration steps", "Technical specs"]
+            },
+            {
+                id: "manual-additional-26", title: "Deutz Tractor Technical Workshop Manual Z", category: "Farmers", subCategory: "Deutz", image: "https://placehold.co/600x400/065f46/ffffff?text=Deutz+Manual",
+                isPdf: true, downloadUrl: "https://drive.google.com/file/d/1sPgbvmyE_-k-xqAjHonZuiR-P-cSkYEu/view?usp=drive_link", price: "50.00",
+                desc: "Comprehensive service manual for tractor repairs.",
+                steps: ["Troubleshooting charts", "Overhaul procedures", "Maintenance specs", "Safety checks"]
+            },
+            {
+                id: "manual-additional-27", title: "Deutz Tractor Technical Workshop Manual AA", category: "Farmers", subCategory: "Deutz", image: "https://placehold.co/600x400/065f46/ffffff?text=Deutz+Manual",
+                isPdf: true, downloadUrl: "https://drive.google.com/file/d/1pS0VEUdTbAeoYgm94UVcg6TY2uI1xUCh/view?usp=drive_link", price: "50.00",
+                desc: "Technical workshop reference for agricultural equipment.",
+                steps: ["Maintenance routines", "Repair instructions", "Hydraulic schematics", "Testing procedures"]
+            },
+            {
+                id: "manual-additional-28", title: "Deutz Tractor Technical Workshop Manual AB", category: "Farmers", subCategory: "Deutz", image: "https://placehold.co/600x400/065f46/ffffff?text=Deutz+Manual",
+                isPdf: true, downloadUrl: "https://drive.google.com/file/d/1ghTnWYwZDDORuEPl46loYDjRF80hgauf/view?usp=drive_link", price: "50.00",
+                desc: "Factory service documentation for workshop technicians.",
+                steps: ["Component overhauls", "Repair guides", "Adjustment values", "Diagnostic checks"]
+            },
+            {
+                id: "manual-additional-29", title: "Deutz Tractor Technical Workshop Manual AC", category: "Farmers", subCategory: "Deutz", image: "https://placehold.co/600x400/065f46/ffffff?text=Deutz+Manual",
+                isPdf: true, downloadUrl: "https://drive.google.com/file/d/1U9I5lzK0oPe64K_EpFC1CBGtga6PCRL4/view?usp=drive_link", price: "50.00",
+                desc: "Comprehensive repair and maintenance manual for Deutz machinery.",
+                steps: ["Mechanical servicing", "Hydraulic repairs", "Electrical troubleshooting", "Routine checks"]
+            },
+            {
+                id: "manual-additional-30", title: "Deutz Tractor Technical Workshop Manual AD", category: "Farmers", subCategory: "Deutz", image: "https://placehold.co/600x400/065f46/ffffff?text=Deutz+Manual",
+                isPdf: true, downloadUrl: "https://drive.google.com/file/d/1nOmvjL4Bcg8n5CL4XHK_2cy3Ipbou6vw/view?usp=drive_link", price: "50.00",
+                desc: "Official factory manual for tractor servicing and repairs.",
+                steps: ["Service procedures", "Component diagnostics", "Repair specifications", "Safety protocols"]
+            },
+            {
+                id: "manual-additional-31", title: "Deutz Tractor Technical Workshop Manual AE", category: "Farmers", subCategory: "Deutz", image: "https://placehold.co/600x400/065f46/ffffff?text=Deutz+Manual",
+                isPdf: true, downloadUrl: "https://drive.google.com/file/d/1YsyyxlpHf9WwqHtxAlICpVgq_7YZ5IOK/view?usp=drive_link", price: "50.00",
+                desc: "Technical workshop manual for agricultural tractors.",
+                steps: ["Maintenance schedules", "Repair instructions", "Hydraulic tests", "Assembly guides"]
+            },
+            {
+                id: "manual-additional-32", title: "Deutz Tractor Technical Workshop Manual AF", category: "Farmers", subCategory: "Deutz", image: "https://placehold.co/600x400/065f46/ffffff?text=Deutz+Manual",
+                isPdf: true, downloadUrl: "https://drive.google.com/file/d/1007IwJRZyW7OIvAtnW599AOCWdfzsqGQ/view?usp=drive_link", price: "50.00",
+                desc: "Factory authorized service manual for mechanical repairs.",
+                steps: ["Mechanical overhauls", "Adjustment procedures", "Fault finding", "Testing notes"]
+            },
+            {
+                id: "manual-additional-33", title: "Deutz Tractor Technical Workshop Manual AG", category: "Farmers", subCategory: "Deutz", image: "https://placehold.co/600x400/065f46/ffffff?text=Deutz+Manual",
+                isPdf: true, downloadUrl: "https://drive.google.com/file/d/1VjCHyFLrPgufNrjN_CuLv1QEDZlK3f9T/view?usp=drive_link", price: "50.00",
+                desc: "Comprehensive workshop manual for tractor service and maintenance.",
+                steps: ["Service routines", "Repair standards", "Component checks", "Technical data"]
+            },
+            {
+                id: "manual-additional-34", title: "Deutz Tractor Technical Workshop Manual AH", category: "Farmers", subCategory: "Deutz", image: "https://placehold.co/600x400/065f46/ffffff?text=Deutz+Manual",
+                isPdf: true, downloadUrl: "https://drive.google.com/file/d/1aL4au3fmEg1VcVgn6fg4qxpYYc1OEanP/view?usp=drive_link", price: "50.00",
+                desc: "Official factory manual for comprehensive tractor repairs.",
+                steps: ["Complete repairs", "Hydraulic service", "Electrical checks", "Safety guidelines"]
+            },
+            {
+                id: "manual-additional-35", title: "Deutz Tractor Technical Workshop Manual AI", category: "Farmers", subCategory: "Deutz", image: "https://placehold.co/600x400/065f46/ffffff?text=Deutz+Manual",
+                isPdf: true, downloadUrl: "https://drive.google.com/file/d/1Cb9aVTvnD529qWDLcErLbf5pqrh8vvoz/view?usp=drive_link", price: "50.00",
+                desc: "Official workshop manual for tractor maintenance and overhauls.",
+                steps: ["Overhaul procedures", "Maintenance intervals", "Hydraulic tuning", "Safety inspection"]
+            },
+            {
+                id: "manual-additional-36", title: "Deutz Tractor Technical Workshop Manual AJ", category: "Farmers", subCategory: "Deutz", image: "https://placehold.co/600x400/065f46/ffffff?text=Deutz+Manual",
+                isPdf: true, downloadUrl: "https://drive.google.com/file/d/1BZ9EZHDrDUpnveQam5_RW-5_sdjhduUJ/view?usp=drive_link", price: "50.00",
+                desc: "Comprehensive factory service manual for professional repairs.",
+                steps: ["Diagnostic testing", "Component replacement", "System calibration", "Repair notes"]
+            },
+            {
+                id: "manual-additional-37", title: "Deutz Tractor Technical Workshop Manual AK", category: "Farmers", subCategory: "Deutz", image: "https://placehold.co/600x400/065f46/ffffff?text=Deutz+Manual",
+                isPdf: true, downloadUrl: "https://drive.google.com/file/d/1SEe8Aj-aFKs-vTBNkRKQHLeaDsZBDOfg/view?usp=drive_link", price: "50.00",
+                desc: "Detailed technical manual for tractor servicing and adjustments.",
+                steps: ["Adjustment values", "Mechanical repairs", "Electrical troubleshooting", "Testing specs"]
+            },
+            {
+                id: "manual-additional-38", title: "Deutz Tractor Technical Workshop Manual AL", category: "Farmers", subCategory: "Deutz", image: "https://placehold.co/600x400/065f46/ffffff?text=Deutz+Manual",
+                isPdf: true, downloadUrl: "https://drive.google.com/file/d/11C6T-hWIMWYNs6kikcxmeoFC-XScDUx3/view?usp=drive_link", price: "50.00",
+                desc: "Official workshop manual for agricultural tractor mechanics.",
+                steps: ["Service routines", "Repair standards", "Fluid specifications", "Safety checks"]
+            },
+            {
+                id: "manual-additional-39", title: "Deutz Tractor Technical Workshop Manual AM", category: "Farmers", subCategory: "Deutz", image: "https://placehold.co/600x400/065f46/ffffff?text=Deutz+Manual",
+                isPdf: true, downloadUrl: "https://drive.google.com/file/d/1RY1NOpV8knNn4awCAF25_hlEmGB-LWTH/view?usp=drive_link", price: "50.00",
+                desc: "Comprehensive service documentation for Deutz tractor systems.",
+                steps: ["System checks", "Repair guidelines", "Maintenance checklists", "Troubleshooting"]
+            },
+            {
+                id: "manual-additional-40", title: "Deutz Tractor Technical Workshop Manual AN", category: "Farmers", subCategory: "Deutz", image: "https://placehold.co/600x400/065f46/ffffff?text=Deutz+Manual",
+                isPdf: true, downloadUrl: "https://drive.google.com/file/d/15_5j1VjP-ODga8Tjh-HF33qYoBlnKkxc/view?usp=drive_link", price: "50.00",
+                desc: "Factory authorized service manual for tractor overhauls.",
+                steps: ["Engine overhauls", "Hydraulic maintenance", "Electrical testing", "Final assembly"]
+            },
 
             // --- SAME MANUALS COLLECTION (R50.00) ---
             {
@@ -778,8 +1028,128 @@
                 desc: "Specialized service manual for SAME Explorer T and TB low-profile orchard/utility tractor models.",
                 steps: ["Low-profile platform setup", "Specialized steering & brakes", "Hydraulic remote valves", "Electrical checks"]
             },
+            {
+                id: "manual-same-12", title: "SAME EXPLORER II 75-85-95 Special Workshop Manual", category: "Farmers", subCategory: "Same", image: "https://placehold.co/600x400/065f46/ffffff?text=SAME+Explorer+II",
+                isPdf: true, downloadUrl: "https://drive.google.com/file/d/1iAzMYqnLVcxaNn0_vgMDomBIOVbJP1Xd/view?usp=drive_link", price: "50.00",
+                desc: "Factory workshop manual for SAME Explorer II 75, 85, 95 Special edition tractors.",
+                steps: ["Mechanical repairs", "Transmission overhaul", "Rear axle & PTO service", "Hydraulic system testing"]
+            },
+            {
+                id: "manual-same-13", title: "FRONT AXLE FOR DIAMOND 210-235-265 Manual", category: "Farmers", subCategory: "Same", image: "https://placehold.co/600x400/065f46/ffffff?text=Diamond+Front+Axle",
+                isPdf: true, downloadUrl: "https://drive.google.com/file/d/1-rDJJ8fjpOlnVjX2N9ypman2DIvwS04t/view?usp=drive_link", price: "50.00",
+                desc: "Specialized heavy-duty front axle repair and maintenance manual for SAME Diamond 210, 235, and 265.",
+                steps: ["Axle casing & differential", "Final reduction hubs", "Steering cylinders & geometry", "Lubrication & torque specs"]
+            },
+            {
+                id: "manual-same-14", title: "FRONT AXLE FOR IRON 100-110-120 Manual", category: "Farmers", subCategory: "Same", image: "https://placehold.co/600x400/065f46/ffffff?text=Iron+Axle+100-120",
+                isPdf: true, downloadUrl: "https://drive.google.com/file/d/1s3E-EnP9Qzhu1V0aarT18orhbM_QvGsY/view?usp=drive_link", price: "50.00",
+                desc: "Workshop manual covering front axle, 4WD engagement, and steering for SAME Iron 100, 110, and 120.",
+                steps: ["Front differential teardown", "Hub reduction service", "Steering sensor calibration", "Maintenance schedules"]
+            },
+            {
+                id: "manual-same-15", title: "FRONT AXLE FOR IRON 120S-130S Manual", category: "Farmers", subCategory: "Same", image: "https://placehold.co/600x400/065f46/ffffff?text=Iron+Axle+120S-130S",
+                isPdf: true, downloadUrl: "https://drive.google.com/file/d/1LReXIrY_Lgo67wvbXntfkpggcM3iTUMw/view?usp=drive_link", price: "50.00",
+                desc: "Detailed technical guide for front axle overhaul on SAME Iron 120S and 130S tractors.",
+                steps: ["Suspension & steering linkage", "Brake disc inspection", "Differential lock repair", "Assembly guidelines"]
+            },
+            {
+                id: "manual-same-16", title: "FRONT AXLE FOR IRON 150-150.7-165.7 Manual", category: "Farmers", subCategory: "Same", image: "https://placehold.co/600x400/065f46/ffffff?text=Iron+Axle+150-165",
+                isPdf: true, downloadUrl: "https://drive.google.com/file/d/1pv0O5t4YjlrDAE0guZQcl4zfAlBy8lIT/view?usp=drive_link", price: "50.00",
+                desc: "Front axle and suspension service manual for high-horsepower SAME Iron 150, 150.7, and 165.7.",
+                steps: ["Heavy-duty axle overhaul", "Epicyclic reduction gears", "Steering hydraulic rams", "Alignment & testing"]
+            },
+            {
+                id: "manual-same-17", title: "SAME GOLDEN 60-65-75-85 / Compatto 60V-75V Manual", category: "Farmers", subCategory: "Same", image: "https://placehold.co/600x400/065f46/ffffff?text=SAME+Golden",
+                isPdf: true, downloadUrl: "https://drive.google.com/file/d/1F8_BWXTCifyhAxcdsF7etsYO1tyJ8Av-/view?usp=drive_link", price: "50.00",
+                desc: "Official workshop manual for SAME Golden series (60, 65, 75, 85) and Compatto 60V, 75V vineyard models.",
+                steps: ["Engine & fuel system", "Transmission gearbox service", "Hydraulic lift & steering", "Electrical system schematics"]
+            },
+            {
+                id: "manual-same-18", title: "HYDRAULIC INVERSOR 80-105 Workshop Manual", category: "Farmers", subCategory: "Same", image: "https://placehold.co/600x400/065f46/ffffff?text=Hydraulic+Inversor+80-105",
+                isPdf: true, downloadUrl: "https://drive.google.com/file/d/1tr7zfafkasJA57p379NcBPMdTjvkScW-/view?usp=drive_link", price: "50.00",
+                desc: "Specialized hydraulic reverser (inversor) service manual for SAME 80 to 105 HP tractor models.",
+                steps: ["Hydraulic inversor control valve", "Pressure testing & adjustment", "Clutch pack overhaul", "Diagnostic troubleshooting"]
+            },
+            {
+                id: "manual-same-19", title: "HYDRAULIC INVERSOR 110-130 Workshop Manual", category: "Farmers", subCategory: "Same", image: "https://placehold.co/600x400/065f46/ffffff?text=Hydraulic+Inversor+110-130",
+                isPdf: true, downloadUrl: "https://drive.google.com/file/d/1-Ff19aPDucUw9dWd2npcO-WMMemu23Dg/view?usp=drive_link", price: "50.00",
+                desc: "Workshop repair manual for the hydraulic power shuttle/inversor system on SAME 110 to 130 HP tractors.",
+                steps: ["Control valve calibration", "Solenoid valve testing", "Hydraulic pump flow check", "Fault code diagnostics"]
+            },
+            {
+                id: "manual-same-20", title: "SAME IRON 100-110-120 Hi-Line Workshop Manual", category: "Farmers", subCategory: "Same", image: "https://placehold.co/600x400/065f46/ffffff?text=SAME+Iron+HiLine",
+                isPdf: true, downloadUrl: "https://drive.google.com/file/d/1QjqFjYC3ZGYc1cWzhdEAFWlUnTNHGb64/view?usp=drive_link", price: "50.00",
+                desc: "Factory service manual for SAME Iron 100, 110, and 120 Hi-Line deluxe cab tractors.",
+                steps: ["Engine management", "Hi-Line transmission & powershift", "Cab electronic controls", "Hydraulic load sensing"]
+            },
+            {
+                id: "manual-same-21", title: "SAME IRON 100-110-120 Standard Workshop Manual", category: "Farmers", subCategory: "Same", image: "https://placehold.co/600x400/065f46/ffffff?text=SAME+Iron+100-120",
+                isPdf: true, downloadUrl: "https://drive.google.com/file/d/1gJqxU5C_5rnuLE_nx-UiavVjvFsUKpMX/view?usp=drive_link", price: "50.00",
+                desc: "Complete workshop manual for standard SAME Iron 100, 110, and 120 tractors.",
+                steps: ["Engine overhaul", "Transmission & rear axle service", "Hydraulic system calibration", "Wiring diagrams"]
+            },
+            {
+                id: "manual-same-22", title: "SAME IRON 130S-140S-150S-165S Workshop Manual", category: "Farmers", subCategory: "Same", image: "https://placehold.co/600x400/065f46/ffffff?text=SAME+Iron+S",
+                isPdf: true, downloadUrl: "https://drive.google.com/file/d/1hY5uZLcRIOriKhf_N4QuKZ0qA2AiK6Cl/view?usp=drive_link", price: "50.00",
+                desc: "Official factory repair manual for high-performance SAME Iron S series (130S, 140S, 150S, 165S).",
+                steps: ["Heavy powertrain servicing", "Powershift & shuttle setup", "Advanced hydraulics", "Electronic diagnostics"]
+            },
+            {
+                id: "manual-same-23", title: "SAME IRON 175S-190S-200 Workshop Manual", category: "Farmers", subCategory: "Same", image: "https://placehold.co/600x400/065f46/ffffff?text=SAME+Iron+200",
+                isPdf: true, downloadUrl: "https://drive.google.com/file/d/1c7hM9del1RTOhIkkTYxjpiBUmmPGTOaZ/view?usp=drive_link", price: "50.00",
+                desc: "Comprehensive workshop manual for large-frame SAME Iron 175S, 190S, and 200 flagship tractors.",
+                steps: ["High-power engine service", "Heavy transmission & differential", "Load-sensing hydraulics", "Cabin electronics & ECU"]
+            },
+            {
+                id: "manual-same-24", title: "SAME KRYPTON 80-90-100 / F78-F88-F98 Manual", category: "Farmers", subCategory: "Same", image: "https://placehold.co/600x400/065f46/ffffff?text=SAME+Krypton",
+                isPdf: true, downloadUrl: "https://drive.google.com/file/d/1LbUnbpMedFdKq_Sdkxj4oP8cLN3N6ECO/view?usp=drive_link", price: "50.00",
+                desc: "Specialized crawler tractor workshop manual for SAME Krypton 80, 90, 100 and F78, F88, F98 models.",
+                steps: ["Track tension & undercarriage", "Steering clutches & brakes", "Crawler transmission service", "Engine & cooling maintenance"]
+            },
+            {
+                id: "manual-same-25", title: "SAME LASER 110-130-150 Workshop Manual", category: "Farmers", subCategory: "Same", image: "https://placehold.co/600x400/065f46/ffffff?text=SAME+Laser",
+                isPdf: true, downloadUrl: "https://drive.google.com/file/d/1os2_Q3DRCO2NZw9foBUoJLIDZ9teweZi/view?usp=drive_link", price: "50.00",
+                desc: "Classic heavy-duty workshop manual for the legendary SAME Laser 110, 130, and 150 tractors.",
+                steps: ["Air/water-cooled engine overhaul", "Synchromesh gearbox repair", "Rear lift & PTO clutch", "Hydraulic & steering systems"]
+            },
+            {
+                id: "manual-same-26", title: "SAME ROCK 55-60-70 Workshop Manual", category: "Farmers", subCategory: "Same", image: "https://placehold.co/600x400/065f46/ffffff?text=SAME+Rock",
+                isPdf: true, downloadUrl: "https://drive.google.com/file/d/11WKO99186n38uVzZihER2wtFPJFe2ZLj/view?usp=drive_link", price: "50.00",
+                desc: "Official factory service manual for SAME Rock 55, 60, and 70 utility tractors.",
+                steps: ["Engine maintenance & tuning", "Gearbox & clutch repair", "Hydraulic hitch adjustments", "Electrical checks"]
+            },
+            {
+                id: "manual-same-27", title: "SAME RUBIN 120-135-150 Workshop Manual", category: "Farmers", subCategory: "Same", image: "https://placehold.co/600x400/065f46/ffffff?text=SAME+Rubin+120-150",
+                isPdf: true, downloadUrl: "https://drive.google.com/file/d/1SqJa4HUWwcirzssprY7AD47MF8QfXH44/view?usp=drive_link", price: "50.00",
+                desc: "Comprehensive workshop manual for SAME Rubin high-power 120, 135, and 150 tractors.",
+                steps: ["Engine management", "Powershift transmission", "Hydraulic load sensing system", "Axle & brake overhauls"]
+            },
+            {
+                id: "manual-same-28", title: "SAME RUBIN 160-180-200 Workshop Manual", category: "Farmers", subCategory: "Same", image: "https://placehold.co/600x400/065f46/ffffff?text=SAME+Rubin+160-200",
+                isPdf: true, downloadUrl: "https://drive.google.com/file/d/11B-ZwoAmcuWzC_ByjOR944FEYch1Im9W/view?usp=drive_link", price: "50.00",
+                desc: "Heavy-duty factory repair manual for large SAME Rubin series 160, 180, and 200 models.",
+                steps: ["Advanced powertrain overhaul", "Hydraulic pump & valve service", "Electronic control calibration", "Differential & final drives"]
+            },
+            {
+                id: "manual-same-29", title: "SAME SILVER 80-90-100.4-100.6 Workshop Manual", category: "Farmers", subCategory: "Same", image: "https://placehold.co/600x400/065f46/ffffff?text=SAME+Silver+80-100",
+                isPdf: true, downloadUrl: "https://drive.google.com/file/d/13FwvC5i4xozXX6u-vmzz5nr0gJMLLkYf/view?usp=drive_link", price: "50.00",
+                desc: "Official factory workshop manual for SAME Silver 80, 90, 100.4, and 100.6 utility tractors.",
+                steps: ["4-cylinder & 6-cylinder engines", "Transmission & splitter setup", "Hydraulic lift & PTO controls", "Steering & electrical diagnostics"]
+            },
+            {
+                id: "manual-same-30", title: "SAME SILVER 110-130 Workshop Manual", category: "Farmers", subCategory: "Same", image: "https://placehold.co/600x400/065f46/ffffff?text=SAME+Silver+110-130",
+                isPdf: true, downloadUrl: "https://drive.google.com/file/d/1s8_tFwejcFxdy59gPPHh3lgou_Yibv0_/view?usp=drive_link", price: "50.00",
+                desc: "Complete technical service manual for medium-heavy SAME Silver 110 and 130 tractors.",
+                steps: ["Engine troubleshooting", "Powershift gearbox maintenance", "Hydraulic pressure testing", "Brake & axle overhaul"]
+            },
+            {
+                id: "manual-same-31", title: "SAME SOLARIS 30-40-50 Workshop Manual", category: "Farmers", subCategory: "Same", image: "https://placehold.co/600x400/065f46/ffffff?text=SAME+Solaris",
+                isPdf: true, downloadUrl: "https://drive.google.com/file/d/1C4k-WX8iEnyu0gX8jqMs046UUi3sNv3H/view?usp=drive_link", price: "50.00",
+                desc: "Compact tractor workshop manual for SAME Solaris 30, 40, and 50 municipal and orchard tractors.",
+                steps: ["Compact diesel engine service", "Compact transmission & clutch", "Hydraulic 3-point linkage", "Electrical & safety switches"]
+            },
 
-            // --- MASSEY FERGUSON PARTS MANUALS (R50.00) ---
+            // --- MASSEY FERGUSON PARTS MANUALS COLLECTION (R50.00) ---
             {
                 id: "manual-mf-415", title: "Massey Ferguson 415 Parts Manual", category: "Farmers", subCategory: "Massey Ferguson", image: "https://placehold.co/600x400/065f46/ffffff?text=MF+415+Parts",
                 isPdf: true, downloadUrl: "https://drive.google.com/file/d/0B460_P5oTO9OYTZQa05jSTZsZjA/view?usp=drive_link&resourcekey=0-CcHmh_YCgWcQYI3NNQPxig", price: "50.00",
@@ -799,39 +1169,7 @@
                 steps: ["Powertrain & transmission parts", "Hydraulic valves and pumps", "Cabin controls and filters", "Complete parts reference index"]
             },
 
-            // --- FORD MANUALS (R50.00) ---
-            {
-                id: "manual-ford-5610-7610", title: "Ford 5610 - 7610 User manual", category: "Farmers", subCategory: "Ford", image: "https://placehold.co/600x400/065f46/ffffff?text=Ford+5610-7610",
-                isPdf: true, downloadUrl: "https://drive.google.com/file/d/0B460_P5oTO9OQWdRdzNsSk5PcWM/view?usp=drive_link&resourcekey=0-wL4M6DvK07mSZbTVwg94EA", price: "50.00",
-                desc: "Official user and operation manual for Ford 5610 and 7610 agricultural tractors.",
-                steps: ["Instrument panel & controls", "Operating procedures & PTO", "Routine maintenance & fluid specs", "Troubleshooting & safety guidelines"]
-            },
-
-            // --- OTHER IMPLEMENTS & BEARINGS ---
-            {
-                id: "manual-bearing-catalogue", title: "Bearing Catalogue", category: "Farmers", subCategory: "Other", image: "https://placehold.co/600x400/065f46/ffffff?text=Bearing+Catalogue",
-                isPdf: true, downloadUrl: "https://drive.google.com/file/d/0B460_P5oTO9OZkV5MGdZRlVLTjA/view?usp=drive_link&resourcekey=0-zLEYOdAvyFH3ChYzGck_tA", price: "50.00",
-                desc: "Bearing catalogue and technical reference guide.",
-                steps: ["Bearing identification & cross-referencing", "Dimensional specifications & load ratings", "Installation & lubrication guidelines", "Maintenance & replacement specs"]
-            },
-            {
-                id: "manual-baldan-spares", title: "Baldan disc spares manual", category: "Farmers", subCategory: "Other", image: "https://placehold.co/600x400/065f46/ffffff?text=Baldan+Disc+Spares",
-                isPdf: true, downloadUrl: "https://drive.google.com/file/d/0B460_P5oTO9OdEY1TjFFZUpGTHc/view?usp=drive_link&resourcekey=0-lrcCzWi9Mmb99sMg9HhHqA", price: "50.00",
-                desc: "Official parts catalog and exploded component diagrams for Baldan disc harrows and tillage equipment.",
-                steps: ["Disc gang assembly spares", "Bearing and housing parts", "Scraper and spacer identification", "Frame and hitch components"]
-            },
-
-            // --- BUILDERS, HANDYMAN, HOUSEWIVES ---
-            {
-                id: "gas-geyser-card", title: "Gas Geyser Safety & Installer Verification Card", category: "Handyman", subCategory: "Gas Installations", image: "https://placehold.co/600x400/0284c7/ffffff?text=Gas+Geyser+Safety+Card", price: "20.00",
-                isGasCard: true,
-                desc: "Gas installation compliance card with safety regulations and direct link access to certified SAQCC Gas technicians.",
-                steps: [
-                    "Verify Installer Registration: Always use a licensed SAQCC Gas practitioner.",
-                    "Ensure Certificate of Conformity (CoC): Mandatory for legal compliance and property insurance.",
-                    "Adhere to SANS 10087-1 Regulations: Observe required safety distances between gas bottles, windows, doors, and electrical points."
-                ]
-            },
+            // --- BUILDERS, HANDYMAN, HOUSEWIVES (Price: R20.00) ---
             {
                 id: "foundation-squaring", title: "Foundation Squaring & Layout Guide", category: "Builders", subCategory: "General", image: "images/foundation-squaring-guide.jpg", price: "20.00",
                 desc: "Step-by-step master guide for accurately laying out building lines, establishing baselines, applying the 3-4-5 rule for right angles, squaring walls, cross-measuring diagonals, and setting up batter boards.",
@@ -839,17 +1177,23 @@
                     "Establish the Baseline: Drive Peg A into the ground, run a mason's line to Peg B, and measure/mark Corner B along the line.",
                     "Apply the 3-4-5 Rule: Mark 3 units on the baseline from Corner A (Point X), measure 4 units outward, and measure a 5-unit hypotenuse from Point X to intersect the 4-unit line to drive Peg C.",
                     "Extend and Square the Second Wall: Line up string from Corner A through Peg C, extend the string to the full required length, and mark Corner D.",
-                    "Verify and Secure Layout: Cross-measure diagonals A-D and B-C, adjust pegs until they match completely."
+                    "Verify and Secure Layout: Cross-measure diagonals A-D and B-C, adjust pegs until they match completely, build secure batter boards outside the footprint, transfer exact string lines to notches, and remove pegs to dig."
                 ]
             },
             {
                 id: "foundation-pouring", title: "Concrete Foundation Pouring & Curing", category: "Builders", subCategory: "General", image: "images/concrete-foundation.jpg", price: "20.00",
                 desc: "Comprehensive technical master guide for professional concrete foundation pouring, trench preparation, formwork bracing, rebar chair spacing, mix ratios, vibration, and moisture curing protocols.",
                 steps: [
-                    "Site Clearing & Soil Compaction: Strip organic topsoil entirely and compact using a mechanical plate compactor.",
-                    "Sub-Base & Damp-Proof Membrane (DPM): Lay 75mm blinding layer and install 250-micron DPM.",
-                    "Formwork & Reinforcement: Build rigid formwork with 32mm planks and position steel rebar grids with cover blocks.",
-                    "Pouring & Curing: Pour concrete continuously (min 25 MPa mix), spade/vibrate trapped air pockets, and cure with moist hessian for 7 days."
+                    "Site Clearing & Soil Compaction: Strip organic topsoil entirely, expose firm subgrade, and compact using a mechanical plate compactor to achieve at least 95% Proctor density.",
+                    "Trench Excavation & Depth Verification: Excavate trenches to engineered depth and verify level benchmarks using a laser level or water level.",
+                    "Sub-Base & Damp-Proof Membrane (DPM): Lay a 75mm blinding layer of crusher dust/sand, compact it, and install a heavy-duty 250-micron polyethylene damp-proof membrane.",
+                    "Formwork Construction & Bracing: Build rigid formwork using 32mm planks or marine plywood, secured with strongbacks and wooden stakes every 900mm to prevent blowout.",
+                    "Reinforcement Spacing & Cover Blocks: Position steel rebar grids or mesh using plastic or concrete cover blocks (minimum 50mm clearance) to ensure full steel encapsulation.",
+                    "Formwork Inspection & Pre-Pour Check: Inspect tie-wires, formwork alignment, squareness, and check that all debris, loose soil, and standing water are cleared.",
+                    "Mix Design & Slump Verification: Order or mix structural concrete (minimum 25 MPa / 3:2:1 ratio), ensuring a workable slump (75mm - 100mm) without excess water.",
+                    "Continuous Pouring & Spading: Pour concrete continuously from one corner to prevent cold joints; spade or mechanically vibrate the mix to release trapped air pockets.",
+                    "Screeding & Surface Finishing: Strike off excess concrete using a straightedge timber screed pulled across form edges, followed by a wood float or steel trowel finish.",
+                    "Moisture Curing Protocol: Begin curing as soon as the surface hardens by keeping it continuously moist with sprinklers, wet Hessian sacking, or curing compound for at least 7 days."
                 ]
             },
             {
@@ -876,10 +1220,10 @@
                 id: "muffin-tin-ice-cream", title: "Muffin Tin Ice Cream Station Hack", category: "Housewives", subCategory: "Home Hacks", image: "images/muffin-tin-ice-cream-station.jpg", price: "20.00",
                 desc: "Create a stable, mess-free ice cream toppings station using an inverted muffin tin to hold small topping cups securely in place.",
                 steps: [
-                    "Gather Supplies: Turn a standard 12-cup metal muffin tin upside down so the raised wells face upward.",
-                    "Secure the Cups: Place small paper or silicone baking liners over each raised well.",
-                    "Fill Toppings: Fill each secured cup with a different ice cream topping.",
-                    "Serve & Enjoy: Set out the ice cream cones and let everyone scoop their favorite toppings."
+                    "Gather Supplies: Turn a standard 12-cup metal muffin tin upside down so the raised wells face upward. Collect small paper or silicone baking liners (or small topping cups), assorted toppings in small bowls, an ice cream scoop, and serving spoons.",
+                    "Secure the Cups: Place the inverted muffin tin flat on your counter or table. Place one small cup or paper liner over each raised well to ensure they fit securely without sliding or tipping.",
+                    "Fill Toppings: Fill each secured cup with a different ice cream topping (sprinkles, chocolate chips, M&Ms, crushed cookies, gummy bears, nuts, cherries, or hot fudge) for a stable and organized display.",
+                    "Serve & Enjoy: Set out the ice cream cones and let everyone scoop their favorite toppings with zero spills and total stability—perfect for kids and parties!"
                 ]
             }
         ];
@@ -949,27 +1293,13 @@
                                  class="w-full h-full object-cover group-hover:scale-105 transition duration-500" style="filter: blur(1.5px); pointer-events: none;"
                                  onerror="handleImageError(this)">
                             <div class="absolute inset-0 bg-slate-950/15 flex items-center justify-center">
-                                <span class="bg-slate-900/85 text-slate-100 text-[10px] font-bold px-3 py-1 rounded-full uppercase tracking-wider backdrop-blur-sm shadow-md border border-slate-700/80">${guide.isGasCard ? '🔒 Preview Protected (R20)' : guide.isPdf ? '🔒 Cloud / PDF Spares Manual' : '🔒 Preview Protected'}</span>
+                                <span class="bg-slate-900/85 text-slate-100 text-[10px] font-bold px-3 py-1 rounded-full uppercase tracking-wider backdrop-blur-sm shadow-md border border-slate-700/80">🔒 ${guide.isPdf ? 'Cloud Workshop Manual' : 'Preview Protected'}</span>
                             </div>
                         </div>
                     `;
                 }
 
-                const priceTag = (guide.price && guide.price !== 'Free') ? ` (R${guide.price})` : ' (Free)';
-
-                let actionBtnHtml = `
-                    <button onclick="openModal('${guide.id}')" class="flex-1 ${theme.buttonBg} text-white py-3 px-4 rounded-2xl text-xs font-bold transition flex items-center justify-center gap-2 shadow-md hover:shadow-lg transform active:scale-95">
-                        <i class="fa-solid ${guide.isPdf ? 'fa-file-pdf text-amber-300' : guide.isInteractive ? 'fa-calculator text-teal-300' : 'fa-lock text-amber-300'}"></i> ${guide.isPdf ? `Unlock & Download Manual${priceTag}` : guide.isInteractive ? `Launch Calculator${priceTag}` : `View Guide${priceTag}`}
-                    </button>
-                `;
-
-                if (guide.isGasCard) {
-                    actionBtnHtml = `
-                        <button onclick="openGasCardModal()" class="flex-1 bg-gradient-to-r from-sky-600 to-blue-600 hover:from-sky-500 hover:to-blue-500 text-white py-3 px-4 rounded-2xl text-xs font-bold transition flex items-center justify-center gap-2 shadow-md hover:shadow-lg transform active:scale-95 border border-sky-400/30">
-                            <i class="fa-solid fa-lock text-amber-300"></i> View & Download Card (R20.00)
-                        </button>
-                    `;
-                }
+                const priceTag = guide.price ? ` (R${guide.price})` : '';
 
                 card.innerHTML = `
                     ${imageHtml}
@@ -982,7 +1312,9 @@
                             <p class="text-slate-300 text-xs sm:text-sm line-clamp-3 mb-4 leading-relaxed">${cardDescription}</p>
                         </div>
                         <div class="flex items-center gap-2.5 pt-4 border-t border-slate-800">
-                            ${actionBtnHtml}
+                            <button onclick="openModal('${guide.id}')" class="flex-1 ${theme.buttonBg} text-white py-3 px-4 rounded-2xl text-xs font-bold transition flex items-center justify-center gap-2 shadow-md hover:shadow-lg transform active:scale-95">
+                                <i class="fa-solid ${guide.isPdf ? 'fa-file-pdf text-amber-300' : guide.isInteractive ? 'fa-calculator text-teal-300' : 'fa-lock text-amber-300'}"></i> ${guide.isPdf ? `Unlock & Download Manual${priceTag}` : guide.isInteractive ? `Launch Calculator${priceTag}` : `View Guide${priceTag}`}
+                            </button>
                         </div>
                     </div>
                 `;
@@ -1090,10 +1422,10 @@
                 subBadge.classList.add('hidden');
             }
 
-            const priceStr = guide.price || "50.00";
+            const priceStr = guide.price || "20.00";
             if (guide.isPdf) {
-                document.getElementById('overlayTitle').innerText = "Protected Spares / Technical Manual";
-                document.getElementById('overlayDesc').innerText = "Complete factory PDF spares manual stored securely on server.";
+                document.getElementById('overlayTitle').innerText = "Protected Cloud Workshop Manual";
+                document.getElementById('overlayDesc').innerText = "Complete factory workshop manual and diagnostic PDF stored securely on Google Drive.";
                 document.getElementById('overlayBtnText').innerText = `Proceed to Secure Checkout (R${priceStr})`;
                 document.getElementById('footerActionBtn').innerHTML = `<i class="fa-solid fa-lock"></i> Secure Checkout - R${priceStr}`;
             } else {
@@ -1140,63 +1472,6 @@
             activeGuideId = null;
         }
 
-        function openGasCardModal() {
-            document.getElementById('gasCardModal').classList.remove('hidden');
-            document.body.style.overflow = 'hidden';
-        }
-
-        function closeGasCardModal() {
-            document.getElementById('gasCardModal').classList.add('hidden');
-            document.body.style.overflow = 'auto';
-        }
-
-        function downloadGasCardAndRedirect() {
-            sessionStorage.setItem('pending_download_id', 'gas-geyser-card');
-            localStorage.setItem('pending_download_id', 'gas-geyser-card');
-            closeGasCardModal();
-            
-            const guide = allGuides.find(g => g.id === 'gas-geyser-card');
-            if (!guide) return;
-
-            const price = "20.00";
-            if (confirm(`Proceed to PayFast checkout for "${guide.title}" (R${price})?`)) {
-                let currentUrl = window.location.href.split('#')[0].split('?')[0];
-                if (!currentUrl.startsWith('http')) {
-                    currentUrl = 'https://enoz-cyber.github.io/agri-hub-app/';
-                }
-
-                const returnWithSuccess = currentUrl + "?payment=success";
-
-                const payfastUrl = 'https://sandbox.payfast.co.za/eng/process';
-                const form = document.createElement('form');
-                form.method = 'POST';
-                form.action = payfastUrl;
-
-                const paymentData = {
-                    merchant_id: '10000100',
-                    merchant_key: '46f0cd694581a',
-                    return_url: returnWithSuccess, 
-                    cancel_url: currentUrl, 
-                    item_name: `Manual/Guide: ${guide.title}`,
-                    amount: price, 
-                    item_description: guide.desc.substring(0, 100)
-                };
-
-                for (const key in paymentData) {
-                    if (paymentData.hasOwnProperty(key)) {
-                        const input = document.createElement('input');
-                        input.type = 'hidden';
-                        input.name = key;
-                        input.value = paymentData[key];
-                        form.appendChild(input);
-                    }
-                }
-
-                document.body.appendChild(form);
-                form.submit();
-            }
-        }
-
         function openCalculatorModal() {
             document.getElementById('calculatorModal').classList.remove('hidden');
             document.body.style.overflow = 'hidden';
@@ -1238,7 +1513,7 @@
             const guide = allGuides.find(g => g.id === activeGuideId);
             if (!guide) return;
 
-            const price = guide.price || "50.00";
+            const price = guide.price || "20.00";
 
             if (confirm(`Proceed to PayFast checkout for "${guide.title}" (R${price})?`)) {
                 let currentUrl = window.location.href.split('#')[0].split('?')[0];
@@ -1247,7 +1522,6 @@
                 }
 
                 sessionStorage.setItem('pending_download_id', guide.id);
-                localStorage.setItem('pending_download_id', guide.id);
                 const returnWithSuccess = currentUrl + "?payment=success";
 
                 const payfastUrl = 'https://sandbox.payfast.co.za/eng/process';
@@ -1283,64 +1557,113 @@
         }
 
         async function executeUnlockedDownload() {
-            let guideId = sessionStorage.getItem('pending_download_id') || localStorage.getItem('pending_download_id') || 'tafe-engine-7502-8502';
+            const guideId = sessionStorage.getItem('pending_download_id');
+            if (!guideId) {
+                alert("No pending download found or it has already been downloaded.");
+                document.getElementById('successPaymentBanner').classList.add('hidden');
+                return;
+            }
 
             const guide = allGuides.find(g => g.id === guideId);
-            if (!guide) {
-                alert("Download reference not found. Please try again.");
-                document.getElementById('successPaymentBanner').classList.add('hidden');
-                return;
-            }
+            if (!guide) return;
 
-            if (guide.isGasCard) {
-                const element = document.getElementById('gasCardRenderArea');
-                if (element) {
-                    await html2canvas(element, {
-                        scale: 3,
-                        backgroundColor: '#020617',
-                        useCORS: true,
-                        allowTaint: true,
-                        logging: false
-                    }).then(canvas => {
-                        const link = document.createElement('a');
-                        link.download = `saqcc_gas_installation_card.png`;
-                        link.href = canvas.toDataURL('image/png', 1.0);
-                        link.click();
-                    });
-                }
-
-                sessionStorage.removeItem('pending_download_id');
-                localStorage.removeItem('pending_download_id');
-                document.getElementById('successPaymentBanner').classList.add('hidden');
-                window.history.replaceState({}, document.title, window.location.pathname);
-
-                setTimeout(() => {
-                    window.location.href = "https://gas.jlvorster.co.za/";
-                }, 800);
-                return;
-            }
-
+            const isInteractiveGuide = guide.isInteractive || false;
             const isPdfGuide = guide.isPdf || false;
 
             if (isPdfGuide) {
+                window.open(guide.downloadUrl, '_blank');
+            } else if (isInteractiveGuide) {
+                let htmlContent = standaloneTreeDensityCalculatorHTML;
+                if (guide.interactiveUrl) {
+                    try {
+                        const res = await fetch(guide.interactiveUrl);
+                        if (res.ok) {
+                            htmlContent = await res.text();
+                        }
+                    } catch(e) {
+                        console.warn("Could not fetch remote interactive file. Using fallback.", e);
+                    }
+                }
+
+                const blob = new Blob([htmlContent], { type: 'text/html' });
                 const link = document.createElement('a');
-                link.href = guide.downloadUrl;
-                link.download = guide.downloadUrl.split('/').pop();
-                link.target = '_blank';
-                document.body.appendChild(link);
+                link.download = `${guide.title.replace(/[^a-z0-9]/gi, '_').toLowerCase()}_interactive_tool.html`;
+                link.href = URL.createObjectURL(blob);
                 link.click();
-                document.body.removeChild(link);
+            } else {
+                const offscreenCard = document.createElement('div');
+                offscreenCard.style.position = 'fixed';
+                offscreenCard.style.top = '-9999px';
+                offscreenCard.style.left = '-9999px';
+                offscreenCard.style.width = '800px';
+                offscreenCard.style.backgroundColor = '#0f172a';
+                offscreenCard.style.color = '#f8fafc';
+                offscreenCard.style.fontFamily = "'Inter', sans-serif";
+                offscreenCard.style.borderRadius = '24px';
+                offscreenCard.style.overflow = 'hidden';
+                offscreenCard.style.padding = '0px';
+
+                let stepsHtml = '';
+                guide.steps.forEach((step, idx) => {
+                    stepsHtml += `
+                        <div style="display:flex; align-items:flex-start; gap:12px; background-color:#1e293b; padding:14px; border-radius:14px; margin-bottom:10px; border:1px solid #334155;">
+                            <span style="background-color:#0369a1; color:#ffffff; font-size:12px; font-weight:800; width:24px; height:24px; border-radius:50%; display:flex; align-items:center; justify-content:center; flex-shrink:0;">${idx + 1}</span>
+                            <span style="font-size:14px; font-weight:500; color:#cbd5e1; line-height:1.4;">${step}</span>
+                        </div>
+                    `;
+                });
+
+                offscreenCard.innerHTML = `
+                    <div style="width:100%; background-color:#020617; border-bottom:1px solid #334155;">
+                        <img src="${guide.image}" crossorigin="anonymous" style="width:100%; height:auto; display:block;">
+                    </div>
+                    <div style="padding:32px;">
+                        <div style="margin-bottom:12px;">
+                            <span style="background-color:#059669; color:#ffffff; font-size:11px; font-weight:800; padding:4px 12px; border-radius:9999px; text-transform:uppercase; letter-spacing:0.05em;">${guide.category}</span>
+                            ${guide.subCategory ? `<span style="background-color:#0f766e; color:#ffffff; font-size:11px; font-weight:800; padding:4px 12px; border-radius:9999px; text-transform:uppercase; letter-spacing:0.05em; margin-left:6px;">${guide.subCategory}</span>` : ''}
+                        </div>
+                        <h1 style="font-size:24px; font-weight:800; color:#ffffff; margin-bottom:16px;">${guide.title}</h1>
+                        <p style="font-size:14px; color:#94a3b8; line-height:1.6; margin-bottom:24px; font-weight:500;">${guide.desc || guide.description || ''}</p>
+                        
+                        <div style="border-top:1px solid #1e293b; padding-top:20px; margin-bottom:24px;">
+                            <h3 style="font-size:11px; font-weight:800; text-transform:uppercase; color:#64748b; letter-spacing:0.05em; margin-bottom:12px;">Step-by-Step Procedure</h3>
+                            ${stepsHtml}
+                        </div>
+
+                        <div style="border-top:1px solid #1e293b; padding-top:16px; display:flex; justify-content:space-between; align-items:center; font-size:11px; color:#64748b; font-weight:700; text-transform:uppercase; letter-spacing:0.05em;">
+                            <span>Professional & Lifestyle Hub</span>
+                            <span>Verified Official Guide</span>
+                        </div>
+                    </div>
+                `;
+
+                document.body.appendChild(offscreenCard);
+
+                await html2canvas(offscreenCard, { 
+                    scale: 3, 
+                    backgroundColor: '#0f172a', 
+                    useCORS: true, 
+                    allowTaint: true, 
+                    logging: false 
+                }).then(canvas => {
+                    const link = document.createElement('a');
+                    link.download = `${guide.title.replace(/[^a-z0-9]/gi, '_').toLowerCase()}_pro_card.png`;
+                    link.href = canvas.toDataURL('image/png', 1.0);
+                    link.click();
+
+                    document.body.removeChild(offscreenCard);
+                });
             }
 
             sessionStorage.removeItem('pending_download_id');
-            localStorage.removeItem('pending_download_id');
             document.getElementById('successPaymentBanner').classList.add('hidden');
             window.history.replaceState({}, document.title, window.location.pathname);
         }
 
+        // --- Splash Screen & Showcase Loop Controller ---
         function runSplashScreenLoop() {
             const showcaseSteps = [
-                { icon: "🌾", category: "Farmers & Tractors", text: "Deutz, Same, Ford & TAFE Spares Manuals" },
+                { icon: "🌾", category: "Farmers & Tractors", text: "Deutz, Same, Ford & Massey Ferguson Manuals" },
                 { icon: "🏗️", category: "Builders & Layouts", text: "Foundation Squaring & Concrete Pouring Guides" },
                 { icon: "🛠️", category: "Handyman & Fabrication", text: "Double Disc Hiller & Spreader Build Blueprints" },
                 { icon: "🏠", category: "Housewives & Home", text: "Meal Prep, Pantry Rotation & Household Hacks" }
@@ -1353,8 +1676,10 @@
             const progressBar = document.getElementById('splashProgressBar');
             const splashScreen = document.getElementById('splashScreen');
 
+            // Animate progress bar to 100% over 3.2 seconds
             setTimeout(() => { progressBar.style.width = '100%'; }, 50);
 
+            // Rotate showcase text every 800ms
             const loopTimer = setInterval(() => {
                 currentStep = (currentStep + 1) % showcaseSteps.length;
                 iconEl.innerText = showcaseSteps[currentStep].icon;
@@ -1362,6 +1687,7 @@
                 textEl.innerText = showcaseSteps[currentStep].text;
             }, 800);
 
+            // Hide splash screen after 3.5 seconds
             setTimeout(() => {
                 clearInterval(loopTimer);
                 splashScreen.style.opacity = '0';
@@ -1374,7 +1700,7 @@
             renderGuides();
 
             const urlParams = new URLSearchParams(window.location.search);
-            if (urlParams.get('payment') === 'success') {
+            if (urlParams.get('payment') === 'success' && sessionStorage.getItem('pending_download_id')) {
                 document.getElementById('successPaymentBanner').classList.remove('hidden');
                 window.scrollTo({ top: 0, behavior: 'smooth' });
             } else {
