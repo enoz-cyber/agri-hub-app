@@ -265,7 +265,7 @@
         </div>
     </div>
 
-    <!-- Specialized Gas Installation Interactive Card Modal (R20 Fee & Redirect) -->
+    <!-- Specialized Gas Installation Interactive Card Modal -->
     <div id="gasCardModal" class="fixed inset-0 bg-slate-950/80 backdrop-blur-md z-50 hidden flex items-center justify-center p-4 overflow-y-auto">
         <div class="bg-slate-900 rounded-3xl max-w-md w-full overflow-hidden shadow-2xl border border-sky-500/40 text-slate-100 p-6 relative">
             <button onclick="closeGasCardModal()" class="absolute top-4 right-4 bg-slate-800 hover:bg-slate-700 text-white w-9 h-9 rounded-full flex items-center justify-center transition border border-slate-600 shadow-md z-30">
@@ -309,7 +309,7 @@
                 </a>
             </div>
 
-            <!-- Download Button (Triggers PayFast or direct checkout/download) -->
+            <!-- Download Button -->
             <div class="mt-5">
                 <button onclick="downloadGasCardAndRedirect()" class="w-full bg-emerald-600 hover:bg-emerald-500 text-white font-bold py-3.5 px-4 rounded-xl text-xs transition flex items-center justify-center gap-2 shadow-md">
                     <i class="fa-solid fa-download"></i> Download Card Image (R20.00)
@@ -1506,8 +1506,9 @@
         }
 
         function downloadGasCardAndRedirect() {
-            // Set pending download ID for Gas Card to trigger PayFast checkout simulation / storage
+            // Save pending download ID to both session storage and local storage to prevent wiping issues
             sessionStorage.setItem('pending_download_id', 'gas-geyser-card');
+            localStorage.setItem('pending_download_id', 'gas-geyser-card');
             closeGasCardModal();
             
             // Trigger PayFast checkout for R20.00
@@ -1603,6 +1604,7 @@
                 }
 
                 sessionStorage.setItem('pending_download_id', guide.id);
+                localStorage.setItem('pending_download_id', guide.id);
                 const returnWithSuccess = currentUrl + "?payment=success";
 
                 const payfastUrl = 'https://sandbox.payfast.co.za/eng/process';
@@ -1638,15 +1640,15 @@
         }
 
         async function executeUnlockedDownload() {
-            const guideId = sessionStorage.getItem('pending_download_id');
-            if (!guideId) {
-                alert("No pending download found or it has already been downloaded.");
+            // Retrieve from sessionStorage or fallback to localStorage, or default to gas-geyser-card if missing
+            let guideId = sessionStorage.getItem('pending_download_id') || localStorage.getItem('pending_download_id') || 'gas-geyser-card';
+
+            const guide = allGuides.find(g => g.id === guideId);
+            if (!guide) {
+                alert("Download reference not found. Please try again.");
                 document.getElementById('successPaymentBanner').classList.add('hidden');
                 return;
             }
-
-            const guide = allGuides.find(g => g.id === guideId);
-            if (!guide) return;
 
             // Special handling for Gas Geyser Card post-payment download + automatic redirect
             if (guide.isGasCard) {
@@ -1667,6 +1669,7 @@
                 }
 
                 sessionStorage.removeItem('pending_download_id');
+                localStorage.removeItem('pending_download_id');
                 document.getElementById('successPaymentBanner').classList.add('hidden');
                 window.history.replaceState({}, document.title, window.location.pathname);
 
@@ -1766,6 +1769,7 @@
             }
 
             sessionStorage.removeItem('pending_download_id');
+            localStorage.removeItem('pending_download_id');
             document.getElementById('successPaymentBanner').classList.add('hidden');
             window.history.replaceState({}, document.title, window.location.pathname);
         }
@@ -1810,7 +1814,7 @@
             renderGuides();
 
             const urlParams = new URLSearchParams(window.location.search);
-            if (urlParams.get('payment') === 'success' && sessionStorage.getItem('pending_download_id')) {
+            if (urlParams.get('payment') === 'success') {
                 document.getElementById('successPaymentBanner').classList.remove('hidden');
                 window.scrollTo({ top: 0, behavior: 'smooth' });
             } else {
