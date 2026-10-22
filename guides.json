@@ -1,0 +1,2169 @@
+[
+  {
+    "id": "plough",
+    "title": "Plough Alignment & Attachment Guide",
+    "category": "Farmers",
+    "subCategory": "Crop Farming",
+    "image": "images/plough-alignment.jpg",
+    "price": "20.00",
+    "desc": "Step-by-step manual for rear-mounted plough alignment, 3-point hitch setup, and depth tuning for optimal soil inversion.",
+    "steps": [
+      "Level tractor and plough.",
+      "Set front furrow width.",
+      "Adjust draft links.",
+      "Verify vertical alignment."
+    ]
+  },
+  {
+    "id": "disc-harrow",
+    "title": "Disc Harrow Alignment Guide",
+    "category": "Farmers",
+    "subCategory": "Crop Farming",
+    "image": "images/disc-harrow.jpg",
+    "price": "20.00",
+    "desc": "Side alignment, gang angles, tractor tire matching, and hitch point leveling for uniform residue incorporation.",
+    "steps": [
+      "Adjust gang angles.",
+      "Set hitch height.",
+      "Inspect scraper blades.",
+      "Grease bearings."
+    ]
+  },
+  {
+    "id": "fertilizer-spreader-calibration",
+    "title": "Fertilizer Spreader Calibration",
+    "category": "Farmers",
+    "subCategory": "Crop Farming",
+    "image": "images/crop-fertilizer-calibration.jpg",
+    "price": "20.00",
+    "desc": "Step-by-step calibration guide and calculations for ground-driven and tractor-attached fertilizer spreaders.",
+    "steps": [
+      "Inspect spinner discs and vanes.",
+      "Set correct PTO speed and forward travel speed.",
+      "Perform stationary catch-test per chute.",
+      "Calculate application rate per hectare and adjust gate openings."
+    ]
+  },
+  {
+    "id": "boom-sprayer",
+    "title": "Boom Sprayer Calibration",
+    "category": "Farmers",
+    "subCategory": "Crop Farming",
+    "image": "images/boom-sprayer.jpg",
+    "price": "20.00",
+    "desc": "Nozzle selection, pressure tuning, and output checks for accurate systemic chemical application.",
+    "steps": [
+      "Check nozzle tips.",
+      "Measure pressure.",
+      "Collect output.",
+      "Ensure flow variation is within +/- 5%."
+    ]
+  },
+  {
+    "id": "field-sprayer",
+    "title": "Field Sprayer Calibration",
+    "category": "Farmers",
+    "subCategory": "Crop Farming",
+    "image": "images/field-sprayer.jpg",
+    "price": "20.00",
+    "desc": "Comprehensive calibration procedures for large field sprayers, tank agitation, and drift reduction.",
+    "steps": [
+      "Fill 100m test track.",
+      "Measure traverse time.",
+      "Calculate tank mix volume.",
+      "Calibrate gauges."
+    ]
+  },
+  {
+    "id": "maize-planting",
+    "title": "Maize Planting Guide",
+    "category": "Farmers",
+    "subCategory": "Crop Farming",
+    "image": "images/maize-planting.jpg",
+    "price": "20.00",
+    "desc": "Seed spacing, population calculations, fertilizer disc placement, and depth settings for high yield emergence.",
+    "steps": [
+      "Select seed plate.",
+      "Calibrate seed drop.",
+      "Set depth (4-6 cm).",
+      "Ensure good contact."
+    ]
+  },
+  {
+    "id": "manure-spreader",
+    "title": "Manure Spreader Calibration",
+    "category": "Farmers",
+    "subCategory": "Crop Farming",
+    "image": "images/manure-spreader.jpg",
+    "price": "20.00",
+    "desc": "Application rates, beater speed adjustment, and spread uniformity for solid and semi-solid livestock manure.",
+    "steps": [
+      "Weigh empty spreader.",
+      "Distribute tarps.",
+      "Run spreader.",
+      "Weigh samples."
+    ]
+  },
+  {
+    "id": "slasher-guide",
+    "title": "Slasher Guide",
+    "category": "Farmers",
+    "subCategory": "Crop Farming",
+    "image": "images/slasher-guide.jpg",
+    "price": "20.00",
+    "desc": "Cutting height adjustments, skid shoe leveling, and safety chain inspections for pasture topping and weed control.",
+    "steps": [
+      "Adjust tail wheel.",
+      "Inspect swing-away blades.",
+      "Verify PTO Clutch.",
+      "Check safety guards."
+    ]
+  },
+  {
+    "id": "mist-sprayer",
+    "title": "Mist Sprayer Calibration",
+    "category": "Farmers",
+    "subCategory": "Fruit Farming",
+    "image": "images/mist-sprayer.jpg",
+    "price": "20.00",
+    "desc": "Air assistance and droplet distribution tuning for orchard canopies and dense foliage crops.",
+    "steps": [
+      "Check fan gearbox.",
+      "Align air coulings.",
+      "Use water-sensitive cards.",
+      "Adjust pump pressure."
+    ]
+  },
+  {
+    "id": "fruit-pruning",
+    "title": "Orchard Fruit Tree Pruning Manual",
+    "category": "Farmers",
+    "subCategory": "Fruit Farming",
+    "image": "images/fruit-pruning.jpg",
+    "price": "20.00",
+    "desc": "Comprehensive 9-step multi-panel visual guide for winter pruning, canopy health, and maximum sunlight penetration.",
+    "steps": [
+      "Sanitize tools.",
+      "Assess canopy goals.",
+      "Remove 3-Ds.",
+      "Clear center canopy."
+    ]
+  },
+  {
+    "id": "tree-density",
+    "title": "Orchard Tree Density Calculation Guide",
+    "category": "Farmers",
+    "subCategory": "Fruit Farming",
+    "image": "images/tree-density.jpg",
+    "price": "20.00",
+    "desc": "Interactive visual simulator and calculation tool for determining tree population per hectare.",
+    "isInteractive": true,
+    "interactiveUrl": "tree-density.html",
+    "steps": [
+      "Adjust row and tree spacing sliders.",
+      "Observe live calculation.",
+      "Analyze hectare population output."
+    ]
+  },
+  {
+    "id": "cabbage-planting",
+    "title": "Cabbage Field Planting & Cultivation Guide",
+    "category": "Farmers",
+    "subCategory": "Vegetable Farming",
+    "image": "images/cabbage-planting.jpg",
+    "price": "20.00",
+    "desc": "Comprehensive 9-step multi-panel visual guide for commercial cabbage field setup, soil prep, basal fertilization, and pest management.",
+    "steps": [
+      "Deep plough and create raised beds.",
+      "Maintain soil pH (6.0-6.8).",
+      "Incorporate pre-plant fertilizer.",
+      "Choose commercial varieties.",
+      "Pre-mark holes.",
+      "Use drip irrigation.",
+      "Perform shallow cultivation.",
+      "Scout for pests.",
+      "Harvest."
+    ]
+  },
+  {
+    "id": "carrot-planting",
+    "title": "Carrot Field Planting & Cultivation Guide",
+    "category": "Farmers",
+    "subCategory": "Vegetable Farming",
+    "image": "images/carrot-planting.jpg",
+    "price": "20.00",
+    "desc": "Comprehensive 9-step multi-panel visual guide for commercial carrot field setup, soil prep, and harvesting.",
+    "steps": [
+      "Deep plough and create raised beds.",
+      "Maintain soil pH (6.0-6.8).",
+      "Incorporate pre-plant fertilizer.",
+      "Choose commercial varieties.",
+      "Pre-mark rows.",
+      "Use drip irrigation.",
+      "Perform shallow cultivation.",
+      "Scout for pests.",
+      "Harvest."
+    ]
+  },
+  {
+    "id": "onion-planting-1",
+    "title": "Commercial Onion Field Planting Guide",
+    "category": "Farmers",
+    "subCategory": "Vegetable Farming",
+    "image": "images/onion-planting-1.jpg",
+    "price": "20.00",
+    "desc": "Comprehensive guide for commercial onion field setup, soil prep, and precision planting.",
+    "steps": [
+      "Test soil pH.",
+      "Incorporate basal fertilizers.",
+      "Choose healthy seedlings.",
+      "Set proper spacing."
+    ]
+  },
+  {
+    "id": "onion-planting-2",
+    "title": "Onion Field Planting & Cultivation Guide",
+    "category": "Farmers",
+    "subCategory": "Vegetable Farming",
+    "image": "images/onion-planting-2.jpg",
+    "price": "20.00",
+    "desc": "Step-by-step visual manual covering soil preparation, planting materials, weed control, and curing.",
+    "steps": [
+      "Test soil pH.",
+      "Choose seeds/transplants.",
+      "Provide consistent water.",
+      "Control weeds."
+    ]
+  },
+  {
+    "id": "potato-planting",
+    "title": "Commercial Potato Field Planting Guide",
+    "category": "Farmers",
+    "subCategory": "Vegetable Farming",
+    "image": "images/potato-planting.jpg",
+    "price": "20.00",
+    "desc": "Comprehensive guide for commercial potato large-scale production, chitting, and hilling.",
+    "steps": [
+      "Test soil pH.",
+      "Choose certified seed tubers.",
+      "Set rows.",
+      "Hill up soil ridges."
+    ]
+  },
+  {
+    "id": "pumpkin-planting",
+    "title": "Commercial Pumpkin Field Planting Guide",
+    "category": "Farmers",
+    "subCategory": "Vegetable Farming",
+    "image": "images/pumpkin-planting.jpg",
+    "price": "20.00",
+    "desc": "Comprehensive guide for commercial pumpkin field setup, precision spacing, vine care, and harvest.",
+    "steps": [
+      "Test soil pH.",
+      "Select certified seeds.",
+      "Apply basal fertilizer.",
+      "Set wide spacing.",
+      "Plant seeds.",
+      "Maintain water.",
+      "Control weeds.",
+      "Monitor pests.",
+      "Harvest."
+    ]
+  },
+  {
+    "id": "watermelon-planting",
+    "title": "Commercial Watermelon Field Planting Guide",
+    "category": "Farmers",
+    "subCategory": "Vegetable Farming",
+    "image": "images/watermelon-planting.jpg",
+    "price": "20.00",
+    "desc": "Comprehensive guide for commercial watermelon field setup, spacing, pest monitoring, and harvest.",
+    "steps": [
+      "Test soil pH.",
+      "Choose seeds.",
+      "Incorporate fertilizer.",
+      "Set rows.",
+      "Plant seeds.",
+      "Provide irrigation.",
+      "Control weeds.",
+      "Monitor pests.",
+      "Harvest."
+    ]
+  },
+  {
+    "id": "tomato-planting",
+    "title": "Commercial Tomato Field Planting Guide",
+    "category": "Farmers",
+    "subCategory": "Vegetable Farming",
+    "image": "images/tomato-planting.jpg",
+    "price": "20.00",
+    "desc": "Comprehensive guide for commercial tomato production, transplanting, staking, and supported harvest.",
+    "steps": [
+      "Test soil pH.",
+      "Use transplants.",
+      "Incorporate fertilizer.",
+      "Set rows.",
+      "Plant deeply.",
+      "Provide moisture.",
+      "Manage mulch.",
+      "Scout for pests.",
+      "Harvest."
+    ]
+  },
+  {
+    "id": "bell-pepper-planting",
+    "title": "Commercial Bell Pepper Field Planting Guide",
+    "category": "Farmers",
+    "subCategory": "Vegetable Farming",
+    "image": "images/bell-pepper-planting.jpg",
+    "price": "20.00",
+    "desc": "Comprehensive guide for commercial bell pepper field setup, soil prep, precision spacing, and harvest.",
+    "steps": [
+      "Test soil pH.",
+      "Use seedlings.",
+      "Incorporate fertilizer.",
+      "Set rows.",
+      "Plant deeply.",
+      "Provide moisture.",
+      "Control weeds.",
+      "Scout for pests.",
+      "Harvest."
+    ]
+  },
+  {
+    "id": "green-bean-planting",
+    "title": "Commercial Green Bean Field Planting Guide",
+    "category": "Farmers",
+    "subCategory": "Vegetable Farming",
+    "image": "images/green-bean-planting.jpg",
+    "price": "20.00",
+    "desc": "Comprehensive guide for commercial green bean field setup, direct seeding, precision spacing, and harvest.",
+    "steps": [
+      "Test soil pH.",
+      "Treat seeds.",
+      "Incorporate fertilizer.",
+      "Set rows.",
+      "Direct seed.",
+      "Provide moisture.",
+      "Control weeds.",
+      "Scout for pests.",
+      "Harvest."
+    ]
+  },
+  {
+    "id": "cattle-health",
+    "title": "Cattle Herd Health & Vaccination Schedule",
+    "category": "Farmers",
+    "subCategory": "Animal Farming",
+    "image": "https://placehold.co/600x400/065f46/ffffff?text=Cattle+Health+Schedule",
+    "price": "20.00",
+    "desc": "Comprehensive South African regional livestock health master manual detailing growth stages, seasonal timelines, clostridial/botulism protocols, and parasite management.",
+    "steps": [
+      "Newborn Calves (0-3 Months): Administer navel disinfection with iodine on Day 1. Ensure colostrum intake within the first 6 hours. Perform ear tagging, dehorning, and castration at 1 to 3 months. Give initial Clostridial (3-in-1 / 5-in-1) and Botulism vaccinations at 3 months, followed by a booster 4 weeks later.",
+      "Weaners & Growing Stock (4-12 Months - Pre-Winter): Administer mandatory Brucellosis (S19 or RB51) vaccination to all heifer calves between 4 and 8 months. Complete clostridial booster shots before weaning stress. Implement targeted internal deworming and regional tick control.",
+      "Adult Breeding Herd - Spring (Sep-Nov / Pre-Calving): Administer annual booster vaccinations for Botulism (Lamsiekte), Clostridial diseases, and reproductive tract infections (Vibriosis/Trichomoniasis) 6 weeks prior to the breeding season.",
+      "Summer & Wet Season (Dec-Apr / Peak Tick & Parasite Risk): Apply regular acaricide dip or pour-on rotation to combat vectors of Redwater, Anaplasmosis (Galsiekte), and Heartwater. Monitor calves closely for tick-borne diseases and administer corrective treatments.",
+      "Winter & Dry Season (May-Aug / Nutritional Maintenance): Provide appropriate phosphate/protein licks or winter energy supplements. Conduct bull breeding soundness evaluations (sperm motility and physical exams) 6 weeks prior to joining."
+    ]
+  },
+  {
+    "id": "poultry-brooding",
+    "title": "Poultry Brooder Setup & Management",
+    "category": "Farmers",
+    "subCategory": "Poultry Farming",
+    "image": "images/image_74ce6420.jpg",
+    "price": "20.00",
+    "desc": "Temperature regulation, lighting programs, and biosecurity protocols for day-old chicks.",
+    "steps": [
+      "Pre-heat brooding house 24-48 hours before and verify floor temperature (30-32\u00b0C) with an infrared scan.",
+      "Set up chick guards with a circular boundary (min. 2.4m diam.) and eliminate sharp corners and drafty pockets.",
+      "Provide fresh water by cleaning, disinfecting, and flushing lines, and positioning founts, bell drinkers, and nipple lines correctly.",
+      "Monitor temperatures by observing chick behavior to identify comfort zones, calibrate sensors, and log data."
+    ]
+  },
+  {
+    "id": "broiler-feed-medication-schedule",
+    "title": "Broiler Feed & Medication Schedule (100 Chicks)",
+    "category": "Farmers",
+    "subCategory": "Poultry Farming",
+    "image": "https://placehold.co/600x400/065f46/ffffff?text=Broiler+Feed+Schedule",
+    "price": "20.00",
+    "desc": "Comprehensive week-by-week broiler feeding schedule, feed conversion ratios, medication/vaccination timing (Newcastle & Gumboro), and strict 7-day withdrawal period guidelines for 100 chicks.",
+    "isPdf": true,
+    "downloadUrl": "pdfs/Broiler Feed and Medication Schedule (100 Chicks).pdf",
+    "steps": [
+      "Week 1-2 (Starter Crumble): Administer electrolytes, vitamins, and Newcastle/Gumboro vaccines on schedule.",
+      "Week 3-4 (Grower Pellets): Monitor growth, provide clean water and multivitamins, and administer Newcastle booster.",
+      "Week 5-6 (Finisher Pellets): Transition to finisher feed, manage heat stress, and observe mandatory 7-day withdrawal period before slaughter."
+    ]
+  },
+  {
+    "id": "layer-feed-medication-breed-guide",
+    "title": "Egg Layer Feed, Medication & Breed Guide (100 Hens)",
+    "category": "Farmers",
+    "subCategory": "Poultry Farming",
+    "image": "https://placehold.co/600x400/065f46/ffffff?text=Layer+Production+Guide",
+    "price": "20.00",
+    "desc": "Complete lifecycle management guide for 100 egg layers, comparing top high-producing breeds (Lohmann, Hy-Line, Koekoek), 5-phase feed formulations, lighting regimes, and vaccination schedules up to 72 weeks.",
+    "isPdf": true,
+    "downloadUrl": "pdfs/Layer Poultry Production Guide (100 Hens).pdf",
+    "steps": [
+      "Rearing Phase (Weeks 1-17): Starter and grower rations, brooding temperature control, and vaccination program (Newcastle, Gumboro, Fowl Pox).",
+      "Pre-Lay & Peak Lay (Weeks 18-45): Gradual lighting increase to 16 hours daily, high calcium pre-lay transition, and layer mash phase 1.",
+      "Late Lay Phase (Weeks 46-72+): Oyster shell / limestone supplementation for eggshell strength and regular deworming."
+    ]
+  },
+  {
+    "id": "manual-disc-harrow-metric-calc",
+    "title": "Disc Harrow Metric Calculation & Sizing Guide",
+    "category": "Farmers",
+    "subCategory": "Tractor tests & calculations",
+    "image": "https://placehold.co/600x400/065f46/ffffff?text=Disc+Harrow+Metric+Guide",
+    "price": "50.00",
+    "desc": "Full metric reference guide for disc harrow blade counts, gang spacing, soil draft values (kN/m), and required tractor kW/hp.",
+    "isPdf": true,
+    "downloadUrl": "pdfs/Disc Harrow Metric Calculation & Sizing Guide.pdf",
+    "steps": [
+      "Disc blade count formula",
+      "Metric draft force tables by soil type",
+      "Drawbar to engine kW conversion",
+      "Field sizing calculation examples"
+    ]
+  },
+  {
+    "id": "manual-tractor-tyre-pressure-water-ballast",
+    "title": "Tractor Tyre Pressure & Water Ballast Guide (Metric)",
+    "category": "Farmers",
+    "subCategory": "Tractor tests & calculations",
+    "image": "https://placehold.co/600x400/065f46/ffffff?text=Tyre+Pressure+%26+Ballast+Guide",
+    "price": "50.00",
+    "desc": "Metric reference chart for tractor tire pressures (bar) for heavy tillage vs. general road work, plus 75% liquid water ballast capacities.",
+    "isPdf": true,
+    "downloadUrl": "pdfs/Tractor Tyre Pressure & Water Ballast Guide (Metric).pdf",
+    "steps": [
+      "Front & rear tire pressure specs",
+      "Field soil preparation bar settings",
+      "75% liquid ballast water volume (Liters)",
+      "Added ballast weight calculations (kg)"
+    ]
+  },
+  {
+    "id": "manual-tafe-engine-45-di",
+    "title": "Engine Parts Manual - TAFE 45 DI",
+    "category": "Farmers",
+    "subCategory": "TAFE",
+    "image": "https://placehold.co/600x400/065f46/ffffff?text=TAFE+Engine+45+DI",
+    "price": "50.00",
+    "desc": "Official parts catalog and exploded component diagrams for TAFE 45 DI engine maintenance and repairs.",
+    "isPdf": true,
+    "downloadUrl": "pdfs/Engine - TAFE 45 DI.pdf",
+    "steps": [
+      "Engine block components",
+      "Valves and camshaft parts",
+      "Fuel system and filter elements",
+      "Gasket and seal kits"
+    ]
+  },
+  {
+    "id": "manual-tafe-tractor-7502-8502",
+    "title": "Tractor Parts Manual - 7502-8502",
+    "category": "Farmers",
+    "subCategory": "TAFE",
+    "image": "https://placehold.co/600x400/065f46/ffffff?text=TAFE+Tractor+7502-8502",
+    "price": "50.00",
+    "desc": "Official comprehensive parts manual for TAFE 7502 and 8502 tractors, covering transmission, chassis, and hydraulics.",
+    "isPdf": true,
+    "downloadUrl": "pdfs/Tractor - 7502-8502.pdf",
+    "steps": [
+      "Transmission and gearbox assemblies",
+      "Hydraulic lift and three-point linkage",
+      "Steering and front axle components",
+      "Electrical and body panels"
+    ]
+  },
+  {
+    "id": "manual-tafe-tractor-45-di",
+    "title": "Tractor Parts Manual - TAFE 45 DI",
+    "category": "Farmers",
+    "subCategory": "TAFE",
+    "image": "https://placehold.co/600x400/065f46/ffffff?text=TAFE+Tractor+45+DI",
+    "price": "50.00",
+    "desc": "Official comprehensive parts manual and exploded diagrams for the TAFE 45 DI tractor model.",
+    "isPdf": true,
+    "downloadUrl": "pdfs/Tractor - TAFE 45 DI.pdf",
+    "steps": [
+      "Clutch and transmission parts",
+      "Rear axle and differential",
+      "Hydraulic pump and lines",
+      "Steering assembly and linkage"
+    ]
+  },
+  {
+    "id": "manual-agrocompact",
+    "title": "AGROCOMPACT F60-F70-F80-F90 Workshop Manual",
+    "category": "Farmers",
+    "subCategory": "Deutz",
+    "image": "https://placehold.co/600x400/065f46/ffffff?text=Deutz+Agrocompact",
+    "price": "50.00",
+    "desc": "Comprehensive technical manual for Deutz Agrocompact series tractors, transmissions, and axles.",
+    "isPdf": true,
+    "downloadUrl": "https://drive.google.com/uc?export=download&id=1BXI-VoI2DLH5lzXRjw8RJXATxFoGOXmB",
+    "steps": [
+      "Transmission & gearbox service",
+      "PTO clutch adjustments",
+      "Brake & steering repairs",
+      "Maintenance schedules"
+    ]
+  },
+  {
+    "id": "manual-agrolux",
+    "title": "AGROLUX F50-F60-F70-F80 Workshop Manual",
+    "category": "Farmers",
+    "subCategory": "Deutz",
+    "image": "https://placehold.co/600x400/065f46/ffffff?text=Deutz+Agrolux",
+    "price": "50.00",
+    "desc": "Detailed workshop repair manual for Agrolux series tractors.",
+    "isPdf": true,
+    "downloadUrl": "https://drive.google.com/uc?export=download&id=1u3RfHd4HZlUjJN3L_kyUACi3ItVFK0gV",
+    "steps": [
+      "Engine maintenance",
+      "Hydraulic lift linkage",
+      "Electrical troubleshooting",
+      "Assembly & disassembly"
+    ]
+  },
+  {
+    "id": "manual-agroplus-60",
+    "title": "AGROPLUS 60-70-80 Workshop Manual",
+    "category": "Farmers",
+    "subCategory": "Deutz",
+    "image": "https://placehold.co/600x400/065f46/ffffff?text=Deutz+Agroplus",
+    "price": "50.00",
+    "desc": "Factory repair and service manual for Agroplus 60, 70, and 80 tractors.",
+    "isPdf": true,
+    "downloadUrl": "https://drive.google.com/uc?export=download&id=1g-ULTNzM_FudwDnuQET49r1TldA4_xdO",
+    "steps": [
+      "Fuel system calibration",
+      "Transmission diagnostics",
+      "Hydraulic pressure testing",
+      "Electrical wiring guide"
+    ]
+  },
+  {
+    "id": "manual-agroplus-75",
+    "title": "AGROPLUS 75-85-95-100 Workshop Manual",
+    "category": "Farmers",
+    "subCategory": "Deutz",
+    "image": "https://placehold.co/600x400/065f46/ffffff?text=Deutz+Agroplus+75-100",
+    "price": "50.00",
+    "desc": "Advanced workshop manual covering Agroplus 75 through 100 models.",
+    "isPdf": true,
+    "downloadUrl": "https://drive.google.com/uc?export=download&id=1A2OM6OOYgFjz6YSqI9NIcGJj5a9gYPtb",
+    "steps": [
+      "Engine disassembly",
+      "Transmission overhaul",
+      "Four-wheel drive axle service",
+      "Cab controls & electronics"
+    ]
+  },
+  {
+    "id": "manual-agrotrac",
+    "title": "AGROTRAC 110-130-150 Workshop Manual",
+    "category": "Farmers",
+    "subCategory": "Deutz",
+    "image": "https://placehold.co/600x400/065f46/ffffff?text=Deutz+Agrotrac",
+    "price": "50.00",
+    "desc": "Heavy-duty tractor workshop manual for Agrotrac high-horsepower models.",
+    "isPdf": true,
+    "downloadUrl": "https://drive.google.com/uc?export=download&id=1PG-j8cG1PzI9zwGMbYlQIjLW3NRVf8m5",
+    "steps": [
+      "Engine cooling & fuel injection",
+      "PowerShift transmission repair",
+      "Rear hitch linkage calibration",
+      "Safety & maintenance specs"
+    ]
+  },
+  {
+    "id": "manual-agrotron-mk3-80",
+    "title": "AGROTRON 80-85-90-100-105 MK3 Workshop Manual",
+    "category": "Farmers",
+    "subCategory": "Deutz",
+    "image": "https://placehold.co/600x400/065f46/ffffff?text=Deutz+Agrotron",
+    "price": "50.00",
+    "desc": "Complete workshop manual for Deutz Agrotron MK3 series tractors.",
+    "isPdf": true,
+    "downloadUrl": "https://drive.google.com/uc?export=download&id=1zmMZfQEoxeUg0G6v7SPHB_uhI-4BOK7V",
+    "steps": [
+      "Electronic engine management",
+      "Transmission & powershift setup",
+      "Hydraulic load sensing",
+      "Diagnostic error codes"
+    ]
+  },
+  {
+    "id": "manual-agrotron-80-105",
+    "title": "AGROTRON 80-90-100-105 Workshop Manual",
+    "category": "Farmers",
+    "subCategory": "Deutz",
+    "image": "https://placehold.co/600x400/065f46/ffffff?text=Deutz+Agrotron",
+    "price": "50.00",
+    "desc": "Technical service manual for Agrotron 80, 90, 100, and 105 tractor series.",
+    "isPdf": true,
+    "downloadUrl": "https://drive.google.com/uc?export=download&id=1q0sJBM7wwknARqX9or8yvQY2rB1pTA4z",
+    "steps": [
+      "Engine diagnostics",
+      "Hydraulic system calibration",
+      "Electrical schematics",
+      "Brake & axle overhaul"
+    ]
+  },
+  {
+    "id": "manual-agrotron-106-165",
+    "title": "AGROTRON 106-110-115-120-135-150-165 MK3 Manual",
+    "category": "Farmers",
+    "subCategory": "Deutz",
+    "image": "https://placehold.co/600x400/065f46/ffffff?text=Deutz+Agrotron",
+    "price": "50.00",
+    "desc": "Comprehensive repair manual for Agrotron MK3 heavy utility tractors.",
+    "isPdf": true,
+    "downloadUrl": "https://drive.google.com/uc?export=download&id=1mis1n7z7WYqSF5qjdX7pjY9GMWPPd5Gr",
+    "steps": [
+      "Transmission teardown",
+      "PowerShift adjustments",
+      "Hydraulic pump testing",
+      "Axle & suspension service"
+    ]
+  },
+  {
+    "id": "manual-agrotron-108-128",
+    "title": "AGROTRON 108-118-128 Workshop Manual",
+    "category": "Farmers",
+    "subCategory": "Deutz",
+    "image": "https://placehold.co/600x400/065f46/ffffff?text=Deutz+Agrotron",
+    "price": "50.00",
+    "desc": "Official workshop service manual for Agrotron 108, 118, and 128 models.",
+    "isPdf": true,
+    "downloadUrl": "https://drive.google.com/uc?export=download&id=1Mt9rIXOZsCJEDZttgxnQ5SK-GYjI7ZDU",
+    "steps": [
+      "Engine specifications",
+      "Transmission servicing",
+      "Hydraulic controls",
+      "Electrical diagnostics"
+    ]
+  },
+  {
+    "id": "manual-agrotron-130-165",
+    "title": "AGROTRON 130-140-155-165 MK3 Workshop Manual",
+    "category": "Farmers",
+    "subCategory": "Deutz",
+    "image": "https://placehold.co/600x400/065f46/ffffff?text=Deutz+Agrotron",
+    "price": "50.00",
+    "desc": "Detailed workshop manual for high-output Agrotron MK3 tractors.",
+    "isPdf": true,
+    "downloadUrl": "https://drive.google.com/uc?export=download&id=1ET78Ydir_bJXQg9SzIabx-1wqTrB-BCT",
+    "steps": [
+      "Powertrain overhaul",
+      "Hydraulics & hitch tuning",
+      "Electronic control units",
+      "Routine maintenance"
+    ]
+  },
+  {
+    "id": "manual-agrotron-210-265",
+    "title": "AGROTRON 210-235-265 Workshop Manual",
+    "category": "Farmers",
+    "subCategory": "Deutz",
+    "image": "https://placehold.co/600x400/065f46/ffffff?text=Deutz+Agrotron",
+    "price": "50.00",
+    "desc": "Factory service manual for large-frame Deutz Agrotron 210, 235, and 265 tractors.",
+    "isPdf": true,
+    "downloadUrl": "https://drive.google.com/uc?export=download&id=1E0lFFheMpvlgrWU011yq81PCAhWr6UoT",
+    "steps": [
+      "Engine repair procedures",
+      "Heavy transmission service",
+      "Axle & differential work",
+      "Advanced diagnostics"
+    ]
+  },
+  {
+    "id": "manual-agrotron-215-265",
+    "title": "AGROTRON 215-265 Workshop Manual",
+    "category": "Farmers",
+    "subCategory": "Deutz",
+    "image": "https://placehold.co/600x400/065f46/ffffff?text=Deutz+Agrotron",
+    "price": "50.00",
+    "desc": "Complete technical manual for Agrotron 215 and 265 tractor fleets.",
+    "isPdf": true,
+    "downloadUrl": "https://drive.google.com/uc?export=download&id=1nt89RIBPNg3QBgQQpFaCy4KnARbrLJFP",
+    "steps": [
+      "Hydraulic system schematics",
+      "Transmission maintenance",
+      "Engine overhaul guide",
+      "Electrical troubleshooting"
+    ]
+  },
+  {
+    "id": "manual-deutz-engines-912",
+    "title": "ENGINES DEUTZ 912-913 Workshop Manual",
+    "category": "Farmers",
+    "subCategory": "Deutz",
+    "image": "https://placehold.co/600x400/065f46/ffffff?text=Deutz+Engines",
+    "price": "50.00",
+    "desc": "Comprehensive engine overhaul and service manual for air-cooled Deutz 912 and 913 series engines.",
+    "isPdf": true,
+    "downloadUrl": "https://drive.google.com/uc?export=download&id=1_izqzFxH-Irebdd2zq3e_5_ETCCTekn3",
+    "steps": [
+      "Cylinder head & valve clearance",
+      "Fuel injection pump timing",
+      "Lubrication & oil cooling",
+      "Torque specifications"
+    ]
+  },
+  {
+    "id": "manual-balance",
+    "title": "5650-5650 Balance Manual",
+    "category": "Farmers",
+    "subCategory": "Other",
+    "image": "https://placehold.co/600x400/065f46/ffffff?text=Balance+Manual",
+    "price": "50.00",
+    "desc": "Official service balance and adjustment documentation for specialized agricultural machinery.",
+    "isPdf": true,
+    "downloadUrl": "https://drive.google.com/uc?export=download&id=1RtsDdGKjdUgZOT8dY5aRFMtDVUf8Zyim",
+    "steps": [
+      "Component calibration",
+      "Balancing procedures",
+      "Maintenance guidelines",
+      "Technical tolerances"
+    ]
+  },
+  {
+    "id": "manual-bearing-catalogue",
+    "title": "Bearing Catalogue",
+    "category": "Farmers",
+    "subCategory": "Other",
+    "image": "https://placehold.co/600x400/065f46/ffffff?text=Bearing+Catalogue",
+    "price": "50.00",
+    "desc": "Bearing catalogue and technical reference guide.",
+    "isPdf": true,
+    "downloadUrl": "https://drive.google.com/uc?export=download&id=0B460_P5oTO9OZkV5MGdZRlVLTjA",
+    "steps": [
+      "Bearing identification & cross-referencing",
+      "Dimensional specifications & load ratings",
+      "Installation & lubrication guidelines",
+      "Maintenance & replacement specs"
+    ]
+  },
+  {
+    "id": "manual-baldan-spares",
+    "title": "Baldan disc spares manual",
+    "category": "Farmers",
+    "subCategory": "Other",
+    "image": "https://placehold.co/600x400/065f46/ffffff?text=Baldan+Disc+Spares",
+    "price": "50.00",
+    "desc": "Official parts catalog and exploded component diagrams for Baldan disc harrows and tillage equipment.",
+    "isPdf": true,
+    "downloadUrl": "https://drive.google.com/uc?export=download&id=0B460_P5oTO9OdEY1TjFFZUpGTHc",
+    "steps": [
+      "Disc gang assembly spares",
+      "Bearing and housing parts",
+      "Scraper and spacer identification",
+      "Frame and hitch components"
+    ]
+  },
+  {
+    "id": "manual-ford-5610-7610",
+    "title": "Ford 5610 - 7610 User manual",
+    "category": "Farmers",
+    "subCategory": "Ford",
+    "image": "https://placehold.co/600x400/065f46/ffffff?text=Ford+5610-7610",
+    "price": "50.00",
+    "desc": "Official user and operation manual for Ford 5610 and 7610 agricultural tractors.",
+    "isPdf": true,
+    "downloadUrl": "https://drive.google.com/uc?export=download&id=0B460_P5oTO9OQWdRdzNsSk5PcWM",
+    "steps": [
+      "Instrument panel & controls",
+      "Operating procedures & PTO",
+      "Routine maintenance & fluid specs",
+      "Troubleshooting & safety guidelines"
+    ]
+  },
+  {
+    "id": "manual-additional-1",
+    "title": "Deutz Tractor Technical Workshop Manual A",
+    "category": "Farmers",
+    "subCategory": "Deutz",
+    "image": "https://placehold.co/600x400/065f46/ffffff?text=Deutz+Manual",
+    "price": "50.00",
+    "desc": "Specialized factory workshop documentation for Deutz agricultural machinery and tractors.",
+    "isPdf": true,
+    "downloadUrl": "https://drive.google.com/uc?export=download&id=1Mt9rIXOZsCJEDZttgxnQ5SK-GYjI7ZDU",
+    "steps": [
+      "Mechanical diagnostics",
+      "Hydraulic repairs",
+      "Electrical troubleshooting",
+      "Component assembly"
+    ]
+  },
+  {
+    "id": "manual-additional-2",
+    "title": "Deutz Tractor Technical Workshop Manual B",
+    "category": "Farmers",
+    "subCategory": "Deutz",
+    "image": "https://placehold.co/600x400/065f46/ffffff?text=Deutz+Manual",
+    "price": "50.00",
+    "desc": "Factory service manual covering mechanical systems and maintenance intervals.",
+    "isPdf": true,
+    "downloadUrl": "https://drive.google.com/uc?export=download&id=1XkcRTm7TsFuPkqWkbhN4cmeBUL_9eCQZ",
+    "steps": [
+      "Routine servicing",
+      "Clutch & brake maintenance",
+      "Steering system checks",
+      "Hydraulic tests"
+    ]
+  },
+  {
+    "id": "manual-additional-3",
+    "title": "Deutz Tractor Technical Workshop Manual C",
+    "category": "Farmers",
+    "subCategory": "Deutz",
+    "image": "https://placehold.co/600x400/065f46/ffffff?text=Deutz+Manual",
+    "price": "50.00",
+    "desc": "Detailed technical repair manual for professional workshop technicians.",
+    "isPdf": true,
+    "downloadUrl": "https://drive.google.com/uc?export=download&id=1tE2PrRTPO9D5EPJbTul4J2vDfpWltmBK",
+    "steps": [
+      "Engine and fuel setup",
+      "Transmission diagnostics",
+      "Axle maintenance",
+      "Wiring diagrams"
+    ]
+  },
+  {
+    "id": "manual-additional-4",
+    "title": "Deutz Tractor Technical Workshop Manual D",
+    "category": "Farmers",
+    "subCategory": "Deutz",
+    "image": "https://placehold.co/600x400/065f46/ffffff?text=Deutz+Manual",
+    "price": "50.00",
+    "desc": "Authorized dealer workshop manual for advanced tractor systems.",
+    "isPdf": true,
+    "downloadUrl": "https://drive.google.com/uc?export=download&id=1UHNld1aigZO1kchK0_B8nmVs6Ccmfy_I",
+    "steps": [
+      "Advanced diagnostics",
+      "Hydraulic control valves",
+      "Power train service",
+      "Safety inspection"
+    ]
+  },
+  {
+    "id": "manual-additional-5",
+    "title": "Deutz Tractor Technical Workshop Manual E",
+    "category": "Farmers",
+    "subCategory": "Deutz",
+    "image": "https://placehold.co/600x400/065f46/ffffff?text=Deutz+Manual",
+    "price": "50.00",
+    "desc": "Official factory service manual for system calibration and repairs.",
+    "isPdf": true,
+    "downloadUrl": "https://drive.google.com/uc?export=download&id=1C4k-WX8iEnyu0gX8jqMs046UUi3sNv3H",
+    "steps": [
+      "System calibration",
+      "Repair procedures",
+      "Torque specs",
+      "Maintenance logs"
+    ]
+  },
+  {
+    "id": "manual-additional-6",
+    "title": "Deutz Tractor Technical Workshop Manual F",
+    "category": "Farmers",
+    "subCategory": "Deutz",
+    "image": "https://placehold.co/600x400/065f46/ffffff?text=Deutz+Manual",
+    "price": "50.00",
+    "desc": "Comprehensive workshop manual for tractor maintenance and overhauls.",
+    "isPdf": true,
+    "downloadUrl": "https://drive.google.com/uc?export=download&id=1xaYrAp0WFwzo9dcD3DKKUL__ZvwqU3sh",
+    "steps": [
+      "Engine checks",
+      "Gearbox servicing",
+      "Differential setup",
+      "Electrical troubleshooting"
+    ]
+  },
+  {
+    "id": "manual-additional-7",
+    "title": "Deutz Tractor Technical Workshop Manual G",
+    "category": "Farmers",
+    "subCategory": "Deutz",
+    "image": "https://placehold.co/600x400/065f46/ffffff?text=Deutz+Manual",
+    "price": "50.00",
+    "desc": "Technical service documentation for workshop repairs.",
+    "isPdf": true,
+    "downloadUrl": "https://drive.google.com/uc?export=download&id=16hel8Tt1QXnTlPwQCJD_tA4pcxx3HrV3",
+    "steps": [
+      "Fault isolation",
+      "Part replacement guides",
+      "Hydraulic checks",
+      "Final testing"
+    ]
+  },
+  {
+    "id": "manual-additional-8",
+    "title": "Deutz Tractor Technical Workshop Manual H",
+    "category": "Farmers",
+    "subCategory": "Deutz",
+    "image": "https://placehold.co/600x400/065f46/ffffff?text=Deutz+Manual",
+    "price": "50.00",
+    "desc": "Official factory repair manual for mechanical and electrical systems.",
+    "isPdf": true,
+    "downloadUrl": "https://drive.google.com/uc?export=download&id=1I38P7V88fcTNa7MtUAerEf12y-xNjMs1",
+    "steps": [
+      "Electrical checks",
+      "Mechanical overhaul",
+      "Fluid replacement",
+      "Calibration"
+    ]
+  },
+  {
+    "id": "manual-additional-9",
+    "title": "Deutz Tractor Technical Workshop Manual I",
+    "category": "Farmers",
+    "subCategory": "Deutz",
+    "image": "https://placehold.co/600x400/065f46/ffffff?text=Deutz+Manual",
+    "price": "50.00",
+    "desc": "Comprehensive workshop guide for servicing Deutz tractors.",
+    "isPdf": true,
+    "downloadUrl": "https://drive.google.com/uc?export=download&id=1-85C-urw8krmSFwSrcS3SO1XCJCPb9_R",
+    "steps": [
+      "Service intervals",
+      "Engine tuning",
+      "Hydraulic maintenance",
+      "Troubleshooting"
+    ]
+  },
+  {
+    "id": "manual-additional-10",
+    "title": "Deutz Tractor Technical Workshop Manual J",
+    "category": "Farmers",
+    "subCategory": "Deutz",
+    "image": "https://placehold.co/600x400/065f46/ffffff?text=Deutz+Manual",
+    "price": "50.00",
+    "desc": "Authorized workshop manual for technical maintenance.",
+    "isPdf": true,
+    "downloadUrl": "https://drive.google.com/uc?export=download&id=17alp9w7cTJG4KRMmN5C7ymclDhns0JQK",
+    "steps": [
+      "Inspection routines",
+      "Repair specifications",
+      "Diagnostic steps",
+      "Safety checks"
+    ]
+  },
+  {
+    "id": "manual-additional-11",
+    "title": "Deutz Tractor Technical Workshop Manual K",
+    "category": "Farmers",
+    "subCategory": "Deutz",
+    "image": "https://placehold.co/600x400/065f46/ffffff?text=Deutz+Manual",
+    "price": "50.00",
+    "desc": "Factory technical manual for drivetrain and engine service.",
+    "isPdf": true,
+    "downloadUrl": "https://drive.google.com/uc?export=download&id=1JlF9TBrZTjFvBgrgNPiDaievVtav2c_F",
+    "steps": [
+      "Drivetrain checks",
+      "Engine diagnostics",
+      "Hydraulic service",
+      "Assembly notes"
+    ]
+  },
+  {
+    "id": "manual-additional-12",
+    "title": "Deutz Tractor Technical Workshop Manual L",
+    "category": "Farmers",
+    "subCategory": "Deutz",
+    "image": "https://placehold.co/600x400/065f46/ffffff?text=Deutz+Manual",
+    "price": "50.00",
+    "desc": "Comprehensive repair instructions for tractor mechanics.",
+    "isPdf": true,
+    "downloadUrl": "https://drive.google.com/uc?export=download&id=1ztK6T2-dikxRyIXN_YBDba1qVRImccqp",
+    "steps": [
+      "Component testing",
+      "Repair guidelines",
+      "Fluid specs",
+      "System checks"
+    ]
+  },
+  {
+    "id": "manual-additional-13",
+    "title": "Deutz Tractor Technical Workshop Manual M",
+    "category": "Farmers",
+    "subCategory": "Deutz",
+    "image": "https://placehold.co/600x400/065f46/ffffff?text=Deutz+Manual",
+    "price": "50.00",
+    "desc": "Official factory workshop guide for tractor upkeep.",
+    "isPdf": true,
+    "downloadUrl": "https://drive.google.com/uc?export=download&id=1TFr63OhVP5Ul_XhgfYLZTNWM4at-yUUG",
+    "steps": [
+      "Maintenance guides",
+      "Hydraulic upkeep",
+      "Electrical testing",
+      "Torque charts"
+    ]
+  },
+  {
+    "id": "manual-additional-14",
+    "title": "Deutz Tractor Technical Workshop Manual N",
+    "category": "Farmers",
+    "subCategory": "Deutz",
+    "image": "https://placehold.co/600x400/065f46/ffffff?text=Deutz+Manual",
+    "price": "50.00",
+    "desc": "Technical manual for tractor systems and major overhauls.",
+    "isPdf": true,
+    "downloadUrl": "https://drive.google.com/uc?export=download&id=1nK5sH7pVQa77RFDnl5RVTJrYFlzZxm4C",
+    "steps": [
+      "Major overhauls",
+      "System testing",
+      "Adjustment specs",
+      "Safety guidelines"
+    ]
+  },
+  {
+    "id": "manual-additional-15",
+    "title": "Deutz Tractor Technical Workshop Manual O",
+    "category": "Farmers",
+    "subCategory": "Deutz",
+    "image": "https://placehold.co/600x400/065f46/ffffff?text=Deutz+Manual",
+    "price": "50.00",
+    "desc": "Workshop service documentation for agricultural equipment.",
+    "isPdf": true,
+    "downloadUrl": "https://drive.google.com/uc?export=download&id=1zTThS-IgPgRSG9Paxq8VYq3BEiEB_6MT",
+    "steps": [
+      "Routine checks",
+      "Mechanical service",
+      "Hydraulic diagnostics",
+      "Repair steps"
+    ]
+  },
+  {
+    "id": "manual-additional-16",
+    "title": "Deutz Tractor Technical Workshop Manual P",
+    "category": "Farmers",
+    "subCategory": "Deutz",
+    "image": "https://placehold.co/600x400/065f46/ffffff?text=Deutz+Manual",
+    "price": "50.00",
+    "desc": "Factory repair manual for professional agricultural technicians.",
+    "isPdf": true,
+    "downloadUrl": "https://drive.google.com/uc?export=download&id=1uhqVUUxuZULU6b16nZ7C-1x2FhxFJbQj",
+    "steps": [
+      "Troubleshooting",
+      "System repair",
+      "Maintenance schedules",
+      "Testing specs"
+    ]
+  },
+  {
+    "id": "manual-additional-17",
+    "title": "Deutz Tractor Technical Workshop Manual Q",
+    "category": "Farmers",
+    "subCategory": "Deutz",
+    "image": "https://placehold.co/600x400/065f46/ffffff?text=Deutz+Manual",
+    "price": "50.00",
+    "desc": "Comprehensive reference manual for Deutz tractor repairs.",
+    "isPdf": true,
+    "downloadUrl": "https://drive.google.com/uc?export=download&id=1TwLD_dP0pNfttdFDzcp9Imxln0P2rk9X",
+    "steps": [
+      "Technical data",
+      "Adjustment procedures",
+      "Component repairs",
+      "Engine assembly"
+    ]
+  },
+  {
+    "id": "manual-additional-18",
+    "title": "Deutz Tractor Technical Workshop Manual R",
+    "category": "Farmers",
+    "subCategory": "Deutz",
+    "image": "https://placehold.co/600x400/065f46/ffffff?text=Deutz+Manual",
+    "price": "50.00",
+    "desc": "Official workshop manual for advanced mechanical servicing.",
+    "isPdf": true,
+    "downloadUrl": "https://drive.google.com/uc?export=download&id=1K92-wj5LsdoTBpQUOhoEnKNA2HTXXPCR",
+    "steps": [
+      "Mechanical service",
+      "Hydraulic testing",
+      "Electrical guides",
+      "Torque specifications"
+    ]
+  },
+  {
+    "id": "manual-additional-19",
+    "title": "Deutz Tractor Technical Workshop Manual S",
+    "category": "Farmers",
+    "subCategory": "Deutz",
+    "image": "https://placehold.co/600x400/065f46/ffffff?text=Deutz+Manual",
+    "price": "50.00",
+    "desc": "Technical service manual for workshop repairs and adjustments.",
+    "isPdf": true,
+    "downloadUrl": "https://drive.google.com/uc?export=download&id=11B-zB1YOHZJhi2eTo1lK3rQ-WeWtubpx",
+    "steps": [
+      "Adjustment values",
+      "Repair guidelines",
+      "Maintenance specs",
+      "Safety procedures"
+    ]
+  },
+  {
+    "id": "manual-additional-20",
+    "title": "Deutz Tractor Technical Workshop Manual T",
+    "category": "Farmers",
+    "subCategory": "Deutz",
+    "image": "https://placehold.co/600x400/065f46/ffffff?text=Deutz+Manual",
+    "price": "50.00",
+    "desc": "Comprehensive workshop manual for tractor maintenance.",
+    "isPdf": true,
+    "downloadUrl": "https://drive.google.com/uc?export=download&id=14mcWjFV1Ce0m8Ni1G_8JVvvoH52z9mjT",
+    "steps": [
+      "Service checks",
+      "Repair instructions",
+      "Component layout",
+      "Testing methods"
+    ]
+  },
+  {
+    "id": "manual-additional-21",
+    "title": "Deutz Tractor Technical Workshop Manual U",
+    "category": "Farmers",
+    "subCategory": "Deutz",
+    "image": "https://placehold.co/600x400/065f46/ffffff?text=Deutz+Manual",
+    "price": "50.00",
+    "desc": "Factory authorized service manual for agricultural machinery.",
+    "isPdf": true,
+    "downloadUrl": "https://drive.google.com/uc?export=download&id=1ri_iZU5OQW6G4CvD-Tsrx-rNDvW9MrXp",
+    "steps": [
+      "System overhauls",
+      "Hydraulic repairs",
+      "Electrical checks",
+      "Routine upkeep"
+    ]
+  },
+  {
+    "id": "manual-additional-22",
+    "title": "Deutz Tractor Technical Workshop Manual V",
+    "category": "Farmers",
+    "subCategory": "Deutz",
+    "image": "https://placehold.co/600x400/065f46/ffffff?text=Deutz+Manual",
+    "price": "50.00",
+    "desc": "Official service manual for tractor maintenance and diagnostics.",
+    "isPdf": true,
+    "downloadUrl": "https://drive.google.com/uc?export=download&id=1yHLOeFLsLCjqy7jR2fURGaLliOa70FC9",
+    "steps": [
+      "Diagnostic testing",
+      "Component servicing",
+      "Adjustment procedures",
+      "Safety notes"
+    ]
+  },
+  {
+    "id": "manual-additional-23",
+    "title": "Deutz Tractor Technical Workshop Manual W",
+    "category": "Farmers",
+    "subCategory": "Deutz",
+    "image": "https://placehold.co/600x400/065f46/ffffff?text=Deutz+Manual",
+    "price": "50.00",
+    "desc": "Comprehensive technical manual for tractor servicing.",
+    "isPdf": true,
+    "downloadUrl": "https://drive.google.com/uc?export=download&id=1u021_FEo79AJOogIs7kY3slOvJptOn3t",
+    "steps": [
+      "Maintenance specs",
+      "Repair procedures",
+      "Hydraulic troubleshooting",
+      "Assembly guides"
+    ]
+  },
+  {
+    "id": "manual-additional-24",
+    "title": "Deutz Tractor Technical Workshop Manual X",
+    "category": "Farmers",
+    "subCategory": "Deutz",
+    "image": "https://placehold.co/600x400/065f46/ffffff?text=Deutz+Manual",
+    "price": "50.00",
+    "desc": "Technical workshop guide for professional mechanics.",
+    "isPdf": true,
+    "downloadUrl": "https://drive.google.com/uc?export=download&id=1OjpIpIIrVNBHPsXAN9CbwxQokO-k5Oxl",
+    "steps": [
+      "Mechanical maintenance",
+      "Repair standards",
+      "Tool requirements",
+      "Inspection checklists"
+    ]
+  },
+  {
+    "id": "manual-additional-25",
+    "title": "Deutz Tractor Technical Workshop Manual Y",
+    "category": "Farmers",
+    "subCategory": "Deutz",
+    "image": "https://placehold.co/600x400/065f46/ffffff?text=Deutz+Manual",
+    "price": "50.00",
+    "desc": "Official factory manual for tractor system maintenance.",
+    "isPdf": true,
+    "downloadUrl": "https://drive.google.com/uc?export=download&id=1R9RKHjAEt8qECU6MGhj7u-5quTwPUwX7",
+    "steps": [
+      "System checks",
+      "Repair guidelines",
+      "Calibration steps",
+      "Technical specs"
+    ]
+  },
+  {
+    "id": "manual-additional-26",
+    "title": "Deutz Tractor Technical Workshop Manual Z",
+    "category": "Farmers",
+    "subCategory": "Deutz",
+    "image": "https://placehold.co/600x400/065f46/ffffff?text=Deutz+Manual",
+    "price": "50.00",
+    "desc": "Comprehensive service manual for tractor repairs.",
+    "isPdf": true,
+    "downloadUrl": "https://drive.google.com/uc?export=download&id=1sPgbvmyE_-k-xqAjHonZuiR-P-cSkYEu",
+    "steps": [
+      "Troubleshooting charts",
+      "Overhaul procedures",
+      "Maintenance specs",
+      "Safety checks"
+    ]
+  },
+  {
+    "id": "manual-additional-27",
+    "title": "Deutz Tractor Technical Workshop Manual AA",
+    "category": "Farmers",
+    "subCategory": "Deutz",
+    "image": "https://placehold.co/600x400/065f46/ffffff?text=Deutz+Manual",
+    "price": "50.00",
+    "desc": "Technical workshop reference for agricultural equipment.",
+    "isPdf": true,
+    "downloadUrl": "https://drive.google.com/uc?export=download&id=1pS0VEUdTbAeoYgm94UVcg6TY2uI1xUCh",
+    "steps": [
+      "Maintenance routines",
+      "Repair instructions",
+      "Hydraulic schematics",
+      "Testing procedures"
+    ]
+  },
+  {
+    "id": "manual-additional-28",
+    "title": "Deutz Tractor Technical Workshop Manual AB",
+    "category": "Farmers",
+    "subCategory": "Deutz",
+    "image": "https://placehold.co/600x400/065f46/ffffff?text=Deutz+Manual",
+    "price": "50.00",
+    "desc": "Factory service documentation for workshop technicians.",
+    "isPdf": true,
+    "downloadUrl": "https://drive.google.com/uc?export=download&id=1ghTnWYwZDDORuEPl46loYDjRF80hgauf",
+    "steps": [
+      "Component overhauls",
+      "Repair guides",
+      "Adjustment values",
+      "Diagnostic checks"
+    ]
+  },
+  {
+    "id": "manual-additional-29",
+    "title": "Deutz Tractor Technical Workshop Manual AC",
+    "category": "Farmers",
+    "subCategory": "Deutz",
+    "image": "https://placehold.co/600x400/065f46/ffffff?text=Deutz+Manual",
+    "price": "50.00",
+    "desc": "Comprehensive repair and maintenance manual for Deutz machinery.",
+    "isPdf": true,
+    "downloadUrl": "https://drive.google.com/uc?export=download&id=1U9I5lzK0oPe64K_EpFC1CBGtga6PCRL4",
+    "steps": [
+      "Mechanical servicing",
+      "Hydraulic repairs",
+      "Electrical troubleshooting",
+      "Routine checks"
+    ]
+  },
+  {
+    "id": "manual-additional-30",
+    "title": "Deutz Tractor Technical Workshop Manual AD",
+    "category": "Farmers",
+    "subCategory": "Deutz",
+    "image": "https://placehold.co/600x400/065f46/ffffff?text=Deutz+Manual",
+    "price": "50.00",
+    "desc": "Official factory manual for tractor servicing and repairs.",
+    "isPdf": true,
+    "downloadUrl": "https://drive.google.com/uc?export=download&id=1nOmvjL4Bcg8n5CL4XHK_2cy3Ipbou6vw",
+    "steps": [
+      "Service procedures",
+      "Component diagnostics",
+      "Repair specifications",
+      "Safety protocols"
+    ]
+  },
+  {
+    "id": "manual-additional-31",
+    "title": "Deutz Tractor Technical Workshop Manual AE",
+    "category": "Farmers",
+    "subCategory": "Deutz",
+    "image": "https://placehold.co/600x400/065f46/ffffff?text=Deutz+Manual",
+    "price": "50.00",
+    "desc": "Technical workshop manual for agricultural tractors.",
+    "isPdf": true,
+    "downloadUrl": "https://drive.google.com/uc?export=download&id=1YsyyxlpHf9WwqHtxAlICpVgq_7YZ5IOK",
+    "steps": [
+      "Maintenance schedules",
+      "Repair instructions",
+      "Hydraulic tests",
+      "Assembly guides"
+    ]
+  },
+  {
+    "id": "manual-additional-32",
+    "title": "Deutz Tractor Technical Workshop Manual AF",
+    "category": "Farmers",
+    "subCategory": "Deutz",
+    "image": "https://placehold.co/600x400/065f46/ffffff?text=Deutz+Manual",
+    "price": "50.00",
+    "desc": "Factory authorized service manual for mechanical repairs.",
+    "isPdf": true,
+    "downloadUrl": "https://drive.google.com/uc?export=download&id=1007IwJRZyW7OIvAtnW599AOCWdfzsqGQ",
+    "steps": [
+      "Mechanical overhauls",
+      "Adjustment procedures",
+      "Fault finding",
+      "Testing notes"
+    ]
+  },
+  {
+    "id": "manual-additional-33",
+    "title": "Deutz Tractor Technical Workshop Manual AG",
+    "category": "Farmers",
+    "subCategory": "Deutz",
+    "image": "https://placehold.co/600x400/065f46/ffffff?text=Deutz+Manual",
+    "price": "50.00",
+    "desc": "Comprehensive workshop manual for tractor service and maintenance.",
+    "isPdf": true,
+    "downloadUrl": "https://drive.google.com/uc?export=download&id=1VjCHyFLrPgufNrjN_CuLv1QEDZlK3f9T",
+    "steps": [
+      "Service routines",
+      "Repair standards",
+      "Component checks",
+      "Technical data"
+    ]
+  },
+  {
+    "id": "manual-additional-34",
+    "title": "Deutz Tractor Technical Workshop Manual AH",
+    "category": "Farmers",
+    "subCategory": "Deutz",
+    "image": "https://placehold.co/600x400/065f46/ffffff?text=Deutz+Manual",
+    "price": "50.00",
+    "desc": "Official factory manual for comprehensive tractor repairs.",
+    "isPdf": true,
+    "downloadUrl": "https://drive.google.com/uc?export=download&id=1aL4au3fmEg1VcVgn6fg4qxpYYc1OEanP",
+    "steps": [
+      "Complete repairs",
+      "Hydraulic service",
+      "Electrical checks",
+      "Safety guidelines"
+    ]
+  },
+  {
+    "id": "manual-additional-35",
+    "title": "Deutz Tractor Technical Workshop Manual AI",
+    "category": "Farmers",
+    "subCategory": "Deutz",
+    "image": "https://placehold.co/600x400/065f46/ffffff?text=Deutz+Manual",
+    "price": "50.00",
+    "desc": "Official workshop manual for tractor maintenance and overhauls.",
+    "isPdf": true,
+    "downloadUrl": "https://drive.google.com/uc?export=download&id=1Cb9aVTvnD529qWDLcErLbf5pqrh8vvoz",
+    "steps": [
+      "Overhaul procedures",
+      "Maintenance intervals",
+      "Hydraulic tuning",
+      "Safety inspection"
+    ]
+  },
+  {
+    "id": "manual-additional-36",
+    "title": "Deutz Tractor Technical Workshop Manual AJ",
+    "category": "Farmers",
+    "subCategory": "Deutz",
+    "image": "https://placehold.co/600x400/065f46/ffffff?text=Deutz+Manual",
+    "price": "50.00",
+    "desc": "Comprehensive factory service manual for professional repairs.",
+    "isPdf": true,
+    "downloadUrl": "https://drive.google.com/uc?export=download&id=1BZ9EZHDrDUpnveQam5_RW-5_sdjhduUJ",
+    "steps": [
+      "Diagnostic testing",
+      "Component replacement",
+      "System calibration",
+      "Repair notes"
+    ]
+  },
+  {
+    "id": "manual-additional-37",
+    "title": "Deutz Tractor Technical Workshop Manual AK",
+    "category": "Farmers",
+    "subCategory": "Deutz",
+    "image": "https://placehold.co/600x400/065f46/ffffff?text=Deutz+Manual",
+    "price": "50.00",
+    "desc": "Detailed technical manual for tractor servicing and adjustments.",
+    "isPdf": true,
+    "downloadUrl": "https://drive.google.com/uc?export=download&id=1SEe8Aj-aFKs-vTBNkRKQHLeaDsZBDOfg",
+    "steps": [
+      "Adjustment values",
+      "Mechanical repairs",
+      "Electrical troubleshooting",
+      "Testing specs"
+    ]
+  },
+  {
+    "id": "manual-additional-38",
+    "title": "Deutz Tractor Technical Workshop Manual AL",
+    "category": "Farmers",
+    "subCategory": "Deutz",
+    "image": "https://placehold.co/600x400/065f46/ffffff?text=Deutz+Manual",
+    "price": "50.00",
+    "desc": "Official workshop manual for agricultural tractor mechanics.",
+    "isPdf": true,
+    "downloadUrl": "https://drive.google.com/uc?export=download&id=11C6T-hWIMWYNs6kikcxmeoFC-XScDUx3",
+    "steps": [
+      "Service routines",
+      "Repair standards",
+      "Fluid specifications",
+      "Safety checks"
+    ]
+  },
+  {
+    "id": "manual-additional-39",
+    "title": "Deutz Tractor Technical Workshop Manual AM",
+    "category": "Farmers",
+    "subCategory": "Deutz",
+    "image": "https://placehold.co/600x400/065f46/ffffff?text=Deutz+Manual",
+    "price": "50.00",
+    "desc": "Comprehensive service documentation for Deutz tractor systems.",
+    "isPdf": true,
+    "downloadUrl": "https://drive.google.com/uc?export=download&id=1RY1NOpV8knNn4awCAF25_hlEmGB-LWTH",
+    "steps": [
+      "System checks",
+      "Repair guidelines",
+      "Maintenance checklists",
+      "Troubleshooting"
+    ]
+  },
+  {
+    "id": "manual-additional-40",
+    "title": "Deutz Tractor Technical Workshop Manual AN",
+    "category": "Farmers",
+    "subCategory": "Deutz",
+    "image": "https://placehold.co/600x400/065f46/ffffff?text=Deutz+Manual",
+    "price": "50.00",
+    "desc": "Factory authorized service manual for tractor overhauls.",
+    "isPdf": true,
+    "downloadUrl": "https://drive.google.com/uc?export=download&id=15_5j1VjP-ODga8Tjh-HF33qYoBlnKkxc",
+    "steps": [
+      "Engine overhauls",
+      "Hydraulic maintenance",
+      "Electrical testing",
+      "Final assembly"
+    ]
+  },
+  {
+    "id": "manual-same-2",
+    "title": "SAME ARGON 55-70 / 55F-70F Classic Workshop Manual",
+    "category": "Farmers",
+    "subCategory": "Same",
+    "image": "https://placehold.co/600x400/065f46/ffffff?text=SAME+Argon+Classic",
+    "price": "50.00",
+    "desc": "Comprehensive repair and maintenance manual for SAME Argon 55, 70 and Classic 55F, 70F models.",
+    "isPdf": true,
+    "downloadUrl": "https://drive.google.com/uc?export=download&id=1eN8DteybKc0pR5d8avq435uNKso6XlR5",
+    "steps": [
+      "Mechanical specifications",
+      "Clutch & gearbox servicing",
+      "Four-wheel drive axle repair",
+      "Brake system adjustments"
+    ]
+  },
+  {
+    "id": "manual-same-3",
+    "title": "SAME DIAMOND 210-235-265 Workshop Manual",
+    "category": "Farmers",
+    "subCategory": "Same",
+    "image": "https://placehold.co/600x400/065f46/ffffff?text=SAME+Diamond",
+    "price": "50.00",
+    "desc": "Heavy-duty factory workshop manual for SAME Diamond high-horsepower 210, 235, and 265 tractors.",
+    "isPdf": true,
+    "downloadUrl": "https://drive.google.com/uc?export=download&id=1_kf2OcCokPFAEUOuYFvgrDmeNuTaSJj-",
+    "steps": [
+      "High-output engine servicing",
+      "Powershift transmission overhaul",
+      "Load-sensing hydraulics",
+      "Electronic control unit diagnostics"
+    ]
+  },
+  {
+    "id": "manual-same-4",
+    "title": "SAME DIAMOND II 230-260 Workshop Manual",
+    "category": "Farmers",
+    "subCategory": "Same",
+    "image": "https://placehold.co/600x400/065f46/ffffff?text=SAME+Diamond+II",
+    "price": "50.00",
+    "desc": "Advanced service manual covering SAME Diamond II series 230 and 260 tractors.",
+    "isPdf": true,
+    "downloadUrl": "https://drive.google.com/uc?export=download&id=1M01ZE0CElzf_7ufxZDvXc_frBp210_rt",
+    "steps": [
+      "Engine management system",
+      "Transmission calibration",
+      "Front axle suspension setup",
+      "Hydraulic pressure testing"
+    ]
+  },
+  {
+    "id": "manual-same-5",
+    "title": "SAME DORADO 55-60-65-70-75-85 Workshop Manual",
+    "category": "Farmers",
+    "subCategory": "Same",
+    "image": "https://placehold.co/600x400/065f46/ffffff?text=SAME+Dorado",
+    "price": "50.00",
+    "desc": "Official factory repair manual for SAME Dorado utility tractors from 55 to 85 HP.",
+    "isPdf": true,
+    "downloadUrl": "https://drive.google.com/uc?export=download&id=1d6TawjKojp0fUFZl7J7HUYMxu5gxyafM",
+    "steps": [
+      "Engine fuel injection setup",
+      "Shuttle transmission service",
+      "Rear hitch controls",
+      "Electrical troubleshooting"
+    ]
+  },
+  {
+    "id": "manual-same-6",
+    "title": "SAME DORADO 55-70-75-90-100 F Workshop Manual",
+    "category": "Farmers",
+    "subCategory": "Same",
+    "image": "https://placehold.co/600x400/065f46/ffffff?text=SAME+Dorado+F",
+    "price": "50.00",
+    "desc": "Specialized orchard and vineyard workshop manual for SAME Dorado F series.",
+    "isPdf": true,
+    "downloadUrl": "https://drive.google.com/uc?export=download&id=1f_FoMkE4g4jYoA5Fa8KsfZiypmpDNEvh",
+    "steps": [
+      "Narrow axle geometry",
+      "Hydraulic pump servicing",
+      "Cooling & lubrication",
+      "Steering and braking systems"
+    ]
+  },
+  {
+    "id": "manual-same-7",
+    "title": "SAME DORADO 66-76-86 Power Shuttle Manual",
+    "category": "Farmers",
+    "subCategory": "Same",
+    "image": "https://placehold.co/600x400/065f46/ffffff?text=SAME+Dorado+Shuttle",
+    "price": "50.00",
+    "desc": "Comprehensive diagnostic and repair manual for SAME Dorado 66, 76, and 86 with Power Shuttle transmission.",
+    "isPdf": true,
+    "downloadUrl": "https://drive.google.com/uc?export=download&id=1rtJ8uvBUX2WcKQkpuB8BY7dz-dzLMSgI",
+    "steps": [
+      "Power shuttle clutch calibration",
+      "Electronic control diagnostics",
+      "Hydraulic valve setup",
+      "Maintenance intervals"
+    ]
+  },
+  {
+    "id": "manual-same-8",
+    "title": "SAME DORADO S-V 70-75-90-100 Workshop Manual",
+    "category": "Farmers",
+    "subCategory": "Same",
+    "image": "https://placehold.co/600x400/065f46/ffffff?text=SAME+Dorado+SV",
+    "price": "50.00",
+    "desc": "Factory workshop guide for SAME Dorado S and V specialized vineyard and orchard tractors.",
+    "isPdf": true,
+    "downloadUrl": "https://drive.google.com/uc?export=download&id=123cUCtDX_ardiGhxKOB7NJeTTR9KkAAY",
+    "steps": [
+      "Specialized narrow body systems",
+      "Front PTO & hitch setup",
+      "Hydraulic circuit diagrams",
+      "Axle alignment"
+    ]
+  },
+  {
+    "id": "manual-same-9",
+    "title": "ENGINES SAME 1000.3-1000.4-1000.6 W EURO II",
+    "category": "Farmers",
+    "subCategory": "Same",
+    "image": "https://placehold.co/600x400/065f46/ffffff?text=SAME+Engines",
+    "price": "50.00",
+    "desc": "Complete engine overhaul and service manual for SAME 1000 series 3, 4, and 6-cylinder Euro II diesel engines.",
+    "isPdf": true,
+    "downloadUrl": "https://drive.google.com/uc?export=download&id=1B0SUDNVPn18utHTyTI_lQySYjO-25Eb3",
+    "steps": [
+      "Cylinder head & valve timing",
+      "Fuel injection pump calibration",
+      "Turbocharger & cooling service",
+      "Torque specs & clearances"
+    ]
+  },
+  {
+    "id": "manual-same-10",
+    "title": "SAME EXPLORER 75-85-95 Workshop Manual",
+    "category": "Farmers",
+    "subCategory": "Same",
+    "image": "https://placehold.co/600x400/065f46/ffffff?text=SAME+Explorer",
+    "price": "50.00",
+    "desc": "Official factory workshop manual for the popular SAME Explorer 75, 85, and 95 utility tractors.",
+    "isPdf": true,
+    "downloadUrl": "https://drive.google.com/uc?export=download&id=1RwDLyLRfdMwRAEuVeR5T3uc9kyrSe1Mz",
+    "steps": [
+      "Engine maintenance",
+      "Transmission & splitter gearbox",
+      "Four-wheel drive engagement",
+      "Hydraulic lift maintenance"
+    ]
+  },
+  {
+    "id": "manual-same-11",
+    "title": "SAME EXPLORER 75T-75TB-85T-85TB-95T-95TB Manual",
+    "category": "Farmers",
+    "subCategory": "Same",
+    "image": "https://placehold.co/600x400/065f46/ffffff?text=SAME+Explorer+TB",
+    "price": "50.00",
+    "desc": "Specialized service manual for SAME Explorer T and TB low-profile orchard/utility tractor models.",
+    "isPdf": true,
+    "downloadUrl": "https://drive.google.com/uc?export=download&id=1McJvwP2fiRbjypUKhlIiFW2gSsjABMKN",
+    "steps": [
+      "Low-profile platform setup",
+      "Specialized steering & brakes",
+      "Hydraulic remote valves",
+      "Electrical checks"
+    ]
+  },
+  {
+    "id": "manual-same-12",
+    "title": "SAME EXPLORER II 75-85-95 Special Workshop Manual",
+    "category": "Farmers",
+    "subCategory": "Same",
+    "image": "https://placehold.co/600x400/065f46/ffffff?text=SAME+Explorer+II",
+    "price": "50.00",
+    "desc": "Factory workshop manual for SAME Explorer II 75, 85, 95 Special edition tractors.",
+    "isPdf": true,
+    "downloadUrl": "https://drive.google.com/uc?export=download&id=1iAzMYqnLVcxaNn0_vgMDomBIOVbJP1Xd",
+    "steps": [
+      "Mechanical repairs",
+      "Transmission overhaul",
+      "Rear axle & PTO service",
+      "Hydraulic system testing"
+    ]
+  },
+  {
+    "id": "manual-same-13",
+    "title": "FRONT AXLE FOR DIAMOND 210-235-265 Manual",
+    "category": "Farmers",
+    "subCategory": "Same",
+    "image": "https://placehold.co/600x400/065f46/ffffff?text=Diamond+Front+Axle",
+    "price": "50.00",
+    "desc": "Specialized heavy-duty front axle repair and maintenance manual for SAME Diamond 210, 235, and 265.",
+    "isPdf": true,
+    "downloadUrl": "https://drive.google.com/uc?export=download&id=1-rDJJ8fjpOlnVjX2N9ypman2DIvwS04t",
+    "steps": [
+      "Axle casing & differential",
+      "Final reduction hubs",
+      "Steering cylinders & geometry",
+      "Lubrication & torque specs"
+    ]
+  },
+  {
+    "id": "manual-same-14",
+    "title": "FRONT AXLE FOR IRON 100-110-120 Manual",
+    "category": "Farmers",
+    "subCategory": "Same",
+    "image": "https://placehold.co/600x400/065f46/ffffff?text=Iron+Axle+100-120",
+    "price": "50.00",
+    "desc": "Workshop manual covering front axle, 4WD engagement, and steering for SAME Iron 100, 110, and 120.",
+    "isPdf": true,
+    "downloadUrl": "https://drive.google.com/uc?export=download&id=1s3E-EnP9Qzhu1V0aarT18orhbM_QvGsY",
+    "steps": [
+      "Front differential teardown",
+      "Hub reduction service",
+      "Steering sensor calibration",
+      "Maintenance schedules"
+    ]
+  },
+  {
+    "id": "manual-same-15",
+    "title": "FRONT AXLE FOR IRON 120S-130S Manual",
+    "category": "Farmers",
+    "subCategory": "Same",
+    "image": "https://placehold.co/600x400/065f46/ffffff?text=Iron+Axle+120S-130S",
+    "price": "50.00",
+    "desc": "Detailed technical guide for front axle overhaul on SAME Iron 120S and 130S tractors.",
+    "isPdf": true,
+    "downloadUrl": "https://drive.google.com/uc?export=download&id=1LReXIrY_Lgo67wvbXntfkpggcM3iTUMw",
+    "steps": [
+      "Suspension & steering linkage",
+      "Brake disc inspection",
+      "Differential lock repair",
+      "Assembly guidelines"
+    ]
+  },
+  {
+    "id": "manual-same-16",
+    "title": "FRONT AXLE FOR IRON 150-150.7-165.7 Manual",
+    "category": "Farmers",
+    "subCategory": "Same",
+    "image": "https://placehold.co/600x400/065f46/ffffff?text=Iron+Axle+150-165",
+    "price": "50.00",
+    "desc": "Front axle and suspension service manual for high-horsepower SAME Iron 150, 150.7, and 165.7.",
+    "isPdf": true,
+    "downloadUrl": "https://drive.google.com/uc?export=download&id=1pv0O5t4YjlrDAE0guZQcl4zfAlBy8lIT",
+    "steps": [
+      "Heavy-duty axle overhaul",
+      "Epicyclic reduction gears",
+      "Steering hydraulic rams",
+      "Alignment & testing"
+    ]
+  },
+  {
+    "id": "manual-same-17",
+    "title": "SAME GOLDEN 60-65-75-85 / Compatto 60V-75V Manual",
+    "category": "Farmers",
+    "subCategory": "Same",
+    "image": "https://placehold.co/600x400/065f46/ffffff?text=SAME+Golden",
+    "price": "50.00",
+    "desc": "Official workshop manual for SAME Golden series (60, 65, 75, 85) and Compatto 60V, 75V vineyard models.",
+    "isPdf": true,
+    "downloadUrl": "https://drive.google.com/uc?export=download&id=1F8_BWXTCifyhAxcdsF7etsYO1tyJ8Av-",
+    "steps": [
+      "Engine & fuel system",
+      "Transmission gearbox service",
+      "Hydraulic lift & steering",
+      "Electrical system schematics"
+    ]
+  },
+  {
+    "id": "manual-same-18",
+    "title": "HYDRAULIC INVERSOR 80-105 Workshop Manual",
+    "category": "Farmers",
+    "subCategory": "Same",
+    "image": "https://placehold.co/600x400/065f46/ffffff?text=Hydraulic+Inversor+80-105",
+    "price": "50.00",
+    "desc": "Specialized hydraulic reverser (inversor) service manual for SAME 80 to 105 HP tractor models.",
+    "isPdf": true,
+    "downloadUrl": "https://drive.google.com/uc?export=download&id=1tr7zfafkasJA57p379NcBPMdTjvkScW-",
+    "steps": [
+      "Hydraulic inversor control valve",
+      "Pressure testing & adjustment",
+      "Clutch pack overhaul",
+      "Diagnostic troubleshooting"
+    ]
+  },
+  {
+    "id": "manual-same-19",
+    "title": "HYDRAULIC INVERSOR 110-130 Workshop Manual",
+    "category": "Farmers",
+    "subCategory": "Same",
+    "image": "https://placehold.co/600x400/065f46/ffffff?text=Hydraulic+Inversor+110-130",
+    "price": "50.00",
+    "desc": "Workshop repair manual for the hydraulic power shuttle/inversor system on SAME 110 to 130 HP tractors.",
+    "isPdf": true,
+    "downloadUrl": "https://drive.google.com/uc?export=download&id=1-Ff19aPDucUw9dWd2npcO-WMMemu23Dg",
+    "steps": [
+      "Control valve calibration",
+      "Solenoid valve testing",
+      "Hydraulic pump flow check",
+      "Fault code diagnostics"
+    ]
+  },
+  {
+    "id": "manual-same-20",
+    "title": "SAME IRON 100-110-120 Hi-Line Workshop Manual",
+    "category": "Farmers",
+    "subCategory": "Same",
+    "image": "https://placehold.co/600x400/065f46/ffffff?text=SAME+Iron+HiLine",
+    "price": "50.00",
+    "desc": "Factory service manual for SAME Iron 100, 110, and 120 Hi-Line deluxe cab tractors.",
+    "isPdf": true,
+    "downloadUrl": "https://drive.google.com/uc?export=download&id=1QjqFjYC3ZGYc1cWzhdEAFWlUnTNHGb64",
+    "steps": [
+      "Engine management",
+      "Hi-Line transmission & powershift",
+      "Cab electronic controls",
+      "Hydraulic load sensing"
+    ]
+  },
+  {
+    "id": "manual-same-21",
+    "title": "SAME IRON 100-110-120 Standard Workshop Manual",
+    "category": "Farmers",
+    "subCategory": "Same",
+    "image": "https://placehold.co/600x400/065f46/ffffff?text=SAME+Iron+100-120",
+    "price": "50.00",
+    "desc": "Complete workshop manual for standard SAME Iron 100, 110, and 120 tractors.",
+    "isPdf": true,
+    "downloadUrl": "https://drive.google.com/uc?export=download&id=1gJqxU5C_5rnuLE_nx-UiavVjvFsUKpMX",
+    "steps": [
+      "Engine overhaul",
+      "Transmission & rear axle service",
+      "Hydraulic system calibration",
+      "Wiring diagrams"
+    ]
+  },
+  {
+    "id": "manual-same-22",
+    "title": "SAME IRON 130S-140S-150S-165S Workshop Manual",
+    "category": "Farmers",
+    "subCategory": "Same",
+    "image": "https://placehold.co/600x400/065f46/ffffff?text=SAME+Iron+S",
+    "price": "50.00",
+    "desc": "Official factory repair manual for high-performance SAME Iron S series (130S, 140S, 150S, 165S).",
+    "isPdf": true,
+    "downloadUrl": "https://drive.google.com/uc?export=download&id=1hY5uZLcRIOriKhf_N4QuKZ0qA2AiK6Cl",
+    "steps": [
+      "Heavy powertrain servicing",
+      "Powershift & shuttle setup",
+      "Advanced hydraulics",
+      "Electronic diagnostics"
+    ]
+  },
+  {
+    "id": "manual-same-23",
+    "title": "SAME IRON 175S-190S-200 Workshop Manual",
+    "category": "Farmers",
+    "subCategory": "Same",
+    "image": "https://placehold.co/600x400/065f46/ffffff?text=SAME+Iron+200",
+    "price": "50.00",
+    "desc": "Comprehensive workshop manual for large-frame SAME Iron 175S, 190S, and 200 flagship tractors.",
+    "isPdf": true,
+    "downloadUrl": "https://drive.google.com/uc?export=download&id=1c7hM9del1RTOhIkkTYxjpiBUmmPGTOaZ",
+    "steps": [
+      "High-power engine service",
+      "Heavy transmission & differential",
+      "Load-sensing hydraulics",
+      "Cabin electronics & ECU"
+    ]
+  },
+  {
+    "id": "manual-same-24",
+    "title": "SAME KRYPTON 80-90-100 / F78-F88-F98 Manual",
+    "category": "Farmers",
+    "subCategory": "Same",
+    "image": "https://placehold.co/600x400/065f46/ffffff?text=SAME+Krypton",
+    "price": "50.00",
+    "desc": "Specialized crawler tractor workshop manual for SAME Krypton 80, 90, 100 and F78, F88, F98 models.",
+    "isPdf": true,
+    "downloadUrl": "https://drive.google.com/uc?export=download&id=1LbUnbpMedFdKq_Sdkxj4oP8cLN3N6ECO",
+    "steps": [
+      "Track tension & undercarriage",
+      "Steering clutches & brakes",
+      "Crawler transmission service",
+      "Engine & cooling maintenance"
+    ]
+  },
+  {
+    "id": "manual-same-25",
+    "title": "SAME LASER 110-130-150 Workshop Manual",
+    "category": "Farmers",
+    "subCategory": "Same",
+    "image": "https://placehold.co/600x400/065f46/ffffff?text=SAME+Laser",
+    "price": "50.00",
+    "desc": "Classic heavy-duty workshop manual for the legendary SAME Laser 110, 130, and 150 tractors.",
+    "isPdf": true,
+    "downloadUrl": "https://drive.google.com/uc?export=download&id=1os2_Q3DRCO2NZw9foBUoJLIDZ9teweZi",
+    "steps": [
+      "Air/water-cooled engine overhaul",
+      "Synchromesh gearbox repair",
+      "Rear lift & PTO clutch",
+      "Hydraulic & steering systems"
+    ]
+  },
+  {
+    "id": "manual-same-26",
+    "title": "SAME ROCK 55-60-70 Workshop Manual",
+    "category": "Farmers",
+    "subCategory": "Same",
+    "image": "https://placehold.co/600x400/065f46/ffffff?text=SAME+Rock",
+    "price": "50.00",
+    "desc": "Official factory service manual for SAME Rock 55, 60, and 70 utility tractors.",
+    "isPdf": true,
+    "downloadUrl": "https://drive.google.com/uc?export=download&id=11WKO99186n38uVzZihER2wtFPJFe2ZLj",
+    "steps": [
+      "Engine maintenance & tuning",
+      "Gearbox & clutch repair",
+      "Hydraulic hitch adjustments",
+      "Electrical checks"
+    ]
+  },
+  {
+    "id": "manual-same-27",
+    "title": "SAME RUBIN 120-135-150 Workshop Manual",
+    "category": "Farmers",
+    "subCategory": "Same",
+    "image": "https://placehold.co/600x400/065f46/ffffff?text=SAME+Rubin+120-150",
+    "price": "50.00",
+    "desc": "Comprehensive workshop manual for SAME Rubin high-power 120, 135, and 150 tractors.",
+    "isPdf": true,
+    "downloadUrl": "https://drive.google.com/uc?export=download&id=1SqJa4HUWwcirzssprY7AD47MF8QfXH44",
+    "steps": [
+      "Engine management",
+      "Powershift transmission",
+      "Hydraulic load sensing system",
+      "Axle & brake overhauls"
+    ]
+  },
+  {
+    "id": "manual-same-28",
+    "title": "SAME RUBIN 160-180-200 Workshop Manual",
+    "category": "Farmers",
+    "subCategory": "Same",
+    "image": "https://placehold.co/600x400/065f46/ffffff?text=SAME+Rubin+160-200",
+    "price": "50.00",
+    "desc": "Heavy-duty factory repair manual for large SAME Rubin series 160, 180, and 200 models.",
+    "isPdf": true,
+    "downloadUrl": "https://drive.google.com/uc?export=download&id=11B-ZwoAmcuWzC_ByjOR944FEYch1Im9W",
+    "steps": [
+      "Advanced powertrain overhaul",
+      "Hydraulic pump & valve service",
+      "Electronic control calibration",
+      "Differential & final drives"
+    ]
+  },
+  {
+    "id": "manual-same-29",
+    "title": "SAME SILVER 80-90-100.4-100.6 Workshop Manual",
+    "category": "Farmers",
+    "subCategory": "Same",
+    "image": "https://placehold.co/600x400/065f46/ffffff?text=SAME+Silver+80-100",
+    "price": "50.00",
+    "desc": "Official factory workshop manual for SAME Silver 80, 90, 100.4, and 100.6 utility tractors.",
+    "isPdf": true,
+    "downloadUrl": "https://drive.google.com/uc?export=download&id=13FwvC5i4xozXX6u-vmzz5nr0gJMLLkYf",
+    "steps": [
+      "4-cylinder & 6-cylinder engines",
+      "Transmission & splitter setup",
+      "Hydraulic lift & PTO controls",
+      "Steering & electrical diagnostics"
+    ]
+  },
+  {
+    "id": "manual-same-30",
+    "title": "SAME SILVER 110-130 Workshop Manual",
+    "category": "Farmers",
+    "subCategory": "Same",
+    "image": "https://placehold.co/600x400/065f46/ffffff?text=SAME+Silver+110-130",
+    "price": "50.00",
+    "desc": "Complete technical service manual for medium-heavy SAME Silver 110 and 130 tractors.",
+    "isPdf": true,
+    "downloadUrl": "https://drive.google.com/uc?export=download&id=1s8_tFwejcFxdy59gPPHh3lgou_Yibv0_",
+    "steps": [
+      "Engine troubleshooting",
+      "Powershift gearbox maintenance",
+      "Hydraulic pressure testing",
+      "Brake & axle overhaul"
+    ]
+  },
+  {
+    "id": "manual-same-31",
+    "title": "SAME SOLARIS 30-40-50 Workshop Manual",
+    "category": "Farmers",
+    "subCategory": "Same",
+    "image": "https://placehold.co/600x400/065f46/ffffff?text=SAME+Solaris",
+    "price": "50.00",
+    "desc": "Compact tractor workshop manual for SAME Solaris 30, 40, and 50 municipal and orchard tractors.",
+    "isPdf": true,
+    "downloadUrl": "https://drive.google.com/uc?export=download&id=1C4k-WX8iEnyu0gX8jqMs046UUi3sNv3H",
+    "steps": [
+      "Compact diesel engine service",
+      "Compact transmission & clutch",
+      "Hydraulic 3-point linkage",
+      "Electrical & safety switches"
+    ]
+  },
+  {
+    "id": "manual-mf-460",
+    "title": "Massey Ferguson 460 Parts Manual",
+    "category": "Farmers",
+    "subCategory": "Massey Ferguson",
+    "image": "https://placehold.co/600x400/065f46/ffffff?text=MF+460+Parts",
+    "price": "50.00",
+    "desc": "Comprehensive parts manual featuring detailed diagrams and part numbers for Massey Ferguson 460 models.",
+    "isPdf": true,
+    "downloadUrl": "https://drive.google.com/uc?export=download&id=0B460_P5oTO9OamYtT1lxcEc4WWM",
+    "steps": [
+      "Sheet metal and body parts",
+      "Electrical components and wiring",
+      "Hitch and linkage assemblies",
+      "Maintenance replacement parts"
+    ]
+  },
+  {
+    "id": "manual-mf-5365",
+    "title": "Massey Ferguson 5365 Parts Manual",
+    "category": "Farmers",
+    "subCategory": "Massey Ferguson",
+    "image": "https://placehold.co/600x400/065f46/ffffff?text=MF+5365+Parts",
+    "price": "50.00",
+    "desc": "Official factory parts manual for Massey Ferguson 5365 agricultural tractors.",
+    "isPdf": true,
+    "downloadUrl": "https://drive.google.com/uc?export=download&id=0B460_P5oTO9OUFdiR2JjWGdNVXM",
+    "steps": [
+      "Powertrain & transmission parts",
+      "Hydraulic valves and pumps",
+      "Cabin controls and filters",
+      "Complete parts reference index"
+    ]
+  },
+  {
+    "id": "gas-geyser-card",
+    "title": "Gas Geyser Safety & Installer Verification Card",
+    "category": "Handyman",
+    "subCategory": "Gas Installations",
+    "image": "https://placehold.co/600x400/0284c7/ffffff?text=Gas+Geyser+Safety+Card",
+    "price": "20.00",
+    "desc": "Gas installation compliance card with safety regulations and direct link access to certified SAQCC Gas technicians.",
+    "isGasCard": true,
+    "steps": [
+      "Verify Installer Registration: Always use a licensed SAQCC Gas practitioner.",
+      "Ensure Certificate of Conformity (CoC): Mandatory for legal compliance and property insurance.",
+      "Adhere to SANS 10087-1 Regulations: Observe required safety distances between gas bottles, windows, doors, and electrical points."
+    ]
+  },
+  {
+    "id": "foundation-squaring",
+    "title": "Foundation Squaring & Layout Guide",
+    "category": "Builders",
+    "subCategory": "General",
+    "image": "images/foundation-squaring-guide.jpg",
+    "price": "20.00",
+    "desc": "Step-by-step master guide for accurately laying out building lines, establishing baselines, applying the 3-4-5 rule for right angles, squaring walls, cross-measuring diagonals, and setting up batter boards.",
+    "steps": [
+      "Establish the Baseline: Drive Peg A into the ground, run a mason's line to Peg B, and measure/mark Corner B along the line.",
+      "Apply the 3-4-5 Rule: Mark 3 units on the baseline from Corner A (Point X), measure 4 units outward, and measure a 5-unit hypotenuse from Point X to intersect the 4-unit line to drive Peg C.",
+      "Extend and Square the Second Wall: Line up string from Corner A through Peg C, extend the string to the full required length, and mark Corner D.",
+      "Verify and Secure Layout: Cross-measure diagonals A-D and B-C, adjust pegs until they match completely, build secure batter boards outside the footprint, transfer exact string lines to notches, and remove pegs to dig."
+    ]
+  },
+  {
+    "id": "foundation-pouring",
+    "title": "Concrete Foundation Pouring & Curing",
+    "category": "Builders",
+    "subCategory": "General",
+    "image": "images/concrete-foundation.jpg",
+    "price": "20.00",
+    "desc": "Comprehensive technical master guide for professional concrete foundation pouring, trench preparation, formwork bracing, rebar chair spacing, mix ratios, vibration, and moisture curing protocols.",
+    "steps": [
+      "Site Clearing & Soil Compaction: Strip organic topsoil entirely, expose firm subgrade, and compact using a mechanical plate compactor to achieve at least 95% Proctor density.",
+      "Trench Excavation & Depth Verification: Excavate trenches to engineered depth and verify level benchmarks using a laser level or water level.",
+      "Sub-Base & Damp-Proof Membrane (DPM): Lay a 75mm blinding layer of crusher dust/sand, compact it, and install a heavy-duty 250-micron polyethylene damp-proof membrane.",
+      "Formwork Construction & Bracing: Build rigid formwork using 32mm planks or marine plywood, secured with strongbacks and wooden stakes every 900mm to prevent blowout.",
+      "Reinforcement Spacing & Cover Blocks: Position steel rebar grids or mesh using plastic or concrete cover blocks (minimum 50mm clearance) to ensure full steel encapsulation.",
+      "Formwork Inspection & Pre-Pour Check: Inspect tie-wires, formwork alignment, squareness, and check that all debris, loose soil, and standing water are cleared.",
+      "Mix Design & Slump Verification: Order or mix structural concrete (minimum 25 MPa / 3:2:1 ratio), ensuring a workable slump (75mm - 100mm) without excess water.",
+      "Continuous Pouring & Spading: Pour concrete continuously from one corner to prevent cold joints; spade or mechanically vibrate the mix to release trapped air pockets.",
+      "Screeding & Surface Finishing: Strike off excess concrete using a straightedge timber screed pulled across form edges, followed by a wood float or steel trowel finish.",
+      "Moisture Curing Protocol: Begin curing as soon as the surface hardens by keeping it continuously moist with sprinklers, wet Hessian sacking, or curing compound for at least 7 days."
+    ]
+  },
+  {
+    "id": "hiller-build",
+    "title": "Raised Bed Hiller (Double Disc) Build Guide",
+    "category": "Handyman",
+    "subCategory": "Manufacture",
+    "image": "images/hiller-build.jpg",
+    "price": "20.00",
+    "desc": "Step-by-step practical fabrication and field tuning manual for building a heavy-duty double-disc raised bed hiller.",
+    "steps": [
+      "Cut square steel tubing.",
+      "Weld hitch upright bracket.",
+      "Cut vertical square shanks.",
+      "Mount double-disc hubs.",
+      "Attach shanks to toolbar.",
+      "Test in workable soil."
+    ]
+  },
+  {
+    "id": "bakkie-fertilizer-spreader",
+    "title": "Bakkie Differential Fertilizer Spreader Build Guide",
+    "category": "Handyman",
+    "subCategory": "Manufacture",
+    "image": "images/Fertilizer-spreader.jpg",
+    "price": "20.00",
+    "desc": "Step-by-step ground-driven fabrication manual for a bakkie differential fertilizer spreader.",
+    "steps": [
+      "Axle Prep & differential locking.",
+      "Build chassis frame.",
+      "Mount conical hopper.",
+      "Align drive transfer & spinner.",
+      "Fit metering gate.",
+      "Field test & calibrate."
+    ]
+  },
+  {
+    "id": "toilet-unblock",
+    "title": "How to Unblock a Toilet",
+    "category": "Handyman",
+    "subCategory": "Plumbing",
+    "image": "images/plumbing-repair.jpg",
+    "price": "20.00",
+    "desc": "Essential step-by-step procedure to safely unblock a toilet using overflow prevention, flange plungers, or a toilet auger.",
+    "steps": [
+      "Prevent overflow.",
+      "Use flange plunger.",
+      "Apply hot water & soap.",
+      "Employ toilet auger."
+    ]
+  },
+  {
+    "id": "meal-prep",
+    "title": "Weekly Family Meal Prep & Pantry Rotation Guide",
+    "category": "Housewives",
+    "subCategory": "Meal Prep",
+    "image": "https://placehold.co/600x400/db2777/ffffff?text=Meal+Prep+Guide",
+    "price": "20.00",
+    "desc": "A complete operational master guide detailing 7-day menu architecture, component overlap, FIFO inventory control, vegetable shelf life, and labeling protocols.",
+    "isPdf": true,
+    "downloadUrl": "pdfs/Weekly Family Meal Prep & Pantry Rotation Guide.pdf",
+    "steps": [
+      "7-Day Family Menu Architecture & Component Overlap",
+      "Perishability Sequencing & Theme Days",
+      "3-Zone FIFO Pantry Inventory Management",
+      "Batch Vegetable Processing & Airtight Storage Rules",
+      "Standardized Masking Tape Labeling Formula"
+    ]
+  },
+  {
+    "id": "muffin-tin-ice-cream",
+    "title": "Muffin Tin Ice Cream Station Hack",
+    "category": "Housewives",
+    "subCategory": "Home Hacks",
+    "image": "images/muffin-tin-ice-cream-station.jpg",
+    "price": "20.00",
+    "desc": "Create a stable, mess-free ice cream toppings station using an inverted muffin tin to hold small topping cups securely in place.",
+    "steps": [
+      "Gather Supplies: Turn a standard 12-cup metal muffin tin upside down so the raised wells face upward. Collect small paper or silicone baking liners (or small topping cups), assorted toppings in small bowls, an ice cream scoop, and serving spoons.",
+      "Secure the Cups: Place the inverted muffin tin flat on your counter or table. Place one small cup or paper liner over each raised well to ensure they fit securely without sliding or tipping.",
+      "Fill Toppings: Fill each secured cup with a different ice cream topping (sprinkles, chocolate chips, M&Ms, crushed cookies, gummy bears, nuts, cherries, or hot fudge) for a stable and organized display.",
+      "Serve & Enjoy: Set out the ice cream cones and let everyone scoop their favorite toppings with zero spills and total stability\u2014perfect for kids and parties!"
+    ]
+  },
+  {
+    "id": "sa-spice-guide",
+    "title": "South African Traditional Foods & Spices Guide",
+    "category": "Housewives",
+    "subCategory": "Cooking & Spices",
+    "image": "https://placehold.co/600x400/db2777/ffffff?text=SA+Spice+Guide",
+    "price": "20.00",
+    "desc": "Comprehensive master guide of traditional South African foods and the exact spice blends used to prepare them.",
+    "steps": [
+      "1. \ud83c\udf2d Boerewors (Traditional South African Sausage): Coarse salt, black pepper, roasted coriander seeds, cloves, nutmeg, and sometimes allspice.",
+      "2. \ud83e\udd69 Braai Meat / Shisa Nyama (Steaks, Chops, and Chicken): Braai spice blend (coarse sea salt, black pepper, coriander seeds, garlic powder, onion powder, paprika or cayenne pepper, and brown sugar).",
+      "3. \ud83e\udd58 Bobotie (Cape Malay Spiced Mince Bake): Cape Malay curry powder (turmeric, coriander, cumin, ginger), cinnamon, cloves, garlic, and bay leaves.",
+      "4. \ud83e\udd69 Biltong & Dro\u00ebwors (Cured Meats): Toasted and coarsely cracked coriander seeds, coarse salt, black pepper, brown vinegar, and a pinch of brown sugar or chilli.",
+      "5. \ud83c\udf5e Durban Curry (Mutton, Chicken, or Prawn Bunny Chow): Durban masala (heavy chili powder, cumin, coriander, fenugreek, mustard seeds, and turmeric).",
+      "6. \ud83d\udc1f Cape Pickled Fish (Snoek or Yellowtail): Whole coriander seeds, turmeric, whole cloves, allspice berries, bay leaves, dried chillies, and curry powder.",
+      "7. \ud83c\udf62 Sosaties (Marinated Meat Kebabs): Curry powder, turmeric, garlic, ginger, tamarind or apricot jam (for sweetness), and bay leaves.",
+      "8. \ud83c\udf72 Potjiekos (Traditional Cast-Iron Pot Stew): Whole black peppercorns, bay leaves, garlic, thyme, sweet paprika, and rich beef or vegetable stock.",
+      "9. \ud83c\udf57 Peri-Peri Chicken / Seafood: African bird's eye chillies (peri-peri), garlic, paprika, lemon juice, and salt.",
+      "10. \ud83e\udd6b Chakalaka (Spicy Vegetable Relish): Curry powder, chillies, ginger, garlic, paprika, and white pepper.",
+      "11. \ud83e\udd6e Malva Pudding (Traditional Dessert): Ground cinnamon, nutmeg, and vanilla (served warm with a rich cream/butter sauce)."
+    ]
+  }
+]
