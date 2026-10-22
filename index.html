@@ -211,6 +211,29 @@
             <h3 class="text-lg font-semibold text-slate-200">No guides found</h3>
             <p class="text-sm text-slate-400 mt-1">Try adjusting your search terms or category filters.</p>
         </div>
+
+        <!-- Prominent Public Disclaimer & Safety Notice Banner -->
+        <div class="mt-12 bg-slate-800/90 border border-amber-500/40 rounded-3xl p-6 sm:p-8 shadow-xl relative backdrop-blur-sm">
+            <div class="flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
+                <div class="flex items-start gap-4">
+                    <div class="bg-amber-500/20 text-amber-400 p-3.5 rounded-2xl border border-amber-500/30 shrink-0">
+                        <i class="fa-solid fa-triangle-exclamation text-2xl sm:text-3xl"></i>
+                    </div>
+                    <div>
+                        <h3 class="text-base sm:text-lg font-extrabold text-white flex items-center gap-2">
+                            Public Disclaimer & Safety Notice
+                        </h3>
+                        <p class="text-xs sm:text-sm text-slate-300 mt-1 leading-relaxed font-medium">
+                            All guides, workshop manuals, calibrations, and calculators provided on this platform are for general informational and educational purposes only. Always comply with safety standards, local regulations, and certified technicians (e.g., SAQCC registered gas practitioners).
+                        </p>
+                    </div>
+                </div>
+                <button onclick="openDisclaimerModal()" class="w-full md:w-auto bg-slate-700 hover:bg-slate-600 text-amber-300 hover:text-amber-200 border border-amber-500/40 px-5 py-2.5 rounded-2xl text-xs font-extrabold transition shadow-md flex items-center justify-center gap-2 shrink-0">
+                    <i class="fa-solid fa-shield-halved"></i> Read Full Legal Disclaimer
+                </button>
+            </div>
+        </div>
+
     </main>
 
     <!-- Standard Guide Modal -->
@@ -470,9 +493,56 @@
         </div>
     </div>
 
+    <!-- Detailed Disclaimer Modal -->
+    <div id="disclaimerModal" class="fixed inset-0 bg-slate-950/80 backdrop-blur-md z-50 hidden flex items-center justify-center p-4 overflow-y-auto">
+        <div class="bg-slate-900 rounded-3xl max-w-lg w-full overflow-hidden shadow-2xl border border-slate-700 text-slate-100 p-6 sm:p-8 relative max-h-[85vh] overflow-y-auto">
+            <button onclick="closeDisclaimerModal()" class="absolute top-4 right-4 bg-slate-800 hover:bg-slate-700 text-white w-9 h-9 rounded-full flex items-center justify-center transition border border-slate-600 shadow-md">
+                <i class="fa-solid fa-xmark text-sm"></i>
+            </button>
+
+            <div class="flex items-center gap-3 border-b border-slate-800 pb-4 mb-4">
+                <div class="bg-amber-500/20 text-amber-400 p-3 rounded-2xl border border-amber-500/30">
+                    <i class="fa-solid fa-shield-halved text-2xl"></i>
+                </div>
+                <div>
+                    <h3 class="text-lg font-extrabold text-white">Disclaimer & Terms of Use</h3>
+                    <p class="text-xs text-amber-400 font-medium">Important Public Notice</p>
+                </div>
+            </div>
+
+            <div class="space-y-4 text-xs text-slate-300 leading-relaxed">
+                <p>
+                    <strong class="text-white">Educational & Informative Purpose Only:</strong> All content, workshop manuals, calculations, and procedures on this platform are provided strictly for educational and informational context.
+                </p>
+                <p>
+                    <strong class="text-white">No Professional Warranty:</strong> While reasonable efforts are made to ensure technical accuracy across agricultural, construction, plumbing, and mechanical guides, no warranty or guarantee of absolute completeness, safety, or suitability is provided.
+                </p>
+                <p>
+                    <strong class="text-white">Compliance & Safety Regulations:</strong> Users operating machinery or carrying out structural work, plumbing, or hazardous gas installations (e.g., SANS 10087-1 LPG gas standards) must follow local legislation and engage certified practitioners (e.g., SAQCC gas installers).
+                </p>
+                <p>
+                    <strong class="text-white">Limitation of Liability:</strong> The platform owners and developers accept no liability for any loss, damage, injury, or mechanical fault resulting from the practical application of any instructions or tools found on this site.
+                </p>
+            </div>
+
+            <div class="mt-6 pt-4 border-t border-slate-800 text-right">
+                <button onclick="closeDisclaimerModal()" class="bg-amber-500 hover:bg-amber-400 text-slate-950 font-extrabold px-6 py-2.5 rounded-xl text-xs transition shadow-md">
+                    I Understand & Accept
+                </button>
+            </div>
+        </div>
+    </div>
+
     <footer class="bg-slate-950 border-t border-slate-800 mt-12 py-6 shadow-sm">
-        <div class="max-w-7xl mx-auto px-4 text-center text-xs text-slate-400 font-medium">
-            &copy; 2026 Professional & Lifestyle Hub &bull; Farmers, Builders, Handyman & Housewives Guide &bull; Offline Ready
+        <div class="max-w-7xl mx-auto px-4 text-center text-xs text-slate-400 font-medium space-y-2">
+            <div>
+                &copy; 2026 Professional & Lifestyle Hub &bull; Farmers, Builders, Handyman & Housewives Guide &bull; Offline Ready
+            </div>
+            <div>
+                <button onclick="openDisclaimerModal()" class="text-amber-400 hover:text-amber-300 underline font-semibold transition">
+                    <i class="fa-solid fa-shield-halved text-xs mr-1"></i> Disclaimer & Terms of Use
+                </button>
+            </div>
         </div>
     </footer>
 
@@ -488,6 +558,17 @@
         function handleImageError(imgElement) {
             imgElement.onerror = null;
             imgElement.src = "https://placehold.co/600x400/0369a1/ffffff?text=Workshop+Manual";
+        }
+
+        /* Modal controls for Public Disclaimer */
+        function openDisclaimerModal() {
+            document.getElementById('disclaimerModal').classList.remove('hidden');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeDisclaimerModal() {
+            document.getElementById('disclaimerModal').classList.add('hidden');
+            document.body.style.overflow = 'auto';
         }
 
         const categoryTheme = {
