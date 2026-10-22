@@ -186,7 +186,7 @@
             <button onclick="filterBySubCategory('Same')" id="subcat-Same" class="subcat-btn px-3.5 py-1.5 rounded-xl text-xs font-bold bg-slate-800 text-amber-300 border border-amber-800 hover:bg-amber-800 hover:text-white transition shadow-sm">Same</button>
             <button onclick="filterBySubCategory('Massey Ferguson')" id="subcat-Massey Ferguson" class="subcat-btn px-3.5 py-1.5 rounded-xl text-xs font-bold bg-slate-800 text-amber-300 border border-amber-800 hover:bg-amber-800 hover:text-white transition shadow-sm">Massey Ferguson</button>
             <button onclick="filterBySubCategory('Ford')" id="subcat-Ford" class="subcat-btn px-3.5 py-1.5 rounded-xl text-xs font-bold bg-slate-800 text-amber-300 border border-amber-800 hover:bg-amber-800 hover:text-white transition shadow-sm">Ford</button>
-            <button onclick="filterBySubCategory('Landini')" id="subcat-Landini" class="subcat-btn px-3.5 py-1.5 rounded-xl text-xs font-bold bg-slate-800 text-amber-300 border border-amber-800 hover:bg-amber-800 hover:text-white transition shadow-sm">Landini</button>
+            <button onclick="filterBySubCategory('Tractor tests & calculations')" id="subcat-Tractor tests & calculations" class="subcat-btn px-3.5 py-1.5 rounded-xl text-xs font-bold bg-slate-800 text-amber-300 border border-amber-800 hover:bg-amber-800 hover:text-white transition shadow-sm">Tractor tests & calculations</button>
             <button onclick="filterBySubCategory('TAFE')" id="subcat-TAFE" class="subcat-btn px-3.5 py-1.5 rounded-xl text-xs font-bold bg-slate-800 text-amber-300 border border-amber-800 hover:bg-amber-800 hover:text-white transition shadow-sm">TAFE</button>
             <button onclick="filterBySubCategory('Other')" id="subcat-Other" class="subcat-btn px-3.5 py-1.5 rounded-xl text-xs font-bold bg-slate-800 text-amber-300 border border-amber-800 hover:bg-amber-800 hover:text-white transition shadow-sm">Other Manuals</button>
         </div>
@@ -745,6 +745,26 @@
                     "Provide fresh water by cleaning, disinfecting, and flushing lines, and positioning founts, bell drinkers, and nipple lines correctly.",
                     "Monitor temperatures by observing chick behavior to identify comfort zones, calibrate sensors, and log data."
                 ]
+            },
+
+            // --- TRACTOR TESTS & CALCULATIONS COLLECTION (R50.00) ---
+            {
+                id: "manual-disc-harrow-draft-speed", title: "Disc Harrow Field Efficiency & Draft Calculation Guide", category: "Farmers", subCategory: "Tractor tests & calculations", image: "https://placehold.co/600x400/065f46/ffffff?text=Disc+Harrow+Draft+%26+Speed",
+                isPdf: true, downloadUrl: "pdfs/Disc Harrow Draft & Speed Calculation Guide.pdf", price: "50.00",
+                desc: "Comprehensive manual detailing disc harrow field testing, draft force calculations, speed optimization, and tractor power matching.",
+                steps: ["Field wheel-slip testing protocols", "Soil draft force calculations", "Target speed & theoretical field capacity", "Power matching formulas"]
+            },
+            {
+                id: "manual-disc-harrow-metric-calc", title: "Disc Harrow Metric Calculation & Sizing Guide", category: "Farmers", subCategory: "Tractor tests & calculations", image: "https://placehold.co/600x400/065f46/ffffff?text=Disc+Harrow+Metric+Guide",
+                isPdf: true, downloadUrl: "pdfs/Disc Harrow Metric Calculation & Sizing Guide.pdf", price: "50.00",
+                desc: "Full metric reference guide for disc harrow blade counts, gang spacing, soil draft values (kN/m), and required tractor kW/hp.",
+                steps: ["Disc blade count formula", "Metric draft force tables by soil type", "Drawbar to engine kW conversion", "Field sizing calculation examples"]
+            },
+            {
+                id: "manual-tractor-tyre-pressure-water-ballast", title: "Tractor Tyre Pressure & Water Ballast Guide (Metric)", category: "Farmers", subCategory: "Tractor tests & calculations", image: "https://placehold.co/600x400/065f46/ffffff?text=Tyre+Pressure+%26+Ballast+Guide",
+                isPdf: true, downloadUrl: "pdfs/Tractor Tyre Pressure & Water Ballast Guide (Metric).pdf", price: "50.00",
+                desc: "Metric reference chart for tractor tire pressures (bar) for heavy tillage vs. general road work, plus 75% liquid water ballast capacities.",
+                steps: ["Front & rear tire pressure specs", "Field soil preparation bar settings", "75% liquid ballast water volume (Liters)", "Added ballast weight calculations (kg)"]
             },
 
             // --- TAFE PARTS MANUALS COLLECTION (R50.00) ---
