@@ -146,15 +146,22 @@
                 <input type="text" id="searchInput" oninput="filterGuides()" placeholder="Search guides or workshop manuals..." 
                     class="w-full pl-10 pr-4 py-2.5 bg-slate-900/90 border border-slate-700 rounded-2xl text-sm text-slate-100 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:bg-slate-900 transition shadow-inner font-medium">
             </div>
-<!-- Category Filter Tabs -->
+
+            <!-- Category Filter Tabs -->
             <div class="flex items-center gap-2 overflow-x-auto w-full md:w-auto pb-2 md:pb-0 whitespace-nowrap">
-                <button onclick="filterByCategory('All')" onmouseenter="startCategoryLoop('All', event)" onmouseleave="stopCategoryLoop()" id="cat-All" class="category-btn px-4 py-2 rounded-xl text-xs font-bold bg-slate-700 text-white transition shadow-sm hover:scale-105">All</button>
-                <button onclick="filterByCategory('Farmers')" onmouseenter="startCategoryLoop('Farmers', event)" onmouseleave="stopCategoryLoop()" id="cat-Farmers" class="category-btn px-4 py-2 rounded-xl text-xs font-bold bg-emerald-950/80 text-emerald-300 border border-emerald-700/60 hover:bg-emerald-600 hover:text-white transition shadow-sm hover:scale-105">🌾 Farmers</button>
-                <button onclick="filterByCategory('Builders')" onmouseenter="startCategoryLoop('Builders', event)" onmouseleave="stopCategoryLoop()" id="cat-Builders" class="category-btn px-4 py-2 rounded-xl text-xs font-bold bg-indigo-950/80 text-indigo-300 border border-indigo-700/60 hover:bg-indigo-600 hover:text-white transition shadow-sm hover:scale-105">🏗️ Builders</button>
-                <button onclick="filterByCategory('Handyman')" onmouseenter="startCategoryLoop('Handyman', event)" onmouseleave="stopCategoryLoop()" id="cat-Handyman" class="category-btn px-4 py-2 rounded-xl text-xs font-bold bg-sky-950/80 text-sky-300 border border-sky-700/60 hover:bg-sky-600 hover:text-white transition shadow-sm hover:scale-105">🛠️ Handyman</button>
-                <button onclick="filterByCategory('Housewives')" onmouseenter="startCategoryLoop('Housewives', event)" onmouseleave="stopCategoryLoop()" id="cat-Housewives" class="category-btn px-4 py-2 rounded-xl text-xs font-bold bg-rose-950/80 text-rose-300 border border-rose-700/60 hover:bg-rose-600 hover:text-white transition shadow-sm hover:scale-105">🏠 Housewives</button>
+                <button onclick="filterByCategory('All')" id="cat-All" class="category-btn px-4 py-2 rounded-xl text-xs font-bold bg-slate-700 text-white transition shadow-sm hover:scale-105">All</button>
+                <button onclick="filterByCategory('Farmers')" id="cat-Farmers" class="category-btn px-4 py-2 rounded-xl text-xs font-bold bg-emerald-950/80 text-emerald-300 border border-emerald-700/60 hover:bg-emerald-600 hover:text-white transition shadow-sm hover:scale-105">🌾 Farmers</button>
+                <button onclick="filterByCategory('Builders')" id="cat-Builders" class="category-btn px-4 py-2 rounded-xl text-xs font-bold bg-indigo-950/80 text-indigo-300 border border-indigo-700/60 hover:bg-indigo-600 hover:text-white transition shadow-sm hover:scale-105">🏗️ Builders</button>
+                <button onclick="filterByCategory('Handyman')" id="cat-Handyman" class="category-btn px-4 py-2 rounded-xl text-xs font-bold bg-sky-950/80 text-sky-300 border border-sky-700/60 hover:bg-sky-600 hover:text-white transition shadow-sm hover:scale-105">🛠️ Handyman</button>
+                <button onclick="filterByCategory('Housewives')" id="cat-Housewives" class="category-btn px-4 py-2 rounded-xl text-xs font-bold bg-rose-950/80 text-rose-300 border border-rose-700/60 hover:bg-rose-600 hover:text-white transition shadow-sm hover:scale-105">🏠 Housewives</button>
             </div>
 
+            <div class="flex items-center gap-3 w-full md:w-auto justify-end">
+                <span class="text-xs text-slate-300 font-bold uppercase tracking-wider bg-slate-900/90 px-4 py-2.5 rounded-2xl border border-slate-700 shadow-sm flex items-center gap-2">
+                    Total Guides: <strong id="guide-count" class="text-emerald-400 font-extrabold text-sm">0</strong>
+                </span>
+            </div>
+        </div>
             <div id="categoryPreviewPopup" class="hidden absolute top-20 left-6 z-50 w-80 bg-slate-900/95 backdrop-blur-md text-white p-4 rounded-2xl shadow-2xl border border-slate-700 pointer-events-none transition-all duration-150">
                 <h4 id="previewTitle" class="text-xs font-extrabold uppercase tracking-wider text-emerald-400 mb-2 border-b border-slate-700 pb-1.5">Category Live Loop</h4>
                 <div id="previewContent" class="text-xs text-slate-200 font-medium min-h-[40px] flex items-center"></div>
