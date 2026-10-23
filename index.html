@@ -194,6 +194,7 @@
             <span class="text-xs font-extrabold text-sky-300 uppercase tracking-wider mr-2 flex items-center gap-1.5"><i class="fa-solid fa-filter text-sky-400"></i> Handyman Sub-Categories:</span>
             <button onclick="filterBySubCategory('All')" id="hsubcat-All" class="hsubcat-btn px-3.5 py-1.5 rounded-xl text-xs font-bold bg-sky-700 text-white transition shadow-sm">All Handyman</button>
             <button onclick="filterBySubCategory('Gas Installations')" id="hsubcat-Gas Installations" class="hsubcat-btn px-3.5 py-1.5 rounded-xl text-xs font-bold bg-slate-800 text-sky-300 border border-sky-800 hover:bg-sky-800 hover:text-white transition shadow-sm">Gas Installations</button>
+            <button onclick="filterBySubCategory('Solar Installations')" id="hsubcat-Solar Installations" class="hsubcat-btn px-3.5 py-1.5 rounded-xl text-xs font-bold bg-slate-800 text-sky-300 border border-sky-800 hover:bg-sky-800 hover:text-white transition shadow-sm">Solar Installations</button>
             <button onclick="filterBySubCategory('Manufacture')" id="hsubcat-Manufacture" class="hsubcat-btn px-3.5 py-1.5 rounded-xl text-xs font-bold bg-slate-800 text-sky-300 border border-sky-800 hover:bg-sky-800 hover:text-white transition shadow-sm">Manufacture</button>
             <button onclick="filterBySubCategory('Metalwork & Fabrication')" id="hsubcat-Metalwork & Fabrication" class="hsubcat-btn px-3.5 py-1.5 rounded-xl text-xs font-bold bg-slate-800 text-sky-300 border border-sky-800 hover:bg-sky-800 hover:text-white transition shadow-sm">Metalwork & Fabrication</button>
             <button onclick="filterBySubCategory('Plumbing')" id="hsubcat-Plumbing" class="hsubcat-btn px-3.5 py-1.5 rounded-xl text-xs font-bold bg-slate-800 text-sky-300 border border-sky-800 hover:bg-sky-800 hover:text-white transition shadow-sm">Plumbing</button>
@@ -1404,6 +1405,34 @@
                     "Adhere to SANS 10087-1 Regulations: Observe required safety distances between gas bottles, windows, doors, and electrical points."
                 ]
             },
+
+            {
+                id: "gas-geyser-card", title: "Gas Geyser Safety & Installer Verification Card", category: "Handyman", subCategory: "Gas Installations", image: "https://placehold.co/600x400/0284c7/ffffff?text=Gas+Geyser+Safety+Card", price: "20.00",
+                isGasCard: true,
+                desc: "Gas installation compliance card with safety regulations and direct link access to certified SAQCC Gas technicians.",
+                steps: [
+                    "Verify Installer Registration: Always use a licensed SAQCC Gas practitioner.",
+                    "Ensure Certificate of Conformity (CoC): Mandatory for legal compliance and property insurance.",
+                    "Adhere to SANS 10087-1 Regulations: Observe required safety distances between gas bottles, windows, doors, and electrical points."
+                ]
+            },
+            {
+                id: "solar-installation-guide", 
+                title: "Solar PV Installation & Cost Analysis Guide", 
+                category: "Handyman", 
+                subCategory: "Solar Installations", 
+                image: "https://placehold.co/600x400/0284c7/ffffff?text=Solar+Installation+Guide", 
+                price: "20.00",
+                isPdf: true,
+                downloadUrl: "pdfs/Solar Installation Step-by-Step Guide South Africa (2).pdf",
+                desc: "SANS 10142-1 compliant 3-bed residential solar installation protocol[cite: 5], turnkey bill of materials[cite: 2], 5kW inverter/10kWh battery costing[cite: 2], and financial return analysis[cite: 3].",
+                steps: [
+                    "Stage 1: Pre-Installation Audit & Municipal SSEG Permitting (Day -7 to -1) - Inspect roof integrity/azimuth, confirm inverter NRS 097-2-1 compliance, and obtain municipal Permission-to-Install (PTI)[cite: 5].",
+                    "Stage 2: Mechanical Roof Mount & Array Assembly (Day 1) - Secure anchor brackets directly to trusses, apply weatherproofing, mount rails, and fit 550W panels with SANS 10142-1 earthing[cite: 5, 6].",
+                    "Stage 3: Electrical, Inverter & DB Load Splitting (Day 2) - Mount 5kW hybrid inverter & 10kWh battery[cite: 2, 6], wire DC combiner/surge protection[cite: 2, 6], and split essential vs non-essential DB loads[cite: 3, 6].",
+                    "Stage 4: Commissioning, Testing & CoC (Day 3) - Perform cold testing/polarity checks[cite: 6], set battery parameters[cite: 6], issue statutory Electrical Certificate of Compliance (CoC)[cite: 2, 6], and file SSEG sign-off[cite: 2, 6]."
+                ]
+            },
             {
                 id: "foundation-squaring", title: "Foundation Squaring & Layout Guide", category: "Builders", subCategory: "General", image: "images/foundation-squaring-guide.jpg", price: "20.00",
                 desc: "Step-by-step master guide for accurately laying out building lines, establishing baselines, applying the 3-4-5 rule for right angles, squaring walls, cross-measuring diagonals, and setting up batter boards.",
@@ -1415,10 +1444,20 @@
                 ]
             },
             {
-                id: "foundation-pouring", title: "Concrete Foundation Pouring & Curing", category: "Builders", subCategory: "General", image: "images/concrete-foundation.jpg", price: "20.00",
-                desc: "Comprehensive technical master guide for professional concrete foundation pouring, trench preparation, formwork bracing, rebar chair spacing, mix ratios, vibration, and moisture curing protocols.",
+                id: "foundation-squaring", title: "Foundation Squaring & Layout Guide", category: "Builders", subCategory: "General", image: "images/foundation-squaring-guide.jpg", price: "20.00",
+                desc: "Step-by-step master guide for accurately laying out building lines, establishing baselines, applying the 3-4-5 rule for right angles, squaring walls, cross-measuring diagonals, and setting up batter boards.",
                 steps: [
-                    "Site Clearing & Soil Compaction: Strip organic topsoil entirely, expose firm subgrade, and compact using a mechanical plate compactor to achieve at least 95% Proctor density.",
+                    "Establish the Baseline: Drive Peg A into the ground, run a mason's line to Peg B, and measure/mark Corner B along the line.",
+                    "Apply the 3-4-5 Rule: Mark 3 units on the baseline from Corner A (Point X), measure 4 units outward, and measure a 5-unit hypotenuse from Point X to intersect the 4-unit line to drive Peg C.",
+                    "Extend and Square the Second Wall: Line up string from Corner A through Peg C, extend the string to the full required length, and mark Corner D.",
+                    "Verify and Secure Layout: Cross-measure diagonals A-D and B-C, adjust pegs until they match completely, build secure batter boards outside the footprint, transfer exact string lines to notches, and remove pegs to dig."
+                ]
+            },
+            {
+                id: "foun
+                    "Site Clearing & Soil Compaction: Strip organic topsoil entirely, expose firm subdation-pouring", title: "Concrete Foundation Pouring & Curing", category: "Builders", subCategory: "General", image: "images/concrete-foundation.jpg", price: "20.00",
+                desc: "Comprehensive technical master guide for professional concrete foundation pouring, trench preparation, formwork bracing, rebar chair spacing, mix ratios, vibration, and moisture curing protocols.",
+                steps: [grade, and compact using a mechanical plate compactor to achieve at least 95% Proctor density.",
                     "Trench Excavation & Depth Verification: Excavate trenches to engineered depth and verify level benchmarks using a laser level or water level.",
                     "Sub-Base & Damp-Proof Membrane (DPM): Lay a 75mm blinding layer of crusher dust/sand, compact it, and install a heavy-duty 250-micron polyethylene damp-proof membrane.",
                     "Formwork Construction & Bracing: Build rigid formwork using 32mm planks or marine plywood, secured with strongbacks and wooden stakes every 900mm to prevent blowout.",
