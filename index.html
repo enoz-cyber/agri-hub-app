@@ -150,13 +150,13 @@
                     class="w-full pl-10 pr-4 py-2.5 bg-slate-900/90 border border-slate-700 rounded-2xl text-sm text-slate-100 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:bg-slate-900 transition shadow-inner font-medium">
             </div>
 
-            <!-- Category Filter Tabs -->
-            <div class="flex items-center gap-2 overflow-x-visible w-full md:w-auto pb-2 md:pb-0">
-                <button onclick="filterByCategory('All')" onmouseenter="startCategoryLoop('All', event)" onmouseleave="stopCategoryLoop()" id="cat-All" class="category-btn px-4 py-2 rounded-xl text-xs font-bold bg-slate-700 text-white transition shadow-sm hover:scale-105">All</button>
-                <button onclick="filterByCategory('Farmers')" onmouseenter="startCategoryLoop('Farmers', event)" onmouseleave="stopCategoryLoop()" id="cat-Farmers" class="category-btn px-4 py-2 rounded-xl text-xs font-bold bg-emerald-950/80 text-emerald-300 border border-emerald-700/60 hover:bg-emerald-600 hover:text-white transition shadow-sm hover:scale-105">🌾 Farmers</button>
-                <button onclick="filterByCategory('Builders')" onmouseenter="startCategoryLoop('Builders', event)" onmouseleave="stopCategoryLoop()" id="cat-Builders" class="category-btn px-4 py-2 rounded-xl text-xs font-bold bg-indigo-950/80 text-indigo-300 border border-indigo-700/60 hover:bg-indigo-600 hover:text-white transition shadow-sm hover:scale-105">🏗️ Builders</button>
-                <button onclick="filterByCategory('Handyman')" onmouseenter="startCategoryLoop('Handyman', event)" onmouseleave="stopCategoryLoop()" id="cat-Handyman" class="category-btn px-4 py-2 rounded-xl text-xs font-bold bg-sky-950/80 text-sky-300 border border-sky-700/60 hover:bg-sky-600 hover:text-white transition shadow-sm hover:scale-105">🛠️ Handyman</button>
-                <button onclick="filterByCategory('Housewives')" onmouseenter="startCategoryLoop('Housewives', event)" onmouseleave="stopCategoryLoop()" id="cat-Housewives" class="category-btn px-4 py-2 rounded-xl text-xs font-bold bg-rose-950/80 text-rose-300 border border-rose-700/60 hover:bg-rose-600 hover:text-white transition shadow-sm hover:scale-105">🏠 Housewives</button>
+            <!-- Category Filter Tabs (Fixed with horizontal scroll & touch safety) -->
+            <div class="flex items-center gap-2 overflow-x-auto w-full md:w-auto pb-2 md:pb-0 whitespace-nowrap scrollbar-thin scrollbar-thumb-slate-700">
+                <button onclick="filterByCategory('All')" onmouseenter="startCategoryLoop('All', event)" onmouseleave="stopCategoryLoop()" id="cat-All" class="category-btn px-4 py-2 rounded-xl text-xs font-bold bg-slate-700 text-white transition shadow-sm hover:scale-105 shrink-0">All</button>
+                <button onclick="filterByCategory('Farmers')" onmouseenter="startCategoryLoop('Farmers', event)" onmouseleave="stopCategoryLoop()" id="cat-Farmers" class="category-btn px-4 py-2 rounded-xl text-xs font-bold bg-emerald-950/80 text-emerald-300 border border-emerald-700/60 hover:bg-emerald-600 hover:text-white transition shadow-sm hover:scale-105 shrink-0">🌾 Farmers</button>
+                <button onclick="filterByCategory('Builders')" onmouseenter="startCategoryLoop('Builders', event)" onmouseleave="stopCategoryLoop()" id="cat-Builders" class="category-btn px-4 py-2 rounded-xl text-xs font-bold bg-indigo-950/80 text-indigo-300 border border-indigo-700/60 hover:bg-indigo-600 hover:text-white transition shadow-sm hover:scale-105 shrink-0">🏗️ Builders</button>
+                <button onclick="filterByCategory('Handyman')" onmouseenter="startCategoryLoop('Handyman', event)" onmouseleave="stopCategoryLoop()" id="cat-Handyman" class="category-btn px-4 py-2 rounded-xl text-xs font-bold bg-sky-950/80 text-sky-300 border border-sky-700/60 hover:bg-sky-600 hover:text-white transition shadow-sm hover:scale-105 shrink-0">🛠️ Handyman</button>
+                <button onclick="filterByCategory('Housewives')" onmouseenter="startCategoryLoop('Housewives', event)" onmouseleave="stopCategoryLoop()" id="cat-Housewives" class="category-btn px-4 py-2 rounded-xl text-xs font-bold bg-rose-950/80 text-rose-300 border border-rose-700/60 hover:bg-rose-600 hover:text-white transition shadow-sm hover:scale-105 shrink-0">🏠 Housewives</button>
             </div>
 
             <!-- Floating Preview Popup Box -->
@@ -171,7 +171,6 @@
                 </span>
             </div>
         </div>
-
         <!-- Sub-Category Filter Bars -->
         <div id="subCategoryContainer" class="mb-6 hidden flex items-center gap-2 overflow-x-auto pb-2 bg-emerald-950/40 p-3.5 rounded-2xl border border-emerald-900/50 shadow-inner">
             <span class="text-xs font-extrabold text-emerald-300 uppercase tracking-wider mr-2 flex items-center gap-1.5"><i class="fa-solid fa-filter text-emerald-400"></i> Farmer Sub-Categories:</span>
