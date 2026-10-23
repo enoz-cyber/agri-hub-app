@@ -1631,7 +1631,10 @@
             renderGuides();
         }
 
-        function startCategoryLoop(category, event) {
+       function startCategoryLoop(category, event) {
+            // Prevent mobile touch taps from triggering the desktop hover preview loop
+            if (window.matchMedia('(pointer: coarse)').matches) return;
+
             const popup = document.getElementById('categoryPreviewPopup');
             const titleEl = document.getElementById('previewTitle');
             const contentEl = document.getElementById('previewContent');
