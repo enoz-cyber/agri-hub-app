@@ -1431,12 +1431,12 @@
                 price: "20.00",
                 isPdf: true,
                 downloadUrl: "pdfs/Solar Installation Cost Analysis South Africa.pdf",
-                desc: "Detailed 3-bedroom residential solar turnkey bill of materials, 5kW inverter & 10kWh battery hardware costing breakdown[cite: 11], daily energy yield metrics[cite: 12], and 10-year cumulative financial payback analysis[cite: 12, 13].",
+                desc: "Detailed 3-bedroom residential solar turnkey bill of materials, 5kW inverter & 10kWh battery hardware costing breakdown, daily energy yield metrics, and 10-year cumulative financial payback analysis.",
                 steps: [
-                    "Stage 1: Turnkey Bill of Materials (BoM) - Detailed pricing for a 5kW hybrid inverter, 5.12kWh LiFePO4 batteries, and 550W monocrystalline panels totaling R118,500[cite: 11].",
-                    "Stage 2: Balance of System & Protection - Aluminium roof rails, AC protection boards, DC combiners, and wiring hardware[cite: 11].",
-                    "Stage 3: Labour & Compliance Fees - Certified PV installation labour, Electrical CoC inspection, and municipal SSEG application fees[cite: 11].",
-                    "Stage 4: Financial Return & Payback Analysis - Simple 4.0-year breakeven calculation based on Eskom tariff hikes and cumulative net savings up to Year 10[cite: 12, 13]."
+                    "Stage 1: Turnkey Bill of Materials (BoM) - Detailed pricing for a 5kW hybrid inverter, 5.12kWh LiFePO4 batteries, and 550W monocrystalline panels totaling R118,500.",
+                    "Stage 2: Balance of System & Protection - Aluminium roof rails, AC protection boards, DC combiners, and wiring hardware.",
+                    "Stage 3: Labour & Compliance Fees - Certified PV installation labour, Electrical CoC inspection, and municipal SSEG application fees.",
+                    "Stage 4: Financial Return & Payback Analysis - Simple 4.0-year breakeven calculation based on Eskom tariff hikes and cumulative net savings up to Year 10."
                 ]
             },
             {
@@ -1800,35 +1800,36 @@
                     currentUrl = 'https://enoz-cyber.github.io/agri-hub-app/';
                 }
 
-        const payfastUrl = 'https://www.payfast.co.za/eng/process'; // Updated to Live URL
-const form = document.createElement('form');
-form.method = 'POST';
-form.action = payfastUrl; // <-- Fixed: assigned the action URL here
+                const returnWithSuccess = currentUrl + "?payment=success";
+                const payfastUrl = 'https://www.payfast.co.za/eng/process'; // Updated to Live URL
+                const form = document.createElement('form');
+                form.method = 'POST';
+                form.action = payfastUrl;
 
-const guideDesc = guide.desc || guide.description || '';
+                const guideDesc = guide.desc || guide.description || '';
 
-const paymentData = {
-    merchant_id: '37563857',      // Your Live Merchant ID
-    merchant_key: 'eshmr1pqikmis',  // Your Live Merchant Key
-    return_url: returnWithSuccess,  
-    cancel_url: currentUrl,  
-    item_name: `Manual/Guide: ${guide.title}`,
-    amount: price,  
-    item_description: guideDesc.substring(0, 100)
-};
+                const paymentData = {
+                    merchant_id: '37563857',      // Your Live Merchant ID
+                    merchant_key: 'eshmr1pqikmis',  // Your Live Merchant Key
+                    return_url: returnWithSuccess,  
+                    cancel_url: currentUrl,  
+                    item_name: `Manual/Guide: ${guide.title}`,
+                    amount: price,  
+                    item_description: guideDesc.substring(0, 100)
+                };
 
-for (const key in paymentData) {
-    if (paymentData.hasOwnProperty(key)) {
-        const input = document.createElement('input');
-        input.type = 'hidden';
-        input.name = key;
-        input.value = paymentData[key];
-        form.appendChild(input);
-    }
-}
+                for (const key in paymentData) {
+                    if (paymentData.hasOwnProperty(key)) {
+                        const input = document.createElement('input');
+                        input.type = 'hidden';
+                        input.name = key;
+                        input.value = paymentData[key];
+                        form.appendChild(input);
+                    }
+                }
 
-document.body.appendChild(form);
-form.submit();
+                document.body.appendChild(form);
+                form.submit();
             }
         }
 
@@ -2055,7 +2056,7 @@ form.submit();
                 localStorage.setItem('pending_download_id', guide.id);
                 const returnWithSuccess = currentUrl + "?payment=success";
 
-                const payfastUrl = 'https://sandbox.payfast.co.za/eng/process';
+                const payfastUrl = 'https://www.payfast.co.za/eng/process'; // Updated to Live URL
                 const form = document.createElement('form');
                 form.method = 'POST';
                 form.action = payfastUrl;
