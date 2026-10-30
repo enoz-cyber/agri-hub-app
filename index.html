@@ -1800,35 +1800,35 @@
                     currentUrl = 'https://enoz-cyber.github.io/agri-hub-app/';
                 }
 
-                const returnWithSuccess = currentUrl + "?payment=success";
+        const payfastUrl = 'https://www.payfast.co.za/eng/process'; // Updated to Live URL
+const form = document.createElement('form');
+form.method = 'POST';
+form.action = payfastUrl; // <-- Fixed: assigned the action URL here
 
-                const payfastUrl = 'https://sandbox.payfast.co.za/eng/process';
-                const form = document.createElement('form');
-                form.method = 'POST';
-                form.action = payfastUrl;
+const guideDesc = guide.desc || guide.description || '';
 
-                const paymentData = {
-                    merchant_id: ' 37563857',
-                    merchant_key: 'eshmr1pqikmis',
-                    return_url: returnWithSuccess, 
-                    cancel_url: currentUrl, 
-                    item_name: `Manual/Guide: ${guide.title}`,
-                    amount: price, 
-                    item_description: guide.desc.substring(0, 100)
-                };
+const paymentData = {
+    merchant_id: '37563857',      // Your Live Merchant ID
+    merchant_key: 'eshmr1pqikmis',  // Your Live Merchant Key
+    return_url: returnWithSuccess,  
+    cancel_url: currentUrl,  
+    item_name: `Manual/Guide: ${guide.title}`,
+    amount: price,  
+    item_description: guideDesc.substring(0, 100)
+};
 
-                for (const key in paymentData) {
-                    if (paymentData.hasOwnProperty(key)) {
-                        const input = document.createElement('input');
-                        input.type = 'hidden';
-                        input.name = key;
-                        input.value = paymentData[key];
-                        form.appendChild(input);
-                    }
-                }
+for (const key in paymentData) {
+    if (paymentData.hasOwnProperty(key)) {
+        const input = document.createElement('input');
+        input.type = 'hidden';
+        input.name = key;
+        input.value = paymentData[key];
+        form.appendChild(input);
+    }
+}
 
-                document.body.appendChild(form);
-                form.submit();
+document.body.appendChild(form);
+form.submit();
             }
         }
 
